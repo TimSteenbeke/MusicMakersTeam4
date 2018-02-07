@@ -1,0 +1,59 @@
+
+.App-title {
+    font-size: 3em;
+    color: black;
+    font-family: "Century Gothic", "Century Gothic", serif;
+
+}
+
+body{
+    background-image: url(images/WebBG.jpg);
+    background-size: cover;
+}
+
+.App-logo {
+    opacity: 0.8;
+}
+
+.container {
+    display: flex;
+}
+
+.left-half {
+    background-color: #ff9e2c;
+    flex: 1;
+}
+
+.right-half {
+    background-color: #b6701e;
+    flex: 1;
+
+}
+
+.loginForm {
+    text-align: center;
+    width: 30%;
+    margin-left: 50%;
+    border-radius: 5px;
+    margin-right: 20%;
+    background-color: #F5F5F5;
+    padding: 2%;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 5px 5px 40px black;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+.loginButton {
+    height: 30px;
+    width: 100%;
+    margin-top: 3%;
+    border-width: 2px;
+    border-color: white;
+    border-radius: 2px;
+
+}
+
