@@ -6,38 +6,49 @@
 
 }
 
-body{
-    background-image: url(images/WebBG.jpg);
-    background-size: cover;
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+
 }
 
+
 .App-logo {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .container {
+    position: absolute;
     display: flex;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
 }
 
 .left-half {
-    background-color: #ff9e2c;
-    flex: 1;
+    background-image: url("images/loginbg.jpg");
+    background-size: cover;
+    flex: 2.2;
+
 }
 
 .right-half {
-    background-color: #b6701e;
+    background-color: #DD2C00;
     flex: 1;
 
 }
 
 .loginForm {
+    margin-top: 5%;
     text-align: center;
-    width: 30%;
-    margin-left: 50%;
+    width: 40%;
+    margin-left: 40%;
     border-radius: 5px;
     margin-right: 20%;
-    background-color: #F5F5F5;
-    padding: 2%;
+    background-color: rgba(245, 245, 245, 0.9);
+    padding: 4%;
     position: absolute;
     z-index: 2;
     box-shadow: 5px 5px 40px black;
@@ -49,7 +60,7 @@ body{
 
 .loginButton {
     height: 30px;
-    width: 100%;
+    width: 60%;
     margin-top: 3%;
     border-width: 2px;
     border-color: white;
