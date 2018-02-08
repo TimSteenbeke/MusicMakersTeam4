@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import LoginComponent from './Login';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 
 const Application = () => (
     <MuiThemeProvider>
-        <App />
+        <LoginComponent />
     </MuiThemeProvider>
 );
 
