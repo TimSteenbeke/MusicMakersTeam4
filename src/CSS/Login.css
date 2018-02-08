@@ -28,7 +28,7 @@ body {
 }
 
 .left-half {
-    background-image: url("images/loginbg.jpg");
+    background-image: url("../images/loginbg.jpg");
     background-size: cover;
     flex: 2.2;
 

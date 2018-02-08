@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import logo from '../images/logo.png';
-import '../App.css';
+import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import {black500, deepOrangeA700} from 'material-ui/styles/colors';
+import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
     width: {
@@ -20,36 +19,40 @@ const styles = {
     underlineStyle: {
         borderColor: deepOrangeA700,
     },
-    floatingLabelStyle: {
+    inputstyle: {
         color: black500,
     },
+    floatingLabelStyle: {
+        color: grey500,
+    },
     floatingLabelFocusStyle: {
-        color: black500,
+        color: grey500,
     },
 };
 
-export default class Login extends Component {
+class Login extends Component {
     render() {
         return (
             <div className="App">
                 <section className="container">
                     <div className="left-half">
+
                     </div>
                     <div className="right-half">
+
                     </div>
                 </section>
                 <div className="loginForm">
-                    <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo"/>
+                    <div className="App-header">
                         <h1 className="App-title">Music Makers</h1>
-                    </header>
+                    </div>
                     <div className="border">
                         <TextField
                             style={styles.width}
                             hintText="Type username here..."
                             floatingLabelText="Username"
-                            inputStyle={styles.floatingLabelStyle}
-                            hintStyle={styles.floatingLabelStyle}
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
@@ -58,8 +61,8 @@ export default class Login extends Component {
                             style={styles.width}
                             hintText="Type password here..."
                             floatingLabelText="Password"
-                            inputStyle={styles.floatingLabelStyle}
-                            hintStyle={styles.floatingLabelStyle}
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
@@ -69,10 +72,11 @@ export default class Login extends Component {
                                   labelColor="#FFEBEE"
                                   className="loginButton"/>
                 </div>
-
             </div>
-
 
         );
     }
 }
+
+
+export default Login;
