@@ -1,0 +1,12 @@
+.right-half {
+    background-image: url("../images/loginbg.jpg");
+    background-size: cover;
+    flex: 2.2;
+
+}
+
+.left-half {
+    background-color: #DD2C00;
+    flex: 1;
+
+}
