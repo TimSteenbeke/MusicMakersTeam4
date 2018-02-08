@@ -4,18 +4,18 @@
 
 import React, {Component} from 'react';
 import '../CSS/Homepage.css';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 
-class HomepageComponent extends Component {
+
+class Homepage extends Component {
     render() {
         return (
+
             <div className="Homepage">
                 <section className="container">
-                    <div className="left-half">
+                    <div className="left-login">
 
                     </div>
-                    <div className="right-half">
+                    <div className="right-login">
 
                     </div>
                 </section>
@@ -23,3 +23,5 @@ class HomepageComponent extends Component {
         );
     }
 }
+
+export default Homepage;

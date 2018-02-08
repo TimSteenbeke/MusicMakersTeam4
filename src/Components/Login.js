@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom';
+
+
+
+
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
@@ -31,8 +36,14 @@ const styles = {
 };
 
 class Login extends Component {
+
+
+    login() {
+    }
+
     render() {
         return (
+
             <div className="App">
                 <section className="container">
                     <div className="left-half">
@@ -58,6 +69,7 @@ class Login extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                         /><br />
                         <TextField
+                            type="password"
                             style={styles.width}
                             hintText="Type password here..."
                             floatingLabelText="Password"
@@ -68,11 +80,14 @@ class Login extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                         /><br />
                     </div>
-                    <RaisedButton label="Login" backgroundColor="#DD2C00" style={styles.loginButton}
+                    <Link to="/homepage">
+                    <RaisedButton label="Login" onClick={this.login} backgroundColor="#DD2C00" style={styles.loginButton}
                                   labelColor="#FFEBEE"
                                   className="loginButton"/>
+                    </Link>
                 </div>
             </div>
+
 
         );
     }
