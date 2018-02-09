@@ -18,11 +18,13 @@ const Application = () => (
 
 
 ReactDOM.render(
+    <MuiThemeProvider>
     <BrowserRouter>
         <div>
             <Route exact path="/" component={Application} />
             <Route path="/homepage" component={Homepage} />
         </div>
     </BrowserRouter>
+    </MuiThemeProvider>
     , document.getElementById('root'));
 registerServiceWorker();
