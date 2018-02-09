@@ -15,10 +15,11 @@
 .left-login {
     background-color: #DD2C00;
     flex: 1;
+    -webkit-transition: flex 2s;
 
 }
 
-.instrumentForm {
+.instrumentDetailForm {
     margin-top: 5%;
     width: 40%;
     margin-left: 10%;

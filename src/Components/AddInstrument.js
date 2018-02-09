@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import '../CSS/Homepage.css';
+import '../CSS/AddInstrument.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -50,12 +50,18 @@ const styles = {
 };
 
 
-class Homepage extends Component {
+class AddInstrument extends Component {
 
     constructor(props) {
         super(props);
         this.state = {value: 1};
     }
+
+    animateLogin = () =>{
+        this.setState({
+            flex: 1
+        });
+    };
 
     handleChange = (event, index, value) => this.setState({value});
 
@@ -137,4 +143,4 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+export default AddInstrument;
