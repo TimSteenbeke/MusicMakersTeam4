@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import '../CSS/AddInstrument.css';
+import '../../CSS/AddInstrument.css';
 import InstrumentDetails from './InstrumentDetails';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';

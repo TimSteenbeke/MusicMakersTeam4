@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App.js';
-import AddInstrument from './Components/AddInstrument.js';
-import InstrumentDetails from './Components/InstrumentDetails';
-import Instrumenten from './Components/Instrumenten.js';
+import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
+import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails';
+import Instrumenten from './Components/InstrumentComponents/Instrumenten.js';
 
 
 import {BrowserRouter} from 'react-router-dom'
