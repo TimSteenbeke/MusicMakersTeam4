@@ -25,12 +25,20 @@ body {
     z-index: 1;
     height: 100%;
     width: 100%;
+
+
 }
+
+
+
+
 
 .left-half {
     background-image: url("../images/loginbg.jpg");
     background-size: cover;
     flex: 2.2;
+    -webkit-transition: flex 3s; /* For Safari 3.1 to 6.0 */
+
 
 }
 

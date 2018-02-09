@@ -33,9 +33,24 @@ const styles = {
         floatingLabelFocusStyle: {
             color: grey500,
         },
+
 };
 
 class Login extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {flex: 2.2};
+
+    }
+
+    animateLogin = () =>{
+        this.setState({
+            flex: 0.0001
+        });
+    };
+
 
 
     render() {
@@ -43,9 +58,11 @@ class Login extends Component {
 
             <div className="App">
                 <section className="container">
-                    <div className="left-half" >
+                    <div className="left-half" style ={{
+                        flex: this.state.flex}} >
 
                     </div>
+
                     <div className="right-half">
 
                     </div>
@@ -78,8 +95,8 @@ class Login extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                         /><br />
                     </div>
-                    <Link to="/homepage">
-                    <RaisedButton label="Login" onClick={this.login} backgroundColor="#DD2C00" style={styles.loginButton}
+                    <Link to="/addInstrument">
+                    <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00" style={styles.loginButton}
                                   labelColor="#FFEBEE"
                                   className="loginButton"/>
                     </Link>
