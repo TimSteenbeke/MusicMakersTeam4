@@ -8,6 +8,7 @@ export function getInstrumentenFromBackend() {
     return fetch("http://musicmaker-api-team4.herokuapp.com/api/instruments")
         .then((response) => response.json())
         .then((responseJson) => {
+            console.log(responseJson);
             return responseJson.data;
         })
         .catch((err) => {
