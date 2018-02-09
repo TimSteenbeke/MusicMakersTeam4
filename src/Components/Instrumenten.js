@@ -1,11 +1,11 @@
-    /**
+/**
  * Created by jariv on 9/02/2018.
  */
 
 import React, {Component} from 'react';
-import '../../CSS/GlobalStylesheet.css';
+import '../CSS/GlobalStylesheet.css';
 import InstrumentDetails from './InstrumentDetails';
-import * as InstrumentenService from '../../Services/InstrumentService.js'
+import * as InstrumentenService from '../Services/InstrumentService.js'
 
 
 class Instrumenten extends Component {

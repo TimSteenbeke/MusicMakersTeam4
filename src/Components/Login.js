@@ -2,33 +2,32 @@ import React, {Component} from 'react';
 import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 10px 5px #616161",
-    },
-    errorStyle: {
-        color: deepOrangeA700,
+        width: {
+            width: "90%",
+        },
+        loginButton: {
+            boxShadow: "2px 10px 5px #616161",
+        },
+        errorStyle: {
+            color: deepOrangeA700,
 
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: grey500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
+        },
+        underlineStyle: {
+            borderColor: deepOrangeA700,
+        },
+        inputstyle: {
+            color: black500,
+        },
+        floatingLabelStyle: {
+            color: grey500,
+        },
+        floatingLabelFocusStyle: {
+            color: grey500,
+        },
 
 };
 
@@ -41,11 +40,12 @@ class Login extends Component {
 
     }
 
-    animateLogin = () => {
+    animateLogin = () =>{
         this.setState({
             flex: 0.0001
         });
     };
+
 
 
     render() {
@@ -53,9 +53,8 @@ class Login extends Component {
 
             <div className="App">
                 <section className="container">
-                    <div className="left-half" style={{
-                        flex: this.state.flex
-                    }}>
+                    <div className="left-half" style ={{
+                        flex: this.state.flex}} >
 
                     </div>
 
@@ -64,7 +63,7 @@ class Login extends Component {
                     </div>
                 </section>
                 <div className="loginForm">
-                    <h1 className="header">Music Makers</h1>
+                        <h1 className="header">Music Makers</h1>
                     <div className="border">
                         <TextField
                             style={styles.width}
@@ -75,7 +74,7 @@ class Login extends Component {
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
-                        /><br/>
+                        /><br />
                         <TextField
                             type="password"
 
@@ -87,19 +86,19 @@ class Login extends Component {
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
-                        /><br/>
+                        /><br />
                     </div>
-                    <Link to="/">
-                        <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
-                                      style={styles.loginButton}
-                                      labelColor="#FFEBEE"
-                                      className="loginButton"/>
+                    <Link to="/addInstrument">
+                    <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00" style={styles.loginButton}
+                                  labelColor="#FFEBEE"
+                                  className="loginButton"/>
                     </Link>
                 </div>
             </div>
 
 
-        );
+
+    );
     }
 }
 
