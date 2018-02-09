@@ -3,11 +3,6 @@ import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
-
-
-
-
-
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
@@ -68,9 +63,7 @@ class Login extends Component {
                     </div>
                 </section>
                 <div className="loginForm">
-                    <div className="App-header">
-                        <h1 className="App-title">Music Makers</h1>
-                    </div>
+                        <h1 className="header">Music Makers</h1>
                     <div className="border">
                         <TextField
                             style={styles.width}

@@ -3,7 +3,6 @@
  */
 
 import React, {Component} from 'react';
-import '../CSS/AddInstrument.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -14,19 +13,17 @@ class InstrumentDetails extends Component {
 
     constructor(props) {
         super(props);
-        this.state.instrument = {};
+        this.state = {
+            instrument: []
+        }
     }
+
 
 
     render() {
         return (
 
-            <div className="Homepage">
-                <section className="container">
-                    <div className="left-login">
 
-                    </div>
-                    <div className="right-login">
 
                         <div className="instrumentDetailForm">
 
@@ -42,9 +39,7 @@ class InstrumentDetails extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
+
         );
     }
 }
