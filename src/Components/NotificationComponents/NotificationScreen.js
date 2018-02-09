@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../../CSS/Notification.css';
 import Notification from './Notification';
 
 export default class NotificationScreen extends Component {
