@@ -24,18 +24,22 @@ export default class NotificationScreen extends Component {
             }
         ];
 
-        let visible =[];
+        let visible = [];
 
-        notifications.forEach((not)=>{
+        notifications.forEach((not) => {
             visible.push(
-                <Notification title={not.title} message ={not.message} author={not.author} date={not.date} attatchment = {not._attachment}/>
+                <Notification title={not.title} message={not.message} author={not.author} date={not.date}
+                              attatchment={not._attachment}/>
             )
         });
 
 
-        return (<div>
-            <h1>Notifications</h1>
-            {visible}
+        return (<div className="container">
+            <div className="whiteBox">
+                <h1 className="header">Notifications</h1>
+                {visible}
+            </div>
+
         </div>);
     }
 }

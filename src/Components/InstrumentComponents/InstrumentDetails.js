@@ -3,15 +3,6 @@
  */
 
 import React, {Component} from 'react';
-<<<<<<< HEAD:src/Components/InstrumentComponents/InstrumentDetails.js
-import '../../CSS/AddInstrument.css';
-=======
->>>>>>> master:src/Components/InstrumentDetails.js
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
 
 class InstrumentDetails extends Component {
 

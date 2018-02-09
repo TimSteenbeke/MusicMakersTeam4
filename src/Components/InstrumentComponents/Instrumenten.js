@@ -3,13 +3,9 @@
  */
 
 import React, {Component} from 'react';
-<<<<<<< HEAD:src/Components/InstrumentComponents/Instrumenten.js
-import '../../CSS/AddInstrument.css';
-=======
-import '../CSS/GlobalStylesheet.css';
->>>>>>> master:src/Components/Instrumenten.js
+import '../../CSS/GlobalStylesheet.css';
 import InstrumentDetails from './InstrumentDetails';
-import * as InstrumentenService from '../Services/InstrumentService.js'
+import * as InstrumentenService from '../../Services/InstrumentService.js'
 
 
 class Instrumenten extends Component {

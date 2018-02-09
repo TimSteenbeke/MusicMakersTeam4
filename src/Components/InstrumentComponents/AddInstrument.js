@@ -3,11 +3,7 @@
  */
 
 import React, {Component} from 'react';
-<<<<<<< HEAD:src/Components/InstrumentComponents/AddInstrument.js
-import '../../CSS/AddInstrument.css';
-=======
-import '../CSS/GlobalStylesheet.css';
->>>>>>> master:src/Components/AddInstrument.js
+import '../../CSS/GlobalStylesheet.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';

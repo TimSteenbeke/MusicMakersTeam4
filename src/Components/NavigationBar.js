@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import '../../CSS/Notification.css';
-import Instrumenten from "./InstrumentComponents/Instrumenten";
-import AddInstrument from "./InstrumentComponents/AddInstrument";
-import InstrumentDetails from "./InstrumentComponents/InstrumentDetails";
-import NotificationScreen from "./NotificationComponents/NotificationScreen";
-import Login from "./Login";
-
+import '../CSS/GlobalStylesheet.css';
 
 
 export default class NavigationBar extends Component {

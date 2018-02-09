@@ -24,16 +24,16 @@ const Application = () => (
 
 ReactDOM.render(
     <MuiThemeProvider>
-    <BrowserRouter>
-        <div>
-            <Route exact path="/" component={Application} />
-            <Route path="/Login" component={Login}/>
-            <Route path="/addinstrument" component={AddInstrument} />
-            <Route path="/instrumenten" component={Instrumenten} />
-            <Route path="/instrumentdetails/:id" component={InstrumentDetails} />
-            <Route path="/notifications" component={NotificationScreen}/>
-        </div>
-    </BrowserRouter>
+        <BrowserRouter>
+            <div>
+                <Route exact path="/" component={Application}/>
+                <Route path="/Login" component={Login}/>
+                <Route path="/addinstrument" component={AddInstrument}/>
+                <Route path="/instrumenten" component={Instrumenten}/>
+                <Route path="/instrumentdetails/:id" component={InstrumentDetails}/>
+                <Route path="/notifications" component={NotificationScreen}/>
+            </div>
+        </BrowserRouter>
     </MuiThemeProvider>
     , document.getElementById('root'));
 registerServiceWorker();

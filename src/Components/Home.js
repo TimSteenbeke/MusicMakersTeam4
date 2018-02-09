@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../CSS/GlobalStylesheet.css';
 
 
 export default class Home extends Component {
@@ -8,9 +9,12 @@ export default class Home extends Component {
     }
 
     render() {
-        return (<div>
-            <h1>Home page header</h1>
-            <p>Test paragraphe</p>
+        return (<div className="container">
+            <div className="whiteBox">
+                <h1>Home page header</h1>
+                <p>Test paragraphe</p>
+            </div>
+
         </div>);
     }
 }
