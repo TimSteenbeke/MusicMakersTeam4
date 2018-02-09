@@ -5,19 +5,23 @@ const BASE_PATH = "backend/";
 
 
 export function getInstrumentenFromBackend() {
-    return fetch("http://musicmaker-api-team4.herokuapp.com/api/instruments")
-        .then((response) => response.json())
+
+    return fetch("http://musicmaker-api-team4.herokuapp.com/api/instruments", { mode: 'cors'})
+        .then((response) =>
+            response.json())
         .then((responseJson) => {
             console.log(responseJson);
-            return responseJson.data;
+            return responseJson;
         })
         .catch((err) => {
+
             console.log("geen response");
+            console.log(err);
         });
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
-    return fetch("http://musicmaker-api-team4.herokuapp.com/api/instruments")
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments")
         .then((response) => response.json())
         .then((responseJson) => {
             return responseJson.data;

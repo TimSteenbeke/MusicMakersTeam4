@@ -3,10 +3,13 @@
  */
 
 import React, {Component} from 'react';
+<<<<<<< HEAD:src/Components/InstrumentComponents/AddInstrument.js
 import '../../CSS/AddInstrument.css';
+=======
+import '../CSS/GlobalStylesheet.css';
+>>>>>>> master:src/Components/AddInstrument.js
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
@@ -57,7 +60,7 @@ class AddInstrument extends Component {
         this.state = {value: 1};
     }
 
-    animateLogin = () =>{
+    animateLogin = () => {
         this.setState({
             flex: 1
         });
@@ -71,71 +74,66 @@ class AddInstrument extends Component {
 
             <div className="Homepage">
                 <section className="container">
-                    <div className="left-login">
+                    <div className="whiteBox">
 
-                    </div>
-                    <div className="right-login">
+                        <h1 className="header">Voeg Instrument toe</h1>
+                        <SelectField
 
-                        <div className="instrumentForm">
+                            floatingLabelText="Soort"
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            selectedMenuItemStyle={styles.errorStyle}
+                        >
+                            <MenuItem value={1} primaryText="Snaar"/>
+                            <MenuItem value={2} primaryText="Slag"/>
+                            <MenuItem value={3} primaryText="Blaas"/>
+                        </SelectField>
+                        <br />
 
-                            <h1 className="title">Voeg Instrument toe</h1>
-                            <SelectField
+                        <TextField
+                            hintText="Geef naam in..."
+                            floatingLabelText="Naam"
+                            style={styles.width}
 
-                                floatingLabelText="Soort"
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                                selectedMenuItemStyle={styles.errorStyle}
-                            >
-                                <MenuItem value={1} primaryText="Snaar" />
-                                <MenuItem value={2} primaryText="Slag" />
-                                <MenuItem value={3} primaryText="Blaas" />
-                            </SelectField>
-                            <br />
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            underlineFocusStyle={styles.underlineStyle}
+                        /><br />
+                        <TextField
+                            hintText="Geef type in..."
+                            floatingLabelText="Type"
+                            style={styles.width}
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            underlineFocusStyle={styles.underlineStyle}
+                        /><br />
+                        <TextField
+                            hintText="Geef uitvoering in..."
+                            floatingLabelText="Uitvoering"
+                            style={styles.width}
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            underlineFocusStyle={styles.underlineStyle}
+                        />
+                        <RaisedButton
+                            label="Kies een image"
+                            labelPosition="before"
 
-                            <TextField
-                                hintText="Geef naam in..."
-                                floatingLabelText="Naam"
-                                style={styles.width}
+                            containerElement="label"
+                        >
+                            <input type="file" style={styles.exampleImageInput}/>
+                        </RaisedButton>
 
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                hintText="Geef type in..."
-                                floatingLabelText="Type"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                hintText="Geef uitvoering in..."
-                                floatingLabelText="Uitvoering"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
-                                <RaisedButton
-                                    label="Kies een image"
-                                    labelPosition="before"
-
-                                    containerElement="label"
-                                >
-                                    <input type="file" style={styles.exampleImageInput} />
-                                </RaisedButton>
-
-                            <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00" style={styles.loginButton}
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
-                        </div>
+                        <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"
+                                      style={styles.loginButton}
+                                      labelColor="#FFEBEE"
+                                      className="inputIntrumentButton"/>
                     </div>
                 </section>
             </div>
