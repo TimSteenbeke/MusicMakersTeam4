@@ -2,40 +2,48 @@ import React, {Component} from 'react';
 import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom';
+
+
+
+
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 10px 5px #616161",
-    },
-    errorStyle: {
-        color: deepOrangeA700,
+        width: {
+            width: "90%",
+        },
+        loginButton: {
+            boxShadow: "2px 10px 5px #616161",
+        },
+        errorStyle: {
+            color: deepOrangeA700,
 
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: grey500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
+        },
+        underlineStyle: {
+            borderColor: deepOrangeA700,
+        },
+        inputstyle: {
+            color: black500,
+        },
+        floatingLabelStyle: {
+            color: grey500,
+        },
+        floatingLabelFocusStyle: {
+            color: grey500,
+        },
 };
 
 class Login extends Component {
+
+
     render() {
         return (
+
             <div className="App">
                 <section className="container">
-                    <div className="left-half">
+                    <div className="left-half" >
 
                     </div>
                     <div className="right-half">
@@ -58,9 +66,11 @@ class Login extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                         /><br />
                         <TextField
-                            style={styles.width}
+                            type="password"
+
                             hintText="Type password here..."
                             floatingLabelText="Password"
+                            style={styles.width}
                             inputStyle={styles.inputstyle}
                             hintStyle={styles.floatingLabelFocusStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
@@ -68,13 +78,17 @@ class Login extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                         /><br />
                     </div>
-                    <RaisedButton label="Login" backgroundColor="#DD2C00" style={styles.loginButton}
+                    <Link to="/homepage">
+                    <RaisedButton label="Login" onClick={this.login} backgroundColor="#DD2C00" style={styles.loginButton}
                                   labelColor="#FFEBEE"
                                   className="loginButton"/>
+                    </Link>
                 </div>
             </div>
 
-        );
+
+
+    );
     }
 }
 
