@@ -1,7 +1,7 @@
 
 export function getAgendaById(agendaId) {
 
-    return fetch("http://localhost:49847/api/agenda/" + agendaId, { mode: 'cors'})
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/agenda/" + agendaId, { mode: 'cors'})
         .then((response) =>
             response.json())
         .then((responseJson) => {
