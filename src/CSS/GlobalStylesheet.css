@@ -1,3 +1,6 @@
+@import '~react-agenda/build/styles.css';
+@import '~react-datetime/css/react-datetime.css';
+
 .whiteBox {
     margin-top: 5%;
     margin-bottom: 5%;

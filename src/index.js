@@ -5,6 +5,7 @@ import App from './App.js';
 import AddInstrument from './Components/AddInstrument.js';
 import InstrumentDetails from './Components/InstrumentDetails';
 import Instrumenten from './Components/Instrumenten.js';
+import Agenda from './Components/Agenda.js'
 
 
 import {BrowserRouter} from 'react-router-dom'
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route path="/addinstrument" component={AddInstrument} />
             <Route path="/instrumenten" component={Instrumenten} />
             <Route path="/instrumentdetails/:id" component={InstrumentDetails} />
+            <Route path="/agenda" component={Agenda} />
         </div>
     </BrowserRouter>
     </MuiThemeProvider>
