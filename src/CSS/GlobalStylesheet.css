@@ -4,11 +4,11 @@
 .whiteBox {
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 40%;
-    margin-left: 10%;
+    width: 60%;
+    margin-left: 20%;
     border-radius: 5px;
-    margin-right: 10%;
-    background-color: rgba(245, 245, 245, 0.95);
+    margin-right: 20%;
+    background-color: rgba(255, 255, 255, 0.99);
     padding: 4%;
     position: absolute;
     z-index: 2;
@@ -21,7 +21,6 @@
     background-size: cover;
     overflow-y: scroll;
 
-
 }
 
 .header {
@@ -30,3 +29,9 @@
     font-family: "Century Gothic", "Century Gothic", serif;
 
 }
+
+.redbg {
+    background-color: #DD2C00;
+
+}
+

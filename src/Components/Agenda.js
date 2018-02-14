@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { ReactAgenda , ReactAgendaCtrl , guid  } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 
+require('moment/locale/nl.js');
 
-require('moment/locale/nl.js')
 
 var colors= {
     'color-1':"rgba(102, 195, 131 , 1)" ,
@@ -109,6 +109,10 @@ class Agenda extends Component {
 
       return  (
           <div>
+              <section className="container">
+                  <div className="whiteBox">
+
+                      <h1 className="header">Agenda</h1>
               <ReactAgenda
                   minDate={now}
                   maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
@@ -132,6 +136,8 @@ class Agenda extends Component {
                   itemComponent={AgendaItem}
               />
             </div>
+              </section>
+          </div>
         );
     }
 }
