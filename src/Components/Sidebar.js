@@ -9,9 +9,10 @@ import MenuItem from 'material-ui/MenuItem';
 import ContentLink from 'material-ui/svg-icons/content/add';
 import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Agenda from 'material-ui/svg-icons/action/view-agenda';
+import Home from 'material-ui/svg-icons/action/home';
+import Admin from 'material-ui/svg-icons/action/grade';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
-
 
 
 class Sidebar extends Component {
@@ -24,17 +25,18 @@ class Sidebar extends Component {
 
     handleClose = () => this.setState({open: false});
 
+
     render() {
         return (
             <div>
-                <AppBar
-                    title="Music Makers"
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
-                    onLeftIconButtonClick={this.handleToggle}
-                    style={{ backgroundColor: '#DD2C00', position: 'fixed'}}
-
-
-            />
+                <Link to="/">
+                    <AppBar
+                        title="Music Makers"
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+                        onLeftIconButtonClick={this.handleToggle}
+                        style={{backgroundColor: '#DD2C00', position: 'fixed'}}
+                    />
+                </Link>
                 <Drawer
                     docked={false}
                     width={200}
@@ -43,18 +45,24 @@ class Sidebar extends Component {
                     onRequestChange={(open) => this.setState({open})}
                 >
                     <Menu>
-                        <Link to="/addInstrument">
-                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink />}/>
+                        <Link to="/">
+                            <MenuItem primaryText="Home" leftIcon={<Home/>}/>
                         </Link>
-                        <Divider />
+                        <Link to="/addInstrument">
+                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
+                        </Link>
+                        <Divider/>
 
                         <Link to="/agenda">
-                            <MenuItem primaryText="Agenda" leftIcon={<Agenda />}/>
+                            <MenuItem primaryText="Agenda" leftIcon={<Agenda/>}/>
                         </Link>
-                        <Divider />
+                        <Divider/>
 
                         <Link to="/instrumenten">
-                            <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard />}/>
+                            <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
+                        </Link>
+                        <Link to="/">
+                            <MenuItem primaryText="Admin" leftIcon={<Admin/>}/>
                         </Link>
                     </Menu>
                 </Drawer>
@@ -64,4 +72,5 @@ class Sidebar extends Component {
         );
     }
 }
+
 export default Sidebar;
