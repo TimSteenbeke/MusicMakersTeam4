@@ -17,11 +17,11 @@ class App extends Component {
         return (
                 <div>
                     <Route path="/" component={Home}/>
-                    <Route exact path="/Login" component={Login}/>
-                    <Route path="/addinstrument" component={AddInstrument}/>
-                    <Route path="/instrumenten" component={Instrumenten}/>
-                    <Route path="/instrumentdetails/:id" component={InstrumentDetails}/>
-                    <Route path="/agenda" component={Agenda}/>
+                    <Route exact name="login" path="/Login" component={Login}/>
+                    <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
+                    <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
+                    <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
+                    <Route name="agenda" path="/agenda" component={Agenda}/>
                 </div>
         );
     }
