@@ -1,7 +1,7 @@
 /**
  * Created by jariv on 9/02/2018.
  */
-
+import {Link} from 'react-router-dom';
 import React, {Component} from 'react';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import {
@@ -34,7 +34,7 @@ class Instrumenten extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Instrumenten</h1>
-                        <Table>
+                        <Table selectable={false}>
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Naam</TableHeaderColumn>
@@ -45,6 +45,7 @@ class Instrumenten extends Component {
                             </TableHeader>
                             <TableBody>
                                 {this.state.instrumenten.map((instrument, i) => (
+
                                 <TableRow key={i}>
                                     <TableRowColumn>{instrument.naam}</TableRowColumn>
                                     <TableRowColumn>{instrument.type}</TableRowColumn>

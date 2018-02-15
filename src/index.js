@@ -11,7 +11,6 @@ const Application = () => (
     <MuiThemeProvider>
         <BrowserRouter>
             <div className="flexBox">
-                {/*hide sidebar when on login*/}
                 <div className="sidebar">
                     <Sidebar/>
                 </div>

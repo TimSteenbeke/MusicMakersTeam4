@@ -29,14 +29,12 @@ class Sidebar extends Component {
     render() {
         return (
             <div>
-                <Link to="/">
                     <AppBar
                         title="Music Makers"
                         iconClassNameRight="muidocs-icon-navigation-expand-more"
                         onLeftIconButtonClick={this.handleToggle}
                         style={{backgroundColor: '#DD2C00', position: 'fixed'}}
                     />
-                </Link>
                 <Drawer
                     docked={false}
                     width={200}
@@ -48,6 +46,7 @@ class Sidebar extends Component {
                         <Link to="/">
                             <MenuItem primaryText="Home" leftIcon={<Home/>}/>
                         </Link>
+                        <Divider/>
                         <Link to="/addInstrument">
                             <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
                         </Link>
@@ -61,9 +60,10 @@ class Sidebar extends Component {
                         <Link to="/instrumenten">
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
-                        <Link to="/">
-                            <MenuItem primaryText="Admin" leftIcon={<Admin/>}/>
-                        </Link>
+                        <Divider/>
+                        {/*<Link to="/">*/}
+                            {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
+                        {/*</Link>*/}
                     </Menu>
                 </Drawer>
             </div>

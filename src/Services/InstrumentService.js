@@ -12,14 +12,13 @@ export function getInstrumentenFromBackend() {
             return responseJson;
         })
         .catch((err) => {
-
             console.log("geen response");
             console.log(err);
         });
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments")
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments/" + instrumentNr)
         .then((response) => response.json())
         .then((responseJson) => {
             return responseJson.data;
