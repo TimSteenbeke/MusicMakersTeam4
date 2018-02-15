@@ -13,6 +13,7 @@ import {Route} from 'react-router'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
+import PlayPartituur from "./Components/PlayMusic";
 
 const Application = () => (
     <MuiThemeProvider>
@@ -30,6 +31,7 @@ ReactDOM.render(
             <Route path="/instrumenten" component={Instrumenten} />
             <Route path="/instrumentdetails/:id" component={InstrumentDetails} />
             <Route path="/agenda" component={Agenda} />
+            <Route path="/Play" component={PlayPartituur}/>
         </div>
     </BrowserRouter>
     </MuiThemeProvider>
