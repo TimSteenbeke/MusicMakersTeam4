@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router-dom';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-import Paper from 'material-ui/Paper';
 
 const styles = {
     width: {

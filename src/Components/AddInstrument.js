@@ -3,7 +3,6 @@
  */
 
 import React, {Component} from 'react';
-import '../CSS/GlobalStylesheet.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';

@@ -4,8 +4,6 @@ import './index.css';
 import App from './App.js';
 import Sidebar from './Components/Sidebar.js'
 import {BrowserRouter} from 'react-router-dom'
-
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 

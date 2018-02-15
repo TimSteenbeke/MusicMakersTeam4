@@ -3,10 +3,16 @@
  */
 
 import React, {Component} from 'react';
-import '../CSS/GlobalStylesheet.css';
 import InstrumentDetails from './InstrumentDetails';
 import * as InstrumentenService from '../Services/InstrumentService.js'
-
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
 
 class Instrumenten extends Component {
 
@@ -29,16 +35,26 @@ class Instrumenten extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Instrumenten</h1>
-                        {this.state.instrumenten.map((instrument, i) =>
-                            <InstrumentDetails
-                                key={i}
-                                InstrumentSoortId={instrument.InstrumentSoortId}
-                                naam={instrument.naam}
-                                type={instrument.type}
-                                uitvoering={instrument.uitvoering}
-                                afbeelding={instrument.afbeelding}
-                            />
-                        )}
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHeaderColumn>Naam</TableHeaderColumn>
+                                    <TableHeaderColumn>Type</TableHeaderColumn>
+                                    <TableHeaderColumn>Uitvoering</TableHeaderColumn>
+                                    <TableHeaderColumn>Afbeelding</TableHeaderColumn>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {this.state.instrumenten.map((instrument, i) => (
+                                <TableRow key={i}>
+                                    <TableRowColumn>{instrument.naam}</TableRowColumn>
+                                    <TableRowColumn>{instrument.type}</TableRowColumn>
+                                    <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
+                                    <TableRowColumn>{instrument.afbeelding}</TableRowColumn>
+                                </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
                     </div>
                 </section>
             </div>

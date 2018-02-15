@@ -3,11 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 
 class InstrumentDetails extends Component {
 
@@ -19,26 +17,32 @@ class InstrumentDetails extends Component {
     }
 
 
-
     render() {
         return (
-
-
-
-                        <div className="instrumentDetailForm">
-
-                            <h1 className="title">Instrument Details</h1>
+            <section className="container">
+                <div className="whiteBox">
+                    <h1 className="header">Instrumenten</h1>
+                    <Card>
+                        <CardHeader
+                            title={this.props.naam}
+                            subtitle="Instrumenten Details"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
                             <div className="InstrumentDetail">
                                 <div id="instrumentDetails">
-                                    <h2>Details</h2>
                                     <p>Instrument Soort Id: {this.props.InstrumentSoortId}</p>
-                                    <p>Naam: {this.props.naam}</p>
+                                    <p>Naam: </p>
                                     <p>Type: {this.props.type}</p>
                                     <p>Uitvoering: {this.props.uitvoering}</p>
                                     <p>Afbeelding: {this.props.afbeelding}</p>
                                 </div>
                             </div>
-                        </div>
+                        </CardText>
+                    </Card>
+                </div>
+            </section>
 
         );
     }

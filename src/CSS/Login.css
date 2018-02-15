@@ -63,3 +63,6 @@ body {
 
 }
 
+.sidebar{
+    visibility: hidden;
+}

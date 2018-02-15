@@ -6,7 +6,10 @@ import {Link, Router} from 'react-router-dom';
 import Menu from 'material-ui/Menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import ContentLink from 'material-ui/svg-icons/content/link';
+import ContentLink from 'material-ui/svg-icons/content/add';
+import Dashboard from 'material-ui/svg-icons/action/dashboard';
+import Agenda from 'material-ui/svg-icons/action/view-agenda';
+
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
@@ -61,12 +64,12 @@ class Sidebar extends Component {
                         <Divider />
 
                         <Link to="/agenda">
-                            <MenuItem primaryText="Agenda" leftIcon={<ContentLink />}/>
+                            <MenuItem primaryText="Agenda" leftIcon={<Agenda />}/>
                         </Link>
                         <Divider />
 
                         <Link to="/instrumenten">
-                            <MenuItem primaryText="Instrumenten" leftIcon={<ContentLink />}/>
+                            <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard />}/>
                         </Link>
                     </Menu>
                 </Drawer>
