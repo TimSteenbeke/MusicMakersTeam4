@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { ReactAgenda , ReactAgendaCtrl , guid  } from 'react-agenda';
+import { ReactAgenda , guid  } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
+import RaisedButton from 'material-ui/RaisedButton';
 
 require('moment/locale/nl.js');
 
@@ -18,10 +19,10 @@ var now = new Date();
 var AgendaItem = function(props){
     console.log( ' ik ga renderen:' , props)
     console.log(props);
-    return <div style={{display:'block', position:'absolute' , background:'#FFF'}}>
-        <p> {props.item.name} </p>
+    return <div className="agendaItem">
+        <h3> {props.item.name} </h3>
         <p>leerkracht: {props.leerkrachten}</p>
-        <button onClick={()=> props.edit(props.item)}>Edit </button>
+        <RaisedButton fullWidth={true} onClick={()=> props.edit(props.item)}>Edit </RaisedButton>
     </div>
 }
 
@@ -65,7 +66,7 @@ class Agenda extends Component {
             for (var i= 0; i < agendaItems.lessons.length; i++) {
                 let optreden = {
                     _id: guid(),
-                    name: "Les coming soon (relatie ligt nog niet",
+                    name: "Les coming soon (relatie ligt nog niet)",
                     startDateTime: new Date(agendaItems.lessons[i].startDateTime),
                     endDateTime: new Date(agendaItems.lessons[i].endDateTime),
                     type: 'Les',
@@ -76,12 +77,12 @@ class Agenda extends Component {
 
             //over performances loopen en info in AgendaItem steken
             //type en basic info
-            for (var i= 0; i < agendaItems.performances.length; i++) {
+            for (var x= 0; x < agendaItems.performances.length; x++) {
                 let optreden = {
                     _id: guid(),
-                    name: agendaItems.performances[i].beschrijving,
-                    startDateTime: new Date(agendaItems.performances[i].startDateTime),
-                    endDateTime: new Date(agendaItems.performances[i].endDateTime),
+                    name: agendaItems.performances[x].beschrijving,
+                    startDateTime: new Date(agendaItems.performances[x].startDateTime),
+                    endDateTime: new Date(agendaItems.performances[x].endDateTime),
                     type: 'Optreden',
                     classes: 'color-2'
                 };

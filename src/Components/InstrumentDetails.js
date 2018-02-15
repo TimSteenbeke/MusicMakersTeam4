@@ -3,9 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 class InstrumentDetails extends Component {
 
@@ -22,7 +20,7 @@ class InstrumentDetails extends Component {
             <section className="container">
                 <div className="whiteBox">
                     <h1 className="header">Instrumenten</h1>
-                    <Card>
+                    <Card expanded={true}>
                         <CardHeader
                             title={this.props.naam}
                             subtitle="Instrumenten Details"

@@ -39,4 +39,9 @@
     visibility: visible;
 }
 
+.agendaItem{
+    width: 100%;
+    padding: 3%;
+    font-family: "Century Gothic", "Century Gothic", serif;
+}
 

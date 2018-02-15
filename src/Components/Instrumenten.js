@@ -3,7 +3,6 @@
  */
 
 import React, {Component} from 'react';
-import InstrumentDetails from './InstrumentDetails';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import {
     Table,

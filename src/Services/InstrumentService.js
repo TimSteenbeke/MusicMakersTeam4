@@ -1,8 +1,6 @@
 /**
  * Created by Lo on 4/08/2017.
  */
-const BASE_PATH = "backend/";
-
 
 export function getInstrumentenFromBackend() {
 

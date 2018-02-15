@@ -2,32 +2,17 @@
  * Created by jariv on 14/02/2018.
  */
 import React, {Component} from 'react';
-import {Link, Router} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Menu from 'material-ui/Menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import ContentLink from 'material-ui/svg-icons/content/add';
 import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Agenda from 'material-ui/svg-icons/action/view-agenda';
-
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
 
 
-const style = {
-    rightIcon: {
-        textAlign: 'center',
-        lineHeight: '24px',
-    },
-    style: {
-        height: 500,
-        width: 100,
-        margin: 20,
-        textAlign: 'center',
-        display: 'inline-block',
-    }
-};
 
 class Sidebar extends Component {
     constructor(props) {
