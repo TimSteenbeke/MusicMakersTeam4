@@ -3,7 +3,7 @@ import Home from './Components/Home';
 import Login from './Components/Login.js';
 import AddInstrument from './Components/AddInstrument.js';
 import InstrumentDetails from './Components/InstrumentDetails';
-import Instrumenten from './Components/Instrumenten.js';
+import Instrumenten from './Components/Instruments.js';
 import Agenda from './Components/Agenda.js'
 import {Route} from 'react-router'
 import './CSS/GlobalStylesheet.css';

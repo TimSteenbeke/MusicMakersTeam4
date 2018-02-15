@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginComponent from './Components/Login';
+import Login from '../Components/Login';
 
-it('renders without crashing', () => {
+test('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<LoginComponent />, div);
+  ReactDOM.render(<Login />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
