@@ -17,7 +17,7 @@ export function getInstrumentenFromBackend() {
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments/" + instrumentNr, { mode: 'cors'})
+    return fetch("http://musicmaker-api-team4.herokuapp.com/api/instruments/" + instrumentNr, { mode: 'cors'})
         .then((response) => response.json()
         )
         .then((responseJson) => {
