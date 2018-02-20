@@ -119,7 +119,6 @@ class AddInstrument extends Component {
                         <RaisedButton
                             label="Kies een image"
                             labelPosition="before"
-
                             containerElement="label"
                         >
                             <input type="file" style={styles.exampleImageInput}/>

@@ -8,7 +8,6 @@ export function getInstrumentenFromBackend() {
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -18,10 +17,11 @@ export function getInstrumentenFromBackend() {
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments/" + instrumentNr)
-        .then((response) => response.json())
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments/" + instrumentNr, { mode: 'cors'})
+        .then((response) => response.json()
+        )
         .then((responseJson) => {
-            return responseJson.data;
+        return responseJson;
         })
         .catch((err) => {
             const instrument = {naam:"instrumenten niet gevonden"};

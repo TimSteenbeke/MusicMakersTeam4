@@ -5,50 +5,66 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import * as InstrumentenService from '../Services/InstrumentService.js'
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+
+
 
 class InstrumentDetails extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            instrument: {}
+            instrument: {
+                soort:{}
+            },
+            open: false,
         }
     }
 
-    componentDidMount() {
-        InstrumentenService.getInstrumentFromBackend(1).then(instrument => {
-            this.setState({instrument: instrument});
+    handleToggle = () => {
+        this.setState({
+            open: !this.state.open,
         });
+    };
+
+    handleNestedListToggle = (item) => {
+        this.setState({
+            open: item.state.open,
+        });
+    };
+
+    componentDidMount() {
+        InstrumentenService.getInstrumentFromBackend(this.props.id)
+            .then(console.log(this.props.id))
+            .then(instrument => this.setState({instrument: instrument}));
     }
 
 
 
     render() {
         return (
-            <section className="container">
-                <div className="whiteBox">
-                    <h1 className="header">Instrumenten</h1>
+                <div >
+                    <h1 className="header">Details</h1>
                     <Card expanded={true}>
                         <CardHeader
                             title={this.state.instrument.naam}
-                            subtitle="Instrumenten Details"
-                            actAsExpander={true}
-                            showExpandableButton={true}
                         />
-                        <CardText expandable={true}>
+                        <CardText>
                             <div className="InstrumentDetail">
                                 <div id="instrumentDetails">
-                                    <p>{this.state.instrument.naam}</p>
-                                    <p>{this.state.instrument.type}</p>
-                                    <p> {this.state.instrument.uitvoering}</p>
-                                    <p>{this.state.instrument.afbeelding}</p>
+                                    <List>
+                                        <ListItem primaryText="Type" secondaryText={this.state.instrument.type} />
+                                        <Divider />
+                                        <Subheader>Soort</Subheader>
+                                        <ListItem primaryText="Type" secondaryText={this.state.instrument.soort.soortNaam}/>
+                                    </List>
                                 </div>
                             </div>
                         </CardText>
                     </Card>
                 </div>
-            </section>
-
         );
     }
 }
