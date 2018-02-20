@@ -9,16 +9,16 @@ import registerServiceWorker from './registerServiceWorker';
 
 const Application = () => (
     <MuiThemeProvider>
-    <BrowserRouter>
-        <div className="flexBox">
-            <div className="sidebar">
-            <Sidebar/>
+        <BrowserRouter>
+            <div className="flexBox">
+                <div className="sidebar">
+                    <Sidebar/>
+                </div>
+                <div className="application">
+                    <App/>
+                </div>
             </div>
-            <div className="application">
-            <App/>
-            </div>
-        </div>
-    </BrowserRouter>
+        </BrowserRouter>
     </MuiThemeProvider>
 );
 

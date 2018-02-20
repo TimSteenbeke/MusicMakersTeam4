@@ -4,15 +4,23 @@
 
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import * as InstrumentenService from '../Services/InstrumentService.js'
 
 class InstrumentDetails extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            instrument: []
+            instrument: {}
         }
     }
+
+    componentDidMount() {
+        InstrumentenService.getInstrumentFromBackend(1).then(instrument => {
+            this.setState({instrument: instrument});
+        });
+    }
+
 
 
     render() {
@@ -22,7 +30,7 @@ class InstrumentDetails extends Component {
                     <h1 className="header">Instrumenten</h1>
                     <Card expanded={true}>
                         <CardHeader
-                            title={this.props.naam}
+                            title={this.state.instrument.naam}
                             subtitle="Instrumenten Details"
                             actAsExpander={true}
                             showExpandableButton={true}
@@ -30,11 +38,10 @@ class InstrumentDetails extends Component {
                         <CardText expandable={true}>
                             <div className="InstrumentDetail">
                                 <div id="instrumentDetails">
-                                    <p>Instrument Soort Id: {this.props.InstrumentSoortId}</p>
-                                    <p>Naam: </p>
-                                    <p>Type: {this.props.type}</p>
-                                    <p>Uitvoering: {this.props.uitvoering}</p>
-                                    <p>Afbeelding: {this.props.afbeelding}</p>
+                                    <p>{this.state.instrument.naam}</p>
+                                    <p>{this.state.instrument.type}</p>
+                                    <p> {this.state.instrument.uitvoering}</p>
+                                    <p>{this.state.instrument.afbeelding}</p>
                                 </div>
                             </div>
                         </CardText>
