@@ -13,7 +13,7 @@ import Home from 'material-ui/svg-icons/action/home';
 import Admin from 'material-ui/svg-icons/action/grade';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
-
+import Group from 'material-ui/svg-icons/social/group'
 
 class Sidebar extends Component {
     constructor(props) {
@@ -63,6 +63,12 @@ class Sidebar extends Component {
                         </Link>
                         <Link to="/">
                             <MenuItem primaryText="Admin" leftIcon={<Admin/>}/>
+                        </Link>
+                        <Link to="/groups">
+                            <MenuItem primaryText="Groepen" leftIcon={<Group/>}/>
+                        </Link>
+                        <Link to="/addGroup">
+                            <MenuItem primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
                         </Link>
                     </Menu>
                 </Drawer>
