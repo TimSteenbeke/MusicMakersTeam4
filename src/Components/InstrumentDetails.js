@@ -10,7 +10,6 @@ import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 
 
-
 class InstrumentDetails extends Component {
 
     constructor(props) {
@@ -47,6 +46,7 @@ class InstrumentDetails extends Component {
     render() {
         return (
                 <div >
+
                     <h1 className="header">Details</h1>
                     <Card expanded={true}>
                         <CardHeader
@@ -55,6 +55,7 @@ class InstrumentDetails extends Component {
                         <CardText>
                             <div className="InstrumentDetail">
                                 <div id="instrumentDetails">
+
                                     <List>
                                         <ListItem primaryText="Type" secondaryText={this.state.instrument.type} />
                                         <Divider />

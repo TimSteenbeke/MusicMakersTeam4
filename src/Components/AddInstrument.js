@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
+import Snackbar from 'material-ui/Snackbar';
 
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
@@ -53,14 +54,20 @@ class AddInstrument extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: 1, soorten: [],};
+        this.state = {value: 1, soorten: [],  open: false,};
 
 
     }
 
-    animateLogin = () => {
+    handleClick = () => {
         this.setState({
-            flex: 1
+            open: true,
+        });
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
         });
     };
 
@@ -81,8 +88,8 @@ class AddInstrument extends Component {
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-
                         <h1 className="header">Voeg Instrument toe</h1>
+                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => { e.preventDefault(); this.handleClick(); } }>
                         <SelectField
                             autoWidth={true}
                             floatingLabelText="Soort"
@@ -100,7 +107,6 @@ class AddInstrument extends Component {
                             hintText="Geef naam in..."
                             floatingLabelText="Naam"
                             style={styles.width}
-
                             inputStyle={styles.inputstyle}
                             hintStyle={styles.floatingLabelFocusStyle}
                             floatingLabelStyle={styles.floatingLabelStyle}
@@ -137,9 +143,18 @@ class AddInstrument extends Component {
 
                         <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"
                                       style={styles.loginButton}
+                                      type="submit"
                                       labelColor="#FFEBEE"
                                       className="inputIntrumentButton"/>
+                            <Snackbar
+                                open={this.state.open}
+                                message="Instrument Added"
+                                autoHideDuration={4000}
+                                onRequestClose={this.handleRequestClose}
+                            />
+                        </form>
                     </div>
+
                 </section>
             </div>
         );
