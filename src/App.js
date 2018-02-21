@@ -15,14 +15,14 @@ class App extends Component {
 
     render() {
         return (
-                <div>
-                    <Route name="home" exact path="/" component={Home}/>
+            <div>
+                <Route name="home" exact path="/" component={Home}/>
                     <Route name="login" path="/login" component={Login}/>
                     <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
                     <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
                     <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
                     <Route name="agenda" path="/agenda" component={Agenda}/>
-                </div>
+            </div>
         );
     }
 }

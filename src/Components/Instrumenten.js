@@ -16,6 +16,7 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
+
 class Instrumenten extends Component {
 
     constructor(props) {
@@ -24,6 +25,7 @@ class Instrumenten extends Component {
             instrumenten: [],
             selectedIndex: 0,
             open: false,
+            visible: "hidden"
         }
 
         ;
@@ -51,6 +53,7 @@ class Instrumenten extends Component {
         console.log("Selected Row: " + this.state.selectedIndex);
         this.handleOpen();
     };
+
 
     render() {
         const actions = [
