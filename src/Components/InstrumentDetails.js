@@ -17,8 +17,9 @@ class InstrumentDetails extends Component {
         super(props);
         this.state = {
             instrument: {
-                soort:{}
-            },
+                soort: {}
+            }
+            ,
             open: false,
         }
     }
@@ -37,8 +38,8 @@ class InstrumentDetails extends Component {
 
     componentDidMount() {
         InstrumentenService.getInstrumentFromBackend(this.props.id)
-            .then(console.log(this.props.id))
-            .then(instrument => this.setState({instrument: instrument}));
+            .then(console.log("----Instrument met id " + this.props.id + "---- \n"))
+            .then(instrument => this.setState({instrument: instrument}, console.log(instrument)))
     }
 
 

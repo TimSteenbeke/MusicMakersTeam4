@@ -10,21 +10,21 @@ var colors= {
     'color-1':"rgba(102, 195, 131 , 1)" ,
     "color-2":"rgba(242, 177, 52, 1)" ,
     "color-3":"rgba(235, 85, 59, 1)"
-}
+};
 
 var now = new Date();
 
 
 
 var AgendaItem = function(props){
-    console.log( ' ik ga renderen:' , props)
+    console.log( ' ik ga renderen:' , props);
     console.log(props);
     return <div className="agendaItem">
         <h3> {props.item.name} </h3>
         <p>leerkracht: {props.leerkrachten}</p>
         <RaisedButton fullWidth={true} onClick={()=> props.edit(props.item)}>Edit </RaisedButton>
     </div>
-}
+};
 
 class Agenda extends Component {
     constructor(props) {
