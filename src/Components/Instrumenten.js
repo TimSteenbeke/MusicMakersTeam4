@@ -22,7 +22,7 @@ class Instrumenten extends Component {
         super(props);
         this.state = {
             instrumenten: [],
-            selectedIndex: {},
+            selectedIndex: 0,
             open: false,
         }
 
@@ -43,12 +43,13 @@ class Instrumenten extends Component {
         });
     }
 
-    handleRowSelection = (selectedRow) => {
+
+    handleCellClick = (rowNumber) => {
         this.setState({
-            selectedIndex: selectedRow,
-    });
-        console.log(selectedRow);
-        this.handleOpen()
+            selectedIndex: this.state.instrumenten[rowNumber].instrumentId
+        });
+        console.log("Selected Row: " + this.state.selectedIndex);
+        this.handleOpen();
     };
 
     render() {
@@ -62,7 +63,7 @@ class Instrumenten extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Instrumenten</h1>
-                        <Table onRowSelection={this.handleRowSelection} selectable={true}>
+                        <Table onCellClick={this.handleCellClick} selectable={false}>
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Naam</TableHeaderColumn>
@@ -73,12 +74,12 @@ class Instrumenten extends Component {
                             </TableHeader>
                             <TableBody>
                                 {this.state.instrumenten.map((instrument, index) => (
-                                <TableRow key={instrument.instrumentId}>
-                                    <TableRowColumn>{instrument.naam}</TableRowColumn>
-                                    <TableRowColumn>{instrument.type}</TableRowColumn>
-                                    <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
-                                    <TableRowColumn>{instrument.afbeelding}</TableRowColumn>
-                                </TableRow>
+                                    <TableRow key={instrument.instrumentId}>
+                                        <TableRowColumn>{instrument.naam}</TableRowColumn>
+                                        <TableRowColumn>{instrument.type}</TableRowColumn>
+                                        <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
+                                        <TableRowColumn>{instrument.afbeelding}</TableRowColumn>
+                                    </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
@@ -92,7 +93,7 @@ class Instrumenten extends Component {
                     autoScrollBodyContent={true}
                 >
                     <InstrumentDetails
-                        id={(this.state.selectedIndex[0] +1)}
+                        id={(this.state.selectedIndex)}
                     />
                 </Dialog>
             </div>

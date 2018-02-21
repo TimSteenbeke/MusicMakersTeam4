@@ -24,7 +24,21 @@ export function getInstrumentFromBackend(instrumentNr) {
         return responseJson;
         })
         .catch((err) => {
-            const instrument = {naam:"instrumenten niet gevonden"};
+            const instrument = {naam:"instrument niet gevonden"};
             return instrument;
+        });
+}
+
+export function getInstrumentSoortenFromBackend() {
+
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instrumentsoorten", { mode: 'cors'})
+        .then((response) =>
+            response.json())
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((err) => {
+            console.log("geen response");
+            console.log(err);
         });
 }

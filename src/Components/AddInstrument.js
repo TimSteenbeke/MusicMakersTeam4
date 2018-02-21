@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import * as InstrumentenService from '../Services/InstrumentService.js'
 
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
@@ -52,7 +53,9 @@ class AddInstrument extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: 1};
+        this.state = {value: 1, soorten: [],};
+
+
     }
 
     animateLogin = () => {
@@ -60,6 +63,14 @@ class AddInstrument extends Component {
             flex: 1
         });
     };
+
+    componentDidMount() {
+        InstrumentenService.getInstrumentSoortenFromBackend()
+            .then(console.log("----soorten---- \n"))
+            .then(soorten => {
+            this.setState({soorten: soorten}, console.log(soorten));
+        });
+    }
 
     handleChange = (event, index, value) => this.setState({value});
 
@@ -73,15 +84,15 @@ class AddInstrument extends Component {
 
                         <h1 className="header">Voeg Instrument toe</h1>
                         <SelectField
-
+                            autoWidth={true}
                             floatingLabelText="Soort"
                             value={this.state.value}
                             onChange={this.handleChange}
                             selectedMenuItemStyle={styles.errorStyle}
                         >
-                            <MenuItem value={1} primaryText="Snaar"/>
-                            <MenuItem value={2} primaryText="Slag"/>
-                            <MenuItem value={3} primaryText="Blaas"/>
+                            {this.state.soorten.map((soort, index) => (
+                                <MenuItem key={soort.instrumentSoortId} value={soort.instrumentSoortId} primaryText={soort.soortNaam}/>
+                            ))}
                         </SelectField>
                         <br />
 
