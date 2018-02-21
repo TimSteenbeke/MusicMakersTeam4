@@ -1,6 +1,18 @@
 @import '~react-agenda/build/styles.css';
 @import '~react-datetime/css/react-datetime.css';
 
+
+@media (max-width: 600px) {
+    .whiteBox {
+        width: 100%;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.99);
+        padding: 4%;
+        position: absolute;
+        z-index: 2;
+        box-shadow: 5px 5px 40px black;
+    }
+}
 .whiteBox {
     margin-top: 10%;
     margin-bottom: 5%;
