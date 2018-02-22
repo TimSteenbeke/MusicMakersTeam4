@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
 import * as MusicService from '../Services/MusicService.js'
-import VexFlowPartituur from "./VexFlowPartituur";
+import Partituur from "./Partituur";
 
 
 class PlayMusic extends Component {
@@ -29,7 +29,7 @@ class PlayMusic extends Component {
                         <h1 className="header">Play music</h1>
                         <p>{this.state.partituur.naam}</p>
                         <p>{this.state.partituur.id}</p>
-                        <VexFlowPartituur/>
+                        <Partituur/>
                     </div>
                 </section>
             </div>
