@@ -29,7 +29,7 @@ class PlayMusic extends Component {
                         <h1 className="header">Play music</h1>
                         <p>{this.state.partituur.naam}</p>
                         <p>{this.state.partituur.id}</p>
-                        <Partituur/>
+                        <Partituur />
                     </div>
                 </section>
             </div>
