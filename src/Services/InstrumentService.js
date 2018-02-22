@@ -42,20 +42,14 @@ export function getInstrumentSoortenFromBackend() {
             console.log(err);
         });
 }
-export function postInstrument() {
 
+export function postInstrument(data) {
     fetch('https://musicmaker-api-team4.herokuapp.com/api/instruments', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            instrumentsoortid: 0,
-            naam: "Jari",
-            type: "Blaas",
-            uitvoering: "Geen idee",
-            afbeelding: "image.jpg"
-        })
+        body: data
     })
 }
