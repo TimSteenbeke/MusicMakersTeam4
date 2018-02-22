@@ -54,7 +54,15 @@ class AddInstrument extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: 1, soorten: [],  open: false,};
+        this.state = {
+            value: 1,
+            soorten: [],
+            open: false,
+            typedName: "",
+            typedType: "",
+            typedVersion: "",
+            image: "..image/image.jpg",
+        };
 
 
     }
@@ -63,6 +71,15 @@ class AddInstrument extends Component {
         this.setState({
             open: true,
         });
+        InstrumentenService.postInstrument(JSON.stringify(
+            {
+                afbeelding: this.state.image,
+                instrumentsoortid: this.state.value,
+                naam: this.state.typedName,
+                type: this.state.typedType,
+                uitvoering: this.state.typedVersion
+            }
+        ));
     };
 
     handleRequestClose = () => {
@@ -75,12 +92,29 @@ class AddInstrument extends Component {
         InstrumentenService.getInstrumentSoortenFromBackend()
             .then(console.log("----soorten---- \n"))
             .then(soorten => {
-            this.setState({soorten: soorten}, console.log(soorten));
-        });
+                this.setState({soorten: soorten}, console.log(soorten));
+            });
     }
 
-    handleChange = (event, index, value) => this.setState({value});
+    onChangeType = (event, typedType) => {
+        this.setState({typedType});
+        console.log("Type:" + typedType)
+    };
 
+    onChangeNaam = (event, typedName) => {
+        this.setState({typedName});
+        console.log("Naam:" + typedName)
+    };
+
+    onChangeVersion = (event, typedVersion) => {
+        this.setState({typedVersion});
+        console.log("Version:" + typedVersion)
+    };
+
+    handleChange = (event, index, value) => {
+        this.setState({value});
+        console.log(value)
+    };
 
     render() {
         return (
@@ -89,63 +123,71 @@ class AddInstrument extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Voeg Instrument toe</h1>
-                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => { e.preventDefault(); this.handleClick(); } }>
-                        <SelectField
-                            autoWidth={true}
-                            floatingLabelText="Soort"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            selectedMenuItemStyle={styles.errorStyle}
-                        >
-                            {this.state.soorten.map((soort, index) => (
-                                <MenuItem key={soort.instrumentSoortId} value={soort.instrumentSoortId} primaryText={soort.soortNaam}/>
-                            ))}
-                        </SelectField>
-                        <br />
+                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
+                            e.preventDefault();
+                            this.handleClick();
+                        } }>
+                            <SelectField
+                                autoWidth={true}
+                                floatingLabelText="Soort"
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                                selectedMenuItemStyle={styles.errorStyle}
+                            >
+                                {this.state.soorten.map((soort, index) => (
+                                    <MenuItem key={soort.instrumentSoortId}
+                                              value={soort.instrumentSoortId}
+                                              primaryText={soort.soortNaam}/>
+                                ))}
+                            </SelectField>
+                            <br />
 
-                        <TextField
-                            hintText="Geef naam in..."
-                            floatingLabelText="Naam"
-                            style={styles.width}
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                        /><br />
-                        <TextField
-                            hintText="Geef type in..."
-                            floatingLabelText="Type"
-                            style={styles.width}
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                        /><br />
-                        <TextField
-                            hintText="Geef uitvoering in..."
-                            floatingLabelText="Uitvoering"
-                            style={styles.width}
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                        />
-                        <RaisedButton
-                            label="Kies een image"
-                            labelPosition="before"
-                            containerElement="label"
-                        >
-                            <input type="file" style={styles.exampleImageInput}/>
-                        </RaisedButton>
+                            <TextField
+                                onChange={this.onChangeNaam}
+                                hintText="Geef naam in..."
+                                floatingLabelText="Naam"
+                                style={styles.width}
+                                inputStyle={styles.inputstyle}
+                                hintStyle={styles.floatingLabelFocusStyle}
+                                floatingLabelStyle={styles.floatingLabelStyle}
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
+                            /><br />
+                            <TextField
+                                onChange={this.onChangeType}
+                                hintText="Geef type in..."
+                                floatingLabelText="Type"
+                                style={styles.width}
+                                inputStyle={styles.inputstyle}
+                                hintStyle={styles.floatingLabelFocusStyle}
+                                floatingLabelStyle={styles.floatingLabelStyle}
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
+                            /><br />
+                            <TextField
+                                onChange={this.onChangeVersion}
+                                hintText="Geef uitvoering in..."
+                                floatingLabelText="Uitvoering"
+                                style={styles.width}
+                                inputStyle={styles.inputstyle}
+                                hintStyle={styles.floatingLabelFocusStyle}
+                                floatingLabelStyle={styles.floatingLabelStyle}
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
+                            />
+                            <RaisedButton
+                                label="Kies een image"
+                                labelPosition="before"
+                                containerElement="label"
+                            >
+                                <input type="file" style={styles.exampleImageInput}/>
+                            </RaisedButton>
 
-                        <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                      style={styles.loginButton}
-                                      type="submit"
-                                      labelColor="#FFEBEE"
-                                      className="inputIntrumentButton"/>
+                            <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"
+                                          style={styles.loginButton}
+                                          type="submit"
+                                          labelColor="#FFEBEE"
+                                          className="inputIntrumentButton"/>
                             <Snackbar
                                 open={this.state.open}
                                 message="Instrument Added"
