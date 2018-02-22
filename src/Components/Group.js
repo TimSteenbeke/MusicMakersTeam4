@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import * as GroupService from '../Services/GroupService.js'
 import RaisedButton from 'material-ui/RaisedButton';
+import Delete from 'material-ui/svg-icons/action/delete'
+
 import {
     Table,
     TableBody,
@@ -11,7 +13,6 @@ import {
 } from 'material-ui/Table';
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-import EditGroup from "./EditGroup";
 
 const styles = {
     width: {
@@ -49,64 +50,85 @@ const styles = {
     },
 };
 
-var keyy;
-var key;
-
 export default class Group extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            groups: [{
-                groupName: "groep1",
-                begeleider: "begeleider1",
-                aantalLeden: 5
-            }, {
-                groupName: "groep2",
-                begeleider: "begeleider2",
-                aantalLeden: 3
-            }],
-            key: []
+            groups: [],
+            selected: [],
+            selectedGroup: null
         };
     }
-/*
+
     componentDidMount() {
-       GroupService.getGroupsFromBackend().then(groups => {
-           this.setState({groups: groups});
+        GroupService.getGroupsFromBackend(1).then(fetchedGroups => {
+            console.log("fetchedGroups ", fetchedGroups)
+            let groups = [];
+            groups.push(fetchedGroups)
+            this.setState({
+                groups: groups,
+                selected: [],
+                selectedGroup: null,
+                tableData: []
+            });
         });
-    }*/
+        console.log("state: ", this.state);
+    }
 
-static _onRowSelection(key){
-    keyy = key
-}
+    isSelected = (index) => {
+        return this.state.selected.indexOf(index) !== -1;
+    };
 
-static editSelectedGroup(key){
+    handleRowSelection = (selectedRows) => {
+        this.setState({
+            selected: selectedRows,
+            selectedGroup: this.state.groups[selectedRows].id
+        });
+        console.log("this.state: ", this.state);
+        console.log("selectedRows: ", selectedRows);
+    };
 
-}
+    onClickDeleteGroup = () => {
+        let tableData = this.state.tableData.filter(({id}) =>
+            !this.state.groups.includes(id))
+        this.setState({tableData, selectedGroup: []}, () => {
+            console.log('After delete', this.state.tableData,
+                '\nthis.state.groups', this.state.selectedGroup)
+    })};
 
+//onRowSelection={this.handleRowSelection}
     render() {
+        console.log("render state: ", this.state);
         return <div className="Homepage">
             <section className="container">
                 <div className="whiteBox">
                     <h1 className="header">Groepen</h1>
-                    <Table onRowSelection={this.key}>
-                        <TableHeader>
+                    <Table selectable={true} fixedHeader={true} onRowSelection={this.handleRowSelection}>
+                        <TableHeader displaySelectAll={false}
+                                     adjustForCheckbox={false}
+                                     enableSelectAll={false}>
                             <TableRow>
                                 <TableHeaderColumn>Naam</TableHeaderColumn>
                                 <TableHeaderColumn>Begeleider</TableHeaderColumn>
                                 <TableHeaderColumn>Aantal leden</TableHeaderColumn>
                             </TableRow>
                         </TableHeader>
-                        <TableBody>
+                        <TableBody displayRowCheckbox={false} showRowHover={true}>
                             {this.state.groups.map((group, i) => (
-                                <TableRow key={i}>
-                                    <TableRowColumn>{group.groupName}</TableRowColumn>
-                                    <TableRowColumn>{group.begeleider}</TableRowColumn>
-                                    <TableRowColumn>{group.aantalLeden}</TableRowColumn>
+                                <TableRow selected={this.isSelected(i)}>
+                                    <TableRowColumn>{group.name}</TableRowColumn>
+                                    <TableRowColumn>{group.supervisor.username}</TableRowColumn>
+                                    <TableRowColumn>{group.users.count}</TableRowColumn>
+                                    <TableRowColumn>
+                                        <RaisedButton onClick={this.onClickDeleteGroup} icon={<Delete/>}/>
+                                    </TableRowColumn>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                    <RaisedButton label="Groep aanpassen" linkButton={true} href={/editGroup/ + keyy} backgroundColor="#DD2C00"
+                    <RaisedButton label="Groep aanpassen" linkButton={true}
+                                  href={/editGroup/ + this.state.selectedGroup}
+                                  backgroundColor="#DD2C00"
                                   style={styles.loginButton}
                                   labelColor="#FFEBEE"
                                   className="inputGroepButton"/>
