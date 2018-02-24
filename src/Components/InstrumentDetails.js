@@ -42,7 +42,6 @@ class InstrumentDetails extends Component {
     }
 
 
-
     render() {
         return (
                 <div >
@@ -61,6 +60,11 @@ class InstrumentDetails extends Component {
                                         <Divider />
                                         <Subheader>Soort</Subheader>
                                         <ListItem primaryText="Type" secondaryText={this.state.instrument.soort.soortNaam}/>
+                                        <Divider />
+                                            <Subheader>Image</Subheader>
+                                            <ListItem>
+                                            <img height="100px" width="100px" src={"data:image;base64," + this.state.instrument.afbeelding} alt="Instrument"/>
+                                            </ListItem>
                                     </List>
                                 </div>
                             </div>

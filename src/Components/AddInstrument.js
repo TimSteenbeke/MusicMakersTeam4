@@ -80,6 +80,12 @@ class AddInstrument extends Component {
                 uitvoering: this.state.typedVersion
             }
         ));
+        console.log("Image: " + this.state.image);
+        console.log("Value: " + this.state.value);
+        console.log("Name: " + this.state.typedName);
+        console.log("Type: " + this.state.typedType);
+        console.log("Version: " + this.state.typedVersion);
+
     };
 
     handleRequestClose = () => {
@@ -114,6 +120,22 @@ class AddInstrument extends Component {
     handleChange = (event, index, value) => {
         this.setState({value});
         console.log(value)
+    };
+
+    handleChangeImage = (evt) => {
+        console.log("Uploading");
+        var self = this;
+        var reader = new FileReader();
+        var file = evt.target.files[0];
+        reader.onload = function (upload) {
+            self.setState({
+                image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
+            });
+        };
+        reader.readAsDataURL(file);
+        setTimeout(function () {
+            console.log("Uploaded");
+        }, 1000);
     };
 
     render() {
@@ -180,7 +202,16 @@ class AddInstrument extends Component {
                                 labelPosition="before"
                                 containerElement="label"
                             >
-                                <input type="file" style={styles.exampleImageInput}/>
+                                <input type="file"
+                                       style={styles.exampleImageInput}
+                                       name="file"
+                                       className="upload-file"
+                                       id="file"
+                                       onChange={this.handleChangeImage}
+                                       encType="multipart/form-data"
+                                       required
+                                       accept="image/*"
+                                />
                             </RaisedButton>
 
                             <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"

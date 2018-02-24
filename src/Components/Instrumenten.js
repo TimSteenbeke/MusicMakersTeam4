@@ -16,8 +16,15 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
+const styles = {
+    exampleImageInput: {
+        margin: 10,
+    }
+}
 
 class Instrumenten extends Component {
+
+
 
     constructor(props) {
         super(props);
@@ -25,11 +32,15 @@ class Instrumenten extends Component {
             instrumenten: [],
             selectedIndex: 0,
             open: false,
-            visible: "hidden"
-        }
-
-        ;
+            selected: [],
+        };
     }
+
+    handleRowSelection = (selectedRows) => {
+        this.setState({
+            selected: selectedRows,
+        });
+    };
 
     handleOpen = () => {
         this.setState({open: true});
@@ -37,6 +48,10 @@ class Instrumenten extends Component {
 
     handleClose = () => {
         this.setState({open: false});
+    };
+
+    handleDelete = () => {
+        InstrumentenService.deleteInstrument(this.state.selectedIndex)
     };
 
     componentDidMount() {
@@ -47,18 +62,29 @@ class Instrumenten extends Component {
 
 
     handleCellClick = (rowNumber) => {
+        var self = this;
+
         this.setState({
             selectedIndex: this.state.instrumenten[rowNumber].instrumentId
         });
-        console.log("Selected Row: " + this.state.selectedIndex);
-        this.handleOpen();
+
+        setTimeout(function () {
+            console.log(console.log("Selected Row: " + self.state.selectedIndex));
+        }, 1000);
+
     };
+
+    isSelected = (index) => {
+        return this.state.selected.indexOf(index) !== -1;
+    };
+
 
 
     render() {
         const actions = [
-            <RaisedButton label="Okay" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>
+            <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
+                          labelColor="#FFEBEE"/>,
+
         ];
 
         return (
@@ -66,26 +92,28 @@ class Instrumenten extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Instrumenten</h1>
-                        <Table onCellClick={this.handleCellClick} selectable={false}>
+                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Naam</TableHeaderColumn>
                                     <TableHeaderColumn>Type</TableHeaderColumn>
                                     <TableHeaderColumn>Uitvoering</TableHeaderColumn>
-                                    <TableHeaderColumn>Afbeelding</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {this.state.instrumenten.map((instrument, index) => (
-                                    <TableRow key={instrument.instrumentId}>
+                                    <TableRow selected={this.isSelected(index)} key={instrument.instrumentId}>
                                         <TableRowColumn>{instrument.naam}</TableRowColumn>
                                         <TableRowColumn>{instrument.type}</TableRowColumn>
                                         <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
-                                        <TableRowColumn>{instrument.afbeelding}</TableRowColumn>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
+                        <RaisedButton style={styles.exampleImageInput} label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
+                        <RaisedButton label="Delete" onClick={this.handleDelete} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
                     </div>
                 </section>
                 <Dialog
@@ -99,6 +127,7 @@ class Instrumenten extends Component {
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
+
             </div>
         );
     }

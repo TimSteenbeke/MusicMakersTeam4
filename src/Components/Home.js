@@ -28,7 +28,7 @@ const styles = {
         color: white,
     },
     toolbarStyle: {
-        backgroundColor: "#DD2C00",
+        backgroundColor: "#000000",
         width: "100%"
     },
     errorStyle: {
@@ -102,7 +102,7 @@ export default class Home extends Component{
                     <h1 className="header">Home</h1>
                     <Toolbar style={styles.toolbarStyle}>
                         <ToolbarGroup firstChild={true}>
-                            <DropDownMenu underlineStyle={styles.titleStyle} selectedMenuItemStyle={styles.errorStyle} value={this.state.value} onChange={this.handleChange}>
+                            <DropDownMenu labelStyle={styles.titleStyle} underlineStyle={styles.titleStyle} selectedMenuItemStyle={styles.errorStyle} value={this.state.value} onChange={this.handleChange}>
                                 <MenuItem value={1} primaryText="Alles" />
                                 <MenuItem value={2} primaryText="Mededelingen" />
                                 <MenuItem value={3} primaryText="Nieuws" />
