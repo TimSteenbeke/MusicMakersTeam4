@@ -16,31 +16,19 @@ class InstrumentDetails extends Component {
         super(props);
         this.state = {
             instrument: {
-                soort: {}
+                soort: {},
+                afbeelding: ""
             }
             ,
             open: false,
         }
     }
 
-    handleToggle = () => {
-        this.setState({
-            open: !this.state.open,
-        });
-    };
-
-    handleNestedListToggle = (item) => {
-        this.setState({
-            open: item.state.open,
-        });
-    };
-
     componentDidMount() {
         InstrumentenService.getInstrumentFromBackend(this.props.id)
             .then(console.log("----Instrument met id " + this.props.id + "---- \n"))
             .then(instrument => this.setState({instrument: instrument}, console.log(instrument)))
     }
-
 
 
     render() {
@@ -61,6 +49,11 @@ class InstrumentDetails extends Component {
                                         <Divider />
                                         <Subheader>Soort</Subheader>
                                         <ListItem primaryText="Type" secondaryText={this.state.instrument.soort.soortNaam}/>
+                                        <Divider />
+                                            <Subheader>Image</Subheader>
+                                            <ListItem>
+                                            <img height="100px" width="100px" src={"data:image;base64," + this.state.instrument.afbeelding} alt="Instrument"/>
+                                            </ListItem>
                                     </List>
                                 </div>
                             </div>
