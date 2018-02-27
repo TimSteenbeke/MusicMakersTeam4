@@ -52,23 +52,22 @@ class Sidebar extends Component {
                             <MenuItem primaryText="Home" leftIcon={<Home/>}/>
                         </Link>
                         <Divider/>
-
-                        <Divider/>
-
                         <Link to="/agenda">
                             <MenuItem primaryText="Agenda" leftIcon={<Agenda/>}/>
                         </Link>
                         <Divider/>
-
                         <Link to="/instrumenten">
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
+                        <Divider/>
                         <Link to="/addInstrument">
                             <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
                         </Link>
+                        <Divider/>
                         <Link to="/courses">
                             <MenuItem primaryText="Courses" leftIcon={<Dashboard/>}/>
                         </Link>
+                        <Divider/>
                         <Link to="/addCourse">
                             <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
                         </Link>
