@@ -16,24 +16,13 @@ class InstrumentDetails extends Component {
         super(props);
         this.state = {
             instrument: {
-                soort: {}
+                soort: {},
+                afbeelding: ""
             }
             ,
             open: false,
         }
     }
-
-    handleToggle = () => {
-        this.setState({
-            open: !this.state.open,
-        });
-    };
-
-    handleNestedListToggle = (item) => {
-        this.setState({
-            open: item.state.open,
-        });
-    };
 
     componentDidMount() {
         InstrumentenService.getInstrumentFromBackend(this.props.id)

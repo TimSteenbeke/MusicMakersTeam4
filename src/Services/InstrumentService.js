@@ -58,15 +58,22 @@ export function deleteInstrument(instrumentId) {
     return fetch('https://musicmaker-api-team4.herokuapp.com/api/instruments/' + instrumentId, {
         method: 'DELETE',
         mode: 'CORS',
-
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-
         }
-    }).then(response =>
-        response.json().then(json => {
-            return json;
-        })
-    );
+    });
+}
+
+export function UpdateInstrument(instrumentId, data) {
+    console.log(data);
+    return fetch('https://musicmaker-api-team4.herokuapp.com/api/instruments/instrument/' + instrumentId, {
+        method: 'PUT',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    });
 }

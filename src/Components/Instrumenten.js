@@ -4,6 +4,8 @@
 import React, {Component} from 'react';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import InstrumentDetails from './InstrumentDetails.js'
+import InstrumentUpdate from './InstrumentUpdate.js'
+
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -24,14 +26,13 @@ const styles = {
 
 class Instrumenten extends Component {
 
-
-
     constructor(props) {
         super(props);
         this.state = {
             instrumenten: [],
             selectedIndex: 0,
-            open: false,
+            openDetails: false,
+            openUpdate: false,
             selected: [],
         };
     }
@@ -43,16 +44,32 @@ class Instrumenten extends Component {
     };
 
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({openDetails: true});
     };
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({openDetails: false});
+    };
+
+    handleOpenUpdate = () => {
+        this.setState({openUpdate: true});
+    };
+
+    handleCloseUpdate = () => {
+        this.setState({openUpdate: false});
     };
 
     handleDelete = () => {
-        InstrumentenService.deleteInstrument(this.state.selectedIndex)
+        InstrumentenService.deleteInstrument(this.state.selectedIndex);
     };
+
+
+    componentWillUpdate(){
+        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
+            this.setState({instrumenten: instrumenten});
+        });
+    }
+
 
     componentDidMount() {
         InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
@@ -81,10 +98,14 @@ class Instrumenten extends Component {
 
 
     render() {
-        const actions = [
+        const actionsDetails = [
             <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
                           labelColor="#FFEBEE"/>,
+        ];
 
+        const actionsUpdate = [
+            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
+                          labelColor="#FFEBEE"/>,
         ];
 
         return (
@@ -95,6 +116,7 @@ class Instrumenten extends Component {
                         <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
                             <TableHeader>
                                 <TableRow>
+                                    <TableHeaderColumn>Id</TableHeaderColumn>
                                     <TableHeaderColumn>Naam</TableHeaderColumn>
                                     <TableHeaderColumn>Type</TableHeaderColumn>
                                     <TableHeaderColumn>Uitvoering</TableHeaderColumn>
@@ -103,6 +125,7 @@ class Instrumenten extends Component {
                             <TableBody>
                                 {this.state.instrumenten.map((instrument, index) => (
                                     <TableRow selected={this.isSelected(index)} key={instrument.instrumentId}>
+                                        <TableRowColumn>{instrument.instrumentId}</TableRowColumn>
                                         <TableRowColumn>{instrument.naam}</TableRowColumn>
                                         <TableRowColumn>{instrument.type}</TableRowColumn>
                                         <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
@@ -112,18 +135,32 @@ class Instrumenten extends Component {
                         </Table>
                         <RaisedButton style={styles.exampleImageInput} label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-                        <RaisedButton label="Delete" onClick={this.handleDelete} backgroundColor="#DD2C00"
+                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
+                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
                     </div>
                 </section>
                 <Dialog
-                    actions={actions}
+                    actions={actionsDetails}
                     modal={false}
-                    open={this.state.open}
+                    open={this.state.openDetails}
                     onRequestClose={this.handleClose}
                     autoScrollBodyContent={true}
                 >
                     <InstrumentDetails
+                        id={(this.state.selectedIndex)}
+                    />
+                </Dialog>
+
+                <Dialog
+                    actions={actionsUpdate}
+                    modal={false}
+                    open={this.state.openUpdate}
+                    onRequestClose={this.handleCloseUpdate}
+                    autoScrollBodyContent={true}
+                >
+                    <InstrumentUpdate
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
