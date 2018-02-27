@@ -1,11 +1,11 @@
 /**
- * Created by jariv on 9/02/2018.
+ * Created by michiel on 25/02/2018.
  */
 import React, {Component} from 'react';
-import * as InstrumentenService from '../Services/InstrumentService.js'
-import InstrumentDetails from './InstrumentDetails.js'
+import * as CompositionService from '../Services/CompositionService.js'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+
 
 import {
     Table,
@@ -15,20 +15,18 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import MuziekstukDetails from "./MuziekstukDetails";
 
 
-class Instrumenten extends Component {
-
+export default class Compositions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            instrumenten: [],
+            compositions: [],
             selectedIndex: 0,
             open: false,
             visible: "hidden"
-        }
-
-        ;
+        };
     }
 
     handleOpen = () => {
@@ -40,19 +38,18 @@ class Instrumenten extends Component {
     };
 
     componentDidMount() {
-        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
-            this.setState({instrumenten: instrumenten});
+        CompositionService.getCompositionsFromBackend().then(compositions => {
+            this.setState({compositions: compositions});
         });
     }
 
     handleCellClick = (rowNumber) => {
         this.setState({
-            selectedIndex: this.state.instrumenten[rowNumber].instrumentId
+            selectedIndex: this.state.compositions[rowNumber].muziekstukId
         });
         console.log("Selected Row: " + this.state.selectedIndex);
         this.handleOpen();
     };
-
 
     render() {
         const actions = [
@@ -64,23 +61,23 @@ class Instrumenten extends Component {
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-                        <h1 className="header">Instrumenten</h1>
+                        <h1 className="header">Muziekstukken</h1>
                         <Table onCellClick={this.handleCellClick} selectable={false}>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHeaderColumn>Naam</TableHeaderColumn>
-                                    <TableHeaderColumn>Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Uitvoering</TableHeaderColumn>
-                                    <TableHeaderColumn>Afbeelding</TableHeaderColumn>
+                                    <TableHeaderColumn>Titel</TableHeaderColumn>
+                                    <TableHeaderColumn>Artiest</TableHeaderColumn>
+                                    <TableHeaderColumn>Taal</TableHeaderColumn>
+                                    <TableHeaderColumn>Genre</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {this.state.instrumenten.map((instrument, index) => (
-                                    <TableRow key={instrument.instrumentId}>
-                                        <TableRowColumn>{instrument.naam}</TableRowColumn>
-                                        <TableRowColumn>{instrument.type}</TableRowColumn>
-                                        <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
-                                        <TableRowColumn>{instrument.afbeelding}</TableRowColumn>
+                                {this.state.compositions.map((composition, index) => (
+                                    <TableRow key={composition.muziekstukId}>
+                                        <TableRowColumn>{composition.titel}</TableRowColumn>
+                                        <TableRowColumn>{composition.artist}</TableRowColumn>
+                                        <TableRowColumn> {composition.language}</TableRowColumn>
+                                        <TableRowColumn>{composition.genre}</TableRowColumn>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -94,7 +91,7 @@ class Instrumenten extends Component {
                     onRequestClose={this.handleClose}
                     autoScrollBodyContent={true}
                 >
-                    <InstrumentDetails
+                    <MuziekstukDetails
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
@@ -103,5 +100,4 @@ class Instrumenten extends Component {
     }
 }
 
-export default Instrumenten;
 

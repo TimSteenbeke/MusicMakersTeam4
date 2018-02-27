@@ -66,6 +66,15 @@ class Sidebar extends Component {
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
                         <Divider/>
+
+                        <Link to="/muziekstukken">
+                            <MenuItem primaryText="Muziekstukken" leftIcon={<Dashboard/>}/>
+                        </Link>
+                        <Divider/>
+                        <Link to="/addMuziekstuk">
+                            <MenuItem primaryText="Add Muziekstuk" leftIcon={<ContentLink/>}/>
+                        </Link>
+                        <Divider/>
                         {/*<Link to="/">*/}
                         {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
                         {/*</Link>*/}
