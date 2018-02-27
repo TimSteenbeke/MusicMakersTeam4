@@ -16,6 +16,11 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
+const styles = {
+    exampleImageInput: {
+        margin: 10,
+    }
+}
 
 class Courses extends Component {
 
@@ -26,21 +31,16 @@ class Courses extends Component {
             selectedIndex: 0,
             open: false,
             visible: "hidden"
-        }
+        };
 
-        ;
+
+
     }
 
-    handleOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-        this.setState({open: false});
-    };
 
     componentDidMount() {
      this.getCourses();
+
     }
 
     getCourses() {
@@ -49,28 +49,40 @@ class Courses extends Component {
         });
     }
 
+    handleDelete = () => {
+        CourseService.deleteCourse(this.state.selectedIndex);
+    }
 
-    handleCellClick = (rowNumber) => {
-        this.setState({
-            selectedIndex: this.state.courses[rowNumber].instrumentId
-        });
-        console.log("Selected Row: " + this.state.selectedIndex);
-        this.handleOpen();
+
+   klikmaar(courseId) {
+        console.log(courseId);
+        this.setState({selectedIndex:courseId});
+   }
+
+   zeghallo() {
+        console.log('hallo');
+   }
+
+   getCourseIdFromTableRow(row) {
+        console.log(row);
+        console.log(this.state.courses[row].courseId);
+        this.setState({selectedIndex: this.state.courses[row].courseId});
+
+   }
+
+
+
+    handleCloseUpdate = (row) => {
+        this.setState({openUpdate: false});
     };
 
-
     render() {
-        const actions = [
-            <RaisedButton label="Okay" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>
-        ];
-
         return (
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Courses</h1>
-                        <Table onCellClick={this.handleCellClick} selectable={false}>
+                        <Table selectable={true} onCellClick={ (rownr) => { this.getCourseIdFromTableRow(rownr)}}>
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Course</TableHeaderColumn>
@@ -79,28 +91,18 @@ class Courses extends Component {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {this.state.courses.map((course, index) => (
+                                {this.state.courses.map((course) => (
                                     <TableRow key={course.courseid}>
                                         <TableRowColumn>{course.beschrijving}</TableRowColumn>
                                         <TableRowColumn>{course.prijs}</TableRowColumn>
-
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
+                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
                     </div>
                 </section>
-                <Dialog
-                    actions={actions}
-                    modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                    autoScrollBodyContent={true}
-                >
-                    <InstrumentDetails
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
             </div>
         );
     }
