@@ -33,7 +33,7 @@ class Sidebar extends Component {
                 <AppBar
                     title="Music Makers"
                     onLeftIconButtonClick={this.handleToggle}
-                    style={{backgroundColor: '#DD2C00', position: 'fixed'}}
+                    style={{backgroundColor: '#000000', position: 'fixed'}}
                     iconElementRight={
                         <IconButton tooltip="Notifications">
                             <NotificationsIcon />
