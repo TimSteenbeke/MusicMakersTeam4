@@ -1,38 +1,11 @@
 @import '~react-agenda/build/styles.css';
 @import '~react-datetime/css/react-datetime.css';
 
-.whiteBox {
-    width: 100%;
-    margin-top: 10%;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.99);
-    padding: 4%;
-    position: absolute;
-    z-index: 2;
-    box-shadow: 5px 5px 40px black;
-}
-
-@media (min-width: 800px) {
-    .whiteBox {
-        margin-top: 10%;
-        margin-bottom: 5%;
-        width: 60%;
-        margin-left: 20%;
-        border-radius: 5px;
-        margin-right: 20%;
-        background-color: rgba(255, 255, 255, 0.99);
-        padding: 4%;
-        position: absolute;
-        z-index: 2;
-        box-shadow: 5px 5px 40px black;
-    }
-}
 
 .container {
-    background-image: url("../images/drum.jpg");
-    background-attachment: scroll;
-    background-size: cover;
-    overflow-y: scroll;
+   background-color: grey;
+    margin: 0;
+    padding: 10px;
 }
 
 .header {
@@ -44,12 +17,8 @@
 
 .redbg {
     background-color: #000000;
-
 }
 
-.sidebar {
-    visibility: visible;
-}
 
 .agendaItem {
     width: 100%;

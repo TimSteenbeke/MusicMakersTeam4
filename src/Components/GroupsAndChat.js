@@ -1,5 +1,5 @@
 /**
- * Created by jariv on 14/02/2018.
+ * Created by jariv on 27/02/2018.
  */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
@@ -12,14 +12,15 @@ import Home from 'material-ui/svg-icons/action/home';
 import Divider from 'material-ui/Divider';
 
 
-class Sidebar extends Component {
+
+class GroupsAndChat extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <div>
+                <div>
                     <Menu>
                         <Link to="/">
                             <MenuItem primaryText="Home" leftIcon={<Home/>}/>
@@ -40,9 +41,9 @@ class Sidebar extends Component {
                         </Link>
                         <Divider/>
                     </Menu>
-            </div>
+                </div>
         );
     }
 }
 
-export default Sidebar;
+export default GroupsAndChat;
