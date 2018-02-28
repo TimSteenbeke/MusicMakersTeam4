@@ -69,7 +69,6 @@ class InstrumentDetails extends Component {
     }
 
     componentDidMount() {
-        var self = this;
         InstrumentenService.getInstrumentFromBackend(this.props.id)
 
             .then(console.log("----Instrument met id " + this.props.id + "---- \n"))
