@@ -1,12 +1,13 @@
+
+
 /**
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
 import * as CourseService from '../Services/CourseService'
-import InstrumentDetails from './InstrumentDetails.js'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import CoursesUpdate from './CoursesUpdate.js'
 import {
     Table,
     TableBody,
@@ -16,6 +17,11 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
+const styles = {
+    exampleImageInput: {
+        margin: 10,
+    }
+}
 
 class Courses extends Component {
 
@@ -24,8 +30,8 @@ class Courses extends Component {
         this.state = {
             courses: [],
             selectedIndex: 0,
-            open: false,
-            visible: "hidden"
+            selected: [],
+            openUpdate: false,
         }
 
         ;
@@ -49,20 +55,54 @@ class Courses extends Component {
         });
     }
 
+    handleRowSelection = (selectedRows) => {
+        this.setState({
+            selected: selectedRows,
+        });
+    };
 
     handleCellClick = (rowNumber) => {
+        var self = this;
+
         this.setState({
-            selectedIndex: this.state.courses[rowNumber].instrumentId
+            selectedIndex: this.state.courses[rowNumber].courseId
         });
-        console.log("Selected Row: " + this.state.selectedIndex);
-        this.handleOpen();
+
+        setTimeout(function () {
+            console.log(console.log("Selected Row: " + self.state.selectedIndex));
+        }, 1000);
+
+    };
+
+    isSelected = (index) => {
+        return this.state.selected.indexOf(index) !== -1;
+    };
+
+    handleOpenUpdate = () => {
+        this.setState({openUpdate: true});
+    };
+
+    handleCloseUpdate = () => {
+        this.setState({openUpdate: false});
+    };
+
+    handleDelete = () => {
+        CourseService.deleteCourse(this.state.selectedIndex);
     };
 
 
+    componentWillUpdate(){
+        CourseService.getCoursesFromBackend().then(courses => {
+            this.setState({courses: courses});
+        });
+    }
+
+
     render() {
-        const actions = [
-            <RaisedButton label="Okay" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>
+
+        const actionsUpdate = [
+            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
+                          labelColor="#FFEBEE"/>,
         ];
 
         return (
@@ -70,34 +110,38 @@ class Courses extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Courses</h1>
-                        <Table onCellClick={this.handleCellClick} selectable={false}>
+                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
                             <TableHeader>
                                 <TableRow>
+                                    <TableHeaderColumn>Id</TableHeaderColumn>
                                     <TableHeaderColumn>Course</TableHeaderColumn>
                                     <TableHeaderColumn>prijs</TableHeaderColumn>
-
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {this.state.courses.map((course, index) => (
-                                    <TableRow key={course.courseid}>
+                                    <TableRow selected={this.isSelected(index)} key={course.courseId}>
+                                        <TableRowColumn>{course.courseId}</TableRowColumn>
                                         <TableRowColumn>{course.beschrijving}</TableRowColumn>
                                         <TableRowColumn>{course.prijs}</TableRowColumn>
-
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
+                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
+                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
                     </div>
                 </section>
                 <Dialog
-                    actions={actions}
+                    actions={actionsUpdate}
                     modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
+                    open={this.state.openUpdate}
+                    onRequestClose={this.handleCloseUpdate}
                     autoScrollBodyContent={true}
                 >
-                    <InstrumentDetails
+                    <CoursesUpdate
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
