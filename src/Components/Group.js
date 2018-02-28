@@ -54,12 +54,21 @@ export default class Group extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            groups: [],
+            groups: []
+            /*
+            ,
             selected: [],
             selectedGroup: null
+        };*/
         };
     }
 
+    componentDidMount(){
+        GroupService.getAllGroupsFromBackend().then(groups => {
+            this.setState({groups: groups});
+        });
+    }
+    /*
     componentDidMount() {
         GroupService.getGroupsFromBackend(1).then(fetchedGroups => {
             console.log("fetchedGroups ", fetchedGroups)
@@ -88,6 +97,7 @@ export default class Group extends Component {
         console.log("selectedRows: ", selectedRows);
     };
 
+
     onClickDeleteGroup = () => {
         let tableData = this.state.tableData.filter(({id}) =>
             !this.state.groups.includes(id))
@@ -95,6 +105,7 @@ export default class Group extends Component {
             console.log('After delete', this.state.tableData,
                 '\nthis.state.groups', this.state.selectedGroup)
     })};
+*/
 
 //onRowSelection={this.handleRowSelection}
     render() {
@@ -115,7 +126,7 @@ export default class Group extends Component {
                         </TableHeader>
                         <TableBody displayRowCheckbox={false} showRowHover={true}>
                             {this.state.groups.map((group, i) => (
-                                <TableRow selected={this.isSelected(i)}>
+                                <TableRow key={i}>
                                     <TableRowColumn>{group.name}</TableRowColumn>
                                     <TableRowColumn>{group.supervisor.username}</TableRowColumn>
                                     <TableRowColumn>{group.users.count}</TableRowColumn>
