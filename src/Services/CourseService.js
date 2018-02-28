@@ -25,11 +25,19 @@ export function postCourse(data) {
             'Content-Type': 'application/json',
         },
         body: data
+<<<<<<< HEAD
     })
 }
 
 export function deleteCourse(courseId) {
     console.log(courseId);
+=======
+    });
+}
+
+
+export function deleteCourse(courseId) {
+>>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
     return fetch('https://musicmaker-api-team4.herokuapp.com/api/courses/' + courseId, {
         method: 'DELETE',
         mode: 'CORS',
@@ -38,6 +46,7 @@ export function deleteCourse(courseId) {
             'Content-Type': 'application/json',
         }
     });
+<<<<<<< HEAD
 }
 
 export function updateCourse(courseId, data) {
@@ -51,4 +60,6 @@ export function updateCourse(courseId, data) {
         },
         body: data
     });
+=======
+>>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
 }
