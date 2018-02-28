@@ -24,13 +24,9 @@ class App extends Component {
                 <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
                 <Route name="agenda" path="/agenda" component={Agenda}/>
-<<<<<<< HEAD
-                </section>
-=======
                 <Route name="courses" path="/courses" component={Courses}/>
                 <Route name="addCourse" path="/addcourse" component={AddCourse} />
-            </div>
->>>>>>> master
+                </section>
         );
     }
 }

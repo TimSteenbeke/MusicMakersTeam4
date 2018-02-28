@@ -33,8 +33,6 @@ class Sidebar extends Component {
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
                         <Divider/>
-<<<<<<< HEAD
-=======
                         <Link to="/addInstrument">
                             <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
                         </Link>
@@ -47,10 +45,6 @@ class Sidebar extends Component {
                             <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
                         </Link>
                         <Divider/>
-                        {/*<Link to="/">*/}
-                        {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
-                        {/*</Link>*/}
->>>>>>> master
                     </Menu>
             </div>
         );
