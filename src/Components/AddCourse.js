@@ -4,8 +4,6 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
 import * as CourseService from '../Services/CourseService.js'
 import Snackbar from 'material-ui/Snackbar';
 
