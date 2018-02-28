@@ -30,24 +30,23 @@ class Courses extends Component {
         this.state = {
             courses: [],
             selectedIndex: 0,
-<<<<<<< HEAD
             selected: [],
             openUpdate: false,
         }
-=======
-            open: false,
-            visible: "hidden"
-        };
->>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
 
-
-
+        ;
     }
 
+    handleOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+        this.setState({open: false});
+    };
 
     componentDidMount() {
      this.getCourses();
-
     }
 
     getCourses() {
@@ -56,7 +55,6 @@ class Courses extends Component {
         });
     }
 
-<<<<<<< HEAD
     handleRowSelection = (selectedRows) => {
         this.setState({
             selected: selectedRows,
@@ -106,46 +104,13 @@ class Courses extends Component {
             <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
                           labelColor="#FFEBEE"/>,
         ];
-=======
-    handleDelete = () => {
-        CourseService.deleteCourse(this.state.selectedIndex);
-    }
 
-
-   klikmaar(courseId) {
-        console.log(courseId);
-        this.setState({selectedIndex:courseId});
-   }
-
-   zeghallo() {
-        console.log('hallo');
-   }
-
-   getCourseIdFromTableRow(row) {
-        console.log(row);
-        console.log(this.state.courses[row].courseId);
-        this.setState({selectedIndex: this.state.courses[row].courseId});
-
-   }
-
->>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
-
-
-    handleCloseUpdate = (row) => {
-        this.setState({openUpdate: false});
-    };
-
-    render() {
         return (
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Courses</h1>
-<<<<<<< HEAD
                         <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
-=======
-                        <Table selectable={true} onCellClick={ (rownr) => { this.getCourseIdFromTableRow(rownr)}}>
->>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Id</TableHeaderColumn>
@@ -154,14 +119,9 @@ class Courses extends Component {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-<<<<<<< HEAD
                                 {this.state.courses.map((course, index) => (
                                     <TableRow selected={this.isSelected(index)} key={course.courseId}>
                                         <TableRowColumn>{course.courseId}</TableRowColumn>
-=======
-                                {this.state.courses.map((course) => (
-                                    <TableRow key={course.courseid}>
->>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
                                         <TableRowColumn>{course.beschrijving}</TableRowColumn>
                                         <TableRowColumn>{course.prijs}</TableRowColumn>
                                     </TableRow>
@@ -170,7 +130,6 @@ class Courses extends Component {
                         </Table>
                         <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-<<<<<<< HEAD
                         <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
                     </div>
@@ -186,10 +145,6 @@ class Courses extends Component {
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
-=======
-                    </div>
-                </section>
->>>>>>> af1cfcd08a926307ad91ba9364e432cd6c6244ba
             </div>
         );
     }
