@@ -45,7 +45,6 @@ const styles = {
     },
 };
 
-
 class AddMuziekstuk extends Component {
 
     constructor(props) {
@@ -135,12 +134,12 @@ class AddMuziekstuk extends Component {
         const reader = new FileReader();
         const file = evt.target.files[0];
         console.log(file.name);
-        const extension = file.name.split('.');
+        const extension = file.name;
         console.log(extension[1]);
         reader.onload = function (upload) {
             self.setState({
                 bestand: upload.target.result.replace(/^data:([^)]+\/[^)]+)?;base64,/, ""),
-                bestandType: extension[1]
+                bestandType: extension
             });
         };
         reader.readAsDataURL(file);
@@ -255,19 +254,17 @@ class AddMuziekstuk extends Component {
                                 />
                             </RaisedButton>
 
+                            <label>{this.state.bestandType}</label>
 
-
-
-                            <br/>
 
                             <RaisedButton label="Voeg muziekstuk Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
                                           type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
+                                          labelColor="#FFEBEE"/>
+
+
                             <Snackbar
                                 open={this.state.open}
-                                message="Instrument Added"
+                                message="Muziekstuk toegevoegd!"
                                 autoHideDuration={4000}
                                 onRequestClose={this.handleRequestClose}
                             />
