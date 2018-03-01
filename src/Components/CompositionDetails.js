@@ -1,4 +1,3 @@
-/*
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
@@ -71,4 +70,4 @@ class CompositionDetails extends Component {
     }
 }
 
-export default CompositionDetails;*/
+export default CompositionDetails;
