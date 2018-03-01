@@ -31,12 +31,9 @@ const styles = {
 };
 
 class Login extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = {flex: 2.2};
-
     }
 
     animateLogin = () => {
@@ -44,11 +41,16 @@ class Login extends Component {
             flex: 0.0001
         });
     };
+    setPassword(typePassword){
+        console.log("setPassword: type=> ", typePassword);
+/*        this.setState({
+
+        })*/
+    }
 
 
     render() {
         return (
-
             <div className="App">
                 <section className="container">
                     <div className="left-half" style={{
@@ -63,41 +65,42 @@ class Login extends Component {
                 </section>
 
                 <div className="loginForm">
-                        <h1 className="header">Music Makers</h1>
-                        <div className="border">
-                            <TextField
-                                style={styles.width}
-                                hintText="Type username here..."
-                                floatingLabelText="Username"
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                type="password"
+                    <h1 className="header">Music Makers</h1>
+                    <div className="border">
+                        <TextField id="username"
+                                   style={styles.width}
+                                   hintText="Type username here..."
+                                   floatingLabelText="Username"
+                                   inputStyle={styles.inputstyle}
+                                   hintStyle={styles.floatingLabelFocusStyle}
+                                   floatingLabelStyle={styles.floatingLabelStyle}
+                                   floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                   underlineFocusStyle={styles.underlineStyle}
+                                   onChange={()=>this.setUsername}
 
-                                hintText="Type password here..."
-                                floatingLabelText="Password"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                        </div>
-                        <Link to="/">
-                            <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          labelColor="#FFEBEE"
-                                          className="loginButton"/>
-                        </Link>
+                        /><br/>
+                        <TextField id="password"
+                                   type="password"
+                                   hintText="Type password here..."
+                                   floatingLabelText="Password"
+                                   style={styles.width}
+                                   inputStyle={styles.inputstyle}
+                                   hintStyle={styles.floatingLabelFocusStyle}
+                                   floatingLabelStyle={styles.floatingLabelStyle}
+                                   floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                   underlineFocusStyle={styles.underlineStyle}
+                                   onChange={()=>this.setPassword}
+                        /><br/>
+                    </div>
+                    <Link to="/">
+                        <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
+                                      style={styles.loginButton}
+                                      labelColor="#FFEBEE"
+                                      className="loginButton"/>
+                    </Link>
                 </div>
 
             </div>
-
 
 
         );
