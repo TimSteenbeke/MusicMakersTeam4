@@ -10,9 +10,10 @@ import ContentLink from 'material-ui/svg-icons/content/add';
 import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Agenda from 'material-ui/svg-icons/action/view-agenda';
 import Home from 'material-ui/svg-icons/action/home';
-import Admin from 'material-ui/svg-icons/action/grade';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 
 
 class Sidebar extends Component {
@@ -29,14 +30,16 @@ class Sidebar extends Component {
     render() {
         return (
             <div>
-                <Link to="/">
-                    <AppBar
-                        title="Music Makers"
-                        iconClassNameRight="muidocs-icon-navigation-expand-more"
-                        onLeftIconButtonClick={this.handleToggle}
-                        style={{backgroundColor: '#DD2C00', position: 'fixed'}}
-                    />
-                </Link>
+                <AppBar
+                    title="Music Makers"
+                    onLeftIconButtonClick={this.handleToggle}
+                    style={{backgroundColor: '#000000', position: 'fixed'}}
+                    iconElementRight={
+                        <IconButton tooltip="Notifications">
+                            <NotificationsIcon />
+                        </IconButton>
+                    }
+                />
                 <Drawer
                     docked={false}
                     width={200}
@@ -48,23 +51,32 @@ class Sidebar extends Component {
                         <Link to="/">
                             <MenuItem primaryText="Home" leftIcon={<Home/>}/>
                         </Link>
-                        <Link to="/addInstrument">
-                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
-                        </Link>
                         <Divider/>
-
                         <Link to="/agenda">
                             <MenuItem primaryText="Agenda" leftIcon={<Agenda/>}/>
                         </Link>
                         <Divider/>
-
                         <Link to="/instrumenten">
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
-                        <Link to="/">
-                            <MenuItem primaryText="Admin" leftIcon={<Admin/>}/>
+                        <Divider/>
+                        <Link to="/addInstrument">
+                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
                         </Link>
+                        <Divider/>
+                        <Link to="/courses">
+                            <MenuItem primaryText="Courses" leftIcon={<Dashboard/>}/>
+                        </Link>
+                        <Divider/>
+                        <Link to="/addCourse">
+                            <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
+                        </Link>
+                        <Divider/>
+                        {/*<Link to="/">*/}
+                        {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
+                        {/*</Link>*/}
                     </Menu>
+
                 </Drawer>
             </div>
 
