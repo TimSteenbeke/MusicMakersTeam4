@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@axetroy/react-download": "^1.0.0",
+    "base-64": "^0.1.0",
     "empty-module": "0.0.2",
     "material-ui": "^0.20.0",
     "moment": "^2.20.1",
+    "prop-types": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
     "react": "^16.2.0",
     "react-agenda": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",
     "react-dom": "^16.2.0",
