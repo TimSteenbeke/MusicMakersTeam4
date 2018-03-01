@@ -12,7 +12,6 @@ import base64 from 'base-64';
 
 
 class MuziekstukDetails extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

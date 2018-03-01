@@ -1,5 +1,5 @@
 export function getCompositionsFromBackend() {
-    return fetch("http://localhost:8080/api/compositions", { mode: 'cors'})
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/compositions", { mode: 'cors'})
         .then((response) =>
             response.json())
         .then((responseJson) => {
@@ -12,7 +12,7 @@ export function getCompositionsFromBackend() {
 }
 
 export function getCompositionFromBackend(compositionId) {
-    return fetch("http://localhost:8080/api/compositions/" + compositionId, { mode: 'cors'})
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/compositions/" + compositionId, { mode: 'cors'})
         .then((response) => response.json()
         )
         .then((responseJson) => {
@@ -25,7 +25,7 @@ export function getCompositionFromBackend(compositionId) {
 }
 
 export function postMuziekstuk(data) {
-    fetch('http://localhost:8080/api/compositions/', {
+    fetch('https://musicmaker-api-team4.herokuapp.com/api/compositions/', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -36,7 +36,7 @@ export function postMuziekstuk(data) {
 }
 
 export function deleteComposition(compositionId) {
-    return fetch('http://localhost:8080/api/compositions/' + compositionId, {
+    return fetch('https://musicmaker-api-team4.herokuapp.com/api/compositions/' + compositionId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
@@ -49,7 +49,7 @@ export function deleteComposition(compositionId) {
 export function UpdateComposition(compositionId, data) {
     console.log("id: " + compositionId);
     console.log(data);
-    return fetch('http://localhost:8080/api/compositions/composition/' + compositionId, {
+    return fetch('https://musicmaker-api-team4.herokuapp.com/api/compositions/composition/' + compositionId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
