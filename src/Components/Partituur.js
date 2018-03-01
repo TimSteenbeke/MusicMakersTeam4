@@ -1,38 +1,58 @@
 
 import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-
+import '../CSS/Partituur.css';
 
 class Partituur extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            musicXML: '/BackendJsonSimulated/BeetAnGeSample.mxl',
-            gp5: '/BackendJsonSimulated/Canon.gp5'
+            musicXML: '/BackendJsonSimulated/Serenade.xml',
+            gp5: '/BackendJsonSimulated/Canon.gp5',
         };
     }
 
-    componentDidMount() {
-        this.PartituurRenderer()
+    componentDidMount(){
+        const $ = window.$;
+
+        // Load alphaTab
+        $(this.refs.partituur).alphaTab({
+            file: this.state.gp5,
+            engine: 'svg',
+            width: -1,
+        });
+
+        // Initialize Player and Setup Player
+        var as = $(this.refs.partituur).alphaTab('playerInit');
+        as.LoadSoundFont('/Libraries/Alphatab/alphaSynth/default.sf2');
+        $(this.refs.partituur).alphaTab('playerCursor');
+
     }
 
-    PartituurRenderer(){
-        var partituur = this.refs.partituur;
-        partituur.alphaTab({file: this.state.gp5, tracks: [0]})
-        /*('#alphaTabScriptInit').alphaTab({
-            file: 'files/features/SongDetails.gp5',
-            tracks: [0]
-        })*/
+    play(){
+        const $ = window.$;
+        $(this.refs.partituur).alphaTab('play');
     }
 
+    stop(){
+        const $ = window.$;
+        $(this.refs.partituur).alphaTab('stop');
+    }
+
+    pauze(){
+        const $ = window.$;
+        $(this.refs.partituur).alphaTab('pause');
+    }
+
+//this.state.gp5 --> this.props.dataFile
     render() {
         return (
             <div>
-                <script type="text/javascript" src="../Libraries/Alphatab/excanvas.js"/>
-                <script type="text/javascript" src="../Libraries/Alphatab/alphaTab.core.js"/>
-                <script type="text/javascript" src="../Libraries/Alphatab/jquery.alphaTab.min.js"/>
-                <div id="AlphaTabScriptInit" ref="partituur"/>
+                <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
+                <input type="button" id="pauseBtn" value="Pauze" onClick={(e) => this.pauze(e)}/>
+                <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.stop(e)}/>
+
+                <div id="AlphaTab" ref="partituur" data-tracks="0"/>
             </div>
         );
     }

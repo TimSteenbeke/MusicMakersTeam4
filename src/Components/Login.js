@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router-dom';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
@@ -88,11 +87,6 @@ class Login extends Component {
                             underlineFocusStyle={styles.underlineStyle}
                         /><br />
                     </div>
-                    <Link to="/addInstrument">
-                    <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00" style={styles.loginButton}
-                                  labelColor="#FFEBEE"
-                                  className="loginButton"/>
-                    </Link>
                 </div>
             </div>
 

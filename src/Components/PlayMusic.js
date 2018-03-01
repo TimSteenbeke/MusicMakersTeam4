@@ -25,11 +25,13 @@ class PlayMusic extends Component {
         return (
             <div className="PlayPartituur">
                 <section className="container">
-                    <div className="whiteBox">
+                    <div className="whiteBoxPartituur">
                         <h1 className="header">Play music</h1>
                         <p>{this.state.partituur.naam}</p>
-                        <p>{this.state.partituur.id}</p>
-                        <Partituur />
+
+                        <Partituur
+                            DataFile={this.state.partituur.dataFile}
+                        />
                     </div>
                 </section>
             </div>
