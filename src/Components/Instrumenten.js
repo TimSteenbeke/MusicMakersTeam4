@@ -22,7 +22,7 @@ const styles = {
     exampleImageInput: {
         margin: 10,
     }
-}
+};
 
 class Instrumenten extends Component {
 

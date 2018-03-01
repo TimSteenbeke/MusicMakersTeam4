@@ -11,7 +11,11 @@ import Agenda from 'material-ui/svg-icons/action/view-agenda';
 import Home from 'material-ui/svg-icons/action/home';
 import Divider from 'material-ui/Divider';
 
-
+const styles = {
+    menuColor: {
+        color: "#FAFAFA",
+    }
+}
 class Sidebar extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +24,7 @@ class Sidebar extends Component {
     render() {
         return (
             <div>
-                    <Menu>
+                    <Menu menuItemStyle={styles.menuColor}>
                         <Link to="/">
                             <MenuItem primaryText="Home" leftIcon={<Home/>}/>
                         </Link>
@@ -32,19 +36,17 @@ class Sidebar extends Component {
                         <Link to="/instrumenten">
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
-                        <Divider/>
-                        <Link to="/addInstrument">
-                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
-                        </Link>
-                        <Divider/>
                         <Link to="/courses">
                             <MenuItem primaryText="Courses" leftIcon={<Dashboard/>}/>
                         </Link>
                         <Divider/>
                         <Link to="/addCourse">
-                            <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
+                        <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
                         </Link>
-                        <Divider/>
+                        <Link to="/addInstrument">
+                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
+                        </Link>
+
                     </Menu>
             </div>
         );

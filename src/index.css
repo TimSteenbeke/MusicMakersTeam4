@@ -1,11 +1,7 @@
-html
+html, body
 {
     width: 100%;
     overflow: hidden;
-
-}
-
-body{
 
 }
 
@@ -23,14 +19,33 @@ body{
     justify-content: flex-start; /* align items in Main Axis */
     align-items: stretch; /* align items in Cross Axis */
     align-content: stretch; /* Extra space in Cross Axis */
+    min-height: 0;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
 
+}
+
+.groups{
+    max-width: 200px;
+    background-color: #263238;
+    box-shadow: 0 4px 6px #000;
+    z-index: 2;
+    position: relative;
 }
 
 
 .sidebar{
+    background-color: #263238;
+    box-shadow: 0 4px 6px #000;
+    z-index: 2;
+    position: relative;
 }
 
 .application{
     flex-grow: 2;
-    overflow-y: scroll;
+    overflow: auto;
+    background: linear-gradient(to bottom right, #37474F, #263238);
+
 }

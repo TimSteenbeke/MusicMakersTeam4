@@ -3,14 +3,13 @@
 
 
 .container {
-   background-color: grey;
     margin: 0;
     padding: 10px;
 }
 
 .header {
     font-size: 2em;
-    color: black;
+    color: ghostwhite;
     font-family: "Plantin", "Plantin", serif;
 
 }
@@ -36,7 +35,7 @@ img:before {
     height: calc(100% + 10px);
     width: 100%;
     background-color: rgb(255, 255, 255);
-    border: 2px dotted rgb(200, 200, 200);
+    border: 2px dotted #37474F;
     border-radius: 5px;
 }
 
@@ -46,9 +45,10 @@ img:after {
     font-size: 16px;
     font-style: normal;
     font-family: "Plantin" , "Plantin", serif;
-    color: rgb(100, 100, 100);
+    color: #37474F;
     position: absolute;
     top: 5px;
+    padding: 5px;
     left: 0;
     width: 100%;
     text-align: center;
