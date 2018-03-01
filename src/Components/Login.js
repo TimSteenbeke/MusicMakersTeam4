@@ -88,7 +88,7 @@ class Login extends Component {
                                 underlineFocusStyle={styles.underlineStyle}
                             /><br />
                         </div>
-                        <Link to="/addInstrument">
+                        <Link to="/">
                             <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
                                           style={styles.loginButton}
                                           labelColor="#FFEBEE"
