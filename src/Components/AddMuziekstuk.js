@@ -139,7 +139,7 @@ class AddMuziekstuk extends Component {
         console.log(extension[1]);
         reader.onload = function (upload) {
             self.setState({
-                bestand: upload.target.result.replace(/^data:([a-z]+\/[a-z]+)?;base64,/, ""),
+                bestand: upload.target.result.replace(/^data:([^)]+\/[^)]+)?;base64,/, ""),
                 bestandType: extension[1]
             });
         };
@@ -227,7 +227,17 @@ class AddMuziekstuk extends Component {
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
                             />
-
+                            <TextField
+                                onChange={this.onChangeLink}
+                                hintText="Geef een link in..."
+                                floatingLabelText="Link"
+                                style={styles.width}
+                                inputStyle={styles.inputstyle}
+                                hintStyle={styles.floatingLabelFocusStyle}
+                                floatingLabelStyle={styles.floatingLabelStyle}
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
+                            />
                             <br/>
                             <RaisedButton
                                 label="Selecteer een bestand"

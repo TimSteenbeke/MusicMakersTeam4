@@ -3,7 +3,6 @@ export function getCompositionsFromBackend() {
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -34,4 +33,29 @@ export function postMuziekstuk(data) {
         },
         body: data
     })
+}
+
+export function deleteComposition(compositionId) {
+    return fetch('http://localhost:8080/api/compositions/' + compositionId, {
+        method: 'DELETE',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+export function UpdateComposition(compositionId, data) {
+    console.log("id: " + compositionId);
+    console.log(data);
+    return fetch('http://localhost:8080/api/compositions/composition/' + compositionId, {
+        method: 'PUT',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    });
 }

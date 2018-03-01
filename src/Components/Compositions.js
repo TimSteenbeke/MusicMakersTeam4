@@ -5,7 +5,8 @@ import React, {Component} from 'react';
 import * as CompositionService from '../Services/CompositionService.js'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import CompDetails from './CompositionDetails.js';
+import CompUpdate from './CompositionUpdate.js';
 
 import {
     Table,
@@ -15,7 +16,6 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
-import MuziekstukDetails from "./MuziekstukDetails";
 
 
 export default class Compositions extends Component {
@@ -24,18 +24,43 @@ export default class Compositions extends Component {
         this.state = {
             compositions: [],
             selectedIndex: 0,
-            open: false,
-            visible: "hidden"
+            openDetails: false,
+            openUpdate: false,
+            selected: [],
         };
     }
 
+    handleRowSelection = (selectedRows) => {
+        this.setState({
+            selected: selectedRows,
+        });
+    };
+
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({openDetails: true});
     };
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({openDetails: false});
     };
+
+    handleOpenUpdate = () => {
+        this.setState({openUpdate: true});
+    };
+
+    handleCloseUpdate = () => {
+        this.setState({openUpdate: false});
+    };
+
+    handleDelete = () => {
+        CompositionService.deleteComposition(this.state.selectedIndex);
+    };
+
+    componentWillUpdate(){
+        CompositionService.getCompositionsFromBackend().then(compositions => {
+            this.setState({compositions: compositions});
+        });
+    }
 
     componentDidMount() {
         CompositionService.getCompositionsFromBackend().then(compositions => {
@@ -44,17 +69,30 @@ export default class Compositions extends Component {
     }
 
     handleCellClick = (rowNumber) => {
+        const self = this;
+
         this.setState({
             selectedIndex: this.state.compositions[rowNumber].muziekstukId
         });
-        console.log("Selected Row: " + this.state.selectedIndex);
-        this.handleOpen();
+
+        setTimeout(function () {
+            console.log(console.log("Selected Row: " + self.state.selectedIndex));
+        }, 1000);
+    };
+
+    isSelected = (index) => {
+        return this.state.selected.indexOf(index) !== -1;
     };
 
     render() {
-        const actions = [
-            <RaisedButton label="Okay" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>
+        const actionsDetails = [
+            <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
+                          labelColor="#FFEBEE"/>,
+        ];
+
+        const actionsUpdate = [
+            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
+                          labelColor="#FFEBEE"/>,
         ];
 
         return (
@@ -62,7 +100,7 @@ export default class Compositions extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Muziekstukken</h1>
-                        <Table onCellClick={this.handleCellClick} selectable={false}>
+                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick} selectable={false}>
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Titel</TableHeaderColumn>
@@ -73,7 +111,7 @@ export default class Compositions extends Component {
                             </TableHeader>
                             <TableBody>
                                 {this.state.compositions.map((composition, index) => (
-                                    <TableRow key={composition.muziekstukId}>
+                                    <TableRow selected={this.isSelected(index)} key={composition.muziekstukId}>
                                         <TableRowColumn>{composition.titel}</TableRowColumn>
                                         <TableRowColumn>{composition.artist}</TableRowColumn>
                                         <TableRowColumn> {composition.language}</TableRowColumn>
@@ -82,16 +120,34 @@ export default class Compositions extends Component {
                                 ))}
                             </TableBody>
                         </Table>
+                        <RaisedButton label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
+                        <RaisedButton label="Delete"    onClick={this.handleDelete} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
+                        <RaisedButton label="Update"    onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
+                                      labelColor="#FFEBEE"/>
                     </div>
                 </section>
                 <Dialog
-                    actions={actions}
+                    actions={actionsDetails}
                     modal={false}
-                    open={this.state.open}
+                    open={this.state.openDetails}
                     onRequestClose={this.handleClose}
                     autoScrollBodyContent={true}
                 >
-                    <MuziekstukDetails
+                    <CompDetails
+                        id={(this.state.selectedIndex)}
+                    />
+                </Dialog>
+
+                <Dialog
+                    actions={actionsUpdate}
+                    modal={false}
+                    open={this.state.openUpdate}
+                    onRequestClose={this.handleCloseUpdate}
+                    autoScrollBodyContent={true}
+                >
+                    <CompUpdate
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
