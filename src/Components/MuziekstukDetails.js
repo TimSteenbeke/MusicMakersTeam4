@@ -2,6 +2,7 @@
  * Created by michiel on 25/02/2018.
  */
 
+/*
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
@@ -12,7 +13,6 @@ import base64 from 'base-64';
 
 
 class MuziekstukDetails extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -94,3 +94,4 @@ class MuziekstukDetails extends Component {
 }
 
 export default MuziekstukDetails;
+*/

@@ -15,7 +15,6 @@ import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 
-import Group from 'material-ui/svg-icons/social/group'
 
 class Sidebar extends Component {
     constructor(props) {
@@ -60,12 +59,6 @@ class Sidebar extends Component {
                         <Link to="/instrumenten">
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
-                        <Link to="/groups">
-                            <MenuItem primaryText="Groepen" leftIcon={<Group/>}/>
-                        </Link>
-                        <Link to="/addGroup">
-                            <MenuItem primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
-                        </Link>
                         <Divider/>
                         <Link to="/addInstrument">
                             <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
@@ -78,8 +71,19 @@ class Sidebar extends Component {
                         <Link to="/addCourse">
                             <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
                         </Link>
-                            <Divider/>
+                        <Divider/>
+                        <Link to="/muziekStukken">
+                            <MenuItem primaryText="Compositions" leftIcon={<Dashboard/>}/>
+                        </Link>
+                        <Divider/>
+                        <Link to="/addMuziekstuk">
+                            <MenuItem primaryText="Add Composition" leftIcon={<ContentLink/>}/>
+                        </Link>
+                        <Divider/>
 
+                        {/*<Link to="/">*/}
+                        {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
+                        {/*</Link>*/}
                     </Menu>
 
                 </Drawer>
