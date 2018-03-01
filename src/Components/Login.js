@@ -42,7 +42,6 @@ class Login extends Component {
 /*        this.setState({
             flex: 0.0001
         });*/
-        console.log("user: " + user + ", pass: ", pass);
         fetchToken(user, pass)
     };
 
