@@ -80,7 +80,6 @@ class Sidebar extends Component {
                             <MenuItem primaryText="Add Composition" leftIcon={<ContentLink/>}/>
                         </Link>
                         <Divider/>
-
                         {/*<Link to="/">*/}
                         {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
                         {/*</Link>*/}

@@ -12,8 +12,8 @@ class CompositionDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            composition: ""
-            ,
+            orignaltitel: "",
+            composition: {},
             open: false,
         }
     }
@@ -21,15 +21,15 @@ class CompositionDetails extends Component {
     componentDidMount() {
         CompositionService.getCompositionFromBackend(this.props.id)
             .then(console.log("----Muziekstuk met id " + this.props.id + "---- \n"))
-            .then(composition => this.setState({composition: composition}, console.log(composition)))
+            .then(composition => this.setState({composition: composition,orignaltitel: composition.titel}, console.log(composition)))
     }
 
     assignItem = item => { // bound arrow function handler
-        const filename = this.state.composition.titel + "." + this.state.composition.fileFormat;
+        const extension = this.state.composition.fileFormat.split('.');
+        const filename = this.state.composition.titel + "." + extension[1];
         const filecontent = base64.decode(item);
 
         console.log(filecontent);
-
 
         fileDownload(filecontent,filename);
     };
@@ -41,7 +41,7 @@ class CompositionDetails extends Component {
                 <h1 className="header">Muziekstuk Details</h1>
                 <Card expanded={true}>
                     <CardHeader
-                        title={this.state.composition.titel}
+                        title={this.state.orignaltitel}
                     />
                     <CardText>
                         <div className="CompositionDetail">
@@ -58,7 +58,7 @@ class CompositionDetails extends Component {
                                     <Divider />
                                     <ListItem primaryText="Onderwerp" secondaryText={this.state.composition.subject}/>
                                     <Divider />
-                                    <ListItem primaryText="Onderwerp" secondaryText={this.state.composition.fileFormat}/>
+                                    <ListItem primaryText="Bestand" secondaryText={this.state.composition.fileFormat}/>
                                     <Divider/>
                                     <ListItem primaryText="Download"  onClick={e => this.assignItem(this.state.composition.content)}/>
                                 </List>

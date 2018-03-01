@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
+import {Card, CardText, CardActions} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
 import {List, ListItem} from 'material-ui/List';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
@@ -79,7 +79,6 @@ class CompositionUpdate extends Component {
         let composition = Object.assign({}, this.state.composition);
         composition.titel = typedTitel;
         this.setState({composition});
-        console.log("titel:" + this.state.composition.titel)
     };
 
 
@@ -143,11 +142,7 @@ class CompositionUpdate extends Component {
 
                 <h1 className="header">Muziekstuk details</h1>
                 <Card expanded={true}>
-                    <CardHeader
-                        title={this.state.composition.titel}
-                    />
                     <CardText>
-
                         <div className="InstrumentDetail">
                             <div id="instrumentDetails">
                                 <List>
