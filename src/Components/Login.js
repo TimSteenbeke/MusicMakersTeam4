@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router-dom';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import {fetchToken} from '../Services/LoginService';
 
 const styles = {
     width: {
@@ -36,16 +36,24 @@ class Login extends Component {
         this.state = {flex: 2.2};
     }
 
-    animateLogin = () => {
-        this.setState({
-            flex: 0.0001
-        });
-    };
-    setPassword(typePassword){
-        console.log("setPassword: type=> ", typePassword);
+    animateLogin = ()=> {
+        let user = this.state.username;
+        let pass = this.state.password;
 /*        this.setState({
+            flex: 0.0001
+        });*/
+        console.log("user: " + user + ", pass: ", pass);
+        fetchToken(user, pass)
+    };
 
-        })*/
+    setPassword(event, typedPassword) {
+        console.log("setPassword: type=> ", typedPassword);
+        this.setState({password: typedPassword})
+    }
+
+    setUsername(event, typedUsername) {
+        console.log("setPassword: type=> ", typedUsername);
+        this.setState({username: typedUsername})
     }
 
 
@@ -76,7 +84,7 @@ class Login extends Component {
                                    floatingLabelStyle={styles.floatingLabelStyle}
                                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                    underlineFocusStyle={styles.underlineStyle}
-                                   onChange={()=>this.setUsername}
+                                   onChange={(event, typedUsername) => this.setUsername(event, typedUsername)}
 
                         /><br/>
                         <TextField id="password"
@@ -89,15 +97,13 @@ class Login extends Component {
                                    floatingLabelStyle={styles.floatingLabelStyle}
                                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                    underlineFocusStyle={styles.underlineStyle}
-                                   onChange={()=>this.setPassword}
+                                   onChange={(event, typedPassword) => this.setPassword(event, typedPassword)}
                         /><br/>
                     </div>
-                    <Link to="/">
-                        <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
-                                      style={styles.loginButton}
-                                      labelColor="#FFEBEE"
-                                      className="loginButton"/>
-                    </Link>
+                    <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
+                                  style={styles.loginButton}
+                                  labelColor="#FFEBEE"
+                                  className="loginButton"/>
                 </div>
 
             </div>
