@@ -24,7 +24,7 @@ const styles = {
     }
 };
 
-export default class Compositions extends Component {
+class Compositions extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -163,4 +163,4 @@ export default class Compositions extends Component {
     }
 }
 
-
+export default Compositions;
