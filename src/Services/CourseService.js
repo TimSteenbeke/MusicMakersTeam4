@@ -25,7 +25,10 @@ export function postCourse(data) {
             'Content-Type': 'application/json',
         },
         body: data
-    })
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
+    });
 }
 
 export function deleteCourse(courseId) {
@@ -37,6 +40,9 @@ export function deleteCourse(courseId) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         }
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
     });
 }
 
@@ -50,5 +56,8 @@ export function updateCourse(courseId, data) {
             'Content-Type': 'application/json',
         },
         body: data
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
     });
 }

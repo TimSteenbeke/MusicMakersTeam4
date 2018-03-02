@@ -32,7 +32,10 @@ export function postMuziekstuk(data) {
             'Content-Type': 'application/json',
         },
         body: data
-    })
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
+    });
 }
 
 export function deleteComposition(compositionId) {
@@ -43,6 +46,9 @@ export function deleteComposition(compositionId) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         }
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
     });
 }
 
@@ -57,5 +63,8 @@ export function UpdateComposition(compositionId, data) {
             'Content-Type': 'application/json',
         },
         body: data
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
     });
 }

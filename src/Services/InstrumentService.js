@@ -51,7 +51,10 @@ export function postInstrument(data) {
             'Content-Type': 'application/json',
         },
         body: data
-    })
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
+    });
 }
 
 export function deleteInstrument(instrumentId) {
@@ -62,6 +65,9 @@ export function deleteInstrument(instrumentId) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         }
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
     });
 }
 
@@ -75,5 +81,8 @@ export function UpdateInstrument(instrumentId, data) {
             'Content-Type': 'application/json',
         },
         body: data
+    }).catch((err) => {
+        console.log("no courses found");
+        console.log(err);
     });
 }

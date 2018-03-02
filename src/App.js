@@ -3,13 +3,9 @@ import Home from './Components/Home';
 import Login from './Components/Login.js';
 import AddInstrument from './Components/AddInstrument.js';
 import InstrumentDetails from './Components/InstrumentDetails';
-<<<<<<< HEAD
 import Instrumenten from './Components/Instruments.js';
-=======
-import Instrumenten from './Components/Instrumenten.js';
 import AddCourse from './Components/AddCourse.js'
 import Courses from './Components/Courses.js'
->>>>>>> master
 import Agenda from './Components/Agenda.js'
 import {Route} from 'react-router'
 import './CSS/GlobalStylesheet.css';

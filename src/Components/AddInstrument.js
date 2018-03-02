@@ -9,6 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import Snackbar from 'material-ui/Snackbar';
+import TestRenderer from 'react-test-renderer';
 
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
@@ -99,7 +100,9 @@ class AddInstrument extends Component {
             .then(console.log("----soorten---- \n"))
             .then(soorten => {
                 this.setState({soorten: soorten}, console.log(soorten));
-            });
+            }).catch((err) => {
+            console.log("geen response");
+        });
     }
 
     onChangeType = (event, typedType) => {
@@ -144,7 +147,7 @@ class AddInstrument extends Component {
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-                        <h1 className="header">Voeg Instrument toe</h1>
+                        <h1 className="header">Voeg Instrument Toe</h1>
                         <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
@@ -165,6 +168,7 @@ class AddInstrument extends Component {
                             <br />
 
                             <TextField
+                                className="nameField"
                                 onChange={this.onChangeNaam}
                                 hintText="Geef naam in..."
                                 floatingLabelText="Naam"
@@ -176,6 +180,7 @@ class AddInstrument extends Component {
                                 underlineFocusStyle={styles.underlineStyle}
                             /><br />
                             <TextField
+                                className="typeField"
                                 onChange={this.onChangeType}
                                 hintText="Geef type in..."
                                 floatingLabelText="Type"
@@ -187,6 +192,7 @@ class AddInstrument extends Component {
                                 underlineFocusStyle={styles.underlineStyle}
                             /><br />
                             <TextField
+                                className="versionField"
                                 onChange={this.onChangeVersion}
                                 hintText="Geef uitvoering in..."
                                 floatingLabelText="Uitvoering"
