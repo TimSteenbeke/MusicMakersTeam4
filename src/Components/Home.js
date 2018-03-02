@@ -9,6 +9,7 @@ import FontIcon from 'material-ui/FontIcon';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import {Toolbar, ToolbarGroup, ToolbarSeparator} from 'material-ui/Toolbar';
+import {white, deepOrangeA700} from 'material-ui/styles/colors';
 
 import React, {Component} from 'react';
 
@@ -19,17 +20,21 @@ const styles = {
         justifyContent: 'space-around',
     },
     gridList: {
-        width: "100%",
+
         height: "100%",
         overflowY: 'auto',
     },
     titleStyle: {
-        color: "#DD2C00",
+        color: white,
     },
     toolbarStyle: {
-        backgroundColor: "#DD2C00",
+        backgroundColor: "#000000",
         width: "100%"
-    }
+    },
+    errorStyle: {
+        color: deepOrangeA700,
+
+    },
 };
 
 const tilesData = [
@@ -97,7 +102,7 @@ export default class Home extends Component{
                     <h1 className="header">Home</h1>
                     <Toolbar style={styles.toolbarStyle}>
                         <ToolbarGroup firstChild={true}>
-                            <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+                            <DropDownMenu labelStyle={styles.titleStyle} underlineStyle={styles.titleStyle} selectedMenuItemStyle={styles.errorStyle} value={this.state.value} onChange={this.handleChange}>
                                 <MenuItem value={1} primaryText="Alles" />
                                 <MenuItem value={2} primaryText="Mededelingen" />
                                 <MenuItem value={3} primaryText="Nieuws" />
