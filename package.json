@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@axetroy/react-download": "^1.0.0",
+    "axios": "^0.18.0",
     "base-64": "^0.1.0",
     "empty-module": "0.0.2",
     "material-ui": "^0.20.0",

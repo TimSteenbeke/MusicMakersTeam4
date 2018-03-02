@@ -25,12 +25,10 @@ export function getCompositionFromBackend(compositionId) {
 }
 
 export function postMuziekstuk(data) {
-    fetch('https://musicmaker-api-team4.herokuapp.com/api/compositions/', {
+    console.log(data);
+    fetch('http://localhost:8080/api/compositions/', {
+        mode: 'no-cors',
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
         body: data
     })
 }
