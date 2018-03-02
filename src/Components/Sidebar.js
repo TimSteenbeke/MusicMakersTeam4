@@ -60,9 +60,11 @@ class Sidebar extends Component {
                         <Link to="/instrumenten">
                             <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
+                        <Divider/>
                         <Link to="/groups">
                             <MenuItem primaryText="Groepen" leftIcon={<Group/>}/>
                         </Link>
+                        <Divider/>
                         <Link to="/addGroup">
                             <MenuItem primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
                         </Link>
@@ -78,7 +80,6 @@ class Sidebar extends Component {
                         <Link to="/addCourse">
                             <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
                         </Link>
-                            <Divider/>
                         <Divider/>
                         <Link to="/muziekStukken">
                             <MenuItem primaryText="Compositions" leftIcon={<Dashboard/>}/>

@@ -35,7 +35,7 @@ export default class Group extends Component {
 
     handleDelete = () => {
         GroupService.deleteGroup(this.state.selectedIndex);
-    }
+    };
 
     componentDidMount(){
         GroupService.getGroupsFromBackend().then(groups => {
