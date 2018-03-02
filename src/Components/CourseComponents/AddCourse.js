@@ -1,10 +1,7 @@
-/**
- * Created by Ben on 27/02/2018.
- */
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as CourseService from '../Services/CourseService.js'
+import * as CourseService from '../../Services/CourseService.js'
 import Snackbar from 'material-ui/Snackbar';
 
 
@@ -57,7 +54,7 @@ class AddCourse extends Component {
             typedcoursebeschrijving: "",
             typedprijs: 0,
             selectedteacherids: [],
-            selectedstudentids :[]
+            selectedstudentids: []
         };
 
 
@@ -77,7 +74,6 @@ class AddCourse extends Component {
         ));
         console.log(this.state.selectedstudentids);
     };
-
 
 
     handleRequestClose = () => {
@@ -101,12 +97,12 @@ class AddCourse extends Component {
     };
 
     onChangeTeacherIds = (event, typedTeacherIds) => {
-        this.setState({selectedteacherids:typedTeacherIds.split(",")});
-        console.log(  typedTeacherIds)
+        this.setState({selectedteacherids: typedTeacherIds.split(",")});
+        console.log(typedTeacherIds)
     };
 
     onChangeStudentIds = (event, typedStudentIds) => {
-        this.setState({selectedstudentids:typedStudentIds.split(",")});
+        this.setState({selectedstudentids: typedStudentIds.split(",")});
         console.log(typedStudentIds)
     };
 
@@ -125,7 +121,7 @@ class AddCourse extends Component {
                         <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
-                        } }>
+                        }}>
                             <TextField
                                 onChange={this.onChangeNaam}
                                 hintText="Geef cursusnaam in"
@@ -136,7 +132,7 @@ class AddCourse extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangePrijs}
                                 hintText="Geef prijs in..."
@@ -147,7 +143,7 @@ class AddCourse extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeTeacherIds}
                                 hintText="Selecteer leerkrachten"

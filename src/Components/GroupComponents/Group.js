@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as GroupService from '../Services/GroupService.js'
+import * as GroupService from '../../Services/GroupService.js'
 import RaisedButton from 'material-ui/RaisedButton';
 import Delete from 'material-ui/svg-icons/action/delete'
 
@@ -63,11 +63,12 @@ export default class Group extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         GroupService.getAllGroupsFromBackend().then(groups => {
             this.setState({groups: groups});
         });
     }
+
     /*
     componentDidMount() {
         GroupService.getGroupsFromBackend(1).then(fetchedGroups => {

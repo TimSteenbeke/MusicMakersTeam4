@@ -1,6 +1,3 @@
-/**
- * Created by jariv on 14/02/2018.
- */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Menu from 'material-ui/Menu';
@@ -36,7 +33,7 @@ class Sidebar extends Component {
                     style={{backgroundColor: '#000000', position: 'fixed'}}
                     iconElementRight={
                         <IconButton tooltip="Notifications">
-                            <NotificationsIcon />
+                            <NotificationsIcon/>
                         </IconButton>
                     }
                 />

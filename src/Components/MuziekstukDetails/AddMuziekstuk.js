@@ -1,11 +1,7 @@
-/**
- * Created by michiel on 25/02/2018.
- */
-
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as CompositionService from '../Services/CompositionService.js'
+import * as CompositionService from '../../Services/CompositionService.js'
 import Snackbar from 'material-ui/Snackbar';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
@@ -117,7 +113,6 @@ class AddMuziekstuk extends Component {
     };
 
 
-
     onChangeLink = (event, typedLink) => {
         this.setState({typedLink});
     };
@@ -158,7 +153,7 @@ class AddMuziekstuk extends Component {
                         <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
-                        } }>
+                        }}>
 
                             <TextField
                                 onChange={this.onChangeTitel}
@@ -170,7 +165,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeArtiest}
                                 hintText="Geef artiest in..."
@@ -181,7 +176,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeLanguage}
                                 hintText="Geef een taal in..."
@@ -192,7 +187,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeGenre}
                                 hintText="Geef een genre in..."
@@ -203,7 +198,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeSubject}
                                 hintText="Geef een onderwerp in..."
@@ -214,7 +209,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeInstrType}
                                 hintText="Geef een instrumenttype in..."

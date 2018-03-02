@@ -36,12 +36,12 @@ class Login extends Component {
         this.state = {flex: 2.2};
     }
 
-    animateLogin = ()=> {
+    animateLogin = () => {
         let user = this.state.username;
         let pass = this.state.password;
-/*        this.setState({
-            flex: 0.0001
-        });*/
+        /*        this.setState({
+                    flex: 0.0001
+                });*/
         fetchToken(user, pass)
     };
 

@@ -1,10 +1,5 @@
-
-
-/**
- * Created by Ben on 27/02/2018.
- */
 import React, {Component} from 'react';
-import * as CourseService from '../Services/CourseService'
+import * as CourseService from '../../Services/CourseService'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import CoursesUpdate from './CoursesUpdate.js'
@@ -46,7 +41,7 @@ class Courses extends Component {
     };
 
     componentDidMount() {
-     this.getCourses();
+        this.getCourses();
     }
 
     getCourses() {
@@ -91,7 +86,7 @@ class Courses extends Component {
     };
 
 
-    componentWillUpdate(){
+    componentWillUpdate() {
         CourseService.getCoursesFromBackend().then(courses => {
             this.setState({courses: courses});
         });
@@ -128,9 +123,11 @@ class Courses extends Component {
                                 ))}
                             </TableBody>
                         </Table>
-                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
+                        <RaisedButton label="Delete" style={styles.exampleImageInput} onClick={this.handleDelete}
+                                      backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
+                        <RaisedButton label="Update" style={styles.exampleImageInput} onClick={this.handleOpenUpdate}
+                                      backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
                     </div>
                 </section>

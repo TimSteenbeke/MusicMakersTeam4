@@ -1,17 +1,10 @@
-/**
- * Created by jariv on 28/02/2018.
- */
-/**
- * Created by jariv on 9/02/2018.
- */
-
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import * as CourseService from '../Services/CourseService'
+import * as CourseService from '../../Services/CourseService'
 
 
 const styles = {
@@ -85,7 +78,7 @@ class InstrumentDetails extends Component {
                 studentids: self.state.course.teacherids
             }
         ));
-        console.log("coursebeschrijving: " +  self.state.course.coursebeschrijving);
+        console.log("coursebeschrijving: " + self.state.course.coursebeschrijving);
         console.log("prijs: " + self.state.course.prijs);
         console.log("studentids: " + self.state.course.studentids);
         console.log("teacherids: " + self.state.course.teacherids);
@@ -93,7 +86,7 @@ class InstrumentDetails extends Component {
 
     render() {
         return (
-            <div >
+            <div>
 
                 <h1 className="header">Details</h1>
                 <Card expanded={true}>

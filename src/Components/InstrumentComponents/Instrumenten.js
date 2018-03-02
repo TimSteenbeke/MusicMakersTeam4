@@ -1,12 +1,10 @@
-/**
- * Created by michiel on 25/02/2018.
- */
 import React, {Component} from 'react';
-import * as CompositionService from '../Services/CompositionService.js'
+import * as InstrumentenService from '../../Services/InstrumentService.js'
+import InstrumentDetails from './InstrumentDetails.js'
+import InstrumentUpdate from './InstrumentUpdate.js'
+
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import CompDetails from './CompositionDetails.js';
-import CompUpdate from './CompositionUpdate.js';
 
 import {
     Table,
@@ -17,23 +15,22 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
-
 const styles = {
     exampleImageInput: {
         margin: 10,
     }
-};
+}
 
-class Compositions extends Component {
+class Instrumenten extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            compositions: [],
+            instrumenten: [],
             selectedIndex: 0,
-            selected: [],
             openDetails: false,
             openUpdate: false,
-
+            selected: [],
         };
     }
 
@@ -60,36 +57,40 @@ class Compositions extends Component {
     };
 
     handleDelete = () => {
-        CompositionService.deleteComposition(this.state.selectedIndex);
+        InstrumentenService.deleteInstrument(this.state.selectedIndex);
     };
 
-    componentWillUpdate(){
-        CompositionService.getCompositionsFromBackend().then(compositions => {
-            this.setState({compositions: compositions});
+
+    componentWillUpdate() {
+        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
+            this.setState({instrumenten: instrumenten});
         });
     }
 
+
     componentDidMount() {
-        CompositionService.getCompositionsFromBackend().then(compositions => {
-            this.setState({compositions: compositions});
+        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
+            this.setState({instrumenten: instrumenten});
         });
     }
 
     handleCellClick = (rowNumber) => {
-        const self = this;
+        var self = this;
 
         this.setState({
-            selectedIndex: this.state.compositions[rowNumber].muziekstukId
+            selectedIndex: this.state.instrumenten[rowNumber].instrumentId
         });
 
         setTimeout(function () {
             console.log(console.log("Selected Row: " + self.state.selectedIndex));
         }, 1000);
+
     };
 
     isSelected = (index) => {
         return this.state.selected.indexOf(index) !== -1;
     };
+
 
     render() {
         const actionsDetails = [
@@ -106,32 +107,35 @@ class Compositions extends Component {
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-                        <h1 className="header">Muziekstukken</h1>
+                        <h1 className="header">Instrumenten</h1>
                         <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHeaderColumn>Titel</TableHeaderColumn>
-                                    <TableHeaderColumn>Artiest</TableHeaderColumn>
-                                    <TableHeaderColumn>Taal</TableHeaderColumn>
-                                    <TableHeaderColumn>Genre</TableHeaderColumn>
+                                    <TableHeaderColumn>Id</TableHeaderColumn>
+                                    <TableHeaderColumn>Naam</TableHeaderColumn>
+                                    <TableHeaderColumn>Type</TableHeaderColumn>
+                                    <TableHeaderColumn>Uitvoering</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {this.state.compositions.map((composition, index) => (
-                                    <TableRow selected={this.isSelected(index)} key={composition.muziekstukId}>
-                                        <TableRowColumn>{composition.titel}</TableRowColumn>
-                                        <TableRowColumn>{composition.artist}</TableRowColumn>
-                                        <TableRowColumn> {composition.language}</TableRowColumn>
-                                        <TableRowColumn>{composition.genre}</TableRowColumn>
+                                {this.state.instrumenten.map((instrument, index) => (
+                                    <TableRow selected={this.isSelected(index)} key={instrument.instrumentId}>
+                                        <TableRowColumn>{instrument.instrumentId}</TableRowColumn>
+                                        <TableRowColumn>{instrument.naam}</TableRowColumn>
+                                        <TableRowColumn>{instrument.type}</TableRowColumn>
+                                        <TableRowColumn> {instrument.uitvoering}</TableRowColumn>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
-                        <RaisedButton style={styles.exampleImageInput} label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
+                        <RaisedButton style={styles.exampleImageInput} label="Details" onClick={this.handleOpen}
+                                      backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
+                        <RaisedButton label="Delete" style={styles.exampleImageInput} onClick={this.handleDelete}
+                                      backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
+                        <RaisedButton label="Update" style={styles.exampleImageInput} onClick={this.handleOpenUpdate}
+                                      backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
                     </div>
                 </section>
@@ -142,7 +146,7 @@ class Compositions extends Component {
                     onRequestClose={this.handleClose}
                     autoScrollBodyContent={true}
                 >
-                    <CompDetails
+                    <InstrumentDetails
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
@@ -154,13 +158,15 @@ class Compositions extends Component {
                     onRequestClose={this.handleCloseUpdate}
                     autoScrollBodyContent={true}
                 >
-                    <CompUpdate
+                    <InstrumentUpdate
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
+
             </div>
         );
     }
 }
 
-export default Compositions;
+export default Instrumenten;
+

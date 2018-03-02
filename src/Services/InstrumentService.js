@@ -1,7 +1,3 @@
-/**
- * Created by Lo on 4/08/2017.
- */
-
 export function getInstrumentenFromBackend() {
 
     return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments", {mode: 'cors'})

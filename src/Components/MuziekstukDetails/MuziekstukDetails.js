@@ -1,7 +1,3 @@
-/**
- * Created by michiel on 25/02/2018.
- */
-
 /*
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';

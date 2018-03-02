@@ -1,10 +1,6 @@
-/**
- * Created by jariv on 9/02/2018.
- */
-
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
-import * as InstrumentenService from '../Services/InstrumentService.js'
+import * as InstrumentenService from '../../Services/InstrumentService.js'
 import {List, ListItem} from 'material-ui/List';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
@@ -103,7 +99,7 @@ class InstrumentDetails extends Component {
 
     render() {
         return (
-            <div >
+            <div>
 
                 <h1 className="header">Details</h1>
                 <Card expanded={true}>

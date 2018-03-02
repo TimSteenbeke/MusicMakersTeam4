@@ -1,9 +1,6 @@
-/**
- * Created by Ben on 27/02/2018.
- */
 export function getCoursesFromBackend() {
 
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/courses", { mode: 'cors'})
+    return fetch("https://musicmaker-api-team4.herokuapp.com/api/courses", {mode: 'cors'})
         .then((response) =>
             response.json())
         .then((responseJson) => {

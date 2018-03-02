@@ -1,7 +1,3 @@
-/**
- * Created by TimS on 15/02/2018.
- */
-
 import {GridList, GridTile} from 'material-ui/GridList';
 import did from '../images/did.jpg'
 import guitar from '../images/guitar.jpg'
@@ -76,24 +72,24 @@ const tilesData = [
     },
 ];
 
-export default class Home extends Component{
+export default class Home extends Component {
 
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             value: 1,
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
     }
 
     handleChange = (event, index, value) => this.setState({value});
 
 
-    render(){
+    render() {
 
 
         return <div className="Homepage">
@@ -102,15 +98,17 @@ export default class Home extends Component{
                     <h1 className="header">Home</h1>
                     <Toolbar style={styles.toolbarStyle}>
                         <ToolbarGroup firstChild={true}>
-                            <DropDownMenu labelStyle={styles.titleStyle} underlineStyle={styles.titleStyle} selectedMenuItemStyle={styles.errorStyle} value={this.state.value} onChange={this.handleChange}>
-                                <MenuItem value={1} primaryText="Alles" />
-                                <MenuItem value={2} primaryText="Mededelingen" />
-                                <MenuItem value={3} primaryText="Nieuws" />
+                            <DropDownMenu labelStyle={styles.titleStyle} underlineStyle={styles.titleStyle}
+                                          selectedMenuItemStyle={styles.errorStyle} value={this.state.value}
+                                          onChange={this.handleChange}>
+                                <MenuItem value={1} primaryText="Alles"/>
+                                <MenuItem value={2} primaryText="Mededelingen"/>
+                                <MenuItem value={3} primaryText="Nieuws"/>
                             </DropDownMenu>
                         </ToolbarGroup>
                         <ToolbarGroup>
-                            <FontIcon className="muidocs-icon-custom-sort" />
-                            <ToolbarSeparator />
+                            <FontIcon className="muidocs-icon-custom-sort"/>
+                            <ToolbarSeparator/>
                         </ToolbarGroup>
                     </Toolbar>
                     <div style={styles.root}>
@@ -125,7 +123,7 @@ export default class Home extends Component{
                                     subtitle={<span>by <b>{tile.author}</b></span>}
                                     titleStyle={styles.titleStyle}
                                 >
-                                    <img src={tile.img} alt="Mededeling" />
+                                    <img src={tile.img} alt="Mededeling"/>
                                 </GridTile>
                             ))}
                         </GridList>

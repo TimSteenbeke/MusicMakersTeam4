@@ -1,13 +1,9 @@
-/**
- * Created by jariv on 8/02/2018.
- */
-
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
-import * as InstrumentenService from '../Services/InstrumentService.js'
+import * as InstrumentenService from '../../Services/InstrumentService.js'
 import Snackbar from 'material-ui/Snackbar';
 
 
@@ -148,7 +144,7 @@ class AddInstrument extends Component {
                         <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
-                        } }>
+                        }}>
                             <SelectField
                                 autoWidth={true}
                                 floatingLabelText="Soort"
@@ -162,7 +158,7 @@ class AddInstrument extends Component {
                                               primaryText={soort.soortNaam}/>
                                 ))}
                             </SelectField>
-                            <br />
+                            <br/>
 
                             <TextField
                                 onChange={this.onChangeNaam}
@@ -174,7 +170,7 @@ class AddInstrument extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeType}
                                 hintText="Geef type in..."
@@ -185,7 +181,7 @@ class AddInstrument extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <TextField
                                 onChange={this.onChangeVersion}
                                 hintText="Geef uitvoering in..."

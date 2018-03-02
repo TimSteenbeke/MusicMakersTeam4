@@ -3,6 +3,8 @@ import Querystring from 'query-string';
 
 const AuthStr = 'Bearer TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE';
 const URL = 'http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim';
+const URL2 = 'https://musicmaker-api-team4.herokuapp.com/oauth/token?grant_type=password&username=tim&password=tim';
+const URL3 ='http://localhost:8080/oauth/token';
 const data = {
     grant_type: "password",
     client_id: "MusicMakerAPIclientid",
@@ -11,47 +13,55 @@ const data = {
     username: "tim",
     password: "tim"
 };
+const dataSafe = {
+    grant_type: "password",
+    username: "tim",
+    password: "tim",
+    Authorization: AuthStr
+};
 let USER_TOKEN;
 
 export function fetchToken(username, password) {
+    //fetch
     // return fetch("http://localhost:8080/oauth/token?grant_type=password&username=" + username + "&password=" + password, {
+    // return fetch("https://musicmaker-api-team4.herokuapp.com/oauth/token?grant_type=password&username=" + username + "&password=" + password, {
+    // return fetch(URL2, {
     return fetch(URL, {
-        headers: {'Authorization': AuthStr},
-        method: 'POST'
+        method: 'POST',
+        headers: {
+            'Authorization': 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE'
+        },
+        mode: "cors",
+        withCredentials: true
     })
         .then((response) => {
             console.log("response: ");
             console.log(response.data);
-            // response.json();
         })
-/*        .then((responseJson) => {
-            return responseJson;
-        })*/
         .catch((err) => {
             console.log("geen response");
             console.log(err);
         });
 //xhr
-    /*   var data = null;
+/*    let xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
-       var xhr = new XMLHttpRequest();
-       xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            console.log(this.responseText);
+        }
+    });
 
-       xhr.addEventListener("readystatechange", function () {
-           if (this.readyState === 4) {
-               console.log(this.responseText);
-           }
-       });
+    xhr.open("POST", URL);
+    // xhr.open("POST", URL2);
+    xhr.setRequestHeader("authorization", "Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE=");
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.setRequestHeader("postman-token", "a7ba005a-4bbb-cdc9-651c-089022de27f5");
 
-       xhr.open("POST", "http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim");
-       xhr.setRequestHeader("authorization", "Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE=");
-       xhr.setRequestHeader("cache-control", "no-cache");
-       xhr.setRequestHeader("postman-token", "a7ba005a-4bbb-cdc9-651c-089022de27f5");
-
-       xhr.send(data);*/
+    xhr.send(null);*/
 
 //http request
-    /*    let http = require("http");
+/*        let http = require("http");
 
             let options = {
                 "method": "POST",
@@ -81,7 +91,7 @@ export function fetchToken(username, password) {
             req.end();*/
 
 //axios.post hardcoded
-    /*    axios.post('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim',
+/*        axios.post('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim',
                 {headers: {'Authorization': 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE='}})
                 .then((response) => {
                     console.log(response);
@@ -91,7 +101,7 @@ export function fetchToken(username, password) {
                 });*/
 
 //axios.post with const data
-    /*    axios.post(URL, Querystring.stringify(data))
+/*        axios.post(URL3, Querystring.stringify(dataSafe),{mode:"corse"})
             .then(response => {
                 console.log(response.data);
                 USER_TOKEN = response.data.access_token;
