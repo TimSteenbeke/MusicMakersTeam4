@@ -15,6 +15,7 @@ import EditGroup from "./Components/EditGroup";
 import Compositions from "./Components/Compositions.js";
 import MuziekstukDetails from "./Components/MuziekstukDetails.js";
 import AddMuziekstuk from "./Components/AddMuziekstuk";
+import PlayMusic from './Components/PlayMusic.js'
 
 
 class App extends Component {
@@ -42,6 +43,7 @@ class App extends Component {
                 <Route path="/groups" component={Group}/>
                 <Route path="/addgroup" component={AddGroup}/>
                 <Route path="/editGroup" component={EditGroup}/>
+                <Route path="/playpartituur" component={PlayMusic} />
             </div>
         );
     }
