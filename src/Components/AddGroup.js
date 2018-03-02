@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as GroupService from '../Services/GroupService.js'
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
@@ -61,14 +62,49 @@ export default class AddGroup extends Component {
         counter++;
     }
 
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: 1,
+            naam: "",
+            begeleider:"",
+            open: false,
+            image: "..image/image.jpg",
+        };
+    }
+
+    handleClick = () => {
+        this.setState({
+            open: true,
+        });
+        GroupService.postGroup(JSON.stringify(
+            {
+
+                id: this.state.value,
+                name: this.state.naam,
+                supervisor: this.state.begeleider,
+                groepImage: this.state.image
+            }
+        ));
+        console.log("Image: " + this.state.image);
+        console.log("Value: " + this.state.value);
+        console.log("Name: " + this.state.typedName);
+        console.log("Type: " + this.state.typedType);
+        console.log("Version: " + this.state.typedVersion);
+
+    };
+
+        render() {
         return (
 
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-
                         <h1 className="header">Voeg een groep toe</h1>
+                        <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
+                            e.preventDefault();
+                            this.handleClick();
+                        } }/>
                         <TextField
                             hintText="Geef de naam van je groep in..."
                             floatingLabelText="Naam"
@@ -89,10 +125,9 @@ export default class AddGroup extends Component {
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
                         /><br/>
-                        <form>
+                       <form>
                             <div id="dynamicGroupMember">
-                                {/*Groepslid<br/><input type="text" name="groupMembers[]"/>*/}
-
+                                Groepslid<br/><input type="text" name="groupMembers[]"/>
                                 <TextField
                                     hintText="Geef groepslid in..."
                                     floatingLabelText="Groepslid 1"

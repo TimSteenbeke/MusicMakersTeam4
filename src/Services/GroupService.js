@@ -1,50 +1,63 @@
 
-export function getGroupsFromBackend(userId) {
-    return fetch("localhost:8080/api/groups/" + userId, { mode: 'cors'})
+export function getGroupsFromBackend() {
+    return fetch("http://localhost:8080/api/groups/allgroups", {mode: 'cors'})
         .then((response) =>
             response.json())
         .then((responseJson) => {
-        console.log('hallo');
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
-
             console.log("geen response");
             console.log(err);
         });
 }
 
-export function getAllGroupsFromBackend() {
-    return fetch("localhost:8080/api/groups/", { mode: 'cors'})
-        .then((response) =>
-            response.json())
+export function getGroupFromBackend(groupId) {
+    return fetch("http://localhost:8080/api/groups/" + groupId, { mode: 'cors'})
+        .then((response) => response.json()
+        )
         .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
-
-            console.log("geen response");
-            console.log(err);
+            const groep = {naam:"groep niet gevonden"};
+            return groep;
         });
 }
 
 
-//in de toekomst is dit de methode om alle data van 1 groep op te vragen, voorlopig doet bovenstaande methode hetzelfde maar moet nog aangepast worden eens Users in orde zijn
-export function loadDataIntoEdit(groupId){
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/groups/" + groupId, {mode:'cors'})
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
-            return responseJson;
-        })
-        .catch((err) => {
+export function postGroup(data){
+    fetch("http://localhost:8080/api/groups", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    })
+}
 
-            console.log("geen response");
-            console.log(err);
-        });
+export function deleteGroup(groupId) {
+    return fetch('http://localhost:8080/api/groups/' + groupId, {
+        method: 'DELETE',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+export function updateGroup(groupId, data) {
+    console.log("id: " + groupId);
+    console.log(data);
+    return fetch('http://localhost:8080/api/groups/' + groupId, {
+        method: 'PUT',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    });
 }

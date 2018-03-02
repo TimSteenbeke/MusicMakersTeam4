@@ -30,16 +30,16 @@ class App extends Component {
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
                 <Route name="agenda" path="/agenda" component={Agenda}/>
                 <Route name="courses" path="/courses" component={Courses}/>
-                <Route name="addCourse" path="/addcourse" component={AddCourse} />
-                    <Route name="login" path="/login" component={Login}/>
-                    <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
-                    <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
-                    <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
-                    <Route name="agenda" path="/agenda" component={Agenda}/>
-                    <Route name="muziekStukken" path = "/muziekstukken" component={Compositions}/>
-                    <Route name="muziekstukDetails" path="/muziekstukdetails/:id" component = {MuziekstukDetails}/>
-                    <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
-                <Route path="/groups" component={Group}/>
+                <Route name="addCourse" path="/addcourse" component={AddCourse}/>
+                <Route name="login" path="/login" component={Login}/>
+                <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
+                <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
+                <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
+                <Route name="agenda" path="/agenda" component={Agenda}/>
+                <Route name="muziekStukken" path="/muziekstukken" component={Compositions}/>
+                <Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>
+                <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
+                <Route name="group" path="/groups" component={Group}/>
                 <Route path="/addgroup" component={AddGroup}/>
                 <Route path="/editGroup" component={EditGroup}/>
             </div>
