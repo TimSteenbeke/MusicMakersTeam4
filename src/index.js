@@ -2,30 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App.js';
-
-
+import Sidebar from './Components/Sidebar.js'
 import {BrowserRouter} from 'react-router-dom'
-import {Route} from 'react-router'
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import PlayPartituur from "./Components/PlayMusic";
 
 const Application = () => (
     <MuiThemeProvider>
-    <App/>
+        <BrowserRouter>
+            <div className="flexBox">
+                <div className="sidebar">
+                    <Sidebar/>
+                </div>
+                <div className="application">
+                    <App/>
+                </div>
+            </div>
+        </BrowserRouter>
     </MuiThemeProvider>
 );
 
 
 ReactDOM.render(
-    <MuiThemeProvider>
-    <BrowserRouter>
-        <div>
-            <Route exact path="/" component={Application} />
-            <Route path="/Play" component={PlayPartituur}/>
-        </div>
-    </BrowserRouter>
-    </MuiThemeProvider>
+    <Application/>
     , document.getElementById('root'));
 registerServiceWorker();

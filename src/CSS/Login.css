@@ -33,19 +33,19 @@ body {
 }
 
 .right-half {
-    background-color: #DD2C00;
+    background-color: #000000;
     flex: 1;
 
 }
 
 .loginForm {
-    margin-top: 5%;
+    margin-top: 10%;
     text-align: center;
     width: 40%;
     margin-left: 40%;
     border-radius: 5px;
     margin-right: 20%;
-    background-color: rgba(245, 245, 245, 0.95);
+    background-color: rgba(255, 255, 255, 0.99);
     padding: 4%;
     position: absolute;
     z-index: 2;
@@ -63,3 +63,6 @@ body {
 
 }
 
+.sidebar{
+    visibility: hidden;
+}
