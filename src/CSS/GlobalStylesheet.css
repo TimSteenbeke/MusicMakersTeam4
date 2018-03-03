@@ -1,31 +1,10 @@
 @import '~react-agenda/build/styles.css';
 @import '~react-datetime/css/react-datetime.css';
 
-.whiteBox {
-    width: 100%;
-    margin-top: 10%;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.99);
-    padding: 4%;
-    position: absolute;
-    z-index: 2;
-    box-shadow: 5px 5px 40px black;
-}
 
-@media (min-width: 800px) {
-    .whiteBox {
-        margin-top: 10%;
-        margin-bottom: 5%;
-        width: 60%;
-        margin-left: 20%;
-        border-radius: 5px;
-        margin-right: 20%;
-        background-color: rgba(255, 255, 255, 0.99);
-        padding: 4%;
-        position: absolute;
-        z-index: 2;
-        box-shadow: 5px 5px 40px black;
-    }
+.containerCss {
+    margin: 0;
+    padding: 12px;
 }
 
 .whiteBoxPartituur {
@@ -42,33 +21,19 @@
     box-shadow: 5px 5px 40px black;
 }
 
-.container {
-    background-image: url("../images/drum.jpg");
-    background-attachment: scroll;
-    background-size: cover;
-    overflow-y: scroll;
-}
 
-.header {
-    font-size: 2em;
-    color: black;
-    font-family: "Plantin", "Plantin", serif;
 
-}
 
 .redbg {
     background-color: #000000;
-
 }
 
-.sidebar {
-    visibility: visible;
+.marginator{
+    margin-right:20px;
 }
 
 .agendaItem {
-    width: 100%;
     padding: 3%;
-    font-family: "Plantin", "Plantin", serif;
 }
 
 img:before {
@@ -76,13 +41,11 @@ img:before {
     display: block;
 
     position: absolute;
-    top: -10px;
     left: 0;
     height: calc(100% + 10px);
     width: 100%;
     background-color: rgb(255, 255, 255);
-    border: 2px dotted rgb(200, 200, 200);
-    border-radius: 5px;
+    border: 2px #37474F;
 }
 
 img:after {
@@ -90,15 +53,51 @@ img:after {
     display: block;
     font-size: 16px;
     font-style: normal;
-    font-family: "Plantin" , "Plantin", serif;
-    color: rgb(100, 100, 100);
+    color: #37474F;
     position: absolute;
     top: 5px;
+    padding: 5px;
     left: 0;
     width: 100%;
     text-align: center;
 }
 
-body{
-    font-family: "Plantin", "Plantin", serif;
+.brand-logo {
+    margin-left: 30px;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+
+}
+
+/* label color */
+.input-field label {
+    color: #546e7a;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #546e7a;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #546e7a;
+    box-shadow: 0 1px 0 0 #546e7a;
+}
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #546e7a;
+    box-shadow: 0 1px 0 0 #546e7a;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #546e7a;
+    box-shadow: 0 1px 0 0 #546e7a;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #546e7a;
 }
