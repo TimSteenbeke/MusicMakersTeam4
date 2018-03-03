@@ -59,7 +59,6 @@ class Sidebar extends Component {
                             <MenuItem style={styles.menuColor}  primaryText="Add Composition" leftIcon={<ContentLink/>}/>
                         </Link>
                         <Divider/>
-
                     </Menu>
             </div>
         );

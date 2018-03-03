@@ -11,7 +11,6 @@ import registerServiceWorker from './registerServiceWorker';
 import PlayPartituur from "./Components/PlayMusic";
 
 
-
 const Application = () => (
     <MuiThemeProvider>
         <BrowserRouter>

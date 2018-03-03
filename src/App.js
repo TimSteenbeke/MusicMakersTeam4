@@ -18,6 +18,7 @@ import MuziekstukDetails from "./Components/MuziekstukDetails.js";
 import AddMuziekstuk from "./Components/AddMuziekstuk";
 import PlayMusic from './Components/PlayMusic.js'
 
+
 class App extends Component {
 
 
@@ -41,6 +42,8 @@ class App extends Component {
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
             </section>
 
+
+            
         );
     }
 }
