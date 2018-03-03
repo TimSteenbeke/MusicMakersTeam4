@@ -143,9 +143,11 @@ export function fetchToken(username, password) {
             mode: "cors",
 
         })
-            .then((response) => {
-                console.log("response: ");
-                console.log(response.json());
+            .then((response) =>
+                response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                return responseJson;
             })
             .catch((err) => {
                 console.log("geen response");
