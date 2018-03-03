@@ -60,10 +60,12 @@ class Instrumenten extends Component {
                                 <td>{instrument.type}</td>
                                 <td>{instrument.uitvoering}</td>
                                 <td>
-                                    <Link className="waves-effect white-text waves-blue-grey darken-1 btn-flat" to={`/instrumentdetails/${instrument.instrumentId}` }>
-                                    Edit
+                                    <Link className="waves-effect white-text red darken-4 btn marginator" to={`/instrumentdetails/${instrument.instrumentId}` }>
+                                        <i className="material-icons">edit
+                                    </i>
                                     </Link>
-                                    <a className="waves-effect white-text waves-blue-grey darken-1 btn-flat" onClick={(e) => this.handleDelete(instrument.instrumentId, e)}>Delete</a>
+                                    <a className="waves-effect white-text red darken-4 btn" onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i className="material-icons">delete
+                                    </i></a>
 
                                 </td>
                             </tr>

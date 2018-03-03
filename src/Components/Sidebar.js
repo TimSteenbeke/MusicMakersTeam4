@@ -10,6 +10,7 @@ import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Agenda from 'material-ui/svg-icons/action/view-agenda';
 import Home from 'material-ui/svg-icons/action/home';
 import Divider from 'material-ui/Divider';
+import logo from '../images/logo.png'
 
 const styles = {
     menuColor: {
@@ -23,7 +24,10 @@ class Sidebar extends Component {
         return (
             <div>
 
-                    <Menu>
+
+                <img className="circle logo" alt="guitar" src={logo} />
+
+                <Menu>
                         <Divider/>
                         <Link to="/">
                             <MenuItem style={styles.menuColor} primaryText="Home" leftIcon={<Home/>}/>

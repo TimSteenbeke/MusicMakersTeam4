@@ -20,7 +20,7 @@ class GroupsAndChat extends Component {
             <div className="containerCss">
 
                 <h5 className="white-text">Users</h5>
-                <ul class="collection">
+                <ul className="collection">
                     <li className="collection-item avatar">
                         <i className="material-icons circle">chat</i>
                         <span className="title">User 1</span>

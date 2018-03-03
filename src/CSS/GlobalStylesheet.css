@@ -15,7 +15,9 @@
     background-color: #000000;
 }
 
-
+.marginator{
+    margin-right:20px;
+}
 
 .agendaItem {
     padding: 3%;
@@ -49,6 +51,14 @@ img:after {
 
 .brand-logo {
     margin-left: 30px;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+
 }
 
 /* label color */
