@@ -3,7 +3,7 @@ import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-import {fetchToken} from '../Services/LoginService';
+import * as LoginService from '../Services/LoginService';
 
 const styles = {
     width: {
@@ -42,7 +42,7 @@ class Login extends Component {
         /*        this.setState({
                     flex: 0.0001
                 });*/
-        fetchToken(user, pass)
+        LoginService.fetchLogin();
     };
 
     setPassword(event, typedPassword) {

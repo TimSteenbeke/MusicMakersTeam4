@@ -29,7 +29,7 @@ export function fetchToken(username, password) {
     return fetch(URL, {
         method: 'POST',
         headers: {
-            'Authorization': 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE'
+            'Authorization': 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE='
         },
         mode: "cors",
         withCredentials: true
@@ -132,3 +132,25 @@ export function fetchToken(username, password) {
     */
 
 }
+    export function fetchLogin() {
+        return fetch('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE=',
+                'Content-Type': 'application/json'
+
+            },
+            mode: "cors",
+
+        })
+            .then((response) => {
+                console.log("response: ");
+                console.log(response.json());
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });
+    }
+
+
