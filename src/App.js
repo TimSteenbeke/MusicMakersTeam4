@@ -24,7 +24,6 @@ class App extends Component {
     render() {
         return (
             <section>
-
                 <Route name="addCourse" path="/addcourse" component={AddCourse}/>
                 <Route name="login" path="/login" component={Login}/>
                 <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
