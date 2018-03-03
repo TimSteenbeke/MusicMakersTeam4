@@ -8,15 +8,7 @@ import GroupsAndChat from './Components/GroupsAndChat.js'
 import {BrowserRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
-import Paper from 'material-ui/Paper';
 
-const style = {
-    height: 100,
-    width: 100,
-    margin: 20,
-    textAlign: 'center',
-    display: 'inline-block',
-};
 
 
 const Application = () => (
@@ -30,12 +22,12 @@ const Application = () => (
                     <section className="application">
                         <App/>
                     </section >
-
                     <section className="groups">
                         <GroupsAndChat/>
                     </section>
                 </section>
             </div>
+
         </BrowserRouter>
     </MuiThemeProvider>
 );

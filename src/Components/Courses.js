@@ -8,6 +8,9 @@ import * as CourseService from '../Services/CourseService'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import CoursesUpdate from './CoursesUpdate.js'
+import Header from './Header'
+
+
 import {
     Table,
     TableBody,
@@ -107,9 +110,9 @@ class Courses extends Component {
 
         return (
             <div className="Homepage">
-                <section className="container">
+                <Header name="Courses"/>
+                <section className="containerCss">
                     <div className="whiteBox">
-                        <h1 className="header">Courses</h1>
                         <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
                             <TableHeader>
                                 <TableRow>

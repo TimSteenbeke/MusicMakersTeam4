@@ -1,7 +1,7 @@
 html, body
 {
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
 
 }
 
@@ -24,28 +24,60 @@ html, body
     overflow: hidden;
     height: 100%;
     width: 100%;
-
 }
 
 .groups{
-    max-width: 200px;
+    width:  20%;
     background-color: #263238;
-    box-shadow: 0 4px 6px #000;
-    z-index: 2;
     position: relative;
+    padding-top: 4%;
+
 }
 
 
 .sidebar{
+    max-width: 20%;
+
     background-color: #263238;
-    box-shadow: 0 4px 6px #000;
-    z-index: 2;
     position: relative;
+    padding-top: 4%;
+
+
 }
 
 .application{
+
     flex-grow: 2;
     overflow: auto;
-    background: linear-gradient(to bottom right, #37474F, #263238);
+    position: relative;
+    background: repeating-linear-gradient(
+            45deg,
+            #78909c,
+            #37474F 90%
+    );
 
+
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #212121;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #212121;
 }

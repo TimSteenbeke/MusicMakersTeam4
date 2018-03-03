@@ -15,38 +15,37 @@ const styles = {
     menuColor: {
         color: "#FAFAFA",
     }
-}
+};
+
 class Sidebar extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
             <div>
-                    <Menu menuItemStyle={styles.menuColor}>
+
+                    <Menu>
+                        <Divider/>
                         <Link to="/">
-                            <MenuItem primaryText="Home" leftIcon={<Home/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Home" leftIcon={<Home/>}/>
                         </Link>
                         <Divider/>
                         <Link to="/agenda">
-                            <MenuItem primaryText="Agenda" leftIcon={<Agenda/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Agenda" leftIcon={<Agenda/>}/>
                         </Link>
                         <Divider/>
                         <Link to="/instrumenten">
-                            <MenuItem primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                         </Link>
                         <Link to="/courses">
-                            <MenuItem primaryText="Courses" leftIcon={<Dashboard/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Courses" leftIcon={<Dashboard/>}/>
                         </Link>
                         <Divider/>
                         <Link to="/addCourse">
-                        <MenuItem primaryText="Add course" leftIcon={<ContentLink/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Add course" leftIcon={<ContentLink/>}/>
                         </Link>
                         <Link to="/addInstrument">
-                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
                         </Link>
-
                     </Menu>
             </div>
         );
