@@ -5,9 +5,8 @@
 .containerCss {
     margin: 0;
     padding: 12px;
+}
 
-<<<<<<< HEAD
-=======
 .whiteBoxPartituur {
     margin-top: 5%;
     margin-bottom: 5%;
@@ -22,13 +21,7 @@
     box-shadow: 5px 5px 40px black;
 }
 
-.container {
-    background-image: url("../images/drum.jpg");
-    background-attachment: scroll;
-    background-size: cover;
-    overflow-y: scroll;
->>>>>>> master
-}
+
 
 
 

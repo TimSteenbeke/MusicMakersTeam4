@@ -52,11 +52,11 @@ class Sidebar extends Component {
                         </Link>
                     <Divider/>
                         <Link to="/muziekStukken">
-                            <MenuItem primaryText="Compositions" leftIcon={<Dashboard/>}/>
+                            <MenuItem style={styles.menuColor} primaryText="Compositions" leftIcon={<Dashboard/>}/>
                         </Link>
                         <Divider/>
                         <Link to="/addMuziekstuk">
-                            <MenuItem primaryText="Add Composition" leftIcon={<ContentLink/>}/>
+                            <MenuItem style={styles.menuColor}  primaryText="Add Composition" leftIcon={<ContentLink/>}/>
                         </Link>
                         <Divider/>
 

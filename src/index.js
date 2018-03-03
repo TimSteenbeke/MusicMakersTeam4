@@ -15,7 +15,6 @@ import PlayPartituur from "./Components/PlayMusic";
 const Application = () => (
     <MuiThemeProvider>
         <BrowserRouter>
-            <div className="content">
                 <section className="flexBox">
                     <section className="sidebar">
                         <Sidebar/>
@@ -27,8 +26,6 @@ const Application = () => (
                         <GroupsAndChat/>
                     </section>
                 </section>
-            </div>
-
         </BrowserRouter>
     </MuiThemeProvider>
 );

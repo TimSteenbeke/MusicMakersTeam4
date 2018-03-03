@@ -27,24 +27,24 @@ html, body
 }
 
 .groups{
-    width:  20%;
+    width:  15%;
     background-color: #263238;
     position: relative;
     padding-top: 4%;
-
 }
 
 
 .sidebar{
-    max-width: 20%;
+    width: 15%;
     background-color: #263238;
     position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
 }
 
 .application{
-
-    flex-grow: 2;
+    width: 70%;
     overflow: auto;
     position: relative;
     background: repeating-linear-gradient(
