@@ -50,9 +50,7 @@ class Sidebar extends Component {
                         <Link to="/addInstrument">
                             <MenuItem style={styles.menuColor} primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
                         </Link>
-<<<<<<< HEAD
-=======
-                        <Divider/>
+                    <Divider/>
                         <Link to="/muziekStukken">
                             <MenuItem primaryText="Compositions" leftIcon={<Dashboard/>}/>
                         </Link>
@@ -61,10 +59,7 @@ class Sidebar extends Component {
                             <MenuItem primaryText="Add Composition" leftIcon={<ContentLink/>}/>
                         </Link>
                         <Divider/>
-                        {/*<Link to="/">*/}
-                        {/*<MenuItem primaryText="Admin" leftIcon={<Admin/>}/>*/}
-                        {/*</Link>*/}
->>>>>>> master
+
                     </Menu>
             </div>
         );
