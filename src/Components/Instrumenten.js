@@ -34,6 +34,27 @@ class Instrumenten extends Component {
         });
     }
 
+<<<<<<< HEAD
+=======
+    handleCellClick = (rowNumber) => {
+        var self = this;
+
+        this.setState({
+            selectedIndex: this.state.instrumenten[rowNumber].instrumentId
+        });
+
+        setTimeout(function () {
+            console.log(console.log("Selected Row: " + self.state.selectedIndex));
+        }, 1000);
+
+    };
+
+    isSelected = (index) => {
+        return this.state.selected.indexOf(index) !== -1;
+    };
+
+
+>>>>>>> master
 
     render() {
 

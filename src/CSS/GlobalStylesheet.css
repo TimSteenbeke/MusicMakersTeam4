@@ -6,6 +6,28 @@
     margin: 0;
     padding: 12px;
 
+<<<<<<< HEAD
+=======
+.whiteBoxPartituur {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 5px;
+    margin-right: 10%;
+    background-color: rgba(245, 245, 245, 0.95);
+    padding: 4%;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 5px 5px 40px black;
+}
+
+.container {
+    background-image: url("../images/drum.jpg");
+    background-attachment: scroll;
+    background-size: cover;
+    overflow-y: scroll;
+>>>>>>> master
 }
 
 
