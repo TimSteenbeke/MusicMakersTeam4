@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD:src/Components/InstrumentComponents/Instrumenten.js
 import * as InstrumentenService from '../../Services/InstrumentService.js'
 import InstrumentDetails from './InstrumentDetails.js'
 import InstrumentUpdate from './InstrumentUpdate.js'
@@ -21,6 +22,11 @@ const styles = {
     }
 }
 
+=======
+import * as InstrumentenService from '../Services/InstrumentService.js'
+import {Link} from 'react-router-dom';
+import Header from './Header'
+>>>>>>> master:src/Components/Instrumenten.js
 class Instrumenten extends Component {
 
     constructor(props) {
@@ -28,36 +34,12 @@ class Instrumenten extends Component {
         this.state = {
             instrumenten: [],
             selectedIndex: 0,
-            openDetails: false,
-            openUpdate: false,
             selected: [],
         };
     }
 
-    handleRowSelection = (selectedRows) => {
-        this.setState({
-            selected: selectedRows,
-        });
-    };
-
-    handleOpen = () => {
-        this.setState({openDetails: true});
-    };
-
-    handleClose = () => {
-        this.setState({openDetails: false});
-    };
-
-    handleOpenUpdate = () => {
-        this.setState({openUpdate: true});
-    };
-
-    handleCloseUpdate = () => {
-        this.setState({openUpdate: false});
-    };
-
-    handleDelete = () => {
-        InstrumentenService.deleteInstrument(this.state.selectedIndex);
+    handleDelete = (id, e) => {
+        InstrumentenService.deleteInstrument(id);
     };
 
 
@@ -74,6 +56,7 @@ class Instrumenten extends Component {
         });
     }
 
+<<<<<<< HEAD:src/Components/InstrumentComponents/Instrumenten.js
     handleCellClick = (rowNumber) => {
         var self = this;
 
@@ -91,20 +74,14 @@ class Instrumenten extends Component {
         return this.state.selected.indexOf(index) !== -1;
     };
 
+=======
+>>>>>>> master:src/Components/Instrumenten.js
 
     render() {
-        const actionsDetails = [
-            <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
-
-        const actionsUpdate = [
-            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
 
         return (
             <div className="Homepage">
+<<<<<<< HEAD:src/Components/InstrumentComponents/Instrumenten.js
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Instrumenten</h1>
@@ -162,7 +139,43 @@ class Instrumenten extends Component {
                         id={(this.state.selectedIndex)}
                     />
                 </Dialog>
+=======
+                <Header name="Instrumenten" />
 
+                <section className="containerCss">
+                    <table className="white-text bordered responsive-table centered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Naam</th>
+                            <th>Type</th>
+                            <th>Uitvoering</th>
+                            <th>Acties</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.instrumenten.map((instrument, index) => (
+                            <tr key={index} id={instrument.instrumentId}>
+                                <td>{instrument.instrumentId}</td>
+                                <td>{instrument.naam}</td>
+                                <td>{instrument.type}</td>
+                                <td>{instrument.uitvoering}</td>
+                                <td>
+                                    <Link className="waves-effect white-text red darken-4 btn marginator" to={`/instrumentdetails/${instrument.instrumentId}` }>
+                                        <i className="material-icons">edit
+                                    </i>
+                                    </Link>
+                                    <a className="waves-effect white-text red darken-4 btn" onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i className="material-icons">delete
+                                    </i></a>
+
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+>>>>>>> master:src/Components/Instrumenten.js
+
+                </section>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../../Services/InstrumentService.js'
 import Snackbar from 'material-ui/Snackbar';
+import Header from './Header'
 
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
@@ -138,9 +139,9 @@ class AddInstrument extends Component {
         return (
 
             <div className="Homepage">
-                <section className="container">
+                <Header name="Add Instrument"/>
+                <section className="containerCss">
                     <div className="whiteBox">
-                        <h1 className="header">Voeg Instrument toe</h1>
                         <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();

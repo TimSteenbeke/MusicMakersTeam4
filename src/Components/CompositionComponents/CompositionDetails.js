@@ -3,8 +3,6 @@ import {Card, CardHeader, CardText} from 'material-ui/Card';
 import * as CompositionService from '../../Services/CompositionService.js'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import fileDownload from 'react-file-download';
-import base64 from 'base-64';
 
 class CompositionDetails extends Component {
 
@@ -27,12 +25,22 @@ class CompositionDetails extends Component {
     }
 
     assignItem = item => { // bound arrow function handler
-        const extension = this.state.composition.fileFormat.split('.');
-        const filename = this.state.composition.titel + "." + extension[1];
-        const filecontent = base64.decode(item);
+        const sampleBytes = CompositionDetails.base64ToArrayBuffer(item);
+        this.saveByteArray([sampleBytes], this.state.composition.fileFormat);
+    };
 
-        console.log(filecontent);
+    static base64ToArrayBuffer(base64) {
+        const binaryString =  window.atob(base64);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++)        {
+            let ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+        }
+        return bytes;
+    }
 
+<<<<<<< HEAD:src/Components/CompositionComponents/CompositionDetails.js
         fileDownload(filecontent, filename);
     };
 
@@ -40,11 +48,27 @@ class CompositionDetails extends Component {
         return (
             <div>
 
+=======
+    saveByteArray = (function () {
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (data, name) {
+            const blob = new Blob(data, {type: "octet/stream"}),
+                url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = name;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+    }());
+
+    render() {
+        return (
+            <div >
+>>>>>>> master:src/Components/CompositionDetails.js
                 <h1 className="header">Muziekstuk Details</h1>
                 <Card expanded={true}>
-                    <CardHeader
-                        title={this.state.orignaltitel}
-                    />
                     <CardText>
                         <div className="CompositionDetail">
                             <div id="compositionDetails">

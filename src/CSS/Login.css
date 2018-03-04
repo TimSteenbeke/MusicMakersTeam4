@@ -10,19 +10,8 @@ html {
 }
 body {
     min-height: 100%;
-
 }
 
-
-.container {
-    position: absolute;
-    display: flex;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-
-
-}
 
 
 .left-half {
@@ -35,7 +24,6 @@ body {
 .right-half {
     background-color: #000000;
     flex: 1;
-
 }
 
 .loginForm {
@@ -63,6 +51,7 @@ body {
 
 }
 
-.sidebar{
-    visibility: hidden;
+html, body {
+    height: 100%;
+    margin: 0;
 }

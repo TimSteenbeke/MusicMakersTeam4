@@ -5,9 +5,14 @@
   "dependencies": {
     "axios": "^0.18.0",
     "@axetroy/react-download": "^1.0.0",
+    "axios": "^0.18.0",
     "base-64": "^0.1.0",
     "empty-module": "0.0.2",
+<<<<<<< HEAD
     "jsonwebtoken": "^8.1.1",
+=======
+    "jquery": "^3.3.1",
+>>>>>>> master
     "material-ui": "^0.20.0",
     "material-ui-table-edit": "^3.0.3",
     "moment": "^2.20.1",

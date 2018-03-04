@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as CourseService from '../../Services/CourseService.js'
 import Snackbar from 'material-ui/Snackbar';
+import Header from './Header'
 
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
@@ -115,9 +116,9 @@ class AddCourse extends Component {
         return (
 
             <div className="Homepage">
-                <section className="container">
+                <Header name="Add Course"/>
+                <section className="containerCss">
                     <div className="whiteBox">
-                        <h1 className="header">Add course</h1>
                         <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
