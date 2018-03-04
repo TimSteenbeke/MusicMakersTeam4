@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import '../CSS/Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router-dom';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import * as LoginService from "../Services/LoginService";
+import {browserHistory} from 'react-router';
+import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
     width: {
@@ -31,73 +33,96 @@ const styles = {
 };
 
 class Login extends Component {
-
-
     constructor(props) {
         super(props);
-        this.state = {flex: 2.2};
-
+        this.state = {
+            flex: 2.2,
+            failLogin: false,
+            redirect: false
+        };
     }
 
     animateLogin = () => {
-        this.setState({
-            flex: 0.0001
-        });
+        let user = this.state.username;
+        let pass = this.state.password;
+        let response = false;
+        LoginService.fetchToken(user, pass);
+        console.log("response before check:", response);
+        if (response === true) {
+            this.setState({
+                flex: 0.00010
+            });
+            this.setState({redirect: true})
+        } else {
+            this.setState({failLogin: true, redirect: false})
+        }
     };
 
+    setPassword(event, typedPassword) {
+        console.log("setPassword: type=> ", typedPassword);
+        this.setState({password: typedPassword})
+    }
+
+    setUsername(event, typedUsername) {
+        console.log("setPassword: type=> ", typedUsername);
+        this.setState({username: typedUsername})
+    }
 
     render() {
+        let failedLogin = null;
+        let redirecting = null;
+        if (this.state.failLogin) {
+            failedLogin = <p> Username or password incorect!!!</p>
+        }
+        if (this.state.redirect) {
+            redirecting = <Redirect to='/'/>
+        }
         return (
 
             <div className="App">
                 <section className="container">
-                    <div className="left-half" style={{
-                        flex: this.state.flex
-                    }}>
-
+                    <div className="left-half" style={{flex: this.state.flex}}>
                     </div>
-
                     <div className="right-half">
-
                     </div>
                 </section>
 
                 <div className="loginForm">
-                        <h1 className="header">Music Makers</h1>
-                        <div className="border">
-                            <TextField
-                                style={styles.width}
-                                hintText="Type username here..."
-                                floatingLabelText="Username"
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                type="password"
+                    <h1 className="header">Music Makers</h1>
+                    <div className="border">
+                        <TextField
+                            style={styles.width}
+                            hintText="Type username here..."
+                            floatingLabelText="Username"
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            underlineFocusStyle={styles.underlineStyle}
+                            onChange={(event, typedUsername) => this.setUsername(event, typedUsername)}
+                        /><br/>
+                        <TextField
+                            type="password"
 
-                                hintText="Type password here..."
-                                floatingLabelText="Password"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                        </div>
-                        <Link to="/">
-                            <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          labelColor="#FFEBEE"
-                                          className="loginButton"/>
-                        </Link>
+                            hintText="Type password here..."
+                            floatingLabelText="Password"
+                            style={styles.width}
+                            inputStyle={styles.inputstyle}
+                            hintStyle={styles.floatingLabelFocusStyle}
+                            floatingLabelStyle={styles.floatingLabelStyle}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            underlineFocusStyle={styles.underlineStyle}
+                            onChange={(event, typedPassword) => this.setPassword(event, typedPassword)}
+                        /><br/>
+                    </div>
+                    {failedLogin}
+                    <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
+                                  style={styles.loginButton}
+                                  labelColor="#FFEBEE"
+                                  className="loginButton"/>
                 </div>
-
+                {redirecting}
             </div>
-
 
 
         );
