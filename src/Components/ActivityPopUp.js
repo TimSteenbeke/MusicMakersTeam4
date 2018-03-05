@@ -27,6 +27,12 @@ class ActivityPopUp extends Component {
     componentDidMount() {
         //Call maken om te zien of persoon aanwezig of afwezig is voor die les
         //State verranderen
+        this.getStatus();
+
+    }
+
+    getStatus() {
+        LesService.getAttendanceStatus(this.props.id);
     }
 
     aanwezig() {
@@ -36,7 +42,7 @@ class ActivityPopUp extends Component {
         if (this.props.type == "Optreden") {
             OptredenService.zetMijOpAanwezig(id);
         } else {
-            LesService.zetMijOpAanwezig(id);
+            LesService.registerPresent(id);
         }
     }
 
@@ -47,7 +53,7 @@ class ActivityPopUp extends Component {
         if (this.props.type == "Optreden") {
             OptredenService.zetMijOpAfwezig(id);
         } else {
-            LesService.zetMijOpAfwezig(id);
+            LesService.registerAbsent(id);
         }
     }
 

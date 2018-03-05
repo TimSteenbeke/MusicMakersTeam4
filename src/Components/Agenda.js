@@ -51,6 +51,7 @@ class Agenda extends Component {
 
     componentDidMount() {
         this.haalAgendaItemsOp();
+        console.log('comp mounted')
     }
 
 
@@ -58,7 +59,7 @@ class Agenda extends Component {
         //HARDCODED ID (TEMPORARY)
         let mijnAgendaItems= [];
 
-        AgendaService.getAgendaById(3).then(agendaItems => {
+        AgendaService.getMyAgenda().then(agendaItems => {
 
             //Eigenaar toewijzen (Agenda van: ....)
             // this.setState({agendaOwner: agendaItems.agendaEigenaar})
