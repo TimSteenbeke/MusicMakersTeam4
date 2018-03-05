@@ -3,7 +3,7 @@ const localURL = 'http://localhost:8080/oauth/token';
 const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/oauth/token';
 
 export function fetchToken(username, password) {
-    return fetch(localURL + '?grant_type=password&username='+ username +'&password='+password, {
+    return fetch(herokuURL + '?grant_type=password&username='+ username +'&password='+password, {
         method: 'POST',
         headers: {
             'Authorization': AuthStr,
