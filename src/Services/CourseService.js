@@ -1,9 +1,15 @@
-/**
- * Created by Ben on 27/02/2018.
- */
+const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const localURL = 'localhost:8080/api/';
+
 export function getCoursesFromBackend() {
 
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/courses", { mode: 'cors'})
+    return fetch(localURL + "courses", {
+        mode: 'cors',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Content-Type': 'application/json'
+        }
+    })
         .then((response) =>
             response.json())
         .then((responseJson) => {
@@ -18,11 +24,12 @@ export function getCoursesFromBackend() {
 export function postCourse(data) {
 
 
-    fetch('https://musicmaker-api-team4.herokuapp.com/api/courses', {
+    fetch(localURL + 'courses', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         },
         body: data
     })
@@ -30,24 +37,26 @@ export function postCourse(data) {
 
 export function deleteCourse(courseId) {
     console.log(courseId);
-    return fetch('https://musicmaker-api-team4.herokuapp.com/api/courses/' + courseId, {
+    return fetch(localURL + 'courses/' + courseId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         }
     });
 }
 
 export function updateCourse(courseId, data) {
     console.log(data);
-    return fetch('https://musicmaker-api-team4.herokuapp.com/api/courses/' + courseId, {
+    return fetch(localURL + 'courses/' + courseId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         },
         body: data
     });

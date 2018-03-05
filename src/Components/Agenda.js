@@ -3,6 +3,7 @@ import { ReactAgenda , guid  } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
 import ActivityPopUp from './ActivityPopUp.js'
+import Header from './Header'
 
 require('moment/locale/nl.js');
 
@@ -21,7 +22,7 @@ var AgendaItem = function(props){
     console.log( ' ik ga renderen:' , props);
     console.log(props);
     return <div className="agendaItem">
-        <h3> {props.item.name} </h3>
+        <p className="text-darken-4">{props.item.name}</p>
         <p>leerkracht: {props.leerkrachten}</p>
         <RaisedButton fullWidth={true} onClick={()=> props.edit(props.item)}>Edit </RaisedButton>
         <ActivityPopUp id={props.item.id} type={props.item.type}/>
@@ -115,10 +116,10 @@ class Agenda extends Component {
 
       return  (
           <div>
-              <section className="container">
-                  <div className="whiteBox">
-
-                      <h1 className="header">Agenda</h1>
+              <div className="scrollbar" id="style-2">
+                  <div className="force-overflow">
+              <Header name="Agenda"/>
+              <section className="containerCss">
               <ReactAgenda
                   minDate={now}
                   maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
@@ -127,6 +128,8 @@ class Agenda extends Component {
                   cellHeight={this.state.cellHeight}
                   locale={this.state.locale}
                   items={this.state.items}
+
+
                   numberOfDays={this.state.numberOfDays}
                   rowsPerHour={this.state.rowsPerHour}
                   itemColors={colors}
@@ -137,8 +140,9 @@ class Agenda extends Component {
                   onRangeSelection={this.handleRangeSelection.bind(this)}
                   itemComponent={AgendaItem}
               />
-            </div>
               </section>
+                  </div>
+              </div>
           </div>
         );
     }

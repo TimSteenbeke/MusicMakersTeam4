@@ -1,9 +1,8 @@
 const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 const localURL = 'localhost:8080/api/';
 
-export function getInstrumentenFromBackend() {
-
-    return fetch(localURL + "instruments", {
+export function getCompositionsFromBackend() {
+    return fetch(localURL + "compositions", {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -21,8 +20,8 @@ export function getInstrumentenFromBackend() {
         });
 }
 
-export function getInstrumentFromBackend(instrumentNr) {
-    return fetch(localURL + "instruments/" + instrumentNr, {
+export function getCompositionFromBackend(compositionId) {
+    return fetch(localURL + "compositions/" + compositionId, {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -35,45 +34,26 @@ export function getInstrumentFromBackend(instrumentNr) {
             return responseJson;
         })
         .catch((err) => {
-            const instrument = {naam: "instrument niet gevonden"};
-            return instrument;
+            const muziekstuk = {naam: "muziekstuk niet gevonden"};
+            return muziekstuk;
         });
 }
 
-export function getInstrumentSoortenFromBackend() {
-
-    return fetch(localURL + "instrumentsoorten", {
-        mode: 'cors',
+export function postMuziekstuk(data) {
+    console.log(data);
+    fetch(localURL + 'compositions/', {
+        mode: 'no-cors',
+        method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
             'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            return responseJson;
-        })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
-}
-
-export function postInstrument(data) {
-    fetch(localURL + 'instruments', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         },
         body: data
     })
 }
 
-export function deleteInstrument(instrumentId) {
-    return fetch(localURL + 'instruments/' + instrumentId, {
+export function deleteComposition(compositionId) {
+    return fetch(localURL + 'compositions/' + compositionId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
@@ -84,9 +64,10 @@ export function deleteInstrument(instrumentId) {
     });
 }
 
-export function UpdateInstrument(instrumentId, data) {
+export function UpdateComposition(compositionId, data) {
+    console.log("id: " + compositionId);
     console.log(data);
-    return fetch(localURL + 'instruments/instrument/' + instrumentId, {
+    return fetch(localURL + 'compositions/composition/' + compositionId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
