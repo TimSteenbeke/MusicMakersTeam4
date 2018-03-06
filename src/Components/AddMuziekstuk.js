@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import * as CompositionService from '../Services/CompositionService.js'
 import Snackbar from 'material-ui/Snackbar';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import axios from 'axios';
 
 const styles = {
     width: {
@@ -45,12 +46,12 @@ const styles = {
     },
 };
 
-
 class AddMuziekstuk extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            formdata: new FormData(),
             value: 1,
             open: false,
             typedTitel: "",
@@ -63,18 +64,15 @@ class AddMuziekstuk extends Component {
             bestandType: "",
             bestand: "",
         };
-
-
     }
 
     handleClick = () => {
         this.setState({
             open: true,
         });
-        CompositionService.postMuziekstuk(JSON.stringify(
+        this.state.formdata.append("compresource",JSON.stringify(
             {
                 content: this.state.bestand,
-                muziekstukId: this.state.value,
                 titel: this.state.typedTitel,
                 artist: this.state.typedArtiest,
                 language: this.state.typedLang,
@@ -83,8 +81,11 @@ class AddMuziekstuk extends Component {
                 instrumentType: this.state.typedInstrumenttype,
                 link: this.state.typedLink,
                 fileFormat: this.state.bestandType
-            }
-        ));
+            }));
+
+        axios.post('https://musicmaker-api-team4.herokuapp.com/api/compositions/', this.state.formdata, {
+            "Content-Type": "multipart/form-data"
+        });
     };
 
     handleRequestClose = () => {
@@ -131,22 +132,17 @@ class AddMuziekstuk extends Component {
 
     handleChangeImage = (evt) => {
         console.log("Uploading");
-        const self = this;
-        const reader = new FileReader();
         const file = evt.target.files[0];
-        console.log(file.name);
-        const extension = file.name.split('.');
-        console.log(extension[1]);
-        reader.onload = function (upload) {
-            self.setState({
-                bestand: upload.target.result.replace(/^data:([^)]+\/[^)]+)?;base64,/, ""),
-                bestandType: extension[1]
-            });
-        };
-        reader.readAsDataURL(file);
-        setTimeout(function () {
-            console.log("Uploaded");
-        }, 1000);
+        const extension = file.name;
+
+        this.setState({
+            bestandType: extension
+
+        });
+
+        const fmdata = new FormData();
+        fmdata.append("file",evt.target.files[0]);
+        this.state.formdata.append("files", evt.target.files[0]);
     };
 
     render() {
@@ -171,6 +167,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                required
                             /><br />
                             <TextField
                                 onChange={this.onChangeArtiest}
@@ -182,6 +179,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                required
                             /><br />
                             <TextField
                                 onChange={this.onChangeLanguage}
@@ -193,6 +191,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                required
                             /><br />
                             <TextField
                                 onChange={this.onChangeGenre}
@@ -204,6 +203,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                required
                             /><br />
                             <TextField
                                 onChange={this.onChangeSubject}
@@ -215,6 +215,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                required
                             /><br />
                             <TextField
                                 onChange={this.onChangeInstrType}
@@ -226,6 +227,7 @@ class AddMuziekstuk extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                required
                             />
                             <TextField
                                 onChange={this.onChangeLink}
@@ -251,23 +253,20 @@ class AddMuziekstuk extends Component {
                                        id="file"
                                        onChange={this.handleChangeImage}
                                        encType="multipart/form-data"
-                                       required
                                 />
                             </RaisedButton>
 
+                            <label>{this.state.bestandType}</label>
 
-
-
-                            <br/>
 
                             <RaisedButton label="Voeg muziekstuk Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
                                           type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
+                                          labelColor="#FFEBEE"/>
+
+
                             <Snackbar
                                 open={this.state.open}
-                                message="Instrument Added"
+                                message="Muziekstuk toegevoegd!"
                                 autoHideDuration={4000}
                                 onRequestClose={this.handleRequestClose}
                             />

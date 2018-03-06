@@ -1,11 +1,80 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+html, body
+{
+    width: 100%;
+    overflow: auto;
+
 }
 
+*, *:before, *:after
+{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
 .flexBox{
-  display: flex;
-  flex-direction: column;
-  flex-basis: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* align items in Main Axis */
+    align-items: stretch; /* align items in Cross Axis */
+    align-content: stretch; /* Extra space in Cross Axis */
+    min-height: 0;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.groups{
+    width:  15%;
+    background-color: #263238;
+    position: relative;
+    padding-top: 4%;
+}
+
+
+.sidebar{
+    width: 15%;
+    background-color: #263238;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+.application{
+    width: 70%;
+    overflow: auto;
+    position: relative;
+    background: repeating-linear-gradient(
+            45deg,
+            #78909c,
+            #37474F 90%
+    );
+
+
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #212121;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #212121;
 }

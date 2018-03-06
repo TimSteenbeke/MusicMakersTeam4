@@ -1,10 +1,15 @@
-/**
- * Created by Lo on 4/08/2017.
- */
+const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const localURL = 'localhost:8080/api/';
 
 export function getInstrumentenFromBackend() {
 
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments", {mode: 'cors'})
+    return fetch(localURL + "instruments", {
+        mode: 'cors',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Content-Type': 'application/json'
+        }
+    })
         .then((response) =>
             response.json())
         .then((responseJson) => {
@@ -17,7 +22,13 @@ export function getInstrumentenFromBackend() {
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instruments/" + instrumentNr, {mode: 'cors'})
+    return fetch(localURL + "instruments/" + instrumentNr, {
+        mode: 'cors',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Content-Type': 'application/json'
+        }
+    })
         .then((response) => response.json()
         )
         .then((responseJson) => {
@@ -31,7 +42,13 @@ export function getInstrumentFromBackend(instrumentNr) {
 
 export function getInstrumentSoortenFromBackend() {
 
-    return fetch("https://musicmaker-api-team4.herokuapp.com/api/instrumentsoorten", {mode: 'cors'})
+    return fetch(localURL + "instrumentsoorten", {
+        mode: 'cors',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Content-Type': 'application/json'
+        }
+    })
         .then((response) =>
             response.json())
         .then((responseJson) => {
@@ -44,35 +61,38 @@ export function getInstrumentSoortenFromBackend() {
 }
 
 export function postInstrument(data) {
-    fetch('https://musicmaker-api-team4.herokuapp.com/api/instruments', {
+    fetch(localURL + 'instruments', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         },
         body: data
     })
 }
 
 export function deleteInstrument(instrumentId) {
-    return fetch('https://musicmaker-api-team4.herokuapp.com/api/instruments/' + instrumentId, {
+    return fetch(localURL + 'instruments/' + instrumentId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         }
     });
 }
 
 export function UpdateInstrument(instrumentId, data) {
     console.log(data);
-    return fetch('https://musicmaker-api-team4.herokuapp.com/api/instruments/instrument/' + instrumentId, {
+    return fetch(localURL + 'instruments/instrument/' + instrumentId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
         },
         body: data
     });

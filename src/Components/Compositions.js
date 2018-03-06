@@ -18,15 +18,22 @@ import {
 } from 'material-ui/Table';
 
 
-export default class Compositions extends Component {
+const styles = {
+    exampleImageInput: {
+        margin: 10,
+    }
+};
+
+class Compositions extends Component {
     constructor(props) {
         super(props);
         this.state = {
             compositions: [],
             selectedIndex: 0,
+            selected: [],
             openDetails: false,
             openUpdate: false,
-            selected: [],
+
         };
     }
 
@@ -100,7 +107,7 @@ export default class Compositions extends Component {
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Muziekstukken</h1>
-                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick} selectable={false}>
+                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
                             <TableHeader>
                                 <TableRow>
                                     <TableHeaderColumn>Titel</TableHeaderColumn>
@@ -120,11 +127,11 @@ export default class Compositions extends Component {
                                 ))}
                             </TableBody>
                         </Table>
-                        <RaisedButton label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
+                        <RaisedButton style={styles.exampleImageInput} label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-                        <RaisedButton label="Delete"    onClick={this.handleDelete} backgroundColor="#DD2C00"
+                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
-                        <RaisedButton label="Update"    onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
+                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
                                       labelColor="#FFEBEE"/>
                     </div>
                 </section>
@@ -156,4 +163,4 @@ export default class Compositions extends Component {
     }
 }
 
-
+export default Compositions;
