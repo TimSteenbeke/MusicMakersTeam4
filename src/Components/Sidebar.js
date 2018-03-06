@@ -14,7 +14,7 @@ import logo from '../images/logo.png'
 
 const styles = {
     menuColor: {
-        color: "#FAFAFA",
+        color: "#D9CDC7",
     }
 };
 

@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import * as LoginService from "../Services/LoginService";
-import {browserHistory} from 'react-router';
 import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
