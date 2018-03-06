@@ -38,7 +38,9 @@ class Login extends Component {
         this.state = {
             flex: 2.2,
             failLogin: false,
-            redirect: false
+            redirect: false,
+            username: "",
+            password:""
         };
     }
 
@@ -46,15 +48,12 @@ class Login extends Component {
         let user = this.state.username;
         let pass = this.state.password;
         let response = false;
-        LoginService.fetchToken(user, pass);
+        response = LoginService.fetchToken(user, pass);
         console.log("response before check:", response);
         if (response === true) {
-            this.setState({
-                flex: 0.00010
-            });
             this.setState({redirect: true})
         } else {
-            this.setState({failLogin: true, redirect: false})
+            this.setState({failLogin: true})
         }
     };
 
@@ -69,10 +68,9 @@ class Login extends Component {
     }
 
     render() {
-        let failedLogin = null;
-        let redirecting = null;
+        let failedLogin = null, redirecting = null;
         if (this.state.failLogin) {
-            failedLogin = <p> Username or password incorect!!!</p>
+            failedLogin = <p className=""> Username or password incorect!!!</p>
         }
         if (this.state.redirect) {
             redirecting = <Redirect to='/'/>
