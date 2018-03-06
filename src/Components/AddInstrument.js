@@ -127,6 +127,7 @@ class AddInstrument extends Component {
         var self = this;
         var reader = new FileReader();
         var file = evt.target.files[0];
+        const extension = file.name;
         reader.onload = function (upload) {
             self.setState({
                 image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
