@@ -47,13 +47,7 @@ html, body
     width: 70%;
     overflow: auto;
     position: relative;
-    background: repeating-linear-gradient(
-            45deg,
-            #8E816F,
-            #4A433D 90%
-    );
-
-
+    background: #4A433D;
 }
 
 /* Let's get this party started */
