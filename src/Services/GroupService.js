@@ -51,7 +51,7 @@ export function deleteGroup(groupId) {
 export function updateGroup(groupId, data) {
     console.log("id: " + groupId);
     console.log(data);
-    return fetch('http://localhost:8080/api/groups/' + groupId, {
+    return fetch('http://localhost:8080/api/groups/group/' + groupId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {

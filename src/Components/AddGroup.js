@@ -70,6 +70,7 @@ export default class AddGroup extends Component {
             begeleider:"",
             open: false,
             image: "..image/image.jpg",
+            bestand: ""
         };
     }
 
@@ -94,9 +95,26 @@ export default class AddGroup extends Component {
 
     };
 
-        render() {
-        return (
+    handleChangeImage = (evt) => {
+        console.log("Uploading");
+        var self = this;
+        var reader = new FileReader();
+        var file = evt.target.files[0];
+        reader.onload = function (upload) {
+            self.setState({
+                image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, ""),
+                bestand: file.name
+            });
+        };
+        reader.readAsDataURL(file);
+        setTimeout(function () {
+            console.log("Uploaded");
+        }, 1000);
+    };
 
+
+    render() {
+        return (
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
@@ -145,12 +163,16 @@ export default class AddGroup extends Component {
                         <RaisedButton
                             label="Kies een image"
                             labelPosition="before"
-
                             containerElement="label"
                         >
-                            <input type="file" style={styles.exampleImageInput}/>
+                            <input type="file" style={styles.exampleImageInput}
+                            name="file"
+                            className="upload-file"
+                            id="file"
+                            onChange={this.handleChangeImage}
+                            encType="multipart/form-data"/>
                         </RaisedButton>
-
+                        <label>{this.state.bestand}</label>
                         <RaisedButton label="Voeg Groep Toe" onClick={this.add} backgroundColor="#DD2C00"
                                       style={styles.loginButton}
                                       labelColor="#FFEBEE"
