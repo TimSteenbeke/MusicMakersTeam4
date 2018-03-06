@@ -7,7 +7,6 @@ import {Card, CardHeader, CardText} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import fileDownload from 'react-file-download';
 import base64 from 'base-64';
 
 

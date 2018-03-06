@@ -10,7 +10,7 @@ import Agenda from './Components/Agenda.js'
 import {Route} from 'react-router'
 import './CSS/GlobalStylesheet.css';
 import Compositions from "./Components/Compositions.js";
-import MuziekstukDetails from "./Components/MuziekstukDetails.js";
+import CompositionDetails from "./Components/CompositionDetails.js";
 import AddMuziekstuk from "./Components/AddMuziekstuk";
 
 
@@ -35,7 +35,7 @@ class App extends Component {
                     <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
                     <Route name="agenda" path="/agenda" component={Agenda}/>
                     <Route name="muziekStukken" path = "/muziekstukken" component={Compositions}/>
-                    <Route name="muziekstukDetails" path="/muziekstukdetails/:id" component = {MuziekstukDetails}/>
+                    <Route name="muziekstukDetails" path="/muziekstukdetails/:id" component = {CompositionDetails}/>
                     <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
             </div>
         );
