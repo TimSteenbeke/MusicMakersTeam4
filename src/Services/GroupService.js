@@ -1,8 +1,8 @@
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'localhost:8080/api/';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'localhost:8080/api/';
 
 export function getGroupsFromBackend(userId) {
-    return fetch(localURL + "groups/" + userId, {
+    return fetch(URL + "groups/" + userId, {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -24,7 +24,7 @@ export function getGroupsFromBackend(userId) {
 }
 
 export function getAllGroupsFromBackend() {
-    return fetch(localURL + "groups/", {
+    return fetch(URL + "groups/", {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -48,7 +48,7 @@ export function getAllGroupsFromBackend() {
 
 //in de toekomst is dit de methode om alle data van 1 groep op te vragen, voorlopig doet bovenstaande methode hetzelfde maar moet nog aangepast worden eens Users in orde zijn
 export function loadDataIntoEdit(groupId) {
-    return fetch(localURL + "groups/" + groupId, {
+    return fetch(URL + "groups/" + groupId, {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
