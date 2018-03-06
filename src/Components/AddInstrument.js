@@ -10,9 +10,10 @@ import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
-
+import StyledTextField from './StyledTextField'
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import {Link} from "react-router-dom";
 
 const styles = {
     width: {
@@ -125,9 +126,9 @@ class AddInstrument extends Component {
 
     handleChangeImage = (evt) => {
         console.log("Uploading");
-        var self = this;
-        var reader = new FileReader();
-        var file = evt.target.files[0];
+        let self = this;
+        let reader = new FileReader();
+        let file = evt.target.files[0];
         reader.onload = function (upload) {
             self.setState({
                 image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
@@ -145,90 +146,68 @@ class AddInstrument extends Component {
             <div className="Homepage">
                 <Header name="Add Instrument"/>
                 <section className="containerCss">
-                    <div className="whiteBox">
-                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
-                            e.preventDefault();
-                            this.handleClick();
-                        } }>
-                            <SelectField
-                                autoWidth={true}
-                                floatingLabelText="Soort"
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                                selectedMenuItemStyle={styles.errorStyle}
-                            >
-                                {this.state.soorten.map((soort, index) => (
-                                    <MenuItem key={soort.instrumentSoortId}
-                                              value={soort.instrumentSoortId}
-                                              primaryText={soort.soortNaam}/>
-                                ))}
-                            </SelectField>
-                            <br />
+                    <div className="row">
+                        <div className="col s0 m2 l2"/>
+                        <div className="col s12 m8 l8">
+                            <div className="card hoverable">
+                                <div className="card-image">
+                                    <img
+                                        src={"data:image;base64," + this.state.afbeelding} alt="Instrument"
+                                        height="300px"/>
+                                    <span className="card-title white-text">{this.state.naam}</span>
+                                    <form action="#">
+                                        <div className="file-field input-field">
+                                            <div
+                                                className="btn-floating halfway-fab waves-effect waves-light red darken-4 pulse">
+                                                <i className="material-icons">attach_file</i>
+                                                <input name="file"
+                                                       className="upload-file"
+                                                       id="file"
+                                                       onChange={this.handleChangeImage}
+                                                       encType="multipart/form-data" accept="image/*" type="file"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className="card-content">
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s3 m3 l3">
+                                                <h5>{this.state.type}</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <StyledTextField hint="Geef nieuw type in..." label="Type"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
 
-                            <TextField
-                                onChange={this.onChangeNaam}
-                                hintText="Geef naam in..."
-                                floatingLabelText="Naam"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangeType}
-                                hintText="Geef type in..."
-                                floatingLabelText="Type"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangeVersion}
-                                hintText="Geef uitvoering in..."
-                                floatingLabelText="Uitvoering"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
-                            <RaisedButton
-                                label="Kies een image"
-                                labelPosition="before"
-                                containerElement="label"
-                            >
-                                <input type="file"
-                                       style={styles.exampleImageInput}
-                                       name="file"
-                                       className="upload-file"
-                                       id="file"
-                                       onChange={this.handleChangeImage}
-                                       encType="multipart/form-data"
-                                       required
-                                       accept="image/*"
-                                />
-                            </RaisedButton>
+                                            <div className="col s3 m3 l3">
+                                                <h5>{this.state.soortnaam}</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <StyledTextField hint="Geef nieuwe soortnaam in..." label="Soortnaam"/>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
-                            <Snackbar
-                                open={this.state.open}
-                                message="Instrument Added"
-                                autoHideDuration={4000}
-                                onRequestClose={this.handleRequestClose}
-                            />
-                        </form>
+                                </div>
+                                <div className="card-action">
+                                    <Link to="/instrumenten">
+                                        <a onClick={this.handleUpdate}
+                                           className="btn-floating btn-small waves-effect waves-light red darken-4 pulse"><i
+                                            className="material-icons">done</i></a>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col s0 m2 l2"/>
                     </div>
 
+
+                        
                 </section>
             </div>
         );
