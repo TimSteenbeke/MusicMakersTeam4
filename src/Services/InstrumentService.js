@@ -1,3 +1,4 @@
+
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 // const URL = 'localhost:8080/api/';
 
@@ -22,6 +23,7 @@ export function getInstrumentenFromBackend() {
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
+
     return fetch(URL + "instruments/" + instrumentNr, {
         mode: 'cors',
         headers: {
@@ -42,6 +44,7 @@ export function getInstrumentFromBackend(instrumentNr) {
 
 export function getInstrumentSoortenFromBackend() {
 
+
     return fetch(URL + "instrumentsoorten", {
         mode: 'cors',
         headers: {
@@ -61,7 +64,9 @@ export function getInstrumentSoortenFromBackend() {
 }
 
 export function postInstrument(data) {
+
     fetch(URL + 'instruments', {
+ 
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -73,6 +78,7 @@ export function postInstrument(data) {
 }
 
 export function deleteInstrument(instrumentId) {
+
     return fetch(URL + 'instruments/' + instrumentId, {
         method: 'DELETE',
         mode: 'CORS',
@@ -86,6 +92,7 @@ export function deleteInstrument(instrumentId) {
 
 export function UpdateInstrument(instrumentId, data) {
     console.log(data);
+
     return fetch(URL + 'instruments/instrument/' + instrumentId, {
         method: 'PUT',
         mode: 'CORS',

@@ -3,54 +3,12 @@
  */
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
 import StyledTextField from './StyledTextField'
-
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-import {Link} from "react-router-dom";
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
-
+import {Link} from 'react-router-dom';
+import {Row, Input} from 'react-materialize'
 
 class AddInstrument extends Component {
 
@@ -104,22 +62,22 @@ class AddInstrument extends Component {
             });
     }
 
-    onChangeType = (event, typedType) => {
-        this.setState({typedType});
-        console.log("Type:" + typedType)
+    onChangeType = (e) => {
+        this.setState({typedType: e.target.value});
+        console.log("Type:" + e.target.value)
     };
 
-    onChangeNaam = (event, typedName) => {
-        this.setState({typedName});
-        console.log("Naam:" + typedName)
+    onChangeNaam = (e) => {
+        this.setState({typedName: e.target.value});
+        console.log("Naam:" + e.target.value)
     };
 
-    onChangeVersion = (event, typedVersion) => {
-        this.setState({typedVersion});
-        console.log("Version:" + typedVersion)
+    onChangeVersion = (e) => {
+        this.setState({typedVersion:  e.target.value});
+        console.log("Version:" + e.target.value)
     };
 
-    handleChange = (event, index, value) => {
+    handleChange = (event, value) => {
         this.setState({value});
         console.log(value)
     };
@@ -152,13 +110,13 @@ class AddInstrument extends Component {
                             <div className="card hoverable">
                                 <div className="card-image">
                                     <img
-                                        src={"data:image;base64," + this.state.afbeelding} alt="Instrument"
+                                        src={"data:image;base64," + this.state.image} alt="Instrument"
                                         height="300px"/>
                                     <span className="card-title white-text">{this.state.naam}</span>
                                     <form action="#">
                                         <div className="file-field input-field">
                                             <div
-                                                className="btn-floating halfway-fab waves-effect waves-light red darken-4 pulse">
+                                                className="btn-floating halfway-fab waves-effect waves-light deep-orange darken-4 pulse">
                                                 <i className="material-icons">attach_file</i>
                                                 <input name="file"
                                                        className="upload-file"
@@ -170,44 +128,84 @@ class AddInstrument extends Component {
                                     </form>
                                 </div>
                                 <div className="card-content">
-                                    <div className="section">
-                                        <div className="row">
-                                            <div className="col s3 m3 l3">
-                                                <h5>{this.state.type}</h5>
-                                            </div>
-                                            <div className="col s9 m9 l9">
-                                                <StyledTextField hint="Geef nieuw type in..." label="Type"/>
+                                    <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
+                                        e.preventDefault();
+                                        this.handleClick();
+                                    } }>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Soort</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <Row>
+                                                        <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
+                                                            {this.state.soorten.map((soort, index) => (
+                                                                <option key={soort.instrumentSoortId}
+                                                                        value={soort.instrumentSoortId}>{soort.soortNaam}</option>
+                                                            ))}
+                                                        </Input>
+                                                    </Row>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
-
-                                            <div className="col s3 m3 l3">
-                                                <h5>{this.state.soortnaam}</h5>
-                                            </div>
-                                            <div className="col s9 m9 l9">
-                                                <StyledTextField hint="Geef nieuwe soortnaam in..." label="Soortnaam"/>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Naam</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeNaam} hint="Geef naam in..."
+                                                                     label="Naam"/>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Type</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeType} hint="Geef type in..."
+                                                                     label="Type"/><br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Uitvoering</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeVersion}
+                                                                     hint="Geef uitvoering in..." label="Uitvoering"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <Snackbar
+                                            open={this.state.open}
+                                            message="Instrument Added"
+                                            autoHideDuration={4000}
+                                            onRequestClose={this.handleRequestClose}
+                                        />
+                                    </form>
 
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/instrumenten">
-                                        <a onClick={this.handleUpdate}
-                                           className="btn-floating btn-small waves-effect waves-light red darken-4 pulse"><i
-                                            className="material-icons">done</i></a>
+                                    <Link to="/instrumenten" onClick={this.handleClick}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                        <i
+                                            className="material-icons">done</i>
                                     </Link>
                                 </div>
                             </div>
                         </div>
                         <div className="col s0 m2 l2"/>
                     </div>
-
-
-                        
                 </section>
             </div>
         );

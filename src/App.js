@@ -14,7 +14,7 @@ import Group from "./Components/Group";
 import AddGroup from "./Components/AddGroup"
 import EditGroup from "./Components/EditGroup";
 import Compositions from "./Components/Compositions.js";
-import MuziekstukDetails from "./Components/MuziekstukDetails.js";
+// import MuziekstukDetails from "./Components/MuziekstukDetails.js";
 import AddMuziekstuk from "./Components/AddMuziekstuk";
 import PlayMusic from './Components/PlayMusic.js'
 
@@ -34,7 +34,7 @@ class App extends Component {
                 <Route name="courses" path="/courses" component={Courses}/>
                 <Route name="addCourse" path="/addcourse" component={AddCourse}/>
                 <Route name="muziekStukken" path="/muziekstukken" component={Compositions}/>
-                <Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>
+                {/*<Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>*/}
                 <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
                 <Route name="groups" path="/groups" component={Group}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>

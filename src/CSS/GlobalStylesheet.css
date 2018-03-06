@@ -36,6 +36,7 @@
     padding: 3%;
 }
 
+
 img:before {
     content: "";
     display: block;
