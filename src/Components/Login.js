@@ -40,21 +40,23 @@ class Login extends Component {
             failLogin: false,
             redirect: false,
             username: "",
-            password:""
+            password: ""
         };
     }
 
     animateLogin = () => {
         let user = this.state.username;
         let pass = this.state.password;
-        let response = false;
-        response = LoginService.fetchToken(user, pass);
-        console.log("response before check:", response);
-        if (response === true) {
-            this.setState({redirect: true})
-        } else {
-            this.setState({failLogin: true})
-        }
+        let response = LoginService.fetchToken(user, pass);
+        console.log("response before check:");
+        console.log(response);
+        response.then((value) => {
+            if (value) {
+                this.setState({redirect: true})
+            } else {
+                this.setState({failLogin: true})
+            }
+        });
     };
 
     setPassword(event, typedPassword) {
@@ -67,10 +69,16 @@ class Login extends Component {
         this.setState({username: typedUsername})
     }
 
+    componentWillMount() {
+        if(localStorage.getItem('userToken')!= null){
+            this.setState({redirect: true});
+        }
+    }
+
     render() {
         let failedLogin = null, redirecting = null;
         if (this.state.failLogin) {
-            failedLogin = <p className=""> Username or password incorect!!!</p>
+            failedLogin = <p className="red-text"> Username or password incorrect !</p>
         }
         if (this.state.redirect) {
             redirecting = <Redirect to='/'/>
