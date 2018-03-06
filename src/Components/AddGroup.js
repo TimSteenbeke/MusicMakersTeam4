@@ -1,15 +1,31 @@
+/**
+ * Created by jariv on 8/02/2018.
+ */
+
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as GroupService from '../Services/GroupService.js'
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import Snackbar from 'material-ui/Snackbar';
+import AutoComplete from 'material-ui/AutoComplete';
+import IconButton from 'material-ui/IconButton';
+import AddCircle from 'material-ui/svg-icons/content/add-circle';
+import SuperSelectField from 'material-ui-superselectfield'
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
     width: {
         width: "90%",
+    },
+    smallIcon: {
+        width: 36,
+        height: 36,
+    },
+    small: {
+        width: 72,
+        height: 72,
     },
     loginButton: {
         boxShadow: "2px 2px 5px #616161",
@@ -43,58 +59,96 @@ const styles = {
     },
 };
 
-var counter = 1;
-export default class AddGroup extends Component {
 
-    addInput(divName) {
-        var newdiv = document.createElement('div');
-        newdiv.innerHTML = "Groepslid " + (counter + 1) + " <br/><TextField\n" +
-            "hintText=\"Geef groepsleden in...\"\n" +
-            "floatingLabelText=\"Groepsleden\"\n" +
-            "style={styles.width}\n" +
-            "inputStyle={styles.inputstyle}\n" +
-            "hintStyle={styles.floatingLabelFocusStyle}\n" +
-            "floatingLabelStyle={styles.floatingLabelStyle}\n" +
-            "floatingLabelFocusStyle={styles.floatingLabelFocusStyle}\n" +
-            "underlineFocusStyle={styles.underlineStyle}\n" +
-            "/>";
-        document.getElementById(divName).appendChild(newdiv);
-        counter++;
-    }
+const students = [];
+for (let i = 0; i < 10; i++) {
+    students.push('Student ' + i);
+}
+
+
+const supervisor = [];
+for (let i = 0; i < 5; i++) {
+    supervisor.push('Supervisor ' + i);
+}
+
+
+class AddInstrument extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: 1,
-            naam: "",
-            begeleider:"",
+            studentValue: [],
+            supervisorValue: [],
+            soorten: [],
             open: false,
+<<<<<<< HEAD
             image: "..image/image.jpg",
             bestand: ""
+=======
+>>>>>>> 4b0c85577c0cc5e7d51ae26d6d5581a77e011b52
         };
+
+
     }
+
+    studentItems(values) {
+        return students.map((name) => (
+            <MenuItem
+                key={name}
+                insetChildren={true}
+                checked={values && values.indexOf(name) > -1}
+                value={name}
+                primaryText={name}
+            />
+        ));
+    }
+
+    supervisorItems(values) {
+        return supervisor.map((name) => (
+            <MenuItem
+                key={name}
+                insetChildren={true}
+                checked={values && values.indexOf(name) > -1}
+                value={name}
+                primaryText={name}
+            />
+        ));
+    }
+
+
+    handleChangeStudent = (event, index, values) => {
+        this.setState({
+            studentValue: values,
+        });
+    };
+
+    handleChangeSupervisor = (event, index, values) => {
+        this.setState({
+            supervisorValue: values,
+        });
+    };
 
     handleClick = () => {
         this.setState({
             open: true,
         });
-        GroupService.postGroup(JSON.stringify(
-            {
-
-                id: this.state.value,
-                name: this.state.naam,
-                supervisor: this.state.begeleider,
-                groepImage: this.state.image
-            }
-        ));
-        console.log("Image: " + this.state.image);
-        console.log("Value: " + this.state.value);
-        console.log("Name: " + this.state.typedName);
-        console.log("Type: " + this.state.typedType);
-        console.log("Version: " + this.state.typedVersion);
-
     };
 
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
+    };
+
+    componentDidMount() {
+
+    }
+
+    handleIconClick = () => {
+        this.state.studentValue.push()
+    };
+
+<<<<<<< HEAD
     handleChangeImage = (evt) => {
         console.log("Uploading");
         var self = this;
@@ -112,54 +166,73 @@ export default class AddGroup extends Component {
         }, 1000);
     };
 
+=======
+    render() {
+        return (
+>>>>>>> 4b0c85577c0cc5e7d51ae26d6d5581a77e011b52
 
     render() {
         return (
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-                        <h1 className="header">Voeg een groep toe</h1>
+                        <h1 className="header">Voeg Instrument toe</h1>
                         <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
-                        } }/>
-                        <TextField
-                            hintText="Geef de naam van je groep in..."
-                            floatingLabelText="Naam"
-                            style={styles.width}
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                        /><br/>
-                        <TextField
-                            hintText="Geef begeleider in..."
-                            floatingLabelText="Begeleider"
-                            style={styles.width}
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                        /><br/>
-                       <form>
-                            <div id="dynamicGroupMember">
-                                Groepslid<br/><input type="text" name="groupMembers[]"/>
-                                <TextField
-                                    hintText="Geef groepslid in..."
-                                    floatingLabelText="Groepslid 1"
-                                    style={styles.width}
-                                    inputStyle={styles.inputstyle}
-                                    hintStyle={styles.floatingLabelFocusStyle}
-                                    floatingLabelStyle={styles.floatingLabelStyle}
-                                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                    underlineFocusStyle={styles.underlineStyle}
-                                />
-                            </div>
-                            <br/>
-                            <RaisedButton label="Extra groepslid" onClick={() => this.addInput("dynamicGroupMember")}/>
+                        } }>
+                            <TextField
+                                onChange={this.onChangeNaam}
+                                hintText="Geef groepnaam in..."
+                                floatingLabelText="Groepnaam"
+                                style={styles.width}
+
+                                inputStyle={styles.inputstyle}
+                                hintStyle={styles.floatingLabelFocusStyle}
+                                floatingLabelStyle={styles.floatingLabelStyle}
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
+                            /><br />
+                            <SuperSelectField
+                                multiple={true}
+                                maxHeight={200}
+                                keepSearchOnSelect
+                                autoWidth={true}
+                                hintText='Users'
+                                value={this.state.studentValue}
+                                onChange={this.handleChangeStudent}
+                                selectedMenuItemStyle={styles.errorStyle}
+                            >
+                                {this.studentItems(this.state.studentValue)}
+                            </SuperSelectField>
+                            <br />
+                            <SelectField
+                                multiple={true}
+                                maxHeight={200}
+                                autoWidth={true}
+                                floatingLabelText="Supervisors"
+                                value={this.state.supervisorValue}
+                                onChange={this.handleChangeSupervisor}
+                                selectedMenuItemStyle={styles.errorStyle}
+                            >
+                                {this.supervisorItems(this.state.supervisorValue)}
+                            </SelectField>
+                            <br />
+
+
+                            <RaisedButton label="Voeg Groep Toe" onClick={this.add} backgroundColor="#DD2C00"
+                                          style={styles.loginButton}
+                                          type="submit"
+                                          labelColor="#FFEBEE"
+                                          className="inputIntrumentButton"/>
+                            <Snackbar
+                                open={this.state.open}
+                                message="Group Added"
+                                autoHideDuration={4000}
+                                onRequestClose={this.handleRequestClose}
+                            />
                         </form>
+<<<<<<< HEAD
                         <RaisedButton
                             label="Kies een image"
                             labelPosition="before"
@@ -177,9 +250,14 @@ export default class AddGroup extends Component {
                                       style={styles.loginButton}
                                       labelColor="#FFEBEE"
                                       className="inputGroepButton"/>
+=======
+>>>>>>> 4b0c85577c0cc5e7d51ae26d6d5581a77e011b52
                     </div>
+
                 </section>
             </div>
         );
     }
 }
+
+export default AddInstrument;
