@@ -19,7 +19,7 @@ class ActivityPopUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            aanwezigheidsstatus:''
         };
 
     }
@@ -27,12 +27,22 @@ class ActivityPopUp extends Component {
     componentDidMount() {
         //Call maken om te zien of persoon aanwezig of afwezig is voor die les
         //State verranderen
-        this.getStatus();
+      this.getStatus();
 
     }
 
     getStatus() {
-        LesService.getAttendanceStatus(this.props.id);
+        if (this.props.type == "Optreden") {
+            OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
+                this.setState({aanwezigheidsstatus:statusobject.status});
+                console.log(this.state.aanwezigheidsstatus);
+            })
+        } else {
+            LesService.getAttendanceStatus(this.props.id).then(statusobject => {
+                this.setState({aanwezigheidsstatus:statusobject.status});
+                console.log(this.state.aanwezigheidsstatus);
+            })
+        }
     }
 
     aanwezig() {
@@ -40,7 +50,7 @@ class ActivityPopUp extends Component {
         var id= this.props.id;
 
         if (this.props.type == "Optreden") {
-            OptredenService.zetMijOpAanwezig(id);
+            OptredenService.registerPresent(id);
         } else {
             LesService.registerPresent(id);
         }
@@ -51,7 +61,7 @@ class ActivityPopUp extends Component {
         var id= this.props.id;
 
         if (this.props.type == "Optreden") {
-            OptredenService.zetMijOpAfwezig(id);
+            OptredenService.registerAbsent(id);
         } else {
             LesService.registerAbsent(id);
         }
@@ -60,6 +70,7 @@ class ActivityPopUp extends Component {
     render() {
         return  (
             <div>
+                <div>Jouw status:{this.state.aanwezigheidsstatus}</div>
                 <RaisedButton label="Aanwezig"  style={styles.exampleImageInput}  onClick={() => this.aanwezig()} backgroundColor="#DD2C00"
                               labelColor="#FFEBEE"/>
                 <RaisedButton label="Afwezig"  style={styles.exampleImageInput}  onClick={() => this.afwezig()} backgroundColor="#DD2C00"

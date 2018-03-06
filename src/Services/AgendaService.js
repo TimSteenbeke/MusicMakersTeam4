@@ -2,7 +2,7 @@ const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 const localURL = 'http://localhost:8080/api/';
 
 export function getMyAgenda() {
-    return fetch(localURL + 'agenda',
+    return fetch(herokuURL + 'agenda',
         {
             mode: 'cors',
             headers: {

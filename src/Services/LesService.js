@@ -6,7 +6,7 @@ const localURL = 'http://localhost:8080/api/';
 
 
 export function registerAbsent(lessonid) {
-    return fetch(localURL + 'lesson/absent/' +lessonid,
+    return fetch(herokuURL + 'lesson/absent/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
@@ -29,7 +29,7 @@ export function registerAbsent(lessonid) {
 }
 
 export function registerPresent(lessonid) {
-    return fetch(localURL + 'lesson/present/' +lessonid,
+    return fetch(herokuURL + 'lesson/present/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
@@ -51,7 +51,7 @@ export function registerPresent(lessonid) {
 }
 
 export function getAttendanceStatus(lessonid) {
-    return fetch(localURL + 'lesson/attendancestatus/' +lessonid,
+    return fetch(herokuURL + 'lesson/attendancestatus/' +lessonid,
         {
             method: 'GET',
             mode: 'cors',
