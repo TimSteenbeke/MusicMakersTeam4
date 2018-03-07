@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { ReactAgenda , guid  } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
+import ActivityPopUp from './ActivityPopUp.js'
 import Header from './Header'
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
@@ -26,6 +27,7 @@ var AgendaItem = function(props){
         <p className="text-darken-4">{props.item.name}</p>
         <p>leerkracht: {props.leerkrachten}</p>
         <RaisedButton fullWidth={true} onClick={()=> props.edit(props.item)}>Edit </RaisedButton>
+        <ActivityPopUp id={props.item.id} type={props.item.type}/>
     </div>
 };
 
@@ -51,6 +53,7 @@ class Agenda extends Component {
 
     componentDidMount() {
         this.haalAgendaItemsOp();
+        console.log('comp mounted')
     }
     componentWillMount(){
         let response = false;
@@ -65,24 +68,26 @@ class Agenda extends Component {
         //HARDCODED ID (TEMPORARY)
         let mijnAgendaItems= [];
 
-        AgendaService.getAgendaById(3).then(agendaItems => {
+        AgendaService.getMyAgenda().then(agendaItems => {
 
             //Eigenaar toewijzen (Agenda van: ....)
             // this.setState({agendaOwner: agendaItems.agendaEigenaar})
+            console.log(agendaItems);
 
 
             //Over lessons loopen en info in AgendaItem steken
             //type en basic info
             for (var i= 0; i < agendaItems.lessons.length; i++) {
-                let optreden = {
+                let les = {
                     _id: guid(),
+                    id: agendaItems.lessons[i].lessonId ,
                     name: "Les coming soon (relatie ligt nog niet)",
                     startDateTime: new Date(agendaItems.lessons[i].startDateTime),
                     endDateTime: new Date(agendaItems.lessons[i].endDateTime),
                     type: 'Les',
                     classes: 'color-1'
                 };
-                mijnAgendaItems.push(optreden);
+                mijnAgendaItems.push(les);
             }
 
             //over performances loopen en info in AgendaItem steken
@@ -90,6 +95,7 @@ class Agenda extends Component {
             for (var x= 0; x < agendaItems.performances.length; x++) {
                 let optreden = {
                     _id: guid(),
+                    id: agendaItems.performances[x].performanceId,
                     name: agendaItems.performances[x].beschrijving,
                     startDateTime: new Date(agendaItems.performances[x].startDateTime),
                     endDateTime: new Date(agendaItems.performances[x].endDateTime),
@@ -135,8 +141,9 @@ class Agenda extends Component {
                   startDate={this.state.startDate}
                   cellHeight={this.state.cellHeight}
                   locale={this.state.locale}
-                  //TODO: vervangen door eigen items na AJAX call
                   items={this.state.items}
+
+
                   numberOfDays={this.state.numberOfDays}
                   rowsPerHour={this.state.rowsPerHour}
                   itemColors={colors}

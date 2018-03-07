@@ -9378,6 +9378,16 @@
         }
       }
     },
+    "react-materialize": {
+      "version": "2.0.7",
+      "resolved": "https://registry.npmjs.org/react-materialize/-/react-materialize-2.0.7.tgz",
+      "integrity": "sha512-b7HuDxvgP9N8mHw2HO68+6CFgLZ/ys/QnEZgtzGanP9WUgi+KPFs5lUo5WtlnctliQ/tcU38ddQJqvTX7/QT3Q==",
+      "requires": {
+        "classnames": "2.2.5",
+        "react": "16.2.0",
+        "react-dom": "16.2.0"
+      }
+    },
     "react-moment": {
       "version": "0.7.0",
       "resolved": "https://registry.npmjs.org/react-moment/-/react-moment-0.7.0.tgz",

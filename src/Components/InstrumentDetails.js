@@ -111,7 +111,7 @@ class InstrumentDetails extends Component {
                                     <form action="#">
                                         <div className="file-field input-field">
                                             <div
-                                                className="btn-floating halfway-fab waves-effect waves-light red darken-4 pulse">
+                                                className="btn-floating halfway-fab waves-effect waves-light deep-orange darken-4 pulse">
                                                 <i className="material-icons">attach_file</i>
                                                 <input name="file"
                                                        className="upload-file"
@@ -141,17 +141,17 @@ class InstrumentDetails extends Component {
                                                 <h5>{this.state.soortnaam}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
-                                                <StyledTextField hint="Geef nieuwe soortnaam in..." label="Soortnaam"/>
+                                                <StyledTextField disabled={true} hint="Geef nieuwe soortnaam in..."
+                                                                 label="Soortnaam"/>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/instrumenten">
-                                        <a onClick={this.handleUpdate}
-                                           className="btn-floating btn-small waves-effect waves-light red darken-4 pulse"><i
-                                            className="material-icons">done</i></a>
+                                    <Link to="/instrumenten" onClick={this.handleUpdate}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
+                                        className="material-icons">done</i>
                                     </Link>
                                 </div>
                             </div>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
@@ -60,7 +59,8 @@ export default class EditGroup extends Component {
         document.getElementById(divName).appendChild(newdiv);
         counter++;
     }
-    componentWillMount(){
+
+    componentWillMount() {
         let response = false;
         response = LoginService.checkToken();
         console.log("response:");
@@ -69,7 +69,7 @@ export default class EditGroup extends Component {
     }
 
     render() {
-        let redirecter=null;
+        let redirecter = null;
         if (this.state.redirect) {
             redirecter = <Redirect to='/login'/>
         }
