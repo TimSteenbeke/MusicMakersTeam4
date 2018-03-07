@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ReactAgenda , guid  } from 'react-agenda';
+import { ReactAgenda , guid ,ReactAgendaCtrl, Modal } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
 import ActivityPopUp from './ActivityPopUp.js'
@@ -41,7 +41,7 @@ class Agenda extends Component {
             showModal:false,
             locale:"nl",
             rowsPerHour:2,
-            numberOfDays:4,
+            numberOfDays:5,
             startDate: new Date(),
             agendaItems: [],
             agendaOwner: ""
@@ -52,8 +52,7 @@ class Agenda extends Component {
     }
 
     componentDidMount() {
-        this.haalAgendaItemsOp();
-        console.log('comp mounted')
+        this.getMyAgendaItems();
     }
     componentWillMount(){
         let response = false;
@@ -64,50 +63,54 @@ class Agenda extends Component {
     }
 
 
-    haalAgendaItemsOp() {
+    getMyAgendaItems() {
         //HARDCODED ID (TEMPORARY)
-        let mijnAgendaItems= [];
+
 
         AgendaService.getMyAgenda().then(agendaItems => {
-
-            //Eigenaar toewijzen (Agenda van: ....)
-            // this.setState({agendaOwner: agendaItems.agendaEigenaar})
-            console.log(agendaItems);
-
-
-            //Over lessons loopen en info in AgendaItem steken
-            //type en basic info
-            for (var i= 0; i < agendaItems.lessons.length; i++) {
-                let les = {
-                    _id: guid(),
-                    id: agendaItems.lessons[i].lessonId ,
-                    name: "Les coming soon (relatie ligt nog niet)",
-                    startDateTime: new Date(agendaItems.lessons[i].startDateTime),
-                    endDateTime: new Date(agendaItems.lessons[i].endDateTime),
-                    type: 'Les',
-                    classes: 'color-1'
-                };
-                mijnAgendaItems.push(les);
-            }
-
-            //over performances loopen en info in AgendaItem steken
-            //type en basic info
-            for (var x= 0; x < agendaItems.performances.length; x++) {
-                let optreden = {
-                    _id: guid(),
-                    id: agendaItems.performances[x].performanceId,
-                    name: agendaItems.performances[x].beschrijving,
-                    startDateTime: new Date(agendaItems.performances[x].startDateTime),
-                    endDateTime: new Date(agendaItems.performances[x].endDateTime),
-                    type: 'Optreden',
-                    classes: 'color-2'
-                };
-                mijnAgendaItems.push(optreden);
-            }
-
-            this.setState({items: mijnAgendaItems});
-
+            this.mapAgendaItems(agendaItems)
         });
+    }
+
+    mapAgendaItems(agendaItems) {
+        let AgendaItems= [];
+        //Eigenaar toewijzen (Agenda van: ....)
+        // this.setState({agendaOwner: agendaItems.agendaEigenaar})
+        console.log(agendaItems);
+
+
+        //Over lessons loopen en info in AgendaItem steken
+        //type en basic info
+        for (var i= 0; i < agendaItems.lessons.length; i++) {
+            let les = {
+                _id: guid(),
+                id: agendaItems.lessons[i].lessonId ,
+                name: "Les coming soon (relatie ligt nog niet)",
+                startDateTime: new Date(agendaItems.lessons[i].startDateTime),
+                endDateTime: new Date(agendaItems.lessons[i].endDateTime),
+                type: 'Les',
+                classes: 'color-1'
+            };
+            AgendaItems.push(les);
+        }
+
+        //over performances loopen en info in AgendaItem steken
+        //type en basic info
+        for (var x= 0; x < agendaItems.performances.length; x++) {
+            let optreden = {
+                _id: guid(),
+                id: agendaItems.performances[x].performanceId,
+                name: agendaItems.performances[x].beschrijving,
+                startDateTime: new Date(agendaItems.performances[x].startDateTime),
+                endDateTime: new Date(agendaItems.performances[x].endDateTime),
+                type: 'Optreden',
+                classes: 'color-2'
+            };
+            AgendaItems.push(optreden);
+        }
+
+        this.setState({items: AgendaItems});
+
     }
 
 
@@ -122,14 +125,25 @@ class Agenda extends Component {
         console.log('handleRangeSelection', item)
     }
 
+ zeghallo = (event,value) => {
+        console.log(value);
+        var user = event.target.value;
+        this.setState({'requesteduser':user});
+    };
+
+    requestAgenda() {
+        console.log('agenda requested: ' + this.state.requesteduser);
+
+    }
+
+
+
+
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
       return  (
-          <div>z
-              {redirecter}
+          <div>
+              <input  onChange={this.zeghallo}/>
+              <button onClick={() => this.requestAgenda()} >Request other agenda</button>
               <div className="scrollbar" id="style-2">
                   <div className="force-overflow">
               <Header name="Agenda"/>
