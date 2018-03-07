@@ -5,8 +5,6 @@ import {List, ListItem} from 'material-ui/List';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 
 
 const styles = {
@@ -69,13 +67,6 @@ class CompositionUpdate extends Component {
         }
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
     componentDidMount() {
         const self = this;
         CompositionService.getCompositionFromBackend(this.props.id)
@@ -149,13 +140,9 @@ class CompositionUpdate extends Component {
     };
 
     render() {
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
+
         return (
             <div>
-                {redirecter}
                 <h1 className="header">Muziekstuk details</h1>
                 <Card expanded={true}>
                     <CardText>

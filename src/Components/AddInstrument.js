@@ -7,20 +7,10 @@ import * as InstrumentenService from '../Services/InstrumentService.js'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from "react-router-dom";
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 import {Row, Input} from 'react-materialize';
 import {Snackbar} from "material-ui";
 
 class AddInstrument extends Component {
-
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
 
     constructor(props) {
         super(props);
@@ -109,14 +99,10 @@ class AddInstrument extends Component {
     };
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
+
         return (
 
             <div className="Homepage">
-                {redirecter}
                 <Header name="Add Instrument"/>
                 <section className="containerCss">
                     <div className="row">

@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import { ReactAgenda , guid  } from 'react-agenda';
-import * as AgendaService from '../Services/AgendaService'
+import * as AgendaService from '../Services/AgendaService';
 import RaisedButton from 'material-ui/RaisedButton';
-import ActivityPopUp from './ActivityPopUp.js'
-import Header from './Header'
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
+import ActivityPopUp from './ActivityPopUp.js';
+import Header from './Header';
 
 require('moment/locale/nl.js');
 
@@ -54,13 +52,6 @@ class Agenda extends Component {
     componentDidMount() {
         this.haalAgendaItemsOp();
         console.log('comp mounted')
-    }
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
     }
 
 
@@ -123,13 +114,8 @@ class Agenda extends Component {
     }
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
       return  (
-          <div>z
-              {redirecter}
+          <div>
               <div className="scrollbar" id="style-2">
                   <div className="force-overflow">
               <Header name="Agenda"/>

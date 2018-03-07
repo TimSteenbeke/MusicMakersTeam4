@@ -2,8 +2,6 @@
 import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
 import '../CSS/Partituur.css';
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 
 class Partituur extends Component {
     constructor(props) {
@@ -31,14 +29,6 @@ class Partituur extends Component {
 
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
     play(){
         const $ = window.$;
         $(this.refs.partituur).alphaTab('play');
@@ -56,13 +46,8 @@ class Partituur extends Component {
 
 //this.state.gp5 --> this.props.dataFile
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
             <div>
-                {redirecter}
                 <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
                 <input type="button" id="pauseBtn" value="Pauze" onClick={(e) => this.pauze(e)}/>
                 <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.stop(e)}/>

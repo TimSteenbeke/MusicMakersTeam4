@@ -2,11 +2,10 @@
  * Created by jariv on 9/02/2018.
  */
 import React, {Component} from 'react';
-import * as InstrumentenService from '../Services/InstrumentService.js'
+import * as InstrumentenService from '../Services/InstrumentService.js';
 import {Link} from 'react-router-dom';
-import Header from './Header'
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
+import Header from './Header';
+
 class Instrumenten extends Component {
 
     constructor(props) {
@@ -36,23 +35,11 @@ class Instrumenten extends Component {
         });
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
+
         return (
             <div className="Homepage">
-                {redirecter}
                 <Header name="Instrumenten" />
 
                 <section className="containerCss">

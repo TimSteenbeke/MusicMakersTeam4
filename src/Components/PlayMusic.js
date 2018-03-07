@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
 import * as MusicService from '../Services/MusicService.js'
 import Partituur from "./Partituur";
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 
 
 class PlayMusic extends Component {
@@ -23,22 +21,11 @@ class PlayMusic extends Component {
         });
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
+
         return (
             <div className="PlayPartituur">
-                {redirecter}
                 <section className="container">
                     <div className="whiteBoxPartituur">
                         <h1 className="header">Play music</h1>

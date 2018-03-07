@@ -7,8 +7,6 @@ import * as InstrumentenService from '../Services/InstrumentService.js'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 
 class InstrumentDetails extends Component {
 
@@ -46,13 +44,6 @@ class InstrumentDetails extends Component {
         });
     }
 
-    componentWillMount() {
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
 
     handleUpdate = () => {
         var self = this;
@@ -90,12 +81,7 @@ class InstrumentDetails extends Component {
 
 
     render() {
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (<div className="Homepage">
-                {redirecter}
                 <Header name={this.state.naam}/>
 
                 <section className="containerCss">
