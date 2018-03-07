@@ -52,6 +52,9 @@ class Agenda extends Component {
     }
 
     componentDidMount() {
+        //Ajax call to get user his role
+        //If role = admin => extra features (change state)
+
         this.getMyAgendaItems();
     }
     componentWillMount(){
@@ -65,8 +68,6 @@ class Agenda extends Component {
 
     getMyAgendaItems() {
         //HARDCODED ID (TEMPORARY)
-
-
         AgendaService.getMyAgenda().then(agendaItems => {
             this.mapAgendaItems(agendaItems)
         });
@@ -133,6 +134,10 @@ class Agenda extends Component {
 
     requestAgenda() {
         console.log('agenda requested: ' + this.state.requesteduser);
+        //Get agenda of request user
+
+        //call map function
+
 
     }
 
@@ -140,6 +145,8 @@ class Agenda extends Component {
 
 
     render() {
+        //Load extra components based on state
+
       return  (
           <div>
               <input  onChange={this.zeghallo}/>
