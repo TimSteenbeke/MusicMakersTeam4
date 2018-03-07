@@ -10,6 +10,8 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import fileDownload from 'react-file-download';
 import base64 from 'base-64';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 class MuziekstukDetails extends Component {
@@ -39,7 +41,13 @@ class MuziekstukDetails extends Component {
             .then(muziekstuk => this.setState({muziekstuk: muziekstuk}, console.log(muziekstuk)))
     }
 
-
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
 
     assignItem = item => { // bound arrow function handler
         const filename = this.state.muziekstuk.titel + "." + this.state.muziekstuk.fileFormat;
@@ -54,9 +62,13 @@ class MuziekstukDetails extends Component {
 
 
     render() {
+            let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
             <div >
-
+                 {redirecter}
                 <h1 className="header">{}</h1>
                 <Card expanded={true}>
                     <CardHeader
@@ -95,3 +107,4 @@ class MuziekstukDetails extends Component {
 
 export default MuziekstukDetails;
 */
+import * as LoginService from "../Services/LoginService";

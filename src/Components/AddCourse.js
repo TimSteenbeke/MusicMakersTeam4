@@ -10,6 +10,8 @@ import Header from './Header'
 
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
     width: {
@@ -87,8 +89,12 @@ class AddCourse extends Component {
         });
     };
 
-    componentDidMount() {
-
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
     }
 
     onChangePrijs = (event, typedPrijs) => {
@@ -117,9 +123,14 @@ class AddCourse extends Component {
     };
 
     render() {
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
 
             <div className="Homepage">
+                {redirecter}
                 <Header name="Add Course"/>
                 <section className="containerCss">
                     <div className="whiteBox">

@@ -3,56 +3,24 @@
  */
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
-import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import {Link} from "react-router-dom";
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 class AddInstrument extends Component {
+
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
 
     constructor(props) {
         super(props);
@@ -141,9 +109,14 @@ class AddInstrument extends Component {
     };
 
     render() {
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
 
             <div className="Homepage">
+                {redirecter}
                 <Header name="Add Instrument"/>
                 <section className="containerCss">
                     <div className="row">

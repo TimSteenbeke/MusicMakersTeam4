@@ -3,6 +3,8 @@ import { ReactAgenda , guid  } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
 import Header from './Header'
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 require('moment/locale/nl.js');
 
@@ -49,6 +51,13 @@ class Agenda extends Component {
 
     componentDidMount() {
         this.haalAgendaItemsOp();
+    }
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
     }
 
 
@@ -108,9 +117,13 @@ class Agenda extends Component {
     }
 
     render() {
-
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
       return  (
-          <div>
+          <div>z
+              {redirecter}
               <div className="scrollbar" id="style-2">
                   <div className="force-overflow">
               <Header name="Agenda"/>

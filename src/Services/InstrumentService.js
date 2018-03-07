@@ -1,12 +1,13 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 // const URL = 'localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
+
 
 export function getInstrumentenFromBackend() {
-
     return fetch(URL + "instruments", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -25,7 +26,7 @@ export function getInstrumentFromBackend(instrumentNr) {
     return fetch(URL + "instruments/" + instrumentNr, {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -45,7 +46,7 @@ export function getInstrumentSoortenFromBackend() {
     return fetch(URL + "instrumentsoorten", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -66,7 +67,7 @@ export function postInstrument(data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     })
@@ -79,7 +80,7 @@ export function deleteInstrument(instrumentId) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         }
     });
 }
@@ -92,7 +93,7 @@ export function UpdateInstrument(instrumentId, data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });

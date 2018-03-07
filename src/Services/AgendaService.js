@@ -1,12 +1,13 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 // const URL = 'localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getAgendaById(agendaId) {
     return fetch(URL + 'agenda/' + agendaId,
         {
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization': userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
@@ -17,7 +18,6 @@ export function getAgendaById(agendaId) {
             return responseJson;
         })
         .catch((err) => {
-
             console.log("geen response");
             console.log(err);
         });

@@ -19,6 +19,8 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
     exampleImageInput: {
@@ -50,6 +52,13 @@ class Courses extends Component {
 
     componentDidMount() {
      this.getCourses();
+    }
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
     }
 
     getCourses() {
@@ -107,9 +116,13 @@ class Courses extends Component {
             <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
                           labelColor="#FFEBEE"/>,
         ];
-
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
             <div className="Homepage">
+                {redirecter}
                 <Header name="Courses"/>
                 <section className="containerCss">
                     <div className="whiteBox">

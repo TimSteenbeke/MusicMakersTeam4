@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import * as LoginService from "../Services/LoginService";
-import {browserHistory} from 'react-router';
 import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
@@ -70,9 +69,14 @@ class Login extends Component {
     }
 
     componentWillMount() {
-        if(localStorage.getItem('userToken')!= null){
-            this.setState({redirect: true});
-        }
+
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: response})
+
+
     }
 
     render() {

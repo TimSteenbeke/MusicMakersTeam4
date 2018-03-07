@@ -7,6 +7,8 @@ import * as InstrumentenService from '../Services/InstrumentService.js'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 class InstrumentDetails extends Component {
 
@@ -44,8 +46,15 @@ class InstrumentDetails extends Component {
         });
     }
 
-    handleUpdate = () => {
+    componentWillMount() {
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
 
+    handleUpdate = () => {
         var self = this;
         InstrumentenService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
             {
@@ -81,7 +90,12 @@ class InstrumentDetails extends Component {
 
 
     render() {
-        return ( <div className="Homepage">
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
+        return (<div className="Homepage">
+                {redirecter}
                 <Header name={this.state.naam}/>
 
                 <section className="containerCss">
@@ -111,33 +125,33 @@ class InstrumentDetails extends Component {
                                 <div className="card-content">
                                     <div className="section">
                                         <div className="row">
-                                        <div className="col s3 m3 l3">
-                                            <h5>{this.state.type}</h5>
-                                        </div>
-                                        <div className="col s9 m9 l9">
-                                        <StyledTextField hint="Geef nieuw type in..." label="Type"/>
-                                        </div>
+                                            <div className="col s3 m3 l3">
+                                                <h5>{this.state.type}</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <StyledTextField hint="Geef nieuw type in..." label="Type"/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="divider"></div>
                                     <div className="section">
                                         <div className="row">
 
-                                        <div className="col s3 m3 l3">
-                                            <h5>{this.state.soortnaam}</h5>
-                                        </div>
-                                        <div className="col s9 m9 l9">
-                                        <StyledTextField hint="Geef nieuwe soortnaam in..." label="Soortnaam"/>
-                                        </div>
+                                            <div className="col s3 m3 l3">
+                                                <h5>{this.state.soortnaam}</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <StyledTextField hint="Geef nieuwe soortnaam in..." label="Soortnaam"/>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div className="card-action">
                                     <Link to="/instrumenten">
-                                    <a onClick={this.handleUpdate}
-                                       className="btn-floating btn-small waves-effect waves-light red darken-4 pulse"><i
-                                        className="material-icons">done</i></a>
+                                        <a onClick={this.handleUpdate}
+                                           className="btn-floating btn-small waves-effect waves-light red darken-4 pulse"><i
+                                            className="material-icons">done</i></a>
                                     </Link>
                                 </div>
                             </div>

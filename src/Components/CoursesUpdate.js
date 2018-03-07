@@ -12,6 +12,8 @@ import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import * as CourseService from '../Services/CourseService'
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 const styles = {
@@ -68,6 +70,13 @@ class InstrumentDetails extends Component {
         }
     }
 
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
     onChangeType = (event, typedType) => {
         let course = Object.assign({}, this.state.course);
         course.coursebeschrijving = typedType;
@@ -92,9 +101,13 @@ class InstrumentDetails extends Component {
     };
 
     render() {
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
             <div >
-
+                {redirecter}
                 <h1 className="header">Details</h1>
                 <Card expanded={true}>
                     <CardHeader

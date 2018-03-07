@@ -5,10 +5,11 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as CompositionService from '../Services/CompositionService.js'
 import Snackbar from 'material-ui/Snackbar';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import axios from 'axios';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
     width: {
@@ -47,6 +48,14 @@ const styles = {
 };
 
 class AddMuziekstuk extends Component {
+
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
 
     constructor(props) {
         super(props);
@@ -146,9 +155,14 @@ class AddMuziekstuk extends Component {
     };
 
     render() {
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
 
             <div className="Homepage">
+                {redirecter}
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Muziekstuk toevoegen</h1>

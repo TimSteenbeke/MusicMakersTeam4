@@ -6,6 +6,7 @@ import guitar from '../images/guitar.jpg'
 import React, {Component} from 'react';
 import Header from './Header'
 import Redirect from "react-router-dom/es/Redirect";
+import * as LoginService from "../Services/LoginService";
 
 
 export default class Home extends Component{
@@ -20,9 +21,11 @@ export default class Home extends Component{
     }
 
     componentWillMount(){
-        if(localStorage.getItem('userToken')!= null){
-            this.setState({redirect: false});
-        }
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
     }
 
     handleChange = (event, index, value) => this.setState({value});

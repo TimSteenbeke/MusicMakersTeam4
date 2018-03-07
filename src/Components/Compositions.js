@@ -16,6 +16,8 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 const styles = {
@@ -36,7 +38,13 @@ class Compositions extends Component {
 
         };
     }
-
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
     handleRowSelection = (selectedRows) => {
         this.setState({
             selected: selectedRows,
@@ -92,6 +100,10 @@ class Compositions extends Component {
     };
 
     render() {
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         const actionsDetails = [
             <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
                           labelColor="#FFEBEE"/>,
@@ -104,6 +116,7 @@ class Compositions extends Component {
 
         return (
             <div className="Homepage">
+                {redirecter}
                 <section className="container">
                     <div className="whiteBox">
                         <h1 className="header">Muziekstukken</h1>

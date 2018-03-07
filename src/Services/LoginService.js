@@ -17,7 +17,7 @@ export function fetchToken(username, password) {
             console.log("Json Response Fetch:")
             console.log(responseJson);
             if(responseJson.hasOwnProperty("access_token")){
-                localStorage.setItem('userToken', responseJson.access_token);
+                localStorage.setItem('userToken', JSON.stringify(responseJson));
                 return true;
             }
             return false;
@@ -28,6 +28,21 @@ export function fetchToken(username, password) {
             return false;
         });
 
+}
+
+export function checkToken(){
+    if(localStorage.getItem('userToken')!= null){
+        let jwt = localStorage.getItem('userToken');
+
+        var current_time = Date.now() / 1000;
+        if ( jwt.exp < current_time) {
+            localStorage.removeItem('userToken');
+            return false;
+        } else{
+            return true;
+        }
+    }
+        return false;
 }
 //Fix Ben
 /*export function fetchLogin() {

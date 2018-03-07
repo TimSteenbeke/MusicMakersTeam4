@@ -13,6 +13,8 @@ import {
 } from 'material-ui/Table';
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import * as LoginService from "../Services/LoginService";
+import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
     width: {
@@ -68,6 +70,13 @@ export default class Group extends Component {
             this.setState({groups: groups});
         });
     }
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
     /*
     componentDidMount() {
         GroupService.getGroupsFromBackend(1).then(fetchedGroups => {
@@ -109,8 +118,13 @@ export default class Group extends Component {
 
 //onRowSelection={this.handleRowSelection}
     render() {
+        let redirecter=null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         console.log("render state: ", this.state);
         return <div className="Homepage">
+            {redirecter}
             <section className="container">
                 <div className="whiteBox">
                     <h1 className="header">Groepen</h1>

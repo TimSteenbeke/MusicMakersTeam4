@@ -8,7 +8,7 @@ import GroupsAndChat from './Components/GroupsAndChat.js'
 import {BrowserRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
-import PlayPartituur from "./Components/PlayMusic";
+// import PlayPartituur from "./Components/PlayMusic";
 
 
 const Application = () => (
