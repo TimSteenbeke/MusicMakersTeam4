@@ -2,50 +2,11 @@
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import * as CourseService from '../Services/CourseService.js'
-import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
-
-
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
+import StyledTextField from './StyledTextField'
+import {Link} from 'react-router-dom';
+import {Row, Input} from 'react-materialize'
 
 
 class AddCourse extends Component {
@@ -54,9 +15,8 @@ class AddCourse extends Component {
         super(props);
         this.state = {
             value: 1,
-            open: false,
-            typedcoursebeschrijving: "",
-            typedprijs: 0,
+            beschrijving: "",
+            prijs: 0,
             selectedteacherids: [],
             selectedstudentids :[]
         };
@@ -65,9 +25,6 @@ class AddCourse extends Component {
     }
 
     handleClick = () => {
-        this.setState({
-            open: true,
-        });
         CourseService.postCourse(JSON.stringify(
             {
                 coursebeschrijving: this.state.typedcoursebeschrijving,
@@ -76,42 +33,23 @@ class AddCourse extends Component {
                 studentids: this.state.selectedstudentids
             }
         ));
-        console.log(this.state.selectedstudentids);
-    };
-
-
-
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
     };
 
     componentDidMount() {
 
     }
 
-    onChangePrijs = (event, typedPrijs) => {
-        this.setState({typedprijs: typedPrijs});
-        console.log("prijs:" + typedPrijs)
+    onChangePrice = (e) => {
+        this.setState({prijs: e.target.value});
+        console.log("prijs:" + e.target.value)
     };
 
-    onChangeNaam = (event, typedName) => {
-        this.setState({typedcoursebeschrijving: typedName});
-        console.log("Coursebeschrijving:" + typedName)
+    onChangeDescription = (e) => {
+        this.setState({beschrijving: e.target.value});
+        console.log("beschrijving:" + e.target.value)
     };
 
-    onChangeTeacherIds = (event, typedTeacherIds) => {
-        this.setState({selectedteacherids:typedTeacherIds.split(",")});
-        console.log(  typedTeacherIds)
-    };
-
-    onChangeStudentIds = (event, typedStudentIds) => {
-        this.setState({selectedstudentids:typedStudentIds.split(",")});
-        console.log(typedStudentIds)
-    };
-
-    handleChange = (event, index, value) => {
+    handleChange = (event, value) => {
         this.setState({value});
         console.log(value)
     };
@@ -122,70 +60,82 @@ class AddCourse extends Component {
             <div className="Homepage">
                 <Header name="Add Course"/>
                 <section className="containerCss">
-                    <div className="whiteBox">
-                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
-                            e.preventDefault();
-                            this.handleClick();
-                        } }>
-                            <TextField
-                                onChange={this.onChangeNaam}
-                                hintText="Geef cursusnaam in"
-                                floatingLabelText="Cursusnaam"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangePrijs}
-                                hintText="Geef prijs in..."
-                                floatingLabelText="Prijs"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangeTeacherIds}
-                                hintText="Selecteer leerkrachten"
-                                floatingLabelText="Leerkrachten"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
-                            <TextField
-                                onChange={this.onChangeStudentIds}
-                                hintText="Selecteer studenten"
-                                floatingLabelText="studenten"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
+                    <div className="row">
+                        <div className="col s0 m2 l2"/>
+                        <div className="col s12 m8 l8">
+                            <div className="card hoverable">
+                                <div className="card-content">
+                                    <form className="addCourse" action="/" method="POST" onSubmit={(e) => {
+                                        e.preventDefault();
+                                        this.handleClick();
+                                    } }>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Naam</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeDescription} hint="Geef een beschrijving in..."
+                                                                     label="Beschrijving"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Uitvoering</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangePrice}
+                                                                     hint="Geef een prijs in..." label="Prijs"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5 className="truncate">Leerkrachten</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <Row>
+                                                        <Input s={12} onChange={this.handleChange} type='select' label="Leerkrachten" icon='face' defaultValue='1'>
+                                                        </Input>
+                                                    </Row>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5 className="truncate">Studenten</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <Row>
+                                                        <Input s={12} onChange={this.handleChange} type='select' label="Studenten" icon='child_care' defaultValue='1'>
+                                                        </Input>
+                                                    </Row>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
 
-                            <RaisedButton label="Voeg Course Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
-                            <Snackbar
-                                open={this.state.open}
-                                message="Course Added"
-                                autoHideDuration={4000}
-                                onRequestClose={this.handleRequestClose}
-                            />
-                        </form>
+                                    </form>
+
+                                </div>
+
+                                <div className="card-action">
+                                    <Link to="/instrumenten" onClick={this.handleClick}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                        <i
+                                            className="material-icons">done</i>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col s0 m2 l2"/>
                     </div>
-
                 </section>
             </div>
         );

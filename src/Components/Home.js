@@ -31,7 +31,7 @@ export default class Home extends Component{
             <Header name="Home"/>
 
             <section className="containerCss">
-                <div className="card hoverable">
+                <div className="card hoverable z-depth-3">
                     <div className="card-image waves-effect waves-block waves-light">
                         <img className="activator" alt="guitar" src={guitar} />
                     </div>

@@ -4,7 +4,7 @@ import Login from './Components/Login.js';
 import AddInstrument from './Components/AddInstrument.js';
 import Instrumenten from './Components/Instrumenten.js';
 import InstrumentDetails from './Components/InstrumentDetails.js';
-
+import CourseDetails from './Components/CoursesDetails.js';
 import AddCourse from './Components/AddCourse.js'
 import Courses from './Components/Courses.js'
 import Agenda from './Components/Agenda.js'
@@ -30,6 +30,7 @@ class App extends Component {
                 <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
                 <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
+                <Route name="instrumentDetails" path="/coursedetails/:id" component={CourseDetails}/>
                 <Route name="agenda" path="/agenda" component={Agenda}/>
                 <Route name="courses" path="/courses" component={Courses}/>
                 <Route name="addCourse" path="/addcourse" component={AddCourse}/>

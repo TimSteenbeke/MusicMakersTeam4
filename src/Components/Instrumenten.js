@@ -12,7 +12,6 @@ class Instrumenten extends Component {
         this.state = {
             instrumenten: [],
             selectedIndex: 0,
-            selected: [],
         };
     }
 
@@ -20,18 +19,20 @@ class Instrumenten extends Component {
         InstrumentenService.deleteInstrument(id);
     };
 
-
-    componentWillUpdate() {
+    getInstrumenten() {
         InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
             this.setState({instrumenten: instrumenten});
         });
     }
 
 
+    componentWillUpdate() {
+        this.getInstrumenten();
+    }
+
+
     componentDidMount() {
-        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
-            this.setState({instrumenten: instrumenten});
-        });
+       this.getInstrumenten();
     }
 
 
@@ -42,7 +43,7 @@ class Instrumenten extends Component {
                 <Header name="Instrumenten" />
 
                 <section className="containerCss">
-                    <table className="white-text bordered responsive-table centered">
+                    <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
                             <th>Id</th>

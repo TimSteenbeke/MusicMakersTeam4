@@ -1,30 +1,12 @@
-
-
 /**
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
 import * as CourseService from '../Services/CourseService'
-import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import CoursesUpdate from './CoursesUpdate.js'
 import Header from './Header'
+import {Link} from 'react-router-dom';
 
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
-
-const styles = {
-    exampleImageInput: {
-        margin: 10,
-    }
-}
 
 class Courses extends Component {
 
@@ -33,23 +15,13 @@ class Courses extends Component {
         this.state = {
             courses: [],
             selectedIndex: 0,
-            selected: [],
-            openUpdate: false,
         }
 
         ;
     }
 
-    handleOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
     componentDidMount() {
-     this.getCourses();
+        this.getCourses();
     }
 
     getCourses() {
@@ -58,43 +30,12 @@ class Courses extends Component {
         });
     }
 
-    handleRowSelection = (selectedRows) => {
-        this.setState({
-            selected: selectedRows,
-        });
-    };
-
-    handleCellClick = (rowNumber) => {
-        var self = this;
-
-        this.setState({
-            selectedIndex: this.state.courses[rowNumber].courseId
-        });
-
-        setTimeout(function () {
-            console.log(console.log("Selected Row: " + self.state.selectedIndex));
-        }, 1000);
-
-    };
-
-    isSelected = (index) => {
-        return this.state.selected.indexOf(index) !== -1;
-    };
-
-    handleOpenUpdate = () => {
-        this.setState({openUpdate: true});
-    };
-
-    handleCloseUpdate = () => {
-        this.setState({openUpdate: false});
-    };
-
     handleDelete = () => {
         CourseService.deleteCourse(this.state.selectedIndex);
     };
 
 
-    componentWillUpdate(){
+    componentWillUpdate() {
         CourseService.getCoursesFromBackend().then(courses => {
             this.setState({courses: courses});
         });
@@ -109,45 +50,43 @@ class Courses extends Component {
         ];
 
         return (
+
             <div className="Homepage">
                 <Header name="Courses"/>
                 <section className="containerCss">
-                    <div className="whiteBox">
-                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHeaderColumn>Id</TableHeaderColumn>
-                                    <TableHeaderColumn>Course</TableHeaderColumn>
-                                    <TableHeaderColumn>prijs</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {this.state.courses.map((course, index) => (
-                                    <TableRow selected={this.isSelected(index)} key={course.courseId}>
-                                        <TableRowColumn>{course.courseId}</TableRowColumn>
-                                        <TableRowColumn>{course.beschrijving}</TableRowColumn>
-                                        <TableRowColumn>{course.prijs}</TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
-                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
-                    </div>
+                    <table className="highlight striped black-text bordered responsive-table centered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Course</th>
+                            <th>Prijs</th>
+                            <th>Acties</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.courses.map((course, index) => (
+                            <tr key={course.courseId} id={course.courseId}>
+                                <td>{course.courseId}</td>
+                                <td>{course.beschrijving}</td>
+                                <td>{course.prijs}</td>
+                                <td>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                          to={`/coursedetails/${course.courseId}` }>
+                                        <i className="material-icons">edit
+                                        </i>
+                                    </Link>
+                                    <a className="waves-effect white-text deep-orange darken-4 btn"
+                                       onClick={(e) => this.handleDelete(course.courseId, e)}><i
+                                        className="material-icons">delete
+                                    </i></a>
+
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+
                 </section>
-                <Dialog
-                    actions={actionsUpdate}
-                    modal={false}
-                    open={this.state.openUpdate}
-                    onRequestClose={this.handleCloseUpdate}
-                    autoScrollBodyContent={true}
-                >
-                    <CoursesUpdate
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
             </div>
         );
     }

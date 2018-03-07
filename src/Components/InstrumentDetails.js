@@ -45,8 +45,7 @@ class InstrumentDetails extends Component {
     }
 
     handleUpdate = () => {
-
-        var self = this;
+        let self = this;
         InstrumentenService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
             {
                 afbeelding: self.state.afbeelding,
@@ -88,7 +87,7 @@ class InstrumentDetails extends Component {
                     <div className="row">
                         <div className="col s0 m2 l2"/>
                         <div className="col s12 m8 l8">
-                            <div className="card hoverable">
+                            <div className="card hoverable z-depth-3">
                                 <div className="card-image">
                                     <img
                                         src={"data:image;base64," + this.state.afbeelding} alt="Instrument"
