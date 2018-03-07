@@ -5,6 +5,7 @@
 import guitar from '../images/guitar.jpg'
 import React, {Component} from 'react';
 import Header from './Header'
+import Redirect from "react-router-dom/es/Redirect";
 
 
 export default class Home extends Component{
@@ -14,20 +15,27 @@ export default class Home extends Component{
         super(props);
         this.state = {
             value: 1,
+            redirect:true
         }
     }
 
-    componentDidMount(){
-
+    componentWillMount(){
+        if(localStorage.getItem('userToken')!= null){
+            this.setState({redirect: false});
+        }
     }
 
     handleChange = (event, index, value) => this.setState({value});
 
 
     render(){
-
+        let redirecting=null;
+        if (this.state.redirect) {
+            redirecting = <Redirect to='/login'/>
+        }
 
         return <div className="Homepage">
+            {redirecting}
             <Header name="Home"/>
 
             <section className="containerCss">

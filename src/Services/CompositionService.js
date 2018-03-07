@@ -1,8 +1,8 @@
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'localhost:8080/api/';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'localhost:8080/api/';
 
 export function getCompositionsFromBackend() {
-    return fetch(localURL + "compositions", {
+    return fetch(URL + "compositions", {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -21,7 +21,7 @@ export function getCompositionsFromBackend() {
 }
 
 export function getCompositionFromBackend(compositionId) {
-    return fetch(localURL + "compositions/" + compositionId, {
+    return fetch(URL + "compositions/" + compositionId, {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -41,7 +41,7 @@ export function getCompositionFromBackend(compositionId) {
 
 export function postMuziekstuk(data) {
     console.log(data);
-    fetch(localURL + 'compositions/', {
+    fetch(URL + 'compositions/', {
         mode: 'no-cors',
         method: 'POST',
         headers: {
@@ -53,7 +53,7 @@ export function postMuziekstuk(data) {
 }
 
 export function deleteComposition(compositionId) {
-    return fetch(localURL + 'compositions/' + compositionId, {
+    return fetch(URL + 'compositions/' + compositionId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
@@ -67,7 +67,7 @@ export function deleteComposition(compositionId) {
 export function UpdateComposition(compositionId, data) {
     console.log("id: " + compositionId);
     console.log(data);
-    return fetch(localURL + 'compositions/composition/' + compositionId, {
+    return fetch(URL + 'compositions/composition/' + compositionId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
