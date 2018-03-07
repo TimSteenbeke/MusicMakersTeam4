@@ -10,6 +10,7 @@ import * as CourseService from '../Services/CourseService'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
+import swal from 'sweetalert2'
 
 class CoursesDetails extends Component {
 
@@ -40,6 +41,13 @@ class CoursesDetails extends Component {
     }
 
     handleUpdate = () => {
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Course Edited',
+            showConfirmButton: false,
+            timer: 1500
+        });
         let self = this;
         CourseService.updateCourse(self.state.courseId, JSON.stringify(
             {

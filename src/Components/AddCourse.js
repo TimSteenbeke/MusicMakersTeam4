@@ -8,7 +8,7 @@ import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize'
 import swal from 'sweetalert2'
-
+import * as UserService from '../Services/UserService'
 
 class AddCourse extends Component {
 
@@ -19,7 +19,9 @@ class AddCourse extends Component {
             beschrijving: "",
             prijs: 0,
             selectedteacherids: [],
-            selectedstudentids :[]
+            selectedstudentids: [],
+            teachers: [],
+            students: [],
         };
 
 
@@ -35,8 +37,7 @@ class AddCourse extends Component {
         });
         CourseService.postCourse(JSON.stringify(
             {
-                coursebeschrijving: this.state.typedcoursebeschrijving,
-                prijs: this.state.typedprijs,
+                beschrijving: this.state.beschrijving,
                 teacherids: this.state.selectedteacherids,
                 studentids: this.state.selectedstudentids
             }
@@ -44,13 +45,24 @@ class AddCourse extends Component {
     };
 
     componentDidMount() {
-
+        this.addStudents();
+        this.addTeachers();
     }
 
-    onChangePrice = (e) => {
-        this.setState({prijs: e.target.value});
-        console.log("prijs:" + e.target.value)
-    };
+    addTeachers() {
+        UserService.getStudents().then(console.log("----Students---- \n"))
+            .then(students => {
+                this.setState({students: students}, console.log(students));
+            });
+    }
+
+    addStudents() {
+        UserService.getTeachers().then(console.log("----Teachers---- \n"))
+            .then(teachers => {
+                this.setState({teachers: teachers}, console.log(teachers));
+            });
+
+    }
 
     onChangeDescription = (e) => {
         this.setState({beschrijving: e.target.value});
@@ -62,9 +74,9 @@ class AddCourse extends Component {
         console.log(value)
     };
 
+
     render() {
         return (
-
             <div className="Homepage">
                 <Header name="Add Course"/>
                 <section className="containerCss">
@@ -80,23 +92,12 @@ class AddCourse extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>Naam</h5>
+                                                    <h5 className="truncate">Beschrijving</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeDescription} hint="Geef een beschrijving in..."
+                                                    <StyledTextField onChange={this.onChangeDescription}
+                                                                     hint="Geef een beschrijving in..."
                                                                      label="Beschrijving"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Uitvoering</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangePrice}
-                                                                     hint="Geef een prijs in..." label="Prijs"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,8 +109,13 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple onChange={this.handleChange} type='select' label="Leerkrachten" icon='face' defaultValue='1'>
-
+                                                        <Input s={12} multiple={true} type='select'
+                                                               label="Leerkrachten" icon='face' defaultValue='1'>
+                                                            <option value="" disabled>Kies de leerkrachten</option>
+                                                            {this.state.teachers.map((teacher, index) => (
+                                                                <option key={teacher.id}
+                                                                        value={teacher.id}>{teacher.firstname} {teacher.lastname}</option>
+                                                            ))}
                                                         </Input>
                                                     </Row>
                                                 </div>
@@ -122,15 +128,19 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple onChange={this.handleChange} type='select' label="Studenten" icon='child_care' defaultValue='1'>
-
+                                                        <Input s={12} multiple type='select' label="Studenten"
+                                                               icon='child_care' defaultValue='1'>
+                                                            <option value="" disabled>Kies de studenten</option>
+                                                            {this.state.students.map((student, index) => (
+                                                                <option key={student.id}
+                                                                        value={student.id}>{student.firstname} {student.lastname}</option>
+                                                            ))}
                                                         </Input>
                                                     </Row>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="divider"></div>
-
                                     </form>
 
                                 </div>

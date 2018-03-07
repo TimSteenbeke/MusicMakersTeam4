@@ -7,6 +7,7 @@ import * as InstrumentenService from '../Services/InstrumentService.js'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
+import swal from 'sweetalert2'
 
 class InstrumentDetails extends Component {
 
@@ -45,6 +46,13 @@ class InstrumentDetails extends Component {
     }
 
     handleUpdate = () => {
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Instrument Edited',
+            showConfirmButton: false,
+            timer: 1500
+        });
         let self = this;
         InstrumentenService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
             {
@@ -82,7 +90,6 @@ class InstrumentDetails extends Component {
     render() {
         return ( <div className="Homepage">
                 <Header name={this.state.naam}/>
-
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s0 m2 l2"/>

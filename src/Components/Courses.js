@@ -41,8 +41,8 @@ class Courses extends Component {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Delete!',
             cancelButtonText: 'Cancel!',
-            confirmButtonClass: 'btn btn-success',
-            cancelButtonClass: 'btn btn-danger',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
             reverseButtons: true
         }).then((result) => {
@@ -117,7 +117,11 @@ class Courses extends Component {
                         ))}
                         </tbody>
                     </table>
-
+                    <div className="fixed-action-btn">
+                        <Link to="/addCourse" className="btn-floating btn-large deep-orange darken-4">
+                            <i className="large material-icons">add</i>
+                        </Link>
+                    </div>
                 </section>
             </div>
         );
