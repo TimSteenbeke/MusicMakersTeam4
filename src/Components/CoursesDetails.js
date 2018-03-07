@@ -18,7 +18,6 @@ class CoursesDetails extends Component {
         this.state = {
             courseId: this.props.match.params.id,
             beschrijving: "string",
-            prijs: 0,
         }
 
     }
@@ -31,12 +30,10 @@ class CoursesDetails extends Component {
             .then(course => {
                 self.setState({
                     courseId: this.props.match.params.id,
-                    beschrijving: course.beschrijving,
-                    prijs: course.prijs
-
+                    beschrijving: course.description,
                 });
                 console.log(self.state.beschrijving);
-                console.log(self.state.prijs);
+                console.log(course.students);
             }).catch((error) => {
             console.log(error);
         });
@@ -78,20 +75,6 @@ class CoursesDetails extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
-
-                                            <div className="col s3 m3 l3">
-                                                <h5>{this.state.prijs}</h5>
-                                            </div>
-                                            <div className="col s9 m9 l9">
-                                                <StyledTextField hint="Geef nieuwe prijs in..."
-                                                                 label="Prijs"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div className="card-action">
                                     <Link to="/courses" onClick={this.handleUpdate}

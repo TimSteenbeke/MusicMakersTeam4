@@ -7,6 +7,7 @@ import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize'
+import swal from 'sweetalert2'
 
 
 class AddCourse extends Component {
@@ -25,6 +26,13 @@ class AddCourse extends Component {
     }
 
     handleClick = () => {
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Course Added',
+            showConfirmButton: false,
+            timer: 1500
+        });
         CourseService.postCourse(JSON.stringify(
             {
                 coursebeschrijving: this.state.typedcoursebeschrijving,
@@ -100,7 +108,8 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} onChange={this.handleChange} type='select' label="Leerkrachten" icon='face' defaultValue='1'>
+                                                        <Input s={12} multiple onChange={this.handleChange} type='select' label="Leerkrachten" icon='face' defaultValue='1'>
+
                                                         </Input>
                                                     </Row>
                                                 </div>
@@ -113,7 +122,8 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} onChange={this.handleChange} type='select' label="Studenten" icon='child_care' defaultValue='1'>
+                                                        <Input s={12} multiple onChange={this.handleChange} type='select' label="Studenten" icon='child_care' defaultValue='1'>
+
                                                         </Input>
                                                     </Row>
                                                 </div>
@@ -126,7 +136,7 @@ class AddCourse extends Component {
                                 </div>
 
                                 <div className="card-action">
-                                    <Link to="/instrumenten" onClick={this.handleClick}
+                                    <Link to="/courses" onClick={this.handleClick}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
                                         <i
                                             className="material-icons">done</i>

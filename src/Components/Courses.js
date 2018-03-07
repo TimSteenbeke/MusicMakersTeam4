@@ -6,6 +6,7 @@ import * as CourseService from '../Services/CourseService'
 import RaisedButton from 'material-ui/RaisedButton';
 import Header from './Header'
 import {Link} from 'react-router-dom';
+import swal from 'sweetalert2'
 
 
 class Courses extends Component {
@@ -30,8 +31,39 @@ class Courses extends Component {
         });
     }
 
-    handleDelete = () => {
-        CourseService.deleteCourse(this.state.selectedIndex);
+    handleDelete = (id, e) => {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swal(
+                    'Deleted!',
+                    'Course has been deleted.',
+                    'success'
+                );
+                CourseService.deleteCourse(id);
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'Cancelled',
+                    'Course was not deleted',
+                    'error'
+                )
+            }
+        })
     };
 
 

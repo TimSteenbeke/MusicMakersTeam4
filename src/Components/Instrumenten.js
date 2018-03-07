@@ -5,6 +5,9 @@ import React, {Component} from 'react';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import {Link} from 'react-router-dom';
 import Header from './Header'
+import swal from 'sweetalert2'
+
+
 class Instrumenten extends Component {
 
     constructor(props) {
@@ -16,7 +19,39 @@ class Instrumenten extends Component {
     }
 
     handleDelete = (id, e) => {
-        InstrumentenService.deleteInstrument(id);
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swal(
+                    'Deleted!',
+                    'Instrument has been deleted.',
+                    'success'
+                );
+                InstrumentenService.deleteInstrument(id);
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'Cancelled',
+                    'Instrument was not deleted',
+                    'error'
+                )
+            }
+        });
+
     };
 
     getInstrumenten() {
