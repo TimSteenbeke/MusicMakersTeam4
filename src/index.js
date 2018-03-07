@@ -21,13 +21,13 @@ const Application = () => (
                     </section>
                     <section className="application">
                         <App/>
+                        <CheckTokenComponent/>
                     </section >
                     <section className="groups">
                         <GroupsAndChat/>
                     </section>
                 </section>
         </BrowserRouter>
-        <CheckTokenComponent/>
     </MuiThemeProvider>
 );
 
