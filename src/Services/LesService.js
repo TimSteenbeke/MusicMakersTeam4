@@ -1,17 +1,17 @@
 /**
  * Created by Ben on 28/02/2018.
  */
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-// const URL = 'http://localhost:8080/api/';
-
+const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const localURL = 'http://localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function registerAbsent(lessonid) {
-    return fetch(URL + 'lesson/absent/' +lessonid,
+    return fetch(herokuURL + 'lesson/absent/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
@@ -29,12 +29,12 @@ export function registerAbsent(lessonid) {
 }
 
 export function registerPresent(lessonid) {
-    return fetch(URL + 'lesson/present/' +lessonid,
+    return fetch(herokuURL + 'lesson/present/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
@@ -51,12 +51,12 @@ export function registerPresent(lessonid) {
 }
 
 export function getAttendanceStatus(lessonid) {
-    return fetch(URL + 'lesson/attendancestatus/' +lessonid,
+    return fetch(herokuURL + 'lesson/attendancestatus/' +lessonid,
         {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
