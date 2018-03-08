@@ -74,6 +74,9 @@ class Agenda extends Component {
     }
 
     mapAgendaItems(agendaItems) {
+        if (agendaItems != undefined) {
+
+
         let AgendaItems= [];
         //Eigenaar toewijzen (Agenda van: ....)
         // this.setState({agendaOwner: agendaItems.agendaEigenaar})
@@ -111,6 +114,7 @@ class Agenda extends Component {
         }
 
         this.setState({items: AgendaItems});
+        }
 
     }
 
@@ -135,12 +139,9 @@ class Agenda extends Component {
     requestAgenda() {
         console.log('agenda requested: ' + this.state.requesteduser);
         //Get agenda of request user
-        AgendaService.getOtherAgenda(this.state.requesteduser);
-
-
-        //call map function
-
-
+        AgendaService.getOtherAgenda(this.state.requesteduser).then(agendaitems => {
+            this.mapAgendaItems(agendaitems);
+        });
     }
 
 
