@@ -55,10 +55,16 @@ class Agenda extends Component {
     componentDidMount() {
         //Ajax call to get user his role
         //If role = admin => extra features (change state)
-        this.getUsers();
+        this.getUserRoles();
+
+              this.getUsers();
 
 
         this.getMyAgendaItems();
+    }
+
+    getUserRoles() {
+        UserService.getUserRoles();
     }
 
     getUsers() {
