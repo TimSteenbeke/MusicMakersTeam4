@@ -28,35 +28,30 @@ html, body
 
 .groups{
     width:  15%;
-    background-color: #263238;
+    background-color: #242728;
     position: relative;
     padding-top: 4%;
+    padding-left: 20px;
+    padding-right: 20px;
+
 }
 
 
 .sidebar{
     width: 15%;
-    background-color: #263238;
+    background-color: #242728;
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
-
 }
 
 .application{
     width: 70%;
     overflow: auto;
     position: relative;
-    background: repeating-linear-gradient(
-            45deg,
-            #78909c,
-            #37474F 90%
-    );
-
-
+    background: #FFFFFF;
 }
 
-/* Let's get this party started */
 ::-webkit-scrollbar {
     width: 6px;
 }

@@ -5,7 +5,6 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as CompositionService from '../Services/CompositionService.js'
 import Snackbar from 'material-ui/Snackbar';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import axios from 'axios';
@@ -146,6 +145,7 @@ class AddMuziekstuk extends Component {
     };
 
     render() {
+
         return (
 
             <div className="Homepage">

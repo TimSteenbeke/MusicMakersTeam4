@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardText} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -53,7 +53,7 @@ class CompositionDetails extends Component {
 
     render() {
         return (
-            <div >
+            <div>
                 <h1 className="header">Muziekstuk Details</h1>
                 <Card expanded={true}>
                     <CardText>

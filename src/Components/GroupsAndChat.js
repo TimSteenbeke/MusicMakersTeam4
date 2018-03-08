@@ -2,12 +2,6 @@
  * Created by jariv on 27/02/2018.
  */
 import React, {Component} from 'react';
-import Menu from 'material-ui/Menu';
-import error from '../images/error.png'
-import AccountCircle from 'material-ui/svg-icons/action/account-circle';
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
-import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
 

@@ -3,53 +3,12 @@
  */
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
-import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
-
-
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
-
+import StyledTextField from './StyledTextField'
+import {Link} from 'react-router-dom';
+import {Row, Input} from 'react-materialize'
+import swal from 'sweetalert2'
 
 class AddInstrument extends Component {
 
@@ -58,7 +17,6 @@ class AddInstrument extends Component {
         this.state = {
             value: 1,
             soorten: [],
-            open: false,
             typedName: "",
             typedType: "",
             typedVersion: "",
@@ -69,8 +27,12 @@ class AddInstrument extends Component {
     }
 
     handleClick = () => {
-        this.setState({
-            open: true,
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Instrument Added!',
+            showConfirmButton: false,
+            timer: 1500
         });
         InstrumentenService.postInstrument(JSON.stringify(
             {
@@ -89,12 +51,6 @@ class AddInstrument extends Component {
 
     };
 
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
-    };
-
     componentDidMount() {
         InstrumentenService.getInstrumentSoortenFromBackend()
             .then(console.log("----soorten---- \n"))
@@ -103,31 +59,31 @@ class AddInstrument extends Component {
             });
     }
 
-    onChangeType = (event, typedType) => {
-        this.setState({typedType});
-        console.log("Type:" + typedType)
+    onChangeType = (e) => {
+        this.setState({typedType: e.target.value});
+        console.log("Type:" + e.target.value)
     };
 
-    onChangeNaam = (event, typedName) => {
-        this.setState({typedName});
-        console.log("Naam:" + typedName)
+    onChangeNaam = (e) => {
+        this.setState({typedName: e.target.value});
+        console.log("Naam:" + e.target.value)
     };
 
-    onChangeVersion = (event, typedVersion) => {
-        this.setState({typedVersion});
-        console.log("Version:" + typedVersion)
+    onChangeVersion = (e) => {
+        this.setState({typedVersion:  e.target.value});
+        console.log("Version:" + e.target.value)
     };
 
-    handleChange = (event, index, value) => {
+    handleChange = (event, value) => {
         this.setState({value});
         console.log(value)
     };
 
     handleChangeImage = (evt) => {
         console.log("Uploading");
-        var self = this;
-        var reader = new FileReader();
-        var file = evt.target.files[0];
+        let self = this;
+        let reader = new FileReader();
+        let file = evt.target.files[0];
         reader.onload = function (upload) {
             self.setState({
                 image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
@@ -145,90 +101,102 @@ class AddInstrument extends Component {
             <div className="Homepage">
                 <Header name="Add Instrument"/>
                 <section className="containerCss">
-                    <div className="whiteBox">
-                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
-                            e.preventDefault();
-                            this.handleClick();
-                        } }>
-                            <SelectField
-                                autoWidth={true}
-                                floatingLabelText="Soort"
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                                selectedMenuItemStyle={styles.errorStyle}
-                            >
-                                {this.state.soorten.map((soort, index) => (
-                                    <MenuItem key={soort.instrumentSoortId}
-                                              value={soort.instrumentSoortId}
-                                              primaryText={soort.soortNaam}/>
-                                ))}
-                            </SelectField>
-                            <br />
+                    <div className="row">
+                        <div className="col s0 m2 l2"/>
+                        <div className="col s12 m8 l8">
+                            <div className="card hoverable">
+                                <div className="card-image">
+                                    <img
+                                        src={"data:image;base64," + this.state.image} alt="Instrument"
+                                        height="300px"/>
+                                    <span className="card-title white-text">{this.state.naam}</span>
+                                    <form action="#">
+                                        <div className="file-field input-field">
+                                            <div
+                                                className="btn-floating halfway-fab waves-effect waves-light deep-orange darken-4 pulse">
+                                                <i className="material-icons">attach_file</i>
+                                                <input name="file"
+                                                       className="upload-file"
+                                                       id="file"
+                                                       onChange={this.handleChangeImage}
+                                                       encType="multipart/form-data" accept="image/*" type="file"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className="card-content">
+                                    <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
+                                        e.preventDefault();
+                                        this.handleClick();
+                                    } }>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Soort</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <Row>
+                                                        <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
+                                                            {this.state.soorten.map((soort, index) => (
+                                                                <option key={soort.instrumentSoortId}
+                                                                        value={soort.instrumentSoortId}>{soort.soortNaam}</option>
+                                                            ))}
+                                                        </Input>
+                                                    </Row>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Naam</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeNaam} hint="Geef naam in..."
+                                                                     label="Naam"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Type</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeType} hint="Geef type in..."
+                                                                     label="Type"/><br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5>Uitvoering</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeVersion}
+                                                                     hint="Geef uitvoering in..." label="Uitvoering"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                    </form>
 
-                            <TextField
-                                onChange={this.onChangeNaam}
-                                hintText="Geef naam in..."
-                                floatingLabelText="Naam"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangeType}
-                                hintText="Geef type in..."
-                                floatingLabelText="Type"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangeVersion}
-                                hintText="Geef uitvoering in..."
-                                floatingLabelText="Uitvoering"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
-                            <RaisedButton
-                                label="Kies een image"
-                                labelPosition="before"
-                                containerElement="label"
-                            >
-                                <input type="file"
-                                       style={styles.exampleImageInput}
-                                       name="file"
-                                       className="upload-file"
-                                       id="file"
-                                       onChange={this.handleChangeImage}
-                                       encType="multipart/form-data"
-                                       required
-                                       accept="image/*"
-                                />
-                            </RaisedButton>
-
-                            <RaisedButton label="Voeg Instrument Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
-                            <Snackbar
-                                open={this.state.open}
-                                message="Instrument Added"
-                                autoHideDuration={4000}
-                                onRequestClose={this.handleRequestClose}
-                            />
-                        </form>
+                                </div>
+                                <div className="card-action">
+                                    <Link to="/instrumenten" onClick={this.handleClick}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                        <i
+                                            className="material-icons">done</i>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col s0 m2 l2"/>
                     </div>
-
                 </section>
             </div>
         );

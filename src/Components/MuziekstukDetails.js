@@ -40,7 +40,6 @@ class MuziekstukDetails extends Component {
     }
 
 
-
     assignItem = item => { // bound arrow function handler
         const filename = this.state.muziekstuk.titel + "." + this.state.muziekstuk.fileFormat;
         const filecontent = base64.decode(item);
@@ -56,7 +55,6 @@ class MuziekstukDetails extends Component {
     render() {
         return (
             <div >
-
                 <h1 className="header">{}</h1>
                 <Card expanded={true}>
                     <CardHeader
@@ -95,3 +93,4 @@ class MuziekstukDetails extends Component {
 
 export default MuziekstukDetails;
 */
+import * as LoginService from "../Services/LoginService";

@@ -2,9 +2,9 @@
  * Created by TimS on 15/02/2018.
  */
 
-import guitar from '../images/guitar.jpg'
+import guitar from '../images/guitar.jpg';
 import React, {Component} from 'react';
-import Header from './Header'
+import Header from './Header';
 
 
 export default class Home extends Component{
@@ -14,24 +14,18 @@ export default class Home extends Component{
         super(props);
         this.state = {
             value: 1,
+            redirect:true
         }
-    }
-
-    componentDidMount(){
-
     }
 
     handleChange = (event, index, value) => this.setState({value});
 
 
     render(){
-
-
         return <div className="Homepage">
             <Header name="Home"/>
-
             <section className="containerCss">
-                <div className="card hoverable">
+                <div className="card hoverable z-depth-3">
                     <div className="card-image waves-effect waves-block waves-light">
                         <img className="activator" alt="guitar" src={guitar} />
                     </div>

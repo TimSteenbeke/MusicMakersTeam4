@@ -72,7 +72,10 @@ class CompositionUpdate extends Component {
         CompositionService.getCompositionFromBackend(this.props.id)
 
             .then(console.log("----Muziekstuk met id " + this.props.id + "---- \n"))
-            .then(composition => self.setState({composition: composition,compid: this.props.id}, console.log(composition)))
+            .then(composition => self.setState({
+                composition: composition,
+                compid: this.props.id
+            }, console.log(composition)))
     }
 
     onChangeTitel = (event, typedTitel) => {
@@ -137,9 +140,9 @@ class CompositionUpdate extends Component {
     };
 
     render() {
-        return (
-            <div >
 
+        return (
+            <div>
                 <h1 className="header">Muziekstuk details</h1>
                 <Card expanded={true}>
                     <CardText>
@@ -148,7 +151,7 @@ class CompositionUpdate extends Component {
                                 <List>
                                     <ListItem>
                                         <TextField
-                                            value = {this.state.composition.titel}
+                                            value={this.state.composition.titel}
                                             onChange={this.onChangeTitel}
                                             hintText="Geef nieuwe titel in..."
                                             floatingLabelText="Titel"
@@ -160,7 +163,7 @@ class CompositionUpdate extends Component {
                                             underlineFocusStyle={styles.underlineStyle}
                                         /><br/>
                                         <TextField
-                                            value = {this.state.composition.artist}
+                                            value={this.state.composition.artist}
                                             onChange={this.onChangeArtiest}
                                             hintText="Geef artiest in..."
                                             floatingLabelText="Artiest"
@@ -170,9 +173,9 @@ class CompositionUpdate extends Component {
                                             floatingLabelStyle={styles.floatingLabelStyle}
                                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                             underlineFocusStyle={styles.underlineStyle}
-                                        /><br />
+                                        /><br/>
                                         <TextField
-                                            value = {this.state.composition.language}
+                                            value={this.state.composition.language}
                                             onChange={this.onChangeLanguage}
                                             hintText="Geef een taal in..."
                                             floatingLabelText="Taal"
@@ -182,9 +185,9 @@ class CompositionUpdate extends Component {
                                             floatingLabelStyle={styles.floatingLabelStyle}
                                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                             underlineFocusStyle={styles.underlineStyle}
-                                        /><br />
+                                        /><br/>
                                         <TextField
-                                            value = {this.state.composition.genre}
+                                            value={this.state.composition.genre}
                                             onChange={this.onChangeGenre}
                                             hintText="Geef een genre in..."
                                             floatingLabelText="Genre"
@@ -194,9 +197,9 @@ class CompositionUpdate extends Component {
                                             floatingLabelStyle={styles.floatingLabelStyle}
                                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                             underlineFocusStyle={styles.underlineStyle}
-                                        /><br />
+                                        /><br/>
                                         <TextField
-                                            value = {this.state.composition.subject}
+                                            value={this.state.composition.subject}
                                             onChange={this.onChangeSubject}
                                             hintText="Geef een onderwerp in..."
                                             floatingLabelText="Onderwerp"
@@ -206,9 +209,9 @@ class CompositionUpdate extends Component {
                                             floatingLabelStyle={styles.floatingLabelStyle}
                                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                             underlineFocusStyle={styles.underlineStyle}
-                                        /><br />
+                                        /><br/>
                                         <TextField
-                                            value = {this.state.composition.instrumentType}
+                                            value={this.state.composition.instrumentType}
                                             onChange={this.onChangeInstrType}
                                             hintText="Geef een instrumenttype in..."
                                             floatingLabelText="Instrument Type"
@@ -220,7 +223,7 @@ class CompositionUpdate extends Component {
                                             underlineFocusStyle={styles.underlineStyle}
                                         />
                                         <TextField
-                                            value = {this.state.composition.link}
+                                            value={this.state.composition.link}
                                             onChange={this.onChangeLink}
                                             hintText="Geef een link in..."
                                             floatingLabelText="Link"
