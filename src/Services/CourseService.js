@@ -21,6 +21,25 @@ export function getCoursesFromBackend() {
         });
 }
 
+export function getCourseFromBackend(courseNr) {
+    return fetch(URL + "courses/" + courseNr, {
+        mode: 'cors',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => response.json()
+        )
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((err) => {
+            const course = {beschrijving: "course niet gevonden"};
+            return course;
+        });
+}
+
 export function postCourse(data) {
 
 

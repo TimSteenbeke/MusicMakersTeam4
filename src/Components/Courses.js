@@ -1,32 +1,13 @@
-
-
 /**
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
 import * as CourseService from '../Services/CourseService'
-import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import CoursesUpdate from './CoursesUpdate.js'
 import Header from './Header'
+import {Link} from 'react-router-dom';
+import swal from 'sweetalert2'
 
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
-
-const styles = {
-    exampleImageInput: {
-        margin: 10,
-    }
-}
 
 class Courses extends Component {
 
@@ -35,23 +16,13 @@ class Courses extends Component {
         this.state = {
             courses: [],
             selectedIndex: 0,
-            selected: [],
-            openUpdate: false,
         }
 
         ;
     }
 
-    handleOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
     componentDidMount() {
-     this.getCourses();
+        this.getCourses();
     }
 
     getCourses() {
@@ -60,43 +31,43 @@ class Courses extends Component {
         });
     }
 
-    handleRowSelection = (selectedRows) => {
-        this.setState({
-            selected: selectedRows,
-        });
+    handleDelete = (id, e) => {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swal(
+                    'Deleted!',
+                    'Course has been deleted.',
+                    'success'
+                );
+                CourseService.deleteCourse(id);
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'Cancelled',
+                    'Course was not deleted',
+                    'error'
+                )
+            }
+        })
     };
 
-    handleCellClick = (rowNumber) => {
-        var self = this;
 
-        this.setState({
-            selectedIndex: this.state.courses[rowNumber].courseId
-        });
-
-        setTimeout(function () {
-            console.log(console.log("Selected Row: " + self.state.selectedIndex));
-        }, 1000);
-
-    };
-
-    isSelected = (index) => {
-        return this.state.selected.indexOf(index) !== -1;
-    };
-
-    handleOpenUpdate = () => {
-        this.setState({openUpdate: true});
-    };
-
-    handleCloseUpdate = () => {
-        this.setState({openUpdate: false});
-    };
-
-    handleDelete = () => {
-        CourseService.deleteCourse(this.state.selectedIndex);
-    };
-
-
-    componentWillReceiveProps(){
+    componentWillUpdate() {
         CourseService.getCoursesFromBackend().then(courses => {
             this.setState({courses: courses});
         });
@@ -109,46 +80,49 @@ class Courses extends Component {
             <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
                           labelColor="#FFEBEE"/>,
         ];
+
         return (
+
             <div className="Homepage">
                 <Header name="Courses"/>
                 <section className="containerCss">
-                    <div className="whiteBox">
-                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHeaderColumn>Id</TableHeaderColumn>
-                                    <TableHeaderColumn>Course</TableHeaderColumn>
-                                    <TableHeaderColumn>prijs</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {this.state.courses.map((course, index) => (
-                                    <TableRow selected={this.isSelected(index)} key={course.courseId}>
-                                        <TableRowColumn>{course.courseId}</TableRowColumn>
-                                        <TableRowColumn>{course.beschrijving}</TableRowColumn>
-                                        <TableRowColumn>{course.prijs}</TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
-                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
+                    <table className="highlight striped black-text bordered responsive-table centered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Course</th>
+                            <th>Prijs</th>
+                            <th>Acties</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.courses.map((course, index) => (
+                            <tr key={course.courseId} id={course.courseId}>
+                                <td>{course.courseId}</td>
+                                <td>{course.beschrijving}</td>
+                                <td>{course.prijs}</td>
+                                <td>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                          to={`/coursedetails/${course.courseId}` }>
+                                        <i className="material-icons">edit
+                                        </i>
+                                    </Link>
+                                    <a className="waves-effect white-text deep-orange darken-4 btn"
+                                       onClick={(e) => this.handleDelete(course.courseId, e)}><i
+                                        className="material-icons">delete
+                                    </i></a>
+
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                    <div className="fixed-action-btn">
+                        <Link to="/addCourse" className="btn-floating btn-large deep-orange darken-4">
+                            <i className="large material-icons">add</i>
+                        </Link>
                     </div>
                 </section>
-                <Dialog
-                    actions={actionsUpdate}
-                    modal={false}
-                    open={this.state.openUpdate}
-                    onRequestClose={this.handleCloseUpdate}
-                    autoScrollBodyContent={true}
-                >
-                    <CoursesUpdate
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
             </div>
         );
     }

@@ -2,51 +2,13 @@
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import * as CourseService from '../Services/CourseService.js'
-import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
-
-
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
-
+import StyledTextField from './StyledTextField'
+import {Link} from 'react-router-dom';
+import {Row, Input} from 'react-materialize'
+import swal from 'sweetalert2'
+import * as UserService from '../Services/UserService'
 
 class AddCourse extends Component {
 
@@ -54,135 +16,146 @@ class AddCourse extends Component {
         super(props);
         this.state = {
             value: 1,
-            open: false,
-            typedcoursebeschrijving: "",
-            typedprijs: 0,
+            beschrijving: "",
+            prijs: 0,
             selectedteacherids: [],
-            selectedstudentids :[]
+            selectedstudentids: [],
+            teachers: [],
+            students: [],
         };
 
 
     }
 
     handleClick = () => {
-        this.setState({
-            open: true,
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Course Added',
+            showConfirmButton: false,
+            timer: 1500
         });
         CourseService.postCourse(JSON.stringify(
             {
-                coursebeschrijving: this.state.typedcoursebeschrijving,
-                prijs: this.state.typedprijs,
+                beschrijving: this.state.beschrijving,
                 teacherids: this.state.selectedteacherids,
                 studentids: this.state.selectedstudentids
             }
         ));
-        console.log(this.state.selectedstudentids);
     };
 
+    componentDidMount() {
+        this.addStudents();
+        this.addTeachers();
+    }
 
+    addTeachers() {
+        UserService.getStudents().then(console.log("----Students---- \n"))
+            .then(students => {
+                this.setState({students: students}, console.log(students));
+            });
+    }
 
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
+    addStudents() {
+        UserService.getTeachers().then(console.log("----Teachers---- \n"))
+            .then(teachers => {
+                this.setState({teachers: teachers}, console.log(teachers));
+            });
+
+    }
+
+    onChangeDescription = (e) => {
+        this.setState({beschrijving: e.target.value});
+        console.log("beschrijving:" + e.target.value)
     };
 
-
-    onChangePrijs = (event, typedPrijs) => {
-        this.setState({typedprijs: typedPrijs});
-        console.log("prijs:" + typedPrijs)
-    };
-
-    onChangeNaam = (event, typedName) => {
-        this.setState({typedcoursebeschrijving: typedName});
-        console.log("Coursebeschrijving:" + typedName)
-    };
-
-    onChangeTeacherIds = (event, typedTeacherIds) => {
-        this.setState({selectedteacherids:typedTeacherIds.split(",")});
-        console.log(  typedTeacherIds)
-    };
-
-    onChangeStudentIds = (event, typedStudentIds) => {
-        this.setState({selectedstudentids:typedStudentIds.split(",")});
-        console.log(typedStudentIds)
-    };
-
-    handleChange = (event, index, value) => {
+    handleChange = (event, value) => {
         this.setState({value});
         console.log(value)
     };
 
+
     render() {
         return (
-
             <div className="Homepage">
                 <Header name="Add Course"/>
                 <section className="containerCss">
-                    <div className="whiteBox">
-                        <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
-                            e.preventDefault();
-                            this.handleClick();
-                        } }>
-                            <TextField
-                                onChange={this.onChangeNaam}
-                                hintText="Geef cursusnaam in"
-                                floatingLabelText="Cursusnaam"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangePrijs}
-                                hintText="Geef prijs in..."
-                                floatingLabelText="Prijs"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br />
-                            <TextField
-                                onChange={this.onChangeTeacherIds}
-                                hintText="Selecteer leerkrachten"
-                                floatingLabelText="Leerkrachten"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
-                            <TextField
-                                onChange={this.onChangeStudentIds}
-                                hintText="Selecteer studenten"
-                                floatingLabelText="studenten"
-                                style={styles.width}
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            />
+                    <div className="row">
+                        <div className="col s0 m2 l2"/>
+                        <div className="col s12 m8 l8">
+                            <div className="card hoverable">
+                                <div className="card-content">
+                                    <form className="addCourse" action="/" method="POST" onSubmit={(e) => {
+                                        e.preventDefault();
+                                        this.handleClick();
+                                    } }>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5 className="truncate">Beschrijving</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <StyledTextField onChange={this.onChangeDescription}
+                                                                     hint="Geef een beschrijving in..."
+                                                                     label="Beschrijving"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5 className="truncate">Leerkrachten</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <Row>
+                                                        <Input s={12} multiple={true} type='select'
+                                                               label="Leerkrachten" icon='face' defaultValue='1'>
+                                                            <option value="" disabled>Kies de leerkrachten</option>
+                                                            {this.state.teachers.map((teacher, index) => (
+                                                                <option key={teacher.id}
+                                                                        value={teacher.id}>{teacher.firstname} {teacher.lastname}</option>
+                                                            ))}
+                                                        </Input>
+                                                    </Row>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="row">
+                                                <div className="col s3 m3 l3">
+                                                    <h5 className="truncate">Studenten</h5>
+                                                </div>
+                                                <div className="col s9 m9 l9">
+                                                    <Row>
+                                                        <Input s={12} multiple type='select' label="Studenten"
+                                                               icon='child_care' defaultValue='1'>
+                                                            <option value="" disabled>Kies de studenten</option>
+                                                            {this.state.students.map((student, index) => (
+                                                                <option key={student.id}
+                                                                        value={student.id}>{student.firstname} {student.lastname}</option>
+                                                            ))}
+                                                        </Input>
+                                                    </Row>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="divider"></div>
+                                    </form>
 
-                            <RaisedButton label="Voeg Course Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
-                            <Snackbar
-                                open={this.state.open}
-                                message="Course Added"
-                                autoHideDuration={4000}
-                                onRequestClose={this.handleRequestClose}
-                            />
-                        </form>
+                                </div>
+
+                                <div className="card-action">
+                                    <Link to="/courses" onClick={this.handleClick}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                        <i
+                                            className="material-icons">done</i>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col s0 m2 l2"/>
                     </div>
-
                 </section>
             </div>
         );
