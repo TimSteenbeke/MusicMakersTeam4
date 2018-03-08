@@ -2,6 +2,8 @@
  * Created by Ben on 28/02/2018.
  */
 const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const localURL = 'http://localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function registerAbsent(performanceid) {
     return fetch(herokuURL + 'performance/absent/' +performanceid,
@@ -9,7 +11,7 @@ export function registerAbsent(performanceid) {
             method: 'POST',
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
@@ -31,7 +33,7 @@ export function registerPresent(performanceid) {
             method: 'POST',
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
@@ -53,7 +55,7 @@ export function getAttendanceStatus(performanceid) {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
                 'Content-Type': 'application/json'
             }
         })
