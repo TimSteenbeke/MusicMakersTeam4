@@ -41,9 +41,8 @@ export function getCourseFromBackend(courseNr) {
 }
 
 export function postCourse(data) {
-
-
-    fetch(URL + 'courses', {
+    console.log(data);
+    fetch(URL + 'courses/', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
