@@ -40,9 +40,9 @@ export function getCourseFromBackend(courseNr) {
         });
 }
 
-export function postCourse(courseId, data) {
-    console.log(courseId);
-    fetch(URL + 'courses/' + courseId, {
+export function postCourse(data) {
+    console.log(data);
+    fetch(URL + 'courses/', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
