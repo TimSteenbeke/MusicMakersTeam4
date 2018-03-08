@@ -135,6 +135,8 @@ class Agenda extends Component {
     requestAgenda() {
         console.log('agenda requested: ' + this.state.requesteduser);
         //Get agenda of request user
+        AgendaService.getOtherAgenda(this.state.requesteduser);
+
 
         //call map function
 
