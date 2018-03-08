@@ -4,7 +4,6 @@
 
 .containerCss {
     margin: 0;
-    padding: 12px;
 }
 
 .whiteBoxPartituur {
@@ -21,7 +20,13 @@
     box-shadow: 5px 5px 40px black;
 }
 
-
+.fixed-action-btn {
+    float: right;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-right: 20px;
+}
 
 
 .redbg {
@@ -35,6 +40,7 @@
 .agendaItem {
     padding: 3%;
 }
+
 
 img:before {
     content: "";

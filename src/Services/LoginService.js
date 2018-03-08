@@ -1,9 +1,9 @@
 const AuthStr = 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE=';
-const localURL = 'http://localhost:8080/oauth/token';
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/oauth/token';
+// const URL = 'http://localhost:8080/oauth/token';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/oauth/token';
 
 export function fetchToken(username, password) {
-    return fetch(herokuURL + '?grant_type=password&username='+ username +'&password='+password, {
+    return fetch(URL + '?grant_type=password&username='+ username +'&password='+password, {
         method: 'POST',
         headers: {
             'Authorization': AuthStr,
@@ -16,14 +16,33 @@ export function fetchToken(username, password) {
         .then((responseJson) => {
             console.log("Json Response Fetch:")
             console.log(responseJson);
-            localStorage.setItem('userToken', responseJson.access_token);
-            return responseJson;
+            if(responseJson.hasOwnProperty("access_token")){
+                localStorage.setItem('userToken', JSON.stringify(responseJson));
+                return true;
+            }
+            return false;
         })
         .catch((err) => {
             console.log("geen response");
             console.log(err);
+            return false;
         });
 
+}
+
+export function checkToken(){
+    if(localStorage.getItem('userToken')!= null){
+        let jwt = localStorage.getItem('userToken');
+
+        var current_time = Date.now() / 1000;
+        if ( jwt.exp < current_time) {
+            localStorage.removeItem('userToken');
+            return false;
+        } else{
+            return true;
+        }
+    }
+        return false;
 }
 //Fix Ben
 /*export function fetchLogin() {

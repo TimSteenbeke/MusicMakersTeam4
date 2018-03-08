@@ -21,7 +21,9 @@ class PlayMusic extends Component {
         });
     }
 
+
     render() {
+
         return (
             <div className="PlayPartituur">
                 <section className="container">

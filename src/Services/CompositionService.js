@@ -1,11 +1,12 @@
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'localhost:8080/api/';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getCompositionsFromBackend() {
-    return fetch(localURL + "compositions", {
+    return fetch(URL + "compositions", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -21,10 +22,10 @@ export function getCompositionsFromBackend() {
 }
 
 export function getCompositionFromBackend(compositionId) {
-    return fetch(localURL + "compositions/" + compositionId, {
+    return fetch(URL + "compositions/" + compositionId, {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -41,11 +42,11 @@ export function getCompositionFromBackend(compositionId) {
 
 export function postMuziekstuk(data) {
     console.log(data);
-    fetch(localURL + 'compositions/', {
+    fetch(URL + 'compositions/', {
         mode: 'no-cors',
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         },
         body: data
@@ -53,13 +54,13 @@ export function postMuziekstuk(data) {
 }
 
 export function deleteComposition(compositionId) {
-    return fetch(localURL + 'compositions/' + compositionId, {
+    return fetch(URL + 'compositions/' + compositionId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
         }
     });
 }
@@ -67,13 +68,13 @@ export function deleteComposition(compositionId) {
 export function UpdateComposition(compositionId, data) {
     console.log("id: " + compositionId);
     console.log(data);
-    return fetch(localURL + 'compositions/composition/' + compositionId, {
+    return fetch(URL + 'compositions/composition/' + compositionId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });

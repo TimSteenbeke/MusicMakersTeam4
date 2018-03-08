@@ -9,10 +9,8 @@
     "empty-module": "0.0.2",
     "jquery": "^3.3.1",
     "material-ui": "^0.20.0",
-    "material-ui-selectfield": "^1.0.24",
-    "material-ui-superselectfield": "^1.8.7",
     "material-ui-table-edit": "^3.0.3",
-    "moment": "^2.21.0",
+    "moment": "^2.20.1",
     "prop-types": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
     "react": "^16.2.0",
     "react-agenda": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",
@@ -20,11 +18,14 @@
     "react-file-download": "^0.3.5",
     "react-image": "^1.3.1",
     "react-image-file": "^0.1.0",
+    "react-materialize": "^2.0.7",
     "react-moment": "^0.7.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-    "react-scroll-parallax": "^1.3.2"
+    "react-scroll-parallax": "^1.3.1",
+    "react-select": "^1.2.1",
+    "sweetalert2": "^7.15.0"
   },
   "scripts": {
     "start": "react-scripts start",

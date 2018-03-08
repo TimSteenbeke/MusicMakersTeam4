@@ -13,10 +13,9 @@ import Home from 'material-ui/svg-icons/action/home';
 import Divider from 'material-ui/Divider';
 import logo from '../images/logo.png'
 
-import Group from 'material-ui/svg-icons/social/group'
 const styles = {
     menuColor: {
-        color: "#FAFAFA",
+        color: "#D9CDC7",
     }
 };
 
@@ -27,54 +26,49 @@ class Sidebar extends Component {
             <div>
 
 
-                <img className="circle logo" alt="guitar" src={logo} />
+                <img className="circle logo" alt="guitar" src={logo}/>
 
                 <Menu>
-                        <Divider/>
-                        <Link to="/">
-                            <MenuItem style={styles.menuColor} primaryText="Home" leftIcon={<Home/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/agenda">
-                            <MenuItem style={styles.menuColor} primaryText="Agenda" leftIcon={<Agenda/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/instrumenten">
-                            <MenuItem style={styles.menuColor} primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/groups">
-                            <MenuItem primaryText="Groepen" leftIcon={<Group/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/addGroup">
-                            <MenuItem primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/addInstrument">
-                            <MenuItem primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/courses">
-                            <MenuItem style={styles.menuColor} primaryText="Courses" leftIcon={<Dashboard/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/addCourse">
-                            <MenuItem style={styles.menuColor} primaryText="Add course" leftIcon={<ContentLink/>}/>
-                        </Link>
-                        <Link to="/addInstrument">
-                            <MenuItem style={styles.menuColor} primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
-                        </Link>
                     <Divider/>
-                        <Link to="/muziekStukken">
-                            <MenuItem style={styles.menuColor} primaryText="Compositions" leftIcon={<Dashboard/>}/>
-                        </Link>
-                        <Divider/>
-                        <Link to="/addMuziekstuk">
-                            <MenuItem style={styles.menuColor}  primaryText="Add Composition" leftIcon={<ContentLink/>}/>
-                        </Link>
-                        <Divider/>
-                    </Menu>
+                    <Link to="/">
+                        <MenuItem style={styles.menuColor} primaryText="Home" leftIcon={<Home/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/agenda">
+                        <MenuItem style={styles.menuColor} primaryText="Agenda" leftIcon={<Agenda/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/instrumenten">
+                        <MenuItem style={styles.menuColor} primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
+                    </Link>
+                    <Link to="/groups">
+                        <MenuItem primaryText="Groepen" leftIcon={<Group/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/addGroup">
+                        <MenuItem primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/courses">
+                        <MenuItem style={styles.menuColor} primaryText="Courses" leftIcon={<Dashboard/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/addCourse">
+                        <MenuItem style={styles.menuColor} primaryText="Add course" leftIcon={<ContentLink/>}/>
+                    </Link>
+                    <Link to="/addInstrument">
+                        <MenuItem style={styles.menuColor} primaryText="Add Instrument" leftIcon={<ContentLink/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/muziekStukken">
+                        <MenuItem style={styles.menuColor} primaryText="Compositions" leftIcon={<Dashboard/>}/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/addMuziekstuk">
+                        <MenuItem style={styles.menuColor} primaryText="Add Composition" leftIcon={<ContentLink/>}/>
+                    </Link>
+                    <Divider/>
+                </Menu>
             </div>
         );
     }

@@ -1,12 +1,14 @@
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'localhost:8080/api/';
+
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
+
 
 export function getInstrumentenFromBackend() {
-
-    return fetch(localURL + "instruments", {
+    return fetch(URL + "instruments", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -22,10 +24,11 @@ export function getInstrumentenFromBackend() {
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
-    return fetch(localURL + "instruments/" + instrumentNr, {
+
+    return fetch(URL + "instruments/" + instrumentNr, {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -42,10 +45,11 @@ export function getInstrumentFromBackend(instrumentNr) {
 
 export function getInstrumentSoortenFromBackend() {
 
-    return fetch(localURL + "instrumentsoorten", {
+
+    return fetch(URL + "instrumentsoorten", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -61,38 +65,42 @@ export function getInstrumentSoortenFromBackend() {
 }
 
 export function postInstrument(data) {
-    fetch(localURL + 'instruments', {
+
+    fetch(URL + 'instruments', {
+ 
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     })
 }
 
 export function deleteInstrument(instrumentId) {
-    return fetch(localURL + 'instruments/' + instrumentId, {
+
+    return fetch(URL + 'instruments/' + instrumentId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         }
     });
 }
 
 export function UpdateInstrument(instrumentId, data) {
     console.log(data);
-    return fetch(localURL + 'instruments/instrument/' + instrumentId, {
+
+    return fetch(URL + 'instruments/instrument/' + instrumentId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });

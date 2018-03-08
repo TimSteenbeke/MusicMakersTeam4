@@ -36,7 +36,6 @@ class Compositions extends Component {
 
         };
     }
-
     handleRowSelection = (selectedRows) => {
         this.setState({
             selected: selectedRows,

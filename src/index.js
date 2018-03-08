@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App.js';
-import Sidebar from './Components/Sidebar.js'
-import GroupsAndChat from './Components/GroupsAndChat.js'
+import Sidebar from './Components/Sidebar.js';
+import GroupsAndChat from './Components/GroupsAndChat.js';
+import CheckTokenComponent from './Components/CheckTokenComponent';
 
 import {BrowserRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
-import PlayPartituur from "./Components/PlayMusic";
+// import PlayPartituur from "./Components/PlayMusic";
 
 
 const Application = () => (
@@ -20,6 +21,7 @@ const Application = () => (
                     </section>
                     <section className="application">
                         <App/>
+                        <CheckTokenComponent/>
                     </section >
                     <section className="groups">
                         <GroupsAndChat/>
