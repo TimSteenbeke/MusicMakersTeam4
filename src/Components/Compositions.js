@@ -3,26 +3,11 @@
  */
 import React, {Component} from 'react';
 import * as CompositionService from '../Services/CompositionService.js'
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import CompDetails from './CompositionDetails.js';
-import CompUpdate from './CompositionUpdate.js';
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
+import Header from './Header'
+import {Link} from 'react-router-dom';
+import swal from 'sweetalert2'
 
 
-const styles = {
-    exampleImageInput: {
-        margin: 10,
-    }
-};
 
 class Compositions extends Component {
     constructor(props) {
@@ -30,36 +15,43 @@ class Compositions extends Component {
         this.state = {
             compositions: [],
             selectedIndex: 0,
-            selected: [],
-            openDetails: false,
-            openUpdate: false,
-
         };
     }
-    handleRowSelection = (selectedRows) => {
-        this.setState({
-            selected: selectedRows,
-        });
-    };
 
-    handleOpen = () => {
-        this.setState({openDetails: true});
-    };
 
-    handleClose = () => {
-        this.setState({openDetails: false});
-    };
-
-    handleOpenUpdate = () => {
-        this.setState({openUpdate: true});
-    };
-
-    handleCloseUpdate = () => {
-        this.setState({openUpdate: false});
-    };
-
-    handleDelete = () => {
-        CompositionService.deleteComposition(this.state.selectedIndex);
+    handleDelete = (id, e) => {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swal(
+                    'Deleted!',
+                    'Composition has been deleted.',
+                    'success'
+                );
+                CompositionService.deleteComposition(id);
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'Cancelled',
+                    'Composition was not deleted',
+                    'error'
+                )
+            }
+        })
     };
 
     componentWillUpdate(){
@@ -74,90 +66,51 @@ class Compositions extends Component {
         });
     }
 
-    handleCellClick = (rowNumber) => {
-        const self = this;
-
-        this.setState({
-            selectedIndex: this.state.compositions[rowNumber].muziekstukId
-        });
-
-        setTimeout(function () {
-            console.log(console.log("Selected Row: " + self.state.selectedIndex));
-        }, 1000);
-    };
-
-    isSelected = (index) => {
-        return this.state.selected.indexOf(index) !== -1;
-    };
-
     render() {
-        const actionsDetails = [
-            <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
-
-        const actionsUpdate = [
-            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
-
         return (
-            <div className="Homepage">
-                <section className="container">
-                    <div className="whiteBox">
-                        <h1 className="header">Muziekstukken</h1>
-                        <Table onRowSelection={this.handleRowSelection} onCellClick={this.handleCellClick}>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHeaderColumn>Titel</TableHeaderColumn>
-                                    <TableHeaderColumn>Artiest</TableHeaderColumn>
-                                    <TableHeaderColumn>Taal</TableHeaderColumn>
-                                    <TableHeaderColumn>Genre</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {this.state.compositions.map((composition, index) => (
-                                    <TableRow selected={this.isSelected(index)} key={composition.muziekstukId}>
-                                        <TableRowColumn>{composition.titel}</TableRowColumn>
-                                        <TableRowColumn>{composition.artist}</TableRowColumn>
-                                        <TableRowColumn> {composition.language}</TableRowColumn>
-                                        <TableRowColumn>{composition.genre}</TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        <RaisedButton style={styles.exampleImageInput} label="Details" onClick={this.handleOpen} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
-                        <RaisedButton label="Delete"  style={styles.exampleImageInput}  onClick={this.handleDelete} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
-                        <RaisedButton label="Update"  style={styles.exampleImageInput}  onClick={this.handleOpenUpdate} backgroundColor="#DD2C00"
-                                      labelColor="#FFEBEE"/>
-                    </div>
-                </section>
-                <Dialog
-                    actions={actionsDetails}
-                    modal={false}
-                    open={this.state.openDetails}
-                    onRequestClose={this.handleClose}
-                    autoScrollBodyContent={true}
-                >
-                    <CompDetails
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
+        <div className="Homepage">
+            <Header name="Composities"/>
+            <section className="containerCss">
+                <table className="highlight striped black-text bordered responsive-table centered">
+                    <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Artiest</th>
+                        <th>Taal</th>
+                        <th>Genre</th>
+                        <th>Acties</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.compositions.map((composition, index) => (
+                        <tr key={composition.muziekstukId} id={composition.muziekstukId}>
+                            <td>{composition.titel}</td>
+                            <td>{composition.artist}</td>
+                            <td>{composition.language}</td>
+                            <td>{composition.genre}</td>
+                            <td>
+                                <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                      to={`/coursedetails/${composition.muziekstukId}` }>
+                                    <i className="material-icons">edit
+                                    </i>
+                                </Link>
+                                <a className="waves-effect white-text deep-orange darken-4 btn"
+                                   onClick={(e) => this.handleDelete(composition.muziekstukId, e)}><i
+                                    className="material-icons">delete
+                                </i></a>
 
-                <Dialog
-                    actions={actionsUpdate}
-                    modal={false}
-                    open={this.state.openUpdate}
-                    onRequestClose={this.handleCloseUpdate}
-                    autoScrollBodyContent={true}
-                >
-                    <CompUpdate
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
-            </div>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                <div className="fixed-action-btn">
+                    <Link to="/addMuziekstuk" className="btn-floating btn-large deep-orange darken-4">
+                        <i className="large material-icons">add</i>
+                    </Link>
+                </div>
+            </section>
+        </div>
         );
     }
 }
