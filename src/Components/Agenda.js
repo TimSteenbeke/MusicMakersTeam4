@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import { ReactAgenda , guid  } from 'react-agenda';
-import * as AgendaService from '../Services/AgendaService';
 import { ReactAgenda , guid ,ReactAgendaCtrl, Modal } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
 import ActivityPopUp from './ActivityPopUp.js';
 import Header from './Header';
+import {Row, Input} from 'react-materialize'
+import * as UserService from '../Services/UserService.js'
 
 require('moment/locale/nl.js');
 
@@ -44,7 +44,8 @@ class Agenda extends Component {
             numberOfDays:4,
             startDate: new Date(),
             agendaItems: [],
-            agendaOwner: ""
+            agendaOwner: "",
+            selectableUsers: []
         };
         this.handleCellSelection = this.handleCellSelection.bind(this);
         this.handleItemEdit = this.handleItemEdit.bind(this);
@@ -54,9 +55,19 @@ class Agenda extends Component {
     componentDidMount() {
         //Ajax call to get user his role
         //If role = admin => extra features (change state)
+        this.getUsers();
+
 
         this.getMyAgendaItems();
     }
+
+    getUsers() {
+        UserService.getAll().then(console.log("----Teachers---- \n"))
+            .then(users => {
+                this.setState({selectableUsers: users.users}, console.log(users.users));
+            });
+
+    };
 
 
     getMyAgendaItems() {
@@ -123,20 +134,15 @@ class Agenda extends Component {
         console.log('handleRangeSelection', item)
     }
 
- zeghallo = (event,value) => {
+ setSelectedUser = (event,value) => {
         console.log(value);
         var user = event.target.value;
         this.setState({'requesteduser':user});
+     AgendaService.getOtherAgenda(this.state.requesteduser).then(agendaitems => {
+         this.mapAgendaItems(agendaitems);
+     });
     };
-
-    requestAgenda() {
-        console.log('agenda requested: ' + this.state.requesteduser);
-        //Get agenda of request user
-        AgendaService.getOtherAgenda(this.state.requesteduser).then(agendaitems => {
-            this.mapAgendaItems(agendaitems);
-        });
-    }
-
+    
 
 
 
@@ -145,12 +151,29 @@ class Agenda extends Component {
 
       return  (
           <div>
-              <input  onChange={this.zeghallo}/>
-              <button onClick={() => this.requestAgenda()} >Request other agenda</button>
               <div className="scrollbar" id="style-2">
                   <div className="force-overflow">
               <Header name="Agenda"/>
               <section className="containerCss">
+                  <div className="section">
+                      <div className="row">
+                          <div className="col s3 m3 l3">
+                              <h5 className="truncate">Studenten</h5>
+                          </div>
+                          <div className="col s9 m9 l9">
+                              <Row>
+                                  <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
+                                         icon='child_care' defaultValue='1'>
+                                      <option key="" value="" disabled>Kies de studenten</option>
+                                      {this.state.selectableUsers.map((user, index) => (
+                                          <option key={user.userid}
+                                                  value={user.userid}>{user.firstname} {user.lastname}</option>
+                                      ))}
+                                  </Input>
+                              </Row>
+                          </div>
+                      </div>
+                  </div>
               <ReactAgenda
                   minDate={now}
                   maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
