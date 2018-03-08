@@ -4,7 +4,6 @@
 
 import React, {Component} from 'react';
 import * as InstrumentenService from '../Services/InstrumentService.js'
-import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';

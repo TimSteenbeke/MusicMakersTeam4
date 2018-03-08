@@ -2,7 +2,6 @@
  * Created by Ben on 28/02/2018.
  */
 const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'http://localhost:8080/api/';
 
 export function registerAbsent(performanceid) {
     return fetch(herokuURL + 'performance/absent/' +performanceid,
