@@ -5,22 +5,46 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
+import Header from './Header'
 
 class CompositionDetails extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            orignaltitel: "",
+            compositionId: this.props.match.params.id,
+            title: "string",
+            artist: "string",
+            language: "string",
+            genre: "string",
+            subject: "string",
+            instrumentType: "string",
+            link: "string",
+            fileFormat: "string",
+            content: "string",
             composition: {},
             open: false,
         }
     }
 
     componentDidMount() {
-        CompositionService.getCompositionFromBackend(this.props.id)
-            .then(console.log("----Muziekstuk met id " + this.props.id + "---- \n"))
-            .then(composition => this.setState({composition: composition,orignaltitel: composition.titel}, console.log(composition)))
+        let self = this;
+        CompositionService.getCompositionFromBackend(self.state.compositionId)
+            .then(console.log("----Composition with id " + self.state.compositionId + "---- \n"))
+            .then(composition => {
+                self.setState({
+                    title: composition.title,
+                    artist: composition.artist,
+                    language: composition.language,
+                    genre: composition.genre,
+                    subject: composition.subject,
+                    instrumentType: composition.instrumentType,
+                    link: composition.link,
+                    fileFormat: composition.fileFormat
+                });
+            }).catch((error) => {
+            console.log(error);
+        });
     }
     componentWillMount(){
         let response = false;
@@ -29,6 +53,24 @@ class CompositionDetails extends Component {
         console.log(response);
         this.setState({redirect: !response})
     }
+
+    handleUpdate = () => {
+        const self = this;
+        CompositionService.UpdateComposition(this.state.compositionId, JSON.stringify(
+            {
+                content: this.state.composition.content,
+                artist: this.state.composition.artist,
+                language: this.state.composition.language,
+                genre: this.state.composition.genre,
+                subject: this.state.composition.subject,
+                instrumentType: this.state.composition.instrumentType,
+                link: this.state.composition.link,
+                fileFormat: this.state.composition.fileFormat,
+                title: this.state.composition.titel
+            }
+        ));
+    };
+
 
     assignItem = item => { // bound arrow function handler
         const sampleBytes = CompositionDetails.base64ToArrayBuffer(item);
@@ -66,9 +108,10 @@ class CompositionDetails extends Component {
             redirecter = <Redirect to='/login'/>
         }
         return (
-            <div >
+            <div className="Homepage">
                 {redirecter}
-                <h1 className="header">Muziekstuk Details</h1>
+                <Header name={this.state.naam}/>
+
                 <Card expanded={true}>
                     <CardText>
                         <div className="CompositionDetail">
