@@ -69,9 +69,11 @@ class Login extends Component {
     }
 
     componentWillMount() {
-        if(localStorage.getItem('userToken')!= null){
-            this.setState({redirect: true});
-        }
+        let response;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: response})
     }
 
     render() {

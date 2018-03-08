@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { ReactAgenda , guid  } from 'react-agenda';
-import * as AgendaService from '../Services/AgendaService'
+import * as AgendaService from '../Services/AgendaService';
 import RaisedButton from 'material-ui/RaisedButton';
-import ActivityPopUp from './ActivityPopUp.js'
-import Header from './Header'
+import ActivityPopUp from './ActivityPopUp.js';
+import Header from './Header';
 
 require('moment/locale/nl.js');
 
@@ -114,7 +114,6 @@ class Agenda extends Component {
     }
 
     render() {
-
       return  (
           <div>
               <div className="scrollbar" id="style-2">

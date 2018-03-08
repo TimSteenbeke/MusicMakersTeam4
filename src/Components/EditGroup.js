@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
-
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
@@ -60,9 +58,10 @@ export default class EditGroup extends Component {
         counter++;
     }
 
-    render() {
-        return (
 
+    render() {
+
+        return (
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">

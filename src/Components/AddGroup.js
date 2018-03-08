@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
 const styles = {
@@ -40,6 +39,7 @@ const styles = {
         opacity: 0,
     },
 };
+
 
 var counter = 1;
 export default class AddGroup extends Component {

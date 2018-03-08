@@ -1,11 +1,12 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 // const URL = 'localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getCompositionsFromBackend() {
     return fetch(URL + "compositions", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -24,7 +25,7 @@ export function getCompositionFromBackend(compositionId) {
     return fetch(URL + "compositions/" + compositionId, {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -45,7 +46,7 @@ export function postMuziekstuk(data) {
         mode: 'no-cors',
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         },
         body: data
@@ -59,7 +60,7 @@ export function deleteComposition(compositionId) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
         }
     });
 }
@@ -73,7 +74,7 @@ export function UpdateComposition(compositionId, data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });

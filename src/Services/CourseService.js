@@ -1,12 +1,12 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-//const URL = 'localhost:8080/api/';
+// const URL = 'localhost:8080/api/';
+let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getCoursesFromBackend() {
-
     return fetch(URL + "courses", {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -48,7 +48,7 @@ export function postCourse(data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     })
@@ -62,7 +62,7 @@ export function deleteCourse(courseId) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         }
     });
 }
@@ -75,7 +75,7 @@ export function updateCourse(courseId, data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
         },
         body: data
     });
