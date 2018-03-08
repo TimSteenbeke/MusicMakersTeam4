@@ -12,6 +12,7 @@ import Agenda from 'material-ui/svg-icons/action/view-agenda';
 import Home from 'material-ui/svg-icons/action/home';
 import Divider from 'material-ui/Divider';
 import logo from '../images/logo.png'
+import Group from 'material-ui/svg-icons/social/group'
 
 const styles = {
     menuColor: {
@@ -42,11 +43,11 @@ class Sidebar extends Component {
                         <MenuItem style={styles.menuColor} primaryText="Instrumenten" leftIcon={<Dashboard/>}/>
                     </Link>
                     <Link to="/groups">
-                        <MenuItem primaryText="Groepen" leftIcon={<Group/>}/>
+                        <MenuItem  style={styles.menuColor} primaryText="Groepen" leftIcon={<Group/>}/>
                     </Link>
                     <Divider/>
                     <Link to="/addGroup">
-                        <MenuItem primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
+                        <MenuItem style={styles.menuColor} primaryText="Groep toevoegen" leftIcon={<ContentLink/>}/>
                     </Link>
                     <Divider/>
                     <Link to="/courses">

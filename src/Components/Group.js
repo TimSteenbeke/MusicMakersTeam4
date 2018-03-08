@@ -39,7 +39,7 @@ export default class Group extends Component {
                 <Header name="Groepen" />
 
                 <section className="containerCss">
-                    <table className="white-text bordered responsive-table centered">
+                    <table className="black-text bordered responsive-table centered">
                         <thead>
                         <tr>
                             <th>Naam</th>
@@ -50,7 +50,7 @@ export default class Group extends Component {
                             <tr key={index} id={group.groupId}>
                                 <td>{group.name}</td>
                                 <td>
-                                    <Link className="waves-effect white-text red darken-4 btn marginator" to={`/instrumentdetails/${group.groupId}` }>
+                                    <Link className="waves-effect white-text red darken-4 btn marginator" to={`/editgroup/${group.groupId}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>

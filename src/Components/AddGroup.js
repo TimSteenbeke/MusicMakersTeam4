@@ -8,10 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import Snackbar from 'material-ui/Snackbar';
-import AutoComplete from 'material-ui/AutoComplete';
-import IconButton from 'material-ui/IconButton';
-import AddCircle from 'material-ui/svg-icons/content/add-circle';
 import SuperSelectField from 'material-ui-superselectfield'
+
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 
@@ -61,7 +59,7 @@ const styles = {
 
 
 const students = [];
-for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
     students.push('Student ' + i);
 }
 
@@ -82,10 +80,12 @@ class AddGroup extends Component {
             soorten: [],
             open: false,
             image: "..image/image.jpg",
-            bestand: ""
+            bestand: "",
+            teacherids: [],
+            studentids: [],
+            teachers: [],
+            students: []
         };
-
-
     }
 
     studentItems(values) {
@@ -167,14 +167,14 @@ class AddGroup extends Component {
             <div className="Homepage">
                 <section className="container">
                     <div className="whiteBox">
-                        <h1 className="header">Voeg Instrument toe</h1>
+                        <h1 className="header">Voeg Groep Toe</h1>
                         <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
                         }}>
                             <TextField
                                 onChange={this.onChangeNaam}
-                                hintText="Geef groepnaam in..."
+                                hintText="Geef groepsnaam in..."
                                 floatingLabelText="Groepnaam"
                                 style={styles.width}
 
@@ -244,8 +244,8 @@ class AddGroup extends Component {
 
                 </section>
             </div>
-    );
+        );
     }
-    }
+}
 
-    export default AddGroup;
+export default AddGroup;
