@@ -75,7 +75,7 @@ export function postGroup(data) {
         },
         body: data
     });
-
+}
 export function deleteGroup(groupId) {
     return fetch('http://localhost:8080/api/groups/' + groupId, {
         method: 'DELETE',
