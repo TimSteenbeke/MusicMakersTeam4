@@ -20,6 +20,7 @@ class Partituur extends Component {
             file: this.state.gp5,
             engine: 'svg',
             width: -1,
+            staves: 'score'
         });
 
         // Initialize Player and Setup Player
@@ -47,9 +48,9 @@ class Partituur extends Component {
 //this.state.gp5 --> this.props.dataFile
     render() {
         return (
-            <div>
+            <div hidden={this.props.hidden}>
                 <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
-                <input type="button" id="pauseBtn" value="Pauze" onClick={(e) => this.pauze(e)}/>
+                <input type="button" id="pauseBtn" value="Pause" onClick={(e) => this.pauze(e)}/>
                 <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.stop(e)}/>
 
                 <div id="AlphaTab" ref="partituur" data-tracks="0"/>
