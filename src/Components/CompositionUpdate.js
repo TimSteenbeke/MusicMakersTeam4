@@ -3,7 +3,6 @@ import * as CompositionService from '../Services/CompositionService.js'
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
 import Header from './Header'
-import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
 
 class CompositionUpdate extends Component {
@@ -12,7 +11,7 @@ class CompositionUpdate extends Component {
         super(props);
         this.state = {
             MuziekstukId: this.props.match.params.id,
-            title: "",
+            titel: "",
             artist: "",
             language: "",
             genre: "",
@@ -29,7 +28,7 @@ class CompositionUpdate extends Component {
         CompositionService.getCompositionFromBackend(self.state.MuziekstukId)
             .then(console.log("----Composition with id " + self.state.MuziekstukId + "---- \n"))
             .then(composition => self.setState({
-                title: composition.title,
+                titel: composition.titel,
                 artist: composition.artist,
                 language: composition.language,
                 genre: composition.genre,
@@ -51,7 +50,7 @@ class CompositionUpdate extends Component {
 
     handleUpdate = () => {
         const self = this;
-        console.log("compid: " + self.state.MuziekstukId);
+        console.log("link: " + self.state.link);
         CompositionService.UpdateComposition(this.state.MuziekstukId, JSON.stringify(
             {
                 content: this.state.content,
@@ -62,9 +61,44 @@ class CompositionUpdate extends Component {
                 instrumentType: this.state.instrumentType,
                 link: this.state.link,
                 fileFormat: this.state.fileFormat,
-                title: this.state.title
+                titel: this.state.titel
             }
         ));
+    };
+
+    setTitle = event => {
+        let value = event.target.value;
+        return this.setState({titel: value})
+    };
+
+    setArtist = event => {
+        let value = event.target.value;
+        return this.setState({artist: value})
+    };
+
+    setGenre = event => {
+        let value = event.target.value;
+        return this.setState({genre: value})
+    };
+
+    setLanguage = event => {
+        let value = event.target.value;
+        return this.setState({language: value})
+    };
+
+    setSubject = event => {
+        let value = event.target.value;
+        return this.setState({subject: value})
+    };
+
+    setType = event => {
+        let value = event.target.value;
+        return this.setState({instrumentType: value})
+    };
+
+    setLink = event => {
+        let value = event.target.value;
+        return this.setState({link: value})
     };
 
     render() {
@@ -74,34 +108,28 @@ class CompositionUpdate extends Component {
         }
         return (<div className="Homepage">
                 {redirecter}
-                <Header name={this.state.title}/>
+                <Header name={this.state.titel}/>
 
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
                                 <div className="card-image">
-                                    <span className="card-title white-text">{this.state.title}</span>
+                                    <span className="card-title white-text">{this.state.titel}</span>
                                 </div>
                                 <div className="card-content">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <input type="text"  placeholder="Geef een titel in.."/>
+                                                <label>Titel</label>
+                                                <input type="text" value={this.state.titel} label="Titel"  onChange={this.setTitle} placeholder="Geef een titel in.."/>
                                             </div>
                                         </div>
                                     <div className="divider"></div>
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <input type="text" placeholder="Geef een artiest in.."/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
-                                            <div className="col s12 m12 l12">
-                                                <input type="text" placeholder="Geef een taal in.."/>
+                                                <label>Artiest</label>
+                                                <input type="text" value={this.state.artist}  onChange={this.setArtist} placeholder="Geef een artiest in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +137,8 @@ class CompositionUpdate extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <input type="text" placeholder="Geef een genre in.."/>
+                                                <label>Taal</label>
+                                                <input type="text" value={this.state.language} onChange={this.setLanguage} placeholder="Geef een taal in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +146,8 @@ class CompositionUpdate extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <input type="text" placeholder="Geef een onderworp in.."/>
+                                                <label>Genre</label>
+                                                <input type="text" value={this.state.genre}  onChange={this.setGenre} placeholder="Geef een genre in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +155,8 @@ class CompositionUpdate extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <input type="text" placeholder="Geef een type in.."/>
+                                                <label>Onderwerp</label>
+                                                <input type="text" value={this.state.subject}  onChange={this.setSubject} placeholder="Geef een onderwerp in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +164,17 @@ class CompositionUpdate extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <input type="text" placeholder="Geef een link in.."/>
+                                                <label>Instrumenttype</label>
+                                                <input type="text" value={this.state.instrumentType}  onChange={this.setType} placeholder="Geef een type in.."/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s12 m12 l12">
+                                                <label>Link</label>
+                                                <input type="text" value={this.state.link}  onChange={this.setLink} placeholder="Geef een link in.."/>
                                             </div>
                                         </div>
                                     </div>

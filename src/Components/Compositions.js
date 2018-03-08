@@ -48,15 +48,14 @@ class Compositions extends Component {
         this.setState({openUpdate: false});
     };
 
-    handleDelete = () => {
-        CompositionService.deleteComposition(this.state.selectedIndex);
-    };
+    handleDelete = (id, e) => {
+        CompositionService.deleteComposition(id);
+        this.setState({ compositions: [] });
 
-    /*componentWillUpdate(){
         CompositionService.getCompositionsFromBackend().then(compositions => {
             this.setState({compositions: compositions});
         });
-    }*/
+    };
 
     componentDidMount() {
         CompositionService.getCompositionsFromBackend().then(compositions => {
@@ -194,7 +193,7 @@ class Compositions extends Component {
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete()}><i className="material-icons">delete
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(composition.muziekstukId, e)}><i className="material-icons">delete
                                     </i></a>
 
                                 </td>
