@@ -19,8 +19,7 @@ class Partituur extends Component {
         $(this.refs.partituur).alphaTab({
             file: this.state.gp5,
             engine: 'svg',
-            width: -1,
-            staves: 'score'
+            width: -1
         });
 
         // Initialize Player and Setup Player
