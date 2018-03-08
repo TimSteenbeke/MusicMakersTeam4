@@ -2,24 +2,17 @@
  * Created by Ben on 28/02/2018.
  */
 import React, {Component} from 'react';
-import { ReactAgenda , guid  } from 'react-agenda';
+import {ReactAgenda, guid} from 'react-agenda';
 import * as LesService from '../Services/LesService.js'
 import * as OptredenService from '../Services/OptredenService.js'
-import RaisedButton from 'material-ui/RaisedButton';
-
-
-const styles = {
-    exampleImageInput: {
-        margin: 10,
-    }
-}
 
 
 class ActivityPopUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            aanwezigheidsstatus:''
+            aanwezigheidsstatus: 'Te beslissen',
+            icon: 'notifications'
         };
 
     }
@@ -27,19 +20,19 @@ class ActivityPopUp extends Component {
     componentDidMount() {
         //Call maken om te zien of persoon aanwezig of afwezig is voor die les
         //State verranderen
-      this.getStatus();
+        this.getStatus();
 
     }
 
     getStatus() {
         if (this.props.type == "Optreden") {
             OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
-                this.setState({aanwezigheidsstatus:statusobject.status});
+                this.setState({aanwezigheidsstatus: statusobject.status});
                 console.log(this.state.aanwezigheidsstatus);
             })
         } else {
             LesService.getAttendanceStatus(this.props.id).then(statusobject => {
-                this.setState({aanwezigheidsstatus:statusobject.status});
+                this.setState({aanwezigheidsstatus: statusobject.status});
                 console.log(this.state.aanwezigheidsstatus);
             })
         }
@@ -47,8 +40,10 @@ class ActivityPopUp extends Component {
 
     aanwezig() {
         console.log(this.props);
-        var id= this.props.id;
-
+        let id = this.props.id;
+        this.setState({
+            icon: 'check'
+        });
         if (this.props.type == "Optreden") {
             OptredenService.registerPresent(id);
         } else {
@@ -58,8 +53,10 @@ class ActivityPopUp extends Component {
 
     afwezig() {
         console.log(this.props);
-        var id= this.props.id;
-
+        let id = this.props.id;
+        this.setState({
+            icon: 'not_interested'
+        });
         if (this.props.type == "Optreden") {
             OptredenService.registerAbsent(id);
         } else {
@@ -68,13 +65,11 @@ class ActivityPopUp extends Component {
     }
 
     render() {
-        return  (
+        return (
             <div>
-                <div>Jouw status:{this.state.aanwezigheidsstatus}</div>
-                <RaisedButton label="Aanwezig"  style={styles.exampleImageInput}  onClick={() => this.aanwezig()} backgroundColor="#DD2C00"
-                              labelColor="#FFEBEE"/>
-                <RaisedButton label="Afwezig"  style={styles.exampleImageInput}  onClick={() => this.afwezig()} backgroundColor="#DD2C00"
-                              labelColor="#FFEBEE"/>
+                {/*Popup*/}
+                <a className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.aanwezigheidsstatus}
+                </a>
             </div>
         );
     }
