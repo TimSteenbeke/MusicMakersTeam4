@@ -1,9 +1,9 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'http://localhost:8080/api/';
+// const URL = 'localhost:8080/api/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
-export function getGroupsFromBackendByUser(userId) {
-    return fetch(localURL + "groups/" + userId, {
+export function getGroupsFromBackend(userId) {
+    return fetch(URL + "groups/" + userId, {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " + userToken.access_token,
@@ -24,11 +24,11 @@ export function getGroupsFromBackendByUser(userId) {
         });
 }
 
-export function getGroupsFromBackend() {
-    return fetch(localURL + "groups/allgroups", {
+export function getAllGroupsFromBackend() {
+    return fetch(URL + "groups/allgroups", {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " + userToken.access_token,
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -74,29 +74,7 @@ export function postGroup(data) {
             'Content-Type': 'application/json',
         },
         body: data
-    })
-}
-
-export function loadDataIntoEdit(groupId) {
-    return fetch(localURL + "groups/" + groupId, {
-        mode: 'cors',
-        headers: {
-            'Authorization': userToken.token_type + " " + userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
-            return responseJson;
-        })
-        .catch((err) => {
-            const groep = {naam: "groep niet gevonden"};
-            return groep;
-        });
-}
+    });
 
 export function deleteGroup(groupId) {
     return fetch('http://localhost:8080/api/groups/' + groupId, {

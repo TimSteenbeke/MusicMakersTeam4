@@ -33,7 +33,9 @@ export function fetchToken(username, password) {
 export function checkToken(){
     if(localStorage.getItem('userToken')!= null){
         let jwt = localStorage.getItem('userToken');
-
+        if(isString(jwt)){
+            return false;
+        }
         var current_time = Date.now() / 1000;
         if ( jwt.exp < current_time) {
             localStorage.removeItem('userToken');
@@ -43,6 +45,11 @@ export function checkToken(){
         }
     }
         return false;
+}
+
+// Returns if a value is a string
+function isString (value) {
+    return typeof value === 'string' || value instanceof String;
 }
 //Fix Ben
 /*export function fetchLogin() {

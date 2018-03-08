@@ -1,11 +1,13 @@
 /**
  * Created by Ben on 28/02/2018.
  */
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'http://localhost:8080/api/';
+
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'http://localhost:8080/api/';
+
 
 export function registerAbsent(performanceid) {
-    return fetch(herokuURL + 'performance/absent/' +performanceid,
+    return fetch(URL + 'performance/absent/' +performanceid,
         {
             method: 'POST',
             mode: 'cors',
@@ -27,7 +29,7 @@ export function registerAbsent(performanceid) {
 }
 
 export function registerPresent(performanceid) {
-    return fetch(herokuURL + 'performance/present/' +performanceid,
+    return fetch(URL + 'performance/present/' +performanceid,
         {
             method: 'POST',
             mode: 'cors',
@@ -49,7 +51,7 @@ export function registerPresent(performanceid) {
 }
 
 export function getAttendanceStatus(performanceid) {
-    return fetch(herokuURL + 'performance/attendancestatus/' +performanceid,
+    return fetch(URL + 'performance/attendancestatus/' +performanceid,
         {
             method: 'GET',
             mode: 'cors',

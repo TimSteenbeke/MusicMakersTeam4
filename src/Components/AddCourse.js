@@ -14,16 +14,14 @@ class AddCourse extends Component {
 
     constructor(props) {
         super(props);
+        console.log("Constructed");
         this.state = {
-            value: 1,
             beschrijving: "",
-            prijs: 0,
-            selectedteacherids: [],
-            selectedstudentids: [],
+            teacherids: [],
+            studentids: [],
             teachers: [],
             students: [],
         };
-
 
     }
 
@@ -35,11 +33,16 @@ class AddCourse extends Component {
             showConfirmButton: false,
             timer: 1500
         });
+        console.log("Beschrijving: " + this.state.beschrijving);
+        console.log("studentIds: " + this.state.studentids);
+        console.log("teacherIds: " + this.state.teacherids);
+
         CourseService.postCourse(JSON.stringify(
             {
-                beschrijving: this.state.beschrijving,
-                teacherids: this.state.selectedteacherids,
-                studentids: this.state.selectedstudentids
+                coursebeschrijving: this.state.beschrijving,
+                teacherids: this.state.teacherids,
+                studentids: this.state.studentids,
+                prijs: 1
             }
         ));
     };
@@ -49,31 +52,50 @@ class AddCourse extends Component {
         this.addTeachers();
     }
 
-    addTeachers() {
+    addTeachers = () => {
         UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
-                this.setState({students: students}, console.log(students));
+                this.setState({students: students.users}, console.log(students.users));
             });
-    }
+    };
 
-    addStudents() {
+    addStudents = () => {
         UserService.getTeachers().then(console.log("----Teachers---- \n"))
             .then(teachers => {
-                this.setState({teachers: teachers}, console.log(teachers));
+                this.setState({teachers: teachers.users}, console.log(teachers.users));
             });
 
-    }
+    };
 
     onChangeDescription = (e) => {
         this.setState({beschrijving: e.target.value});
         console.log("beschrijving:" + e.target.value)
     };
 
-    handleChange = (event, value) => {
-        this.setState({value});
-        console.log(value)
+
+    handleTeacherChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({teacherids: value});
+        console.log(this.state.teacherids);
     };
 
+    handleStudentChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({studentids: value});
+        console.log(this.state.studentids);
+    };
 
     render() {
         return (
@@ -110,11 +132,13 @@ class AddCourse extends Component {
                                                 <div className="col s9 m9 l9">
                                                     <Row>
                                                         <Input s={12} multiple={true} type='select'
+                                                               onChange={this.handleTeacherChange}
                                                                label="Leerkrachten" icon='face' defaultValue='1'>
-                                                            <option value="" disabled>Kies de leerkrachten</option>
+                                                            <option key="" value="" disabled>Kies de leerkrachten
+                                                            </option>
                                                             {this.state.teachers.map((teacher, index) => (
-                                                                <option key={teacher.id}
-                                                                        value={teacher.id}>{teacher.firstname} {teacher.lastname}</option>
+                                                                <option key={teacher.userid}
+                                                                        value={teacher.userid}>{teacher.firstname} {teacher.lastname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
@@ -128,12 +152,12 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple type='select' label="Studenten"
+                                                        <Input s={12} multiple={true} type='select' label="Studenten" onChange={this.handleStudentChange}
                                                                icon='child_care' defaultValue='1'>
-                                                            <option value="" disabled>Kies de studenten</option>
+                                                            <option key="" value="" disabled>Kies de studenten</option>
                                                             {this.state.students.map((student, index) => (
-                                                                <option key={student.id}
-                                                                        value={student.id}>{student.firstname} {student.lastname}</option>
+                                                                <option key={student.userid}
+                                                                        value={student.userid}>{student.firstname} {student.lastname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>

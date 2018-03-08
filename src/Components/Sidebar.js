@@ -6,10 +6,6 @@ import {Link} from 'react-router-dom';
 import Menu from 'material-ui/Menu';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import ContentLink from 'material-ui/svg-icons/content/add';
-import Dashboard from 'material-ui/svg-icons/action/dashboard';
-import Agenda from 'material-ui/svg-icons/action/view-agenda';
-import Home from 'material-ui/svg-icons/action/home';
 import Divider from 'material-ui/Divider';
 import logo from '../images/logo.png'
 import Group from 'material-ui/svg-icons/social/group'
