@@ -27,7 +27,7 @@ export function getMyAgenda() {
 
 
 export function getOtherAgenda(userid) {
-    return fetch(localURL + 'agenda/' + userid,
+    return fetch(URL + 'agenda/' + userid,
         {
             mode: 'cors',
             headers: {

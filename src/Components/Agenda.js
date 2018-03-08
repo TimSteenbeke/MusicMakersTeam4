@@ -142,7 +142,7 @@ class Agenda extends Component {
          this.mapAgendaItems(agendaitems);
      });
     };
-    
+
 
 
 
