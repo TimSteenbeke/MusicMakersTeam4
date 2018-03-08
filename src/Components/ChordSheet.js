@@ -71,12 +71,10 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
     }
 
     play(){
-        this.setState({hideFirst:false});
         var chordList = $(".chord").map(function(){return $(this).html()}).get();
         var _this = this;
         this.interval = setInterval(function() {_this.nextChord(chordList)}, this.state.speed);
         console.log(this.interval);
-
     }
 
     nextChord(chordList){
