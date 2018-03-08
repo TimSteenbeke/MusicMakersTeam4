@@ -25,7 +25,7 @@ export function getCourseFromBackend(courseNr) {
     return fetch(URL + "courses/" + courseNr, {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })

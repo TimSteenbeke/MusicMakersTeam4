@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react';
 import * as CourseService from '../Services/CourseService'
-import RaisedButton from 'material-ui/RaisedButton';
 import Header from './Header'
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2'
@@ -75,11 +74,6 @@ class Courses extends Component {
 
 
     render() {
-
-        const actionsUpdate = [
-            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
 
         return (
 
