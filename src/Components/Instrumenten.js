@@ -12,6 +12,7 @@ class Instrumenten extends Component {
 
     constructor(props) {
         super(props);
+        console.log("Constructed");
         this.state = {
             instrumenten: [],
             selectedIndex: 0,
