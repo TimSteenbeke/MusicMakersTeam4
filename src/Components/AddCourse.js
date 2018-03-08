@@ -52,14 +52,14 @@ class AddCourse extends Component {
     addTeachers() {
         UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
-                this.setState({students: students}, console.log(students));
+                this.setState({students: students.users}, console.log(students.users));
             });
     }
 
     addStudents() {
         UserService.getTeachers().then(console.log("----Teachers---- \n"))
             .then(teachers => {
-                this.setState({teachers: teachers}, console.log(teachers));
+                this.setState({teachers: teachers.users}, console.log(teachers.users));
             });
 
     }
@@ -111,10 +111,10 @@ class AddCourse extends Component {
                                                     <Row>
                                                         <Input s={12} multiple={true} type='select'
                                                                label="Leerkrachten" icon='face' defaultValue='1'>
-                                                            <option value="" disabled>Kies de leerkrachten</option>
+                                                            <option key="" value="" disabled>Kies de leerkrachten</option>
                                                             {this.state.teachers.map((teacher, index) => (
-                                                                <option key={teacher.id}
-                                                                        value={teacher.id}>{teacher.firstname} {teacher.lastname}</option>
+                                                                <option key={teacher.userid}
+                                                                        value={teacher.userid}>{teacher.firstname} {teacher.lastname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
@@ -128,12 +128,12 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple type='select' label="Studenten"
+                                                        <Input s={12} multiple={true} type='select' label="Studenten"
                                                                icon='child_care' defaultValue='1'>
-                                                            <option value="" disabled>Kies de studenten</option>
+                                                            <option key="" value="" disabled>Kies de studenten</option>
                                                             {this.state.students.map((student, index) => (
-                                                                <option key={student.id}
-                                                                        value={student.id}>{student.firstname} {student.lastname}</option>
+                                                                <option key={student.userid}
+                                                                        value={student.userid}>{student.firstname} {student.lastname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
