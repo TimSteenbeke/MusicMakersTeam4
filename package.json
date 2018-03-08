@@ -10,9 +10,9 @@
     "jquery": "^3.3.1",
     "material-ui": "^0.20.0",
     "material-ui-selectfield": "^1.0.24",
-    "material-ui-superselectfield": "^1.8.5",
+    "material-ui-superselectfield": "^1.8.7",
     "material-ui-table-edit": "^3.0.3",
-    "moment": "^2.20.1",
+    "moment": "^2.21.0",
     "prop-types": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
     "react": "^16.2.0",
     "react-agenda": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",
@@ -24,7 +24,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-    "react-scroll-parallax": "^1.3.1"
+    "react-scroll-parallax": "^1.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

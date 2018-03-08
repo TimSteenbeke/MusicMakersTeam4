@@ -49,11 +49,9 @@ export default class GroupUpdate extends Component {
         super(props);
         this.state = {
             group: {
-                id: 1,
+                groupId: 1,
                 name: "string",
-                supervisor: {
-                    username: "string"
-                }
+                supervisorid: 1
             },
             open: false
         }
@@ -62,7 +60,6 @@ export default class GroupUpdate extends Component {
     componentDidMount() {
         const self = this;
         GroupService.getGroupFromBackend(this.props.id)
-
             .then(console.log("----Groep met id " + this.props.id + "---- \n"))
             .then(group => self.setState({
                 group: group,
@@ -86,7 +83,7 @@ export default class GroupUpdate extends Component {
 
     handleUpdate = () => {
         const self = this;
-        console.log("id: " + self.state.group.id);
+        console.log("id: " + self.state.group.groupId);
         GroupService.updateGroup(this.state.id, JSON.stringify(
             {
                 name: this.state.group.name,

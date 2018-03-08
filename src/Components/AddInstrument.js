@@ -3,14 +3,10 @@
  */
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
 import * as InstrumentenService from '../Services/InstrumentService.js'
-import Snackbar from 'material-ui/Snackbar';
 import Header from './Header'
 import StyledTextField from './StyledTextField'
+import {Link} from "react-router-dom"
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 

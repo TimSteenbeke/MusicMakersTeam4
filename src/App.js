@@ -42,8 +42,8 @@ class App extends Component {
                 <Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>
                 <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
                 <Route name="group" path="/groups" component={Group}/>
-                <Route path="/addGroup" component={AddGroup}/>
-                <Route path="/editGroup" component={EditGroup}/>
+                <Route path="/addgroup" component={AddGroup}/>
+                <Route path="/editgroup" component={EditGroup}/>
             </section>
         );
     }

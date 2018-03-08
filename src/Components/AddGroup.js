@@ -72,7 +72,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 
-class AddInstrument extends Component {
+class AddGroup extends Component {
 
     constructor(props) {
         super(props);
@@ -81,11 +81,8 @@ class AddInstrument extends Component {
             supervisorValue: [],
             soorten: [],
             open: false,
-<<<<<<< HEAD
             image: "..image/image.jpg",
             bestand: ""
-=======
->>>>>>> 4b0c85577c0cc5e7d51ae26d6d5581a77e011b52
         };
 
 
@@ -148,7 +145,6 @@ class AddInstrument extends Component {
         this.state.studentValue.push()
     };
 
-<<<<<<< HEAD
     handleChangeImage = (evt) => {
         console.log("Uploading");
         var self = this;
@@ -166,11 +162,6 @@ class AddInstrument extends Component {
         }, 1000);
     };
 
-=======
-    render() {
-        return (
->>>>>>> 4b0c85577c0cc5e7d51ae26d6d5581a77e011b52
-
     render() {
         return (
             <div className="Homepage">
@@ -180,7 +171,7 @@ class AddInstrument extends Component {
                         <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
                             e.preventDefault();
                             this.handleClick();
-                        } }>
+                        }}>
                             <TextField
                                 onChange={this.onChangeNaam}
                                 hintText="Geef groepnaam in..."
@@ -192,7 +183,7 @@ class AddInstrument extends Component {
                                 floatingLabelStyle={styles.floatingLabelStyle}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                            /><br />
+                            /><br/>
                             <SuperSelectField
                                 multiple={true}
                                 maxHeight={200}
@@ -205,7 +196,7 @@ class AddInstrument extends Component {
                             >
                                 {this.studentItems(this.state.studentValue)}
                             </SuperSelectField>
-                            <br />
+                            <br/>
                             <SelectField
                                 multiple={true}
                                 maxHeight={200}
@@ -217,7 +208,7 @@ class AddInstrument extends Component {
                             >
                                 {this.supervisorItems(this.state.supervisorValue)}
                             </SelectField>
-                            <br />
+                            <br/>
 
 
                             <RaisedButton label="Voeg Groep Toe" onClick={this.add} backgroundColor="#DD2C00"
@@ -232,32 +223,29 @@ class AddInstrument extends Component {
                                 onRequestClose={this.handleRequestClose}
                             />
                         </form>
-<<<<<<< HEAD
                         <RaisedButton
                             label="Kies een image"
                             labelPosition="before"
                             containerElement="label"
                         >
                             <input type="file" style={styles.exampleImageInput}
-                            name="file"
-                            className="upload-file"
-                            id="file"
-                            onChange={this.handleChangeImage}
-                            encType="multipart/form-data"/>
+                                   name="file"
+                                   className="upload-file"
+                                   id="file"
+                                   onChange={this.handleChangeImage}
+                                   encType="multipart/form-data"/>
                         </RaisedButton>
                         <label>{this.state.bestand}</label>
                         <RaisedButton label="Voeg Groep Toe" onClick={this.add} backgroundColor="#DD2C00"
                                       style={styles.loginButton}
                                       labelColor="#FFEBEE"
                                       className="inputGroepButton"/>
-=======
->>>>>>> 4b0c85577c0cc5e7d51ae26d6d5581a77e011b52
                     </div>
 
                 </section>
             </div>
-        );
+    );
     }
-}
+    }
 
-export default AddInstrument;
+    export default AddGroup;
