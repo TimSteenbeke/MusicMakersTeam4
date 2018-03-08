@@ -2,7 +2,8 @@
  * Created by jariv on 7/03/2018.
  */
 
-URL="https://musicmaker-api-team4.herokuapp.com/api/users/";
+const URL="https://musicmaker-api-team4.herokuapp.com/api/users/";
+// const URL = 'http://localhost:8080/api/';
 
 export function getTeachers() {
 
