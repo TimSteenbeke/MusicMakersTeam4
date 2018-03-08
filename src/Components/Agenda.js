@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
+import { ReactAgenda , guid  } from 'react-agenda';
+import * as AgendaService from '../Services/AgendaService';
 import { ReactAgenda , guid ,ReactAgendaCtrl, Modal } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
-import ActivityPopUp from './ActivityPopUp.js'
-import Header from './Header'
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
+import ActivityPopUp from './ActivityPopUp.js';
+import Header from './Header';
 
 require('moment/locale/nl.js');
 
@@ -41,7 +41,7 @@ class Agenda extends Component {
             showModal:false,
             locale:"nl",
             rowsPerHour:2,
-            numberOfDays:5,
+            numberOfDays:4,
             startDate: new Date(),
             agendaItems: [],
             agendaOwner: ""
@@ -56,13 +56,6 @@ class Agenda extends Component {
         //If role = admin => extra features (change state)
 
         this.getMyAgendaItems();
-    }
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
     }
 
 

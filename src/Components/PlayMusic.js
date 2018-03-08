@@ -3,8 +3,7 @@ import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
 import * as MusicService from '../Services/MusicService.js'
 import Partituur from "./Partituur";
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
+import ChordSheet from "./ChordSheet";
 
 
 class PlayMusic extends Component {
@@ -13,7 +12,8 @@ class PlayMusic extends Component {
         super(props);
         this.state = {
             selectedPartituurId: 1,
-            partituur:[]
+            partituur:[],
+            hidden:true
         };
     }
 
@@ -23,28 +23,27 @@ class PlayMusic extends Component {
         });
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
+    swap(){
+        this.setState({hidden :!this.state.hidden});
     }
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
             <div className="PlayPartituur">
-                {redirecter}
                 <section className="container">
-                    <div className="whiteBoxPartituur">
+                    <div>
                         <h1 className="header">Play music</h1>
+
+                        <input type="button" id="swap" value="swap" onClick={(e) => this.swap(e)}/>
                         <p>{this.state.partituur.naam}</p>
 
+                        <ChordSheet
+                            hidden={!this.state.hidden}
+                            DataFile={this.state.partituur.dataFile}
+                        />
+
                         <Partituur
+                            hidden={this.state.hidden}
                             DataFile={this.state.partituur.dataFile}
                         />
                     </div>

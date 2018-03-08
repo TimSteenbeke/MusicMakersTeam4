@@ -2,11 +2,9 @@
  * Created by TimS on 15/02/2018.
  */
 
-import guitar from '../images/guitar.jpg'
+import guitar from '../images/guitar.jpg';
 import React, {Component} from 'react';
-import Header from './Header'
-import Redirect from "react-router-dom/es/Redirect";
-import * as LoginService from "../Services/LoginService";
+import Header from './Header';
 
 
 export default class Home extends Component{
@@ -20,29 +18,14 @@ export default class Home extends Component{
         }
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
     handleChange = (event, index, value) => this.setState({value});
 
 
     render(){
-        let redirecting=null;
-        if (this.state.redirect) {
-            redirecting = <Redirect to='/login'/>
-        }
-
         return <div className="Homepage">
-            {redirecting}
             <Header name="Home"/>
-
             <section className="containerCss">
-                <div className="card hoverable">
+                <div className="card hoverable z-depth-3">
                     <div className="card-image waves-effect waves-block waves-light">
                         <img className="activator" alt="guitar" src={guitar} />
                     </div>

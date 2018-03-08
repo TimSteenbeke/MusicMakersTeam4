@@ -3,8 +3,6 @@ import {Card, CardText} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 
 class CompositionDetails extends Component {
 
@@ -21,13 +19,6 @@ class CompositionDetails extends Component {
         CompositionService.getCompositionFromBackend(this.props.id)
             .then(console.log("----Muziekstuk met id " + this.props.id + "---- \n"))
             .then(composition => this.setState({composition: composition,orignaltitel: composition.titel}, console.log(composition)))
-    }
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
     }
 
     assignItem = item => { // bound arrow function handler
@@ -61,13 +52,8 @@ class CompositionDetails extends Component {
     }());
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
-            <div >
-                {redirecter}
+            <div>
                 <h1 className="header">Muziekstuk Details</h1>
                 <Card expanded={true}>
                     <CardText>
