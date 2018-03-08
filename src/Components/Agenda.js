@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import { ReactAgenda , guid  } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService';
+import { ReactAgenda , guid ,ReactAgendaCtrl, Modal } from 'react-agenda';
+import * as AgendaService from '../Services/AgendaService'
+import RaisedButton from 'material-ui/RaisedButton';
+>>>>>>> 995f988529d2ad7e23ff4e54cca4d8a24f86c6c4
 import ActivityPopUp from './ActivityPopUp.js';
 import Header from './Header';
+import {Row, Input} from 'react-materialize'
+import * as UserService from '../Services/UserService.js'
 
 require('moment/locale/nl.js');
 
@@ -40,22 +46,37 @@ class Agenda extends Component {
             numberOfDays:4,
             startDate: new Date(),
             agendaItems: [],
-            agendaOwner: ""
+            agendaOwner: "",
+            selectableUsers: []
         };
     }
 
     componentDidMount() {
-        this.haalAgendaItemsOp();
-        console.log('comp mounted')
+        //Ajax call to get user his role
+        //If role = admin => extra features (change state)
+        this.getUsers();
+
+
+        this.getMyAgendaItems();
     }
 
+    getUsers() {
+        UserService.getAll().then(console.log("----Teachers---- \n"))
+            .then(users => {
+                this.setState({selectableUsers: users.users}, console.log(users.users));
+            });
 
-    haalAgendaItemsOp() {
+    };
+
+
+    getMyAgendaItems() {
         //HARDCODED ID (TEMPORARY)
-        let mijnAgendaItems= [];
-
         AgendaService.getMyAgenda().then(agendaItems => {
+            this.mapAgendaItems(agendaItems)
+        });
+    }
 
+<<<<<<< HEAD
             //Eigenaar toewijzen (Agenda van: ....)
             // this.setState({agendaOwner: agendaItems.agendaEigenaar})
             console.log(agendaItems);
@@ -92,17 +113,108 @@ class Agenda extends Component {
             }
 
             this.setState({items: mijnAgendaItems});
+=======
+    mapAgendaItems(agendaItems) {
+        if (agendaItems != undefined) {
 
-        });
+
+        let AgendaItems= [];
+        //Eigenaar toewijzen (Agenda van: ....)
+        // this.setState({agendaOwner: agendaItems.agendaEigenaar})
+        console.log(agendaItems);
+
+
+        //Over lessons loopen en info in AgendaItem steken
+        //type en basic info
+        for (var i= 0; i < agendaItems.lessons.length; i++) {
+            let les = {
+                _id: guid(),
+                id: agendaItems.lessons[i].lessonId ,
+                name: "Les coming soon (relatie ligt nog niet)",
+                startDateTime: new Date(agendaItems.lessons[i].startDateTime),
+                endDateTime: new Date(agendaItems.lessons[i].endDateTime),
+                type: 'Les',
+                classes: 'color-1'
+            };
+            AgendaItems.push(les);
+        }
+
+        //over performances loopen en info in AgendaItem steken
+        //type en basic info
+        for (var x= 0; x < agendaItems.performances.length; x++) {
+            let optreden = {
+                _id: guid(),
+                id: agendaItems.performances[x].performanceId,
+                name: agendaItems.performances[x].beschrijving,
+                startDateTime: new Date(agendaItems.performances[x].startDateTime),
+                endDateTime: new Date(agendaItems.performances[x].endDateTime),
+                type: 'Optreden',
+                classes: 'color-2'
+            };
+            AgendaItems.push(optreden);
+        }
+
+        this.setState({items: AgendaItems});
+        }
+>>>>>>> 995f988529d2ad7e23ff4e54cca4d8a24f86c6c4
+
     }
 
+<<<<<<< HEAD
+=======
+
+
+    handleCellSelection(item){
+        console.log('handleCellSelection',item)
+    }
+    handleItemEdit(item){
+        console.log('handleItemEdit', item)
+    }
+    handleRangeSelection(item){
+        console.log('handleRangeSelection', item)
+    }
+
+ setSelectedUser = (event,value) => {
+        console.log(value);
+        var user = event.target.value;
+        this.setState({'requesteduser':user});
+     AgendaService.getOtherAgenda(this.state.requesteduser).then(agendaitems => {
+         this.mapAgendaItems(agendaitems);
+     });
+    };
+
+
+
+
+>>>>>>> 995f988529d2ad7e23ff4e54cca4d8a24f86c6c4
     render() {
+        //Load extra components based on state
+
       return  (
           <div>
               <div className="scrollbar" id="style-2">
                   <div className="force-overflow">
               <Header name="Agenda"/>
               <section className="containerCss">
+                  <div className="section">
+                      <div className="row">
+                          <div className="col s3 m3 l3">
+                              <h5 className="truncate">Studenten</h5>
+                          </div>
+                          <div className="col s9 m9 l9">
+                              <Row>
+                                  <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
+                                         icon='child_care' defaultValue='1'>
+                                      <option key="" value="" disabled>Kies de studenten</option>
+                                      {this.state.selectableUsers.map((user, index) => (
+                                          <option key={user.userid}
+                                                  value={user.userid}>{user.firstname} {user.lastname}</option>
+                                      ))}
+                                  </Input>
+                              </Row>
+                          </div>
+                      </div>
+                  </div>
               <ReactAgenda
                   minDate={now}
                   maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
