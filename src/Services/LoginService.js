@@ -33,7 +33,6 @@ export function fetchToken(username, password) {
 export function checkToken(){
     if(localStorage.getItem('userToken')!= null){
         let jwt = localStorage.getItem('userToken');
-
         var current_time = Date.now() / 1000;
         if ( jwt.exp < current_time) {
             localStorage.removeItem('userToken');
@@ -44,6 +43,7 @@ export function checkToken(){
     }
         return false;
 }
+
 //Fix Ben
 /*export function fetchLogin() {
     return fetch('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim', {

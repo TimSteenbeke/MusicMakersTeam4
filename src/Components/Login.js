@@ -69,14 +69,11 @@ class Login extends Component {
     }
 
     componentWillMount() {
-
-        let response = false;
+        let response;
         response = LoginService.checkToken();
         console.log("response:");
         console.log(response);
         this.setState({redirect: response})
-
-
     }
 
     render() {

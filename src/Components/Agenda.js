@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import { ReactAgenda , guid  } from 'react-agenda';
+import { ReactAgenda , guid ,ReactAgendaCtrl, Modal } from 'react-agenda';
 import * as AgendaService from '../Services/AgendaService'
 import RaisedButton from 'material-ui/RaisedButton';
-import ActivityPopUp from './ActivityPopUp.js'
-import Header from './Header'
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
+import ActivityPopUp from './ActivityPopUp.js';
+import Header from './Header';
+import {Row, Input} from 'react-materialize'
+import * as UserService from '../Services/UserService.js'
 
 require('moment/locale/nl.js');
 
@@ -44,7 +44,8 @@ class Agenda extends Component {
             numberOfDays:4,
             startDate: new Date(),
             agendaItems: [],
-            agendaOwner: ""
+            agendaOwner: "",
+            selectableUsers: []
         };
         this.handleCellSelection = this.handleCellSelection.bind(this);
         this.handleItemEdit = this.handleItemEdit.bind(this);
@@ -52,62 +53,73 @@ class Agenda extends Component {
     }
 
     componentDidMount() {
-        this.haalAgendaItemsOp();
-        console.log('comp mounted')
-    }
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
+        //Ajax call to get user his role
+        //If role = admin => extra features (change state)
+        this.getUsers();
 
 
-    haalAgendaItemsOp() {
+        this.getMyAgendaItems();
+    }
+
+    getUsers() {
+        UserService.getAll().then(console.log("----Teachers---- \n"))
+            .then(users => {
+                this.setState({selectableUsers: users.users}, console.log(users.users));
+            });
+
+    };
+
+
+    getMyAgendaItems() {
         //HARDCODED ID (TEMPORARY)
-        let mijnAgendaItems= [];
-
         AgendaService.getMyAgenda().then(agendaItems => {
-
-            //Eigenaar toewijzen (Agenda van: ....)
-            // this.setState({agendaOwner: agendaItems.agendaEigenaar})
-            console.log(agendaItems);
-
-
-            //Over lessons loopen en info in AgendaItem steken
-            //type en basic info
-            for (var i= 0; i < agendaItems.lessons.length; i++) {
-                let les = {
-                    _id: guid(),
-                    id: agendaItems.lessons[i].lessonId ,
-                    name: "Les coming soon (relatie ligt nog niet)",
-                    startDateTime: new Date(agendaItems.lessons[i].startDateTime),
-                    endDateTime: new Date(agendaItems.lessons[i].endDateTime),
-                    type: 'Les',
-                    classes: 'color-1'
-                };
-                mijnAgendaItems.push(les);
-            }
-
-            //over performances loopen en info in AgendaItem steken
-            //type en basic info
-            for (var x= 0; x < agendaItems.performances.length; x++) {
-                let optreden = {
-                    _id: guid(),
-                    id: agendaItems.performances[x].performanceId,
-                    name: agendaItems.performances[x].beschrijving,
-                    startDateTime: new Date(agendaItems.performances[x].startDateTime),
-                    endDateTime: new Date(agendaItems.performances[x].endDateTime),
-                    type: 'Optreden',
-                    classes: 'color-2'
-                };
-                mijnAgendaItems.push(optreden);
-            }
-
-            this.setState({items: mijnAgendaItems});
-
+            this.mapAgendaItems(agendaItems)
         });
+    }
+
+    mapAgendaItems(agendaItems) {
+        if (agendaItems != undefined) {
+
+
+        let AgendaItems= [];
+        //Eigenaar toewijzen (Agenda van: ....)
+        // this.setState({agendaOwner: agendaItems.agendaEigenaar})
+        console.log(agendaItems);
+
+
+        //Over lessons loopen en info in AgendaItem steken
+        //type en basic info
+        for (var i= 0; i < agendaItems.lessons.length; i++) {
+            let les = {
+                _id: guid(),
+                id: agendaItems.lessons[i].lessonId ,
+                name: "Les coming soon (relatie ligt nog niet)",
+                startDateTime: new Date(agendaItems.lessons[i].startDateTime),
+                endDateTime: new Date(agendaItems.lessons[i].endDateTime),
+                type: 'Les',
+                classes: 'color-1'
+            };
+            AgendaItems.push(les);
+        }
+
+        //over performances loopen en info in AgendaItem steken
+        //type en basic info
+        for (var x= 0; x < agendaItems.performances.length; x++) {
+            let optreden = {
+                _id: guid(),
+                id: agendaItems.performances[x].performanceId,
+                name: agendaItems.performances[x].beschrijving,
+                startDateTime: new Date(agendaItems.performances[x].startDateTime),
+                endDateTime: new Date(agendaItems.performances[x].endDateTime),
+                type: 'Optreden',
+                classes: 'color-2'
+            };
+            AgendaItems.push(optreden);
+        }
+
+        this.setState({items: AgendaItems});
+        }
+
     }
 
 
@@ -122,18 +134,46 @@ class Agenda extends Component {
         console.log('handleRangeSelection', item)
     }
 
+ setSelectedUser = (event,value) => {
+        console.log(value);
+        var user = event.target.value;
+        this.setState({'requesteduser':user});
+     AgendaService.getOtherAgenda(this.state.requesteduser).then(agendaitems => {
+         this.mapAgendaItems(agendaitems);
+     });
+    };
+
+
+
+
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
+        //Load extra components based on state
+
       return  (
-          <div>z
-              {redirecter}
+          <div>
               <div className="scrollbar" id="style-2">
                   <div className="force-overflow">
               <Header name="Agenda"/>
               <section className="containerCss">
+                  <div className="section">
+                      <div className="row">
+                          <div className="col s3 m3 l3">
+                              <h5 className="truncate">Studenten</h5>
+                          </div>
+                          <div className="col s9 m9 l9">
+                              <Row>
+                                  <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
+                                         icon='child_care' defaultValue='1'>
+                                      <option key="" value="" disabled>Kies de studenten</option>
+                                      {this.state.selectableUsers.map((user, index) => (
+                                          <option key={user.userid}
+                                                  value={user.userid}>{user.firstname} {user.lastname}</option>
+                                      ))}
+                                  </Input>
+                              </Row>
+                          </div>
+                      </div>
+                  </div>
               <ReactAgenda
                   minDate={now}
                   maxDate={new Date(now.getFullYear(), now.getMonth()+3)}

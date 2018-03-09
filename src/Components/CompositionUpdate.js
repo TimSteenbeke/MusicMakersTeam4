@@ -5,6 +5,8 @@ import Redirect from "react-router-dom/es/Redirect";
 import Header from './Header'
 import {Link} from 'react-router-dom';
 
+
+
 class CompositionUpdate extends Component {
 
     constructor(props) {
@@ -25,6 +27,7 @@ class CompositionUpdate extends Component {
 
     componentDidMount() {
         const self = this;
+
         CompositionService.getCompositionFromBackend(self.state.MuziekstukId)
             .then(console.log("----Composition with id " + self.state.MuziekstukId + "---- \n"))
             .then(composition => self.setState({
@@ -47,6 +50,7 @@ class CompositionUpdate extends Component {
         console.log(response);
         this.setState({redirect: !response})
     }
+
 
     handleUpdate = () => {
         const self = this;
@@ -102,6 +106,7 @@ class CompositionUpdate extends Component {
     };
 
     render() {
+
         let redirecter = null;
         if (this.state.redirect) {
             redirecter = <Redirect to='/login'/>
@@ -185,6 +190,7 @@ class CompositionUpdate extends Component {
                                         className="material-icons">done</i>
                                     </Link>
                                 </div>
+
                             </div>
                         </div>
                         <div className="col s0 m2 l2"/>

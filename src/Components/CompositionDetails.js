@@ -3,9 +3,11 @@ import {Card, CardText} from 'material-ui/Card';
 import * as CompositionService from '../Services/CompositionService.js'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
 import Header from './Header'
+
 
 class CompositionDetails extends Component {
 
@@ -45,13 +47,6 @@ class CompositionDetails extends Component {
             }).catch((error) => {
             console.log(error);
         });
-    }
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
     }
 
     handleUpdate = () => {
@@ -103,42 +98,39 @@ class CompositionDetails extends Component {
     }());
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
-        return (
-            <div className="Homepage">
-                {redirecter}
-                <Header name={this.state.naam}/>
 
-                <Card expanded={true}>
-                    <CardText>
-                        <div className="CompositionDetail">
-                            <div id="compositionDetails">
+        <div className="Homepage">
+            {redirecter}
+            <Header name={this.state.naam}/>
 
-                                <List>
-                                    <ListItem primaryText="Titel" secondaryText={this.state.composition.titel} />
-                                    <Divider />
-                                    <ListItem primaryText="Artiest" secondaryText={this.state.composition.artist}/>
-                                    <Divider />
-                                    <ListItem primaryText="Taal" secondaryText={this.state.composition.language}/>
-                                    <Divider />
-                                    <ListItem primaryText="Genre" secondaryText={this.state.composition.genre}/>
-                                    <Divider />
-                                    <ListItem primaryText="Onderwerp" secondaryText={this.state.composition.subject}/>
-                                    <Divider />
-                                    <ListItem primaryText="Bestand" secondaryText={this.state.composition.fileFormat}/>
-                                    <Divider/>
-                                    <ListItem primaryText="Download"  onClick={e => this.assignItem(this.state.composition.content)}/>
-                                </List>
-                            </div>
+            <Card expanded={true}>
+                <CardText>
+                    <div className="CompositionDetail">
+                        <div id="compositionDetails">
+
+                            <List>
+                                <ListItem primaryText="Titel" secondaryText={this.state.composition.titel}/>
+                                <Divider/>
+                                <ListItem primaryText="Artiest" secondaryText={this.state.composition.artist}/>
+                                <Divider/>
+                                <ListItem primaryText="Taal" secondaryText={this.state.composition.language}/>
+                                <Divider/>
+                                <ListItem primaryText="Genre" secondaryText={this.state.composition.genre}/>
+                                <Divider/>
+                                <ListItem primaryText="Onderwerp" secondaryText={this.state.composition.subject}/>
+                                <Divider/>
+                                <ListItem primaryText="Bestand" secondaryText={this.state.composition.fileFormat}/>
+                                <Divider/>
+                                <ListItem primaryText="Download"
+                                          onClick={e => this.assignItem(this.state.composition.content)}/>
+                            </List>
                         </div>
-                    </CardText>
-                </Card>
-            </div>
-        );
-    }
-}
+                    </div>
+                </CardText>
+            </Card>
+        </div>
+    }};
+
+
 
 export default CompositionDetails;

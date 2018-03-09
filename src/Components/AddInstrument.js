@@ -6,28 +6,17 @@ import React, {Component} from 'react';
 import * as InstrumentenService from '../Services/InstrumentService.js'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
-import {Link} from "react-router-dom";
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
-import {Row, Input} from 'react-materialize';
-import {Snackbar} from "material-ui";
+import {Link} from 'react-router-dom';
+import {Row, Input} from 'react-materialize'
+import swal from 'sweetalert2'
 
 class AddInstrument extends Component {
-
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
 
     constructor(props) {
         super(props);
         this.state = {
             value: 1,
             soorten: [],
-            open: false,
             typedName: "",
             typedType: "",
             typedVersion: "",
@@ -38,8 +27,12 @@ class AddInstrument extends Component {
     }
 
     handleClick = () => {
-        this.setState({
-            open: true,
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Instrument Added!',
+            showConfirmButton: false,
+            timer: 1500
         });
         InstrumentenService.postInstrument(JSON.stringify(
             {
@@ -56,12 +49,6 @@ class AddInstrument extends Component {
         console.log("Type: " + this.state.typedType);
         console.log("Version: " + this.state.typedVersion);
 
-    };
-
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
     };
 
     componentDidMount() {
@@ -109,14 +96,9 @@ class AddInstrument extends Component {
     };
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
 
             <div className="Homepage">
-                {redirecter}
                 <Header name="Add Instrument"/>
                 <section className="containerCss">
                     <div className="row">
@@ -201,12 +183,6 @@ class AddInstrument extends Component {
                                             </div>
                                         </div>
                                         <div className="divider"></div>
-                                        <Snackbar
-                                            open={this.state.open}
-                                            message="Instrument Added"
-                                            autoHideDuration={4000}
-                                            onRequestClose={this.handleRequestClose}
-                                        />
                                     </form>
 
                                 </div>

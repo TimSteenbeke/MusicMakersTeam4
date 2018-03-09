@@ -3,8 +3,6 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 
 const styles = {
     width: {
@@ -46,14 +44,6 @@ const styles = {
 var counter = 1;
 export default class AddGroup extends Component {
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
     addInput(divName) {
         var newdiv = document.createElement('div');
         newdiv.innerHTML = "Groepslid " + (counter + 1) + " <br/><TextField\n" +
@@ -71,14 +61,9 @@ export default class AddGroup extends Component {
     }
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
 
             <div className="Homepage">
-                {redirecter}
                 <section className="container">
                     <div className="whiteBox">
 

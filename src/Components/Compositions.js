@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react';
 import * as CompositionService from '../Services/CompositionService.js'
+
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import CompDetails from './CompositionDetails.js';
@@ -12,30 +13,21 @@ import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
 import {Link} from 'react-router-dom';
 
+
 class Compositions extends Component {
     constructor(props) {
         super(props);
         this.state = {
             compositions: [],
             selectedIndex: 0,
+
             selected: [],
             openDetails: false,
             openUpdate: false,
             search: "empty"
+
         };
     }
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-    handleRowSelection = (selectedRows) => {
-        this.setState({
-            selected: selectedRows,
-        });
-    };
 
     handleClose = () => {
         this.setState({openDetails: false});
@@ -48,6 +40,9 @@ class Compositions extends Component {
     handleDelete = (id, e) => {
         CompositionService.deleteComposition(id);
         this.setState({ compositions: [] });
+
+
+
 
         CompositionService.getCompositionsFromBackend().then(compositions => {
             this.setState({compositions: compositions});
@@ -118,21 +113,8 @@ class Compositions extends Component {
 
 
     render() {
-        let redirecter=null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
-        const actionsDetails = [
-            <RaisedButton label="Close" onClick={this.handleClose} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
-
-        const actionsUpdate = [
-            <RaisedButton label="Close" onClick={this.handleCloseUpdate} backgroundColor="#DD2C00"
-                          labelColor="#FFEBEE"/>,
-        ];
-
         return (
+
             <div className="Homepage">
                 {redirecter}
 
