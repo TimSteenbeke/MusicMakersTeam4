@@ -5,6 +5,7 @@
 import guitar from '../images/guitar.jpg';
 import React, {Component} from 'react';
 import Header from './Header';
+import Divider from 'material-ui/Divider';
 
 
 export default class Home extends Component{

@@ -52,7 +52,6 @@ class CoursesDetails extends Component {
         CourseService.updateCourse(self.state.courseId, JSON.stringify(
             {
                 beschrijving: self.state.beschrijving,
-                prijs: self.state.prijs
             }
         ));
         console.log("coursebeschrijving: " + self.state.beschrijving);
@@ -60,6 +59,11 @@ class CoursesDetails extends Component {
 
     };
 
+
+    onChangeDescription = (e) => {
+        this.setState({beschrijving: e.target.value});
+        console.log("beschrijving:" + e.target.value)
+    };
 
     render() {
         return (
@@ -78,7 +82,7 @@ class CoursesDetails extends Component {
                                                 <h5 className="truncate">{this.state.beschrijving}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
-                                                <StyledTextField hint="Geef nieuw coursebeschrijving in..."
+                                                <StyledTextField onChange={this.onChangeDescription} hint="Geef nieuw coursebeschrijving in..."
                                                                  label="Coursebeschrijving"/>
                                             </div>
                                         </div>

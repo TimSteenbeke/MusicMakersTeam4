@@ -59,10 +59,6 @@ class Sidebar extends Component {
                         <MenuItem style={styles.menuColor} primaryText="Compositions"/>
                     </Link>
                     <Divider/>
-                    <Link to="/addMuziekstuk">
-                        <MenuItem style={styles.menuColor} primaryText="Add Composition"/>
-                    </Link>
-                    <Divider/>
                     <Link to="/playpartituur">
                         <MenuItem style={styles.menuColor} primaryText="Play Partituur"/>
                     </Link>
