@@ -98,7 +98,10 @@ class CompositionDetails extends Component {
     }());
 
     render() {
-
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         <div className="Homepage">
             {redirecter}
             <Header name={this.state.naam}/>

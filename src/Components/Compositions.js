@@ -113,6 +113,10 @@ class Compositions extends Component {
 
 
     render() {
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
 
             <div className="Homepage">
@@ -185,31 +189,6 @@ class Compositions extends Component {
                     </table>
 
                 </section>
-
-
-                <Dialog
-                    actions={actionsDetails}
-                    modal={false}
-                    open={this.state.openDetails}
-                    onRequestClose={this.handleClose}
-                    autoScrollBodyContent={true}
-                >
-                    <CompDetails
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
-
-                <Dialog
-                    actions={actionsUpdate}
-                    modal={false}
-                    open={this.state.openUpdate}
-                    onRequestClose={this.handleCloseUpdate}
-                    autoScrollBodyContent={true}
-                >
-                    <CompUpdate
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
             </div>
         );
     }
