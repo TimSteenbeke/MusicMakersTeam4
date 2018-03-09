@@ -82,7 +82,7 @@ class AddMuziekstuk extends Component {
                 fileFormat: this.state.bestandType
             }));
 
-        axios.post('https://musicmaker-api-team4.herokuapp.com/api/compositions/', this.state.formdata, {
+        axios.post('http://musicmaker-api-team4.herokuapp.com/api/compositions/', this.state.formdata, {
             "Content-Type": "multipart/form-data"
         });
     };

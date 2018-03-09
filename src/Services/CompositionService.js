@@ -1,5 +1,6 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-// const URL = 'http://localhost:8080/api/';
+//const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const URL = 'http://localhost:8080/api/';
+
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getCompositionsFromBackend() {
@@ -18,6 +19,36 @@ export function getCompositionsFromBackend() {
         .catch((err) => {
             console.log("geen response");
             console.log(err);
+        });
+}
+
+export function filterCompositions(search,id){
+    console.log("switch id " + id);
+    var url2 = "";
+
+    switch (id){
+        case '1': url2 = "title"; break;
+        case '2': url2 = "genre"; break;
+        case '3': url2 = "subject"; break;
+        case '4': url2 = "type"; break;
+        case '5': url2 = "fileformat"; break;
+    }
+
+    return fetch(URL + "compositions/" + url2 + "/" + search, {
+        mode: 'cors',
+        headers: {
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => response.json()
+        )
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((err) => {
+            const muziekstuk = {naam: "muziekstuk niet gevonden"};
+            return muziekstuk;
         });
 }
 
