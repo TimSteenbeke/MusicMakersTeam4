@@ -102,7 +102,7 @@ class CompositionDetails extends Component {
         if (this.state.redirect) {
             redirecter = <Redirect to='/login'/>
         }
-        <div className="Homepage">
+        return <div className="Homepage">
             {redirecter}
             <Header name={this.state.naam}/>
 
@@ -110,7 +110,6 @@ class CompositionDetails extends Component {
                 <CardText>
                     <div className="CompositionDetail">
                         <div id="compositionDetails">
-
                             <List>
                                 <ListItem primaryText="Titel" secondaryText={this.state.composition.titel}/>
                                 <Divider/>
