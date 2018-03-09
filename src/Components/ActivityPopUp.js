@@ -1,10 +1,12 @@
 /**
  * Created by Ben on 28/02/2018.
  */
+
 import React, {Component} from 'react';
 import {ReactAgenda, guid} from 'react-agenda';
 import * as LesService from '../Services/LesService.js'
 import * as OptredenService from '../Services/OptredenService.js'
+import swal from 'sweetalert2'
 
 
 class ActivityPopUp extends Component {
@@ -22,6 +24,10 @@ class ActivityPopUp extends Component {
         //State verranderen
         this.getStatus();
 
+    }
+
+    componentWillUpdate(){
+        this.getStatus();
     }
 
     getStatus() {
@@ -62,6 +68,40 @@ class ActivityPopUp extends Component {
         } else {
             LesService.registerAbsent(id);
         }
+    }
+
+    setAanwezigheid(){
+        swal({
+            title: 'Aanwezigheid?',
+            text: "Kies je status voor deze les!",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aanwezig!',
+            cancelButtonText: 'Afwezig!',
+            confirmButtonClass: 'btn green',
+            cancelButtonClass: 'btn red marginator',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swal(
+                    'Aanwezig!',
+                    'Je bent aanwezig op deze les.',
+                    'success'
+                );
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'Afwezig',
+                    'Je bent afwezig op deze les',
+                    'error'
+                )
+            }
+        });
     }
 
     render() {
