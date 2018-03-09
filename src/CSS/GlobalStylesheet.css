@@ -40,6 +40,10 @@
     margin-right:20px;
 }
 
+.minimargin{
+    margin-left:10px;
+}
+
 .agendaItem {
     padding: 3%;
 }

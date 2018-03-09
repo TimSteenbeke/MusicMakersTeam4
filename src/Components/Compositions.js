@@ -118,12 +118,8 @@ class Compositions extends Component {
             redirecter = <Redirect to='/login'/>
         }
         return (
-
             <div className="Homepage">
-                {redirecter}
-
                 <Header name="Muziekstukken" />
-
                 <div className="section">
                     <div className="row">
                         <div className="col s12 m2 offset-m1 l2 offset-l1  center">
@@ -187,7 +183,6 @@ class Compositions extends Component {
                         ))}
                         </tbody>
                     </table>
-
                 </section>
             </div>
         );
