@@ -22,6 +22,7 @@ export default class Group extends Component {
 
     componentDidMount(){
         GroupService.getAllGroupsFromBackend().then(groups => {
+            console.log(groups);
             this.setState({groups: groups});
         });
     }
@@ -42,12 +43,15 @@ export default class Group extends Component {
                     <table className="black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>Naam</th>
+                        <th>Image</th>
+                        <th>Naam</th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.groups.map((group, index) => (
                             <tr key={index} id={group.groupId}>
+                                {/*<td><img src={"data:image;base64," + group.groupImage} alt="groepsfoto" height="50px" width="50px"/>
+                                </td>*/}
                                 <td>{group.name}</td>
                                 <td>
                                     <Link className="waves-effect white-text red darken-4 btn marginator" to={`/groupupdate/${group.groupId}` }>

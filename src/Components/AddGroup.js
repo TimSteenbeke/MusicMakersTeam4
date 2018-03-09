@@ -68,8 +68,7 @@ class AddGroup extends Component {
             studentids: [],
             allUsers: [],
             students: [],
-            groupImage: "",
-            fileType: ""
+            image: "../image/image.jpg"
         };
     }
 
@@ -90,7 +89,7 @@ class AddGroup extends Component {
                 name: this.state.name,
                 userids: this.state.userids,
                 studentids: this.state.studentids,
-                groupimage: this.state.groupImage
+                groupimage: this.state.image
 
             }
         ));
@@ -149,18 +148,20 @@ class AddGroup extends Component {
 
     handleChangeImage = (evt) => {
         console.log("Uploading");
-        const file = evt.target.files[0];
-        const extension = file.name;
-
-        this.setState({
-            fileType: extension
-
-        });
-
-        const fmdata = new FormData();
-        fmdata.append("file",evt.target.files[0]);
-        this.state.formdata.append("files", evt.target.files[0]);
+        let self = this;
+        let reader = new FileReader();
+        let file = evt.target.files[0];
+        reader.onload = function (upload) {
+            self.setState({
+                image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
+            });
+        };
+        reader.readAsDataURL(file);
+        setTimeout(function () {
+            console.log("Uploaded");
+        }, 1000);
     };
+
 
 
     render() {
@@ -228,20 +229,11 @@ class AddGroup extends Component {
                                                     </Input>
                                                 </Row>
                                             </div>
-                                            <RaisedButton
-                                                label="Selecteer een bestand"
-                                                labelPosition="before"
-                                                containerElement="label"
-                                            >
-                                                <input type="file"
-                                                       style={styles.exampleImageInput}
-                                                       name="file"
-                                                       className="upload-file"
-                                                       id="file"
-                                                       onChange={this.handleChangeImage}
-                                                       encType="multipart/form-data"
-                                                />
-                                            </RaisedButton>
+                                            <input name="file"
+                                                   className="upload-file"
+                                                   id="file"
+                                                   onChange={this.handleChangeImage}
+                                                   encType="multipart/form-data" accept="image/*" type="file"/>
                                             <label>{this.state.fileType}</label>
                                         </div>
                                     </div>
