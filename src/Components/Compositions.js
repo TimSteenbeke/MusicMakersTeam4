@@ -37,12 +37,9 @@ class Compositions extends Component {
         });
     };
 
-
-
     handleClose = () => {
         this.setState({openDetails: false});
     };
-
 
     handleCloseUpdate = () => {
         this.setState({openUpdate: false});
@@ -176,6 +173,7 @@ class Compositions extends Component {
                             <th>Onderwerp</th>
                             <th>Instrumenttype</th>
                             <th>Bestand</th>
+                            <th>Afspelen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -188,6 +186,8 @@ class Compositions extends Component {
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
                                 <td><a href="#" onClick={e => this.assignItem(composition.content,index)}>{composition.fileFormat != null ? composition.fileFormat : "No file"}</a></td>
+                                <Link to="/instrumenten" onClick={this.handleClick} className="btn">
+                                </Link>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/compositiondetails/${composition.muziekstukId}` }>
                                         <i className="material-icons">edit

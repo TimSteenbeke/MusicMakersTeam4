@@ -1,5 +1,5 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-//const URL = 'http://localhost:8080/api/';
+//const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const URL = 'http://localhost:8080/api/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getCompositionsFromBackend() {

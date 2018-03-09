@@ -44,6 +44,7 @@ class App extends Component {
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="editGroup" path="/editGroup" component={EditGroup}/>
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
+                <Route name="play" path="/play/:id" component={PlayMusic}/>
                 {/*<Route component={NoMatch}/>
                 <Route component={NoMatch} path="/404"/>*/}
             </section>
