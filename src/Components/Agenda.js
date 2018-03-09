@@ -10,9 +10,9 @@ require('moment/locale/nl.js');
 
 
 let colors= {
-    'color-1':"rgba(102, 195, 131 , 1)" ,
-    "color-2":"rgba(242, 177, 52, 1)" ,
-    "color-3":"rgba(235, 85, 59, 1)"
+    'color-1': '#242728' ,
+    'color-2': '#242728' ,
+    'color-3': '#242728' ,
 };
 
 let now = new Date();
@@ -20,11 +20,11 @@ let now = new Date();
 
 
 let AgendaItem = function(props){
-    console.log( ' ik ga renderen:' , props);
+    console.log( 'ik ga renderen:' , props);
     console.log(props);
     return <div className="agendaItem">
-        <p className="text-darken-4">{props.item.name}</p>
-        <p>leerkracht: {props.leerkrachten}</p>
+        <h6 className="white-text">{props.item.name}</h6>
+        <p className="white-text">leerkracht: {props.leerkrachten}</p>
         <ActivityPopUp id={props.item.id} type={props.item.type}/>
     </div>
 };
@@ -47,22 +47,26 @@ class Agenda extends Component {
         };
     }
 
+    updateComponent = () =>{
+        this.getUserRoles();
+        this.getUsers();
+        this.getMyAgendaItems();
+    };
+
     componentDidMount() {
         //Ajax call to get user his role
         //If role = admin => extra features (change state)
         this.getUserRoles();
-
         this.getUsers();
-
-
         this.getMyAgendaItems();
     }
 
-    getUserRoles() {
-        UserService.getUserRoles();
-    }
 
-    getUsers() {
+    getUserRoles =() => {
+        UserService.getUserRoles();
+    };
+
+    getUsers = () => {
         UserService.getAll().then(console.log("----Teachers---- \n"))
             .then(users => {
                 this.setState({selectableUsers: users.users}, console.log(users.users));
@@ -71,14 +75,14 @@ class Agenda extends Component {
     };
 
 
-    getMyAgendaItems() {
+    getMyAgendaItems = () => {
         //HARDCODED ID (TEMPORARY)
         AgendaService.getMyAgenda().then(agendaItems => {
             this.mapAgendaItems(agendaItems)
         });
-    }
+    };
 
-    mapAgendaItems(agendaItems) {
+    mapAgendaItems = (agendaItems) => {
         if (agendaItems != undefined) {
 
 
@@ -121,7 +125,7 @@ class Agenda extends Component {
             this.setState({items: AgendaItems});
         }
 
-    }
+    };
 
 
     setSelectedUser = (event,value) => {
@@ -141,8 +145,6 @@ class Agenda extends Component {
 
         return  (
             <div>
-                <div className="scrollbar" id="style-2">
-                    <div className="force-overflow">
                         <Header name="Agenda"/>
                         <section className="containerCss">
                             <div className="section">
@@ -181,8 +183,6 @@ class Agenda extends Component {
                             />
                         </section>
                     </div>
-                </div>
-            </div>
         );
     }
 }

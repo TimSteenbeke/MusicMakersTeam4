@@ -13,7 +13,7 @@ class ActivityPopUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            aanwezigheidsstatus: 'Te beslissen',
+            aanwezigheidsstatus: "Te beslissen",
             icon: 'notifications'
         };
 
@@ -26,51 +26,61 @@ class ActivityPopUp extends Component {
 
     }
 
-    componentWillUpdate(){
-        this.getStatus();
-    }
-
-    getStatus() {
+    getStatus = () => {
         if (this.props.type == "Optreden") {
             OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setState({aanwezigheidsstatus: statusobject.status});
+                this.setIcon(statusobject.status);
                 console.log(this.state.aanwezigheidsstatus);
             })
         } else {
             LesService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setState({aanwezigheidsstatus: statusobject.status});
+                this.setIcon(statusobject.status);
                 console.log(this.state.aanwezigheidsstatus);
             })
         }
-    }
+    };
 
-    aanwezig() {
+    setIcon = (status) => {
+        console.log(status);
+        if (status === "absent"){
+            this.setState({
+                icon: 'not_interested'
+            });
+        }else if(status === "present"){
+            this.setState({
+                icon: 'check'
+            });
+        }else{
+            this.setState({
+                icon: 'notifications'
+            });
+        }
+    };
+
+    aanwezig = () => {
         console.log(this.props);
         let id = this.props.id;
-        this.setState({
-            icon: 'check'
-        });
         if (this.props.type == "Optreden") {
             OptredenService.registerPresent(id);
+
         } else {
             LesService.registerPresent(id);
         }
-    }
+    };
 
-    afwezig() {
+    afwezig = () => {
         console.log(this.props);
         let id = this.props.id;
-        this.setState({
-            icon: 'not_interested'
-        });
         if (this.props.type == "Optreden") {
             OptredenService.registerAbsent(id);
         } else {
             LesService.registerAbsent(id);
         }
-    }
+    };
 
-    setAanwezigheid(){
+    setAanwezigheid = () =>{
         swal({
             title: 'Aanwezigheid?',
             text: "Kies je status voor deze les!",
@@ -91,6 +101,7 @@ class ActivityPopUp extends Component {
                     'Je bent aanwezig op deze les.',
                     'success'
                 );
+                this.aanwezig();
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -99,16 +110,18 @@ class ActivityPopUp extends Component {
                     'Afwezig',
                     'Je bent afwezig op deze les',
                     'error'
-                )
+                );
+                this.afwezig();
             }
         });
-    }
+        this.getStatus();
+    };
 
     render() {
         return (
             <div>
                 {/*Popup*/}
-                <a className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.aanwezigheidsstatus}
+                <a onClick={this.setAanwezigheid} className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.aanwezigheidsstatus}
                 </a>
             </div>
         );

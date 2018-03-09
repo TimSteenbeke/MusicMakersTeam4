@@ -114,12 +114,8 @@ class Compositions extends Component {
 
     render() {
         return (
-
             <div className="Homepage">
-                {redirecter}
-
                 <Header name="Muziekstukken" />
-
                 <div className="section">
                     <div className="row">
                         <div className="col s12 m2 offset-m1 l2 offset-l1  center">
@@ -183,33 +179,7 @@ class Compositions extends Component {
                         ))}
                         </tbody>
                     </table>
-
                 </section>
-
-
-                <Dialog
-                    actions={actionsDetails}
-                    modal={false}
-                    open={this.state.openDetails}
-                    onRequestClose={this.handleClose}
-                    autoScrollBodyContent={true}
-                >
-                    <CompDetails
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
-
-                <Dialog
-                    actions={actionsUpdate}
-                    modal={false}
-                    open={this.state.openUpdate}
-                    onRequestClose={this.handleCloseUpdate}
-                    autoScrollBodyContent={true}
-                >
-                    <CompUpdate
-                        id={(this.state.selectedIndex)}
-                    />
-                </Dialog>
             </div>
         );
     }

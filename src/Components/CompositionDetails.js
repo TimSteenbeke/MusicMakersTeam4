@@ -73,10 +73,10 @@ class CompositionDetails extends Component {
     };
 
     static base64ToArrayBuffer(base64) {
-        const binaryString =  window.atob(base64);
+        const binaryString = window.atob(base64);
         const binaryLen = binaryString.length;
         const bytes = new Uint8Array(binaryLen);
-        for (let i = 0; i < binaryLen; i++)        {
+        for (let i = 0; i < binaryLen; i++) {
             let ascii = binaryString.charCodeAt(i);
             bytes[i] = ascii;
         }
@@ -98,39 +98,11 @@ class CompositionDetails extends Component {
     }());
 
     render() {
+        return (
+            <div></div>
+        );
+    }
 
-        <div className="Homepage">
-            {redirecter}
-            <Header name={this.state.naam}/>
-
-            <Card expanded={true}>
-                <CardText>
-                    <div className="CompositionDetail">
-                        <div id="compositionDetails">
-
-                            <List>
-                                <ListItem primaryText="Titel" secondaryText={this.state.composition.titel}/>
-                                <Divider/>
-                                <ListItem primaryText="Artiest" secondaryText={this.state.composition.artist}/>
-                                <Divider/>
-                                <ListItem primaryText="Taal" secondaryText={this.state.composition.language}/>
-                                <Divider/>
-                                <ListItem primaryText="Genre" secondaryText={this.state.composition.genre}/>
-                                <Divider/>
-                                <ListItem primaryText="Onderwerp" secondaryText={this.state.composition.subject}/>
-                                <Divider/>
-                                <ListItem primaryText="Bestand" secondaryText={this.state.composition.fileFormat}/>
-                                <Divider/>
-                                <ListItem primaryText="Download"
-                                          onClick={e => this.assignItem(this.state.composition.content)}/>
-                            </List>
-                        </div>
-                    </div>
-                </CardText>
-            </Card>
-        </div>
-    }};
-
-
+}
 
 export default CompositionDetails;
