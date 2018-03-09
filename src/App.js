@@ -12,11 +12,11 @@ import {Route} from 'react-router'
 import './CSS/GlobalStylesheet.css';
 import Group from "./Components/Group";
 import AddGroup from "./Components/AddGroup"
-import EditGroup from "./Components/EditGroup";
 import Compositions from "./Components/Compositions.js";
 // import MuziekstukDetails from "./Components/MuziekstukDetails.js";
 import AddMuziekstuk from "./Components/AddMuziekstuk";
 import PlayMusic from './Components/PlayMusic.js'
+import GroupUpdate from "./Components/GroupUpdate";
 
 
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
                 <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
                 <Route name="group" path="/groups" component={Group}/>
                 <Route path="/addgroup" component={AddGroup}/>
-                <Route path="/editgroup" component={EditGroup}/>
+                <Route path="/groupupdate/:id" component={GroupUpdate}/>
             </section>
         );
     }

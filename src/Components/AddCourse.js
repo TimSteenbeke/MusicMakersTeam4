@@ -55,7 +55,7 @@ class AddCourse extends Component {
     addTeachers = () => {
         UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
+                this.setState({users: students.users}, console.log(students.users));
             });
     };
 
@@ -155,7 +155,7 @@ class AddCourse extends Component {
                                                         <Input s={12} multiple={true} type='select' label="Studenten" onChange={this.handleStudentChange}
                                                                icon='child_care' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies de studenten</option>
-                                                            {this.state.students.map((student, index) => (
+                                                            {this.state.users.map((student, index) => (
                                                                 <option key={student.userid}
                                                                         value={student.userid}>{student.firstname} {student.lastname}</option>
                                                             ))}

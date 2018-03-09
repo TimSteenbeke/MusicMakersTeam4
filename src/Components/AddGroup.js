@@ -3,15 +3,15 @@
  */
 
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
-import Snackbar from 'material-ui/Snackbar';
-import SuperSelectField from 'material-ui-superselectfield'
-
-
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
+import * as UserService from "../Services/UserService";
+import swal from 'sweetalert2'
+import Header from "./Header";
+import {Input, Row} from "react-materialize";
+import Link from "react-router-dom/es/Link";
+import StyledTextField from "./StyledTextField";
+import * as GroupService from "../Services/GroupService";
+import {RaisedButton} from "material-ui";
 
 const styles = {
     width: {
@@ -57,191 +57,209 @@ const styles = {
     },
 };
 
-
-const students = [];
-    for (let i = 0; i < 10; i++) {
-    students.push('Student ' + i);
-}
-
-
-const supervisor = [];
-for (let i = 0; i < 5; i++) {
-    supervisor.push('Supervisor ' + i);
-}
-
-
 class AddGroup extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            studentValue: [],
-            supervisorValue: [],
-            soorten: [],
-            open: false,
-            image: "..image/image.jpg",
+            name:"",
             bestand: "",
-            teacherids: [],
+            userids: [],
             studentids: [],
-            teachers: [],
-            students: []
+            allUsers: [],
+            students: [],
+            groupImage: "",
+            fileType: ""
         };
     }
 
-    studentItems(values) {
-        return students.map((name) => (
-            <MenuItem
-                key={name}
-                insetChildren={true}
-                checked={values && values.indexOf(name) > -1}
-                value={name}
-                primaryText={name}
-            />
-        ));
-    }
-
-    supervisorItems(values) {
-        return supervisor.map((name) => (
-            <MenuItem
-                key={name}
-                insetChildren={true}
-                checked={values && values.indexOf(name) > -1}
-                value={name}
-                primaryText={name}
-            />
-        ));
-    }
-
-
-    handleChangeStudent = (event, index, values) => {
-        this.setState({
-            studentValue: values,
-        });
-    };
-
-    handleChangeSupervisor = (event, index, values) => {
-        this.setState({
-            supervisorValue: values,
-        });
-    };
-
     handleClick = () => {
-        this.setState({
-            open: true,
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Groep toegevoegd',
+            showConfirmButton: false,
+            timer: 1500
         });
+        console.log("Name: " + this.state.name);
+        console.log("studentIds: " + this.state.studentids);
+        console.log("userIds: " + this.state.userids);
+
+        GroupService.postGroup(JSON.stringify(
+            {
+                name: this.state.name,
+                userids: this.state.userids,
+                studentids: this.state.studentids,
+                groupimage: this.state.groupImage
+
+            }
+        ));
     };
 
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
+
+    onChangeName = (e) => {
+        this.setState({name: e.target.value});
+        console.log("name:" + e.target.value)
+    };
+
+    addUsers = () => {
+        UserService.getAllUsers().then(console.log("----Students---- \n"))
+            .then(allUsers => {
+                this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
+            });
+    };
+
+    addStudents = () => {
+        UserService.getStudents().then(console.log("----Users---- \n"))
+            .then(students => {
+                this.setState({students: students.users}, console.log(students.users));
+            });
+
+    };
+
+
+    handleUserChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({userids: value});
+        console.log(this.state.userids);
+    };
+
+    handleStudentChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({studentids: value});
+        console.log(this.state.studentids);
     };
 
     componentDidMount() {
-
+        this.addUsers();
+        this.addStudents();
     }
-
-    handleIconClick = () => {
-        this.state.studentValue.push()
-    };
 
     handleChangeImage = (evt) => {
         console.log("Uploading");
-        var self = this;
-        var reader = new FileReader();
-        var file = evt.target.files[0];
-        reader.onload = function (upload) {
-            self.setState({
-                image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, ""),
-                bestand: file.name
-            });
-        };
-        reader.readAsDataURL(file);
-        setTimeout(function () {
-            console.log("Uploaded");
-        }, 1000);
+        const file = evt.target.files[0];
+        const extension = file.name;
+
+        this.setState({
+            fileType: extension
+
+        });
+
+        const fmdata = new FormData();
+        fmdata.append("file",evt.target.files[0]);
+        this.state.formdata.append("files", evt.target.files[0]);
     };
+
 
     render() {
         return (
             <div className="Homepage">
-                <section className="container">
-                    <div className="whiteBox">
-                        <h1 className="header">Voeg Groep Toe</h1>
-                        <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
-                            e.preventDefault();
-                            this.handleClick();
-                        }}>
-                            <TextField
-                                onChange={this.onChangeNaam}
-                                hintText="Geef groepsnaam in..."
-                                floatingLabelText="Groepnaam"
-                                style={styles.width}
+                <Header name="Add Group"/>
+                <section className="containerCss">
+                    <div className="col s0 m2 l2"/>
+                    <div className="col s12 m8 l8">
+                        <div className="card hoverable">
+                            <div className="card-content">
+                                <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
+                                    e.preventDefault();
+                                    this.handleClick();
+                                }}>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s3 m3 l3">
+                                                <h5 className="truncate">Group</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <StyledTextField onChange={this.onChangeName}
+                                                                 hint="Geef een naam in..."
+                                                                 label="Naam"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s3 m3 l3">
+                                                <h5 className="truncate">Gebruikers</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <Row>
+                                                    <Input s={12} multiple={true} type='select'
+                                                           onChange={this.handleUserChange}
+                                                           label="Begeleiders" icon='face' defaultValue='1'>
+                                                        <option key="" value="" disabled>Kies de begeleiders
+                                                        </option>
+                                                        {this.state.allUsers.map((user, index) => (
+                                                            <option key={user.userid}
+                                                                    value={user.userid}>{user.firstname} {user.lastname}</option>
+                                                        ))}
+                                                    </Input>
+                                                </Row>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s3 m3 l3">
+                                                <h5 className="truncate">Studenten</h5>
+                                            </div>
+                                            <div className="col s9 m9 l9">
+                                                <Row>
+                                                    <Input s={12} multiple={true} type='select' label="Studenten"
+                                                           onChange={this.handleStudentChange}
+                                                           icon='child_care' defaultValue='1'>
+                                                        <option key="" value="" disabled>Kies de studenten</option>
+                                                        {this.state.students.map((student, index) => (
+                                                            <option key={student.userid}
+                                                                    value={student.userid}>{student.firstname} {student.lastname}</option>
+                                                        ))}
+                                                    </Input>
+                                                </Row>
+                                            </div>
+                                            <RaisedButton
+                                                label="Selecteer een bestand"
+                                                labelPosition="before"
+                                                containerElement="label"
+                                            >
+                                                <input type="file"
+                                                       style={styles.exampleImageInput}
+                                                       name="file"
+                                                       className="upload-file"
+                                                       id="file"
+                                                       onChange={this.handleChangeImage}
+                                                       encType="multipart/form-data"
+                                                />
+                                            </RaisedButton>
+                                            <label>{this.state.fileType}</label>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                </form>
 
-                                inputStyle={styles.inputstyle}
-                                hintStyle={styles.floatingLabelFocusStyle}
-                                floatingLabelStyle={styles.floatingLabelStyle}
-                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                underlineFocusStyle={styles.underlineStyle}
-                            /><br/>
-                            <SuperSelectField
-                                multiple={true}
-                                maxHeight={200}
-                                keepSearchOnSelect
-                                autoWidth={true}
-                                hintText='Users'
-                                value={this.state.studentValue}
-                                onChange={this.handleChangeStudent}
-                                selectedMenuItemStyle={styles.errorStyle}
-                            >
-                                {this.studentItems(this.state.studentValue)}
-                            </SuperSelectField>
-                            <br/>
-                            <SelectField
-                                multiple={true}
-                                maxHeight={200}
-                                autoWidth={true}
-                                floatingLabelText="Supervisors"
-                                value={this.state.supervisorValue}
-                                onChange={this.handleChangeSupervisor}
-                                selectedMenuItemStyle={styles.errorStyle}
-                            >
-                                {this.supervisorItems(this.state.supervisorValue)}
-                            </SelectField>
-                            <br/>
+                            </div>
 
-
-                            <RaisedButton label="Voeg Groep Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                          style={styles.loginButton}
-                                          type="submit"
-                                          labelColor="#FFEBEE"
-                                          className="inputIntrumentButton"/>
-                            <Snackbar
-                                open={this.state.open}
-                                message="Group Added"
-                                autoHideDuration={4000}
-                                onRequestClose={this.handleRequestClose}
-                            />
-                        </form>
-                        <RaisedButton
-                            label="Kies een image"
-                            labelPosition="before"
-                            containerElement="label"
-                        >
-                            <input type="file" style={styles.exampleImageInput}
-                                   name="file"
-                                   className="upload-file"
-                                   id="file"
-                                   onChange={this.handleChangeImage}
-                                   encType="multipart/form-data"/>
-                        </RaisedButton>
-                        <label>{this.state.bestand}</label>
-                        <RaisedButton label="Voeg Groep Toe" onClick={this.add} backgroundColor="#DD2C00"
-                                      style={styles.loginButton}
-                                      labelColor="#FFEBEE"
-                                      className="inputGroepButton"/>
+                            <div className="card-action">
+                                <Link to="/groups" onClick={this.handleClick}
+                                      className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                    <i
+                                        className="material-icons">done</i>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-
+                    <div className="col s0 m2 l2"/>
                 </section>
             </div>
         );

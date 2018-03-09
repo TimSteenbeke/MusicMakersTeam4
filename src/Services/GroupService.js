@@ -1,5 +1,5 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-// const URL = 'localhost:8080/api/';
+//const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const URL = 'http://localhost:8080/api/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getGroupsFromBackend(userId) {
@@ -13,8 +13,6 @@ export function getGroupsFromBackend(userId) {
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -35,8 +33,6 @@ export function getAllGroupsFromBackend() {
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -48,7 +44,7 @@ export function getAllGroupsFromBackend() {
 
 
 export function getGroupFromBackend(groupId) {
-    return fetch(localURL + "groups/" + groupId, {
+    return fetch(URL + "groups/" + groupId, {
         mode: 'cors',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
@@ -67,7 +63,7 @@ export function getGroupFromBackend(groupId) {
 }
 
 export function postGroup(data) {
-    fetch(localURL + "groups", {
+    fetch(URL + "groups", {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -77,7 +73,7 @@ export function postGroup(data) {
     });
 }
 export function deleteGroup(groupId) {
-    return fetch('http://localhost:8080/api/groups/' + groupId, {
+    return fetch(URL + 'groups/' + groupId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
@@ -91,7 +87,7 @@ export function deleteGroup(groupId) {
 export function updateGroup(groupId, data) {
     console.log("id: " + groupId);
     console.log(data);
-    return fetch('http://localhost:8080/api/groups/group/' + groupId, {
+    return fetch(URL + 'groups/group/' + groupId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {

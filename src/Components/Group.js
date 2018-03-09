@@ -21,13 +21,13 @@ export default class Group extends Component {
     };
 
     componentDidMount(){
-        GroupService.getGroupsFromBackend().then(groups => {
+        GroupService.getAllGroupsFromBackend().then(groups => {
             this.setState({groups: groups});
         });
     }
 
     componentWillUpdate(){
-        GroupService.getGroupsFromBackend().then(groups => {
+        GroupService.getAllGroupsFromBackend().then(groups => {
             this.setState({groups: groups});
         });
     }
@@ -50,7 +50,7 @@ export default class Group extends Component {
                             <tr key={index} id={group.groupId}>
                                 <td>{group.name}</td>
                                 <td>
-                                    <Link className="waves-effect white-text red darken-4 btn marginator" to={`/editgroup/${group.groupId}` }>
+                                    <Link className="waves-effect white-text red darken-4 btn marginator" to={`/groupupdate/${group.groupId}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>

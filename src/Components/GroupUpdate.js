@@ -5,6 +5,7 @@ import {List, ListItem} from 'material-ui/List';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import swal from 'sweetalert2'
 
 const styles = {
     width: {
@@ -49,9 +50,10 @@ export default class GroupUpdate extends Component {
         super(props);
         this.state = {
             group: {
-                groupId: 1,
+                groupId: this.props.match.params.id,
                 name: "string",
-                supervisorid: 1
+                supervisorid: 1,
+                supervisorname: ""
             },
             open: false
         }
@@ -59,11 +61,13 @@ export default class GroupUpdate extends Component {
 
     componentDidMount() {
         const self = this;
-        GroupService.getGroupFromBackend(this.props.id)
-            .then(console.log("----Groep met id " + this.props.id + "---- \n"))
+        GroupService.getGroupFromBackend(self.state.groupId)
+            .then(console.log("----Groep met id " + self.state.groupId + "---- \n"))
             .then(group => self.setState({
-                group: group,
-                id: this.props.id
+                groupId: group.groupId,
+                name: group.name,
+                supervisorid: group.supervisor.id,
+                supervisorname: group.supervisor.username
             }, console.log(group)))
     }
 
@@ -78,18 +82,28 @@ export default class GroupUpdate extends Component {
         let group = Object.assign({}, this.state.group);
         group.supervisor = typedSupervisor;
         this.setState({group});
-        console.log("Name:" + this.state.group.supervisor)
+        console.log("Name:" + this.state.supervisorname)
     };
 
     handleUpdate = () => {
-        const self = this;
-        console.log("id: " + self.state.group.groupId);
-        GroupService.updateGroup(this.state.id, JSON.stringify(
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Instrument Edited',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        let self = this;
+        GroupService.updateGroup(self.state.groupId, JSON.stringify(
             {
-                name: this.state.group.name,
-                supervisor: this.state.group.supervisor
+                name: self.state.name,
+                supervisorid: self.state.supervisorid,
             }
         ));
+        console.log("groupId: " + self.state.groupId);
+        console.log("groepsnaam: " + self.state.name);
+        console.log("supervisorid: " + self.state.supervisorid);
+        console.log("supervisornaam: " + self.state.supervisorname);
     };
 
     render() {
@@ -99,7 +113,7 @@ export default class GroupUpdate extends Component {
                 <h1 className="header">Groep details</h1>
                 <Card expanded={true}>
                     <CardHeader
-                        title={this.state.group.name}
+                        title={this.state.name}
                     />
                     <CardText>
                         <div className="InstrumentDetail">
@@ -107,7 +121,7 @@ export default class GroupUpdate extends Component {
                                 <List>
                                     <ListItem>
                                         <TextField
-                                            value={this.state.group.name}
+                                            value={this.state.name}
                                             onChange={this.onChangeName}
                                             hintText="Geef nieuwe groepsnaam in..."
                                             floatingLabelText="Naam"
@@ -119,7 +133,7 @@ export default class GroupUpdate extends Component {
                                             underlineFocusStyle={styles.underlineStyle}
                                         /><br/>
                                         <TextField
-                                            value={this.state.group.supervisor.username}
+                                            value={this.state.supervisorname}
                                             onChange={this.onChangeSupervisor}
                                             hintText="Geef begeleider in..."
                                             floatingLabelText="Begeleider"
