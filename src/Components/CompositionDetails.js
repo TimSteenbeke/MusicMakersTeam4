@@ -98,11 +98,45 @@ class CompositionDetails extends Component {
     }());
 
     render() {
-        return (
-            <div></div>
-        );
-    }
 
-}
+        return (
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
+        return <div className="Homepage">
+            {redirecter}
+            <Header name={this.state.naam}/>
+
+            <Card expanded={true}>
+                <CardText>
+                    <div className="CompositionDetail">
+                        <div id="compositionDetails">
+                            <List>
+                                <ListItem primaryText="Titel" secondaryText={this.state.composition.titel}/>
+                                <Divider/>
+                                <ListItem primaryText="Artiest" secondaryText={this.state.composition.artist}/>
+                                <Divider/>
+                                <ListItem primaryText="Taal" secondaryText={this.state.composition.language}/>
+                                <Divider/>
+                                <ListItem primaryText="Genre" secondaryText={this.state.composition.genre}/>
+                                <Divider/>
+                                <ListItem primaryText="Onderwerp" secondaryText={this.state.composition.subject}/>
+                                <Divider/>
+                                <ListItem primaryText="Bestand" secondaryText={this.state.composition.fileFormat}/>
+                                <Divider/>
+                                <ListItem primaryText="Download"
+                                          onClick={e => this.assignItem(this.state.composition.content)}/>
+                            </List>
+                        </div>
+                    </div>
+                </CardText>
+            </Card>
+        </div>
+          )
+    }};
+
+
+
 
 export default CompositionDetails;

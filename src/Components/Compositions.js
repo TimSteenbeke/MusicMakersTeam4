@@ -113,6 +113,10 @@ class Compositions extends Component {
 
 
     render() {
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
         return (
             <div className="Homepage">
                 <Header name="Muziekstukken" />
