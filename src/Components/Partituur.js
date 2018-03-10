@@ -2,13 +2,17 @@
 import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
 import '../CSS/Partituur.css';
+import * as loadjs from "loadjs";
+import $ from "jquery"
+
+//require('/Libraries/Alphatab/jquery.alphaTab.js');
 
 class Partituur extends Component {
     constructor(props) {
         super(props);
         this.state = {
             musicXML: '/BackendJsonSimulated/Serenade.xml',
-            gp5: '/BackendJsonSimulated/Canon.gp5',
+            gp5: '/BackendJsonSimulated/Serenade.gp5',
         };
     }
 
@@ -17,7 +21,7 @@ class Partituur extends Component {
 
         // Load alphaTab
         $(this.refs.partituur).alphaTab({
-            file: this.state.gp5,
+            file: this.props.dataFile,
             engine: 'svg',
             width: -1
         });
@@ -26,8 +30,8 @@ class Partituur extends Component {
         var as = $(this.refs.partituur).alphaTab('playerInit');
         as.LoadSoundFont('/Libraries/Alphatab/alphaSynth/default.sf2');
         $(this.refs.partituur).alphaTab('playerCursor');
-
     }
+
 
     play(){
         const $ = window.$;
@@ -44,7 +48,6 @@ class Partituur extends Component {
         $(this.refs.partituur).alphaTab('pause');
     }
 
-//this.state.gp5 --> this.props.dataFile
     render() {
         return (
             <div hidden={this.props.hidden}>

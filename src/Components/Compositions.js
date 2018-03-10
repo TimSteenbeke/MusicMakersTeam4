@@ -172,7 +172,7 @@ class Compositions extends Component {
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
                                 <td><a href="#" onClick={e => this.assignItem(composition.content,index)}>{composition.fileFormat != null ? composition.fileFormat : "No file"}</a></td>
-                                <Link to="/instrumenten" onClick={this.handleClick} className="btn">
+                                <Link to={`/play/${composition.muziekstukId}` } onClick={this.handleClick} className="btn">
                                 </Link>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/compositiondetails/${composition.muziekstukId}` }>
@@ -187,7 +187,11 @@ class Compositions extends Component {
                         ))}
                         </tbody>
                     </table>
-
+                    <div className="fixed-action-btn">
+                        <Link to="/addmuziekstuk" className="btn-floating btn-large deep-orange darken-4">
+                            <i className="large material-icons">add</i>
+                        </Link>
+                    </div>
                 </section>
             </div>
         );
