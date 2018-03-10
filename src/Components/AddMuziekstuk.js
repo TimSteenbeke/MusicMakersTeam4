@@ -134,7 +134,6 @@ class AddMuziekstuk extends Component {
 
         this.setState({
             bestandType: extension
-
         });
 
         const fmdata = new FormData();
@@ -153,7 +152,7 @@ class AddMuziekstuk extends Component {
                         <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
                                 <div className="card-content">
-                                    <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
+                                    <form className="addmuziekstuk" action="/" method="POST" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
