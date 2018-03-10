@@ -134,7 +134,6 @@ class AddMuziekstuk extends Component {
 
         this.setState({
             bestandType: extension
-
         });
 
         const fmdata = new FormData();
