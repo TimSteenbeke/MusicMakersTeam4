@@ -4,13 +4,7 @@
 import React, {Component} from 'react';
 import * as CompositionService from '../Services/CompositionService.js'
 
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import CompDetails from './CompositionDetails.js';
-import CompUpdate from './CompositionUpdate.js';
 import Header from './Header'
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 import {Link} from 'react-router-dom';
 
 
@@ -76,7 +70,6 @@ class Compositions extends Component {
     setSearch = event => {
         this.setState({ compositions: [] });
 
-        const self = this;
         let value = event.target.value;
 
         console.log(value);
@@ -127,10 +120,8 @@ class Compositions extends Component {
 
     render() {
         return (
-
             <div className="Homepage">
                 <Header name="Muziekstukken" />
-
                 <div className="section">
                     <div className="row">
                         <div className="col s12 m6 offset-m3 l6 offset-l3 center">
@@ -181,6 +172,7 @@ class Compositions extends Component {
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>
+
                 </section>
             </div>
         );
