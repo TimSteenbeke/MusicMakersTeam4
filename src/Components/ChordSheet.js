@@ -17,7 +17,7 @@ class ChordSheet extends Component {
             hideFirst:true,
             currentChord:0,
             speed:1000,
-            hidden:false
+            hidden:true
         };
 
         this.nextChord = this.nextChord.bind(this);
@@ -63,7 +63,7 @@ class ChordSheet extends Component {
         console.log("klgjsfklgjsdlgfjkdg");
         console.log(this.props.content);
         const chordSheet = this.props.content;
-        this.setState({dataFile: chordSheetExample});
+        this.setState({dataFile: chordSheet});
     }
 
     parseChordSheetPro(chordSheet){
