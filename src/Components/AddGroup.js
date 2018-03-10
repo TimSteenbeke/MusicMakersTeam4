@@ -64,8 +64,8 @@ class AddGroup extends Component {
         this.state = {
             name:"",
             bestand: "",
+            supervisorid: 1,
             userids: [],
-            studentids: [],
             allUsers: [],
             students: [],
             image: "../image/image.jpg"
@@ -81,25 +81,20 @@ class AddGroup extends Component {
             timer: 1500
         });
         console.log("Name: " + this.state.name);
-        console.log("studentIds: " + this.state.studentids);
-        console.log("userIds: " + this.state.userids);
+        console.log("studentIds: " + this.state.userids);
+        console.log("userIds: " + this.state.supervisorid);
 
         GroupService.postGroup(JSON.stringify(
             {
                 name: this.state.name,
+                supervisorid: this.state.supervisorid,
                 userids: this.state.userids,
-                studentids: this.state.studentids,
                 groupimage: this.state.image
 
             }
         ));
     };
 
-
-    onChangeName = (e) => {
-        this.setState({name: e.target.value});
-        console.log("name:" + e.target.value)
-    };
 
     addUsers = () => {
         UserService.getAllUsers().then(console.log("----Students---- \n"))
@@ -116,17 +111,22 @@ class AddGroup extends Component {
 
     };
 
+    onChangeName = (e) => {
+        this.setState({name: e.target.value});
+        console.log("name:" + e.target.value)
+    };
+
 
     handleUserChange = (e) => {
         let options = e.target.options;
-        let value = [];
+        let value = 1;
         for (let i = 0, l = options.length; i < l; i++) {
             if (options[i].selected) {
-                value.push(options[i].value);
+                value = options[i].value;
             }
         }
-        this.setState({userids: value});
-        console.log(this.state.userids);
+        this.setState({supervisorid: value});
+        console.log(this.state.supervisorid);
     };
 
     handleStudentChange = (e) => {
@@ -137,8 +137,8 @@ class AddGroup extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({studentids: value});
-        console.log(this.state.studentids);
+        this.setState({userids: value});
+        console.log(this.state.userids);
     };
 
     componentDidMount() {

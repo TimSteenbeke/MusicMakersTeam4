@@ -43,8 +43,8 @@ export default class Group extends Component {
                     <table className="black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                        <th>Image</th>
                         <th>Naam</th>
+                            <th>ff</th>
                         </tr>
                         </thead>
                         <tbody>

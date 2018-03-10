@@ -6,6 +6,10 @@ import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import swal from 'sweetalert2'
+import * as LoginService from "../Services/LoginService";
+import Link from "react-router-dom/es/Link";
+import Redirect from "react-router-dom/es/Redirect";
+import Header from "./Header";
 
 const styles = {
     width: {
@@ -52,23 +56,36 @@ export default class GroupUpdate extends Component {
             group: {
                 groupId: this.props.match.params.id,
                 name: "string",
-                supervisorid: 1,
-                supervisorname: ""
+                supervisor: {
+                    username: "string"
+                },
             },
-            open: false
         }
     }
 
     componentDidMount() {
         const self = this;
-        GroupService.getGroupFromBackend(self.state.groupId)
-            .then(console.log("----Groep met id " + self.state.groupId + "---- \n"))
-            .then(group => self.setState({
+        console.log("newgroupid: " + self.state.group.groupId);
+        GroupService.getGroupFromBackend(self.state.group.groupId)
+            .then(console.log("----Groep met id " + self.state.group.groupId + "---- \n"))
+                .then(group => self.setState({
                 groupId: group.groupId,
                 name: group.name,
-                supervisorid: group.supervisor.id,
-                supervisorname: group.supervisor.username
+                supervisor: group.supervisor
             }, console.log(group)))
+    }
+
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
+
+    setName = event => {
+        let value = event.target.value;
+        return this.setState({name: value})
     }
 
     onChangeName = (event, typedName) => {
@@ -82,7 +99,7 @@ export default class GroupUpdate extends Component {
         let group = Object.assign({}, this.state.group);
         group.supervisor = typedSupervisor;
         this.setState({group});
-        console.log("Name:" + this.state.supervisorname)
+        console.log("Name:" + this.state.username)
     };
 
     handleUpdate = () => {
@@ -102,57 +119,56 @@ export default class GroupUpdate extends Component {
         ));
         console.log("groupId: " + self.state.groupId);
         console.log("groepsnaam: " + self.state.name);
-        console.log("supervisorid: " + self.state.supervisorid);
-        console.log("supervisornaam: " + self.state.supervisorname);
+        console.log("supervisorid: " + self.state.supervisor.supervisorid);
+        console.log("supervisornaam: " + self.state.supervisor.username);
     };
 
     render() {
-        return (
-            <div>
 
-                <h1 className="header">Groep details</h1>
-                <Card expanded={true}>
-                    <CardHeader
-                        title={this.state.name}
-                    />
-                    <CardText>
-                        <div className="InstrumentDetail">
-                            <div id="instrumentDetails">
-                                <List>
-                                    <ListItem>
-                                        <TextField
-                                            value={this.state.name}
-                                            onChange={this.onChangeName}
-                                            hintText="Geef nieuwe groepsnaam in..."
-                                            floatingLabelText="Naam"
-                                            style={styles.width}
-                                            inputStyle={styles.inputstyle}
-                                            hintStyle={styles.floatingLabelFocusStyle}
-                                            floatingLabelStyle={styles.floatingLabelStyle}
-                                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                            underlineFocusStyle={styles.underlineStyle}
-                                        /><br/>
-                                        <TextField
-                                            value={this.state.supervisorname}
-                                            onChange={this.onChangeSupervisor}
-                                            hintText="Geef begeleider in..."
-                                            floatingLabelText="Begeleider"
-                                            style={styles.width}
-                                            inputStyle={styles.inputstyle}
-                                            hintStyle={styles.floatingLabelFocusStyle}
-                                            floatingLabelStyle={styles.floatingLabelStyle}
-                                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                            underlineFocusStyle={styles.underlineStyle}
-                                        />
-                                    </ListItem>
-                                </List>
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
+        return (<div className="Homepage">
+                {redirecter}
+                <Header name={this.state.name}/>
+
+                <section className="containerCss">
+                    <div className="row">
+                        <div className="col s12 m8 offset-m2 l8 offset-l2">
+                            <div className="card hoverable">
+                                <div className="card-image">
+                                    <span className="card-title white-text">{this.state.name}</span>
+                                </div>
+                                <div className="card-content">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <label>Groepsnaam</label>
+                                            <input type="text" value={this.state.name} label="Titel"  onChange={this.setTitle} placeholder="Geef een titel in.."/>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s12 m12 l12">
+                                                <label>Begeleider</label>
+                                                <input type="text" value={this.state.group.supervisor.username}  onChange={this.setArtist} placeholder="Geef een artiest in.."/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card-action">
+                                    <Link to="/muziekstukken" onClick={this.handleUpdate}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
+                                        className="material-icons">done</i>
+                                    </Link>
+                                </div>
+
                             </div>
                         </div>
-                    </CardText>
-                    <CardActions>
-                        <FlatButton label="Update" onClick={this.handleUpdate}/>
-                    </CardActions>
-                </Card>
+                        <div className="col s0 m2 l2"/>
+                    </div>
+                </section>
             </div>
         );
     }

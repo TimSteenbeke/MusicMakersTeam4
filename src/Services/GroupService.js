@@ -47,8 +47,9 @@ export function getGroupFromBackend(groupId) {
     return fetch(URL + "groups/" + groupId, {
         mode: 'cors',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
+
         }
     })
         .then((response) => response.json()
@@ -68,6 +69,7 @@ export function postGroup(data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });
@@ -93,6 +95,7 @@ export function updateGroup(groupId, data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });

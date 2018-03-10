@@ -34,14 +34,14 @@ class AddCourse extends Component {
             timer: 1500
         });
         console.log("Beschrijving: " + this.state.beschrijving);
-        console.log("studentIds: " + this.state.studentids);
+        console.log("studentIds: " + this.state.userids);
         console.log("teacherIds: " + this.state.teacherids);
 
         CourseService.postCourse(JSON.stringify(
             {
                 coursebeschrijving: this.state.beschrijving,
                 teacherids: this.state.teacherids,
-                studentids: this.state.studentids,
+                userids: this.state.userids,
                 prijs: 1
             }
         ));
@@ -93,8 +93,8 @@ class AddCourse extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({studentids: value});
-        console.log(this.state.studentids);
+        this.setState({userids: value});
+        console.log(this.state.userids);
     };
 
     render() {
