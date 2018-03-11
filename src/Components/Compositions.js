@@ -170,7 +170,7 @@ class Compositions extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addmuziekstuk" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addcomposition" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>
