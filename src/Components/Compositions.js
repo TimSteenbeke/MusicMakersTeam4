@@ -14,7 +14,6 @@ class Compositions extends Component {
         this.state = {
             compositions: [],
             selectedIndex: 0,
-
             selected: [],
             openDetails: false,
             openUpdate: false,
