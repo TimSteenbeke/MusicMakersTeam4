@@ -10,72 +10,90 @@ import * as LoginService from "../Services/LoginService";
 import Link from "react-router-dom/es/Link";
 import Redirect from "react-router-dom/es/Redirect";
 import Header from "./Header";
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
-
+import * as UserService from "../Services/UserService";
+import {Input, Row} from "react-materialize";
+import StyledTextField from "./StyledTextField";
 
 export default class GroupUpdate extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            allUsers: [],
+            students: [],
             group: {
                 groupId: this.props.match.params.id,
                 name: "string",
                 supervisor: {
-                    username: "string"
+                    id: 1,
+                    username: ""
                 },
+                image: "../image/image.jpg"
             },
         }
     }
 
+    addUsers = () => {
+        UserService.getAllUsers().then(console.log("----Users---- \n"))
+            .then(allUsers => {
+                this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
+            });
+    };
+
+    addStudents = () => {
+        UserService.getStudents().then(console.log("----Students---- \n"))
+            .then(students => {
+                this.setState({students: students.users}, console.log(students.users));
+            });
+
+    };
+
+    handleNameChange = event => {
+        let value = event.target.value;
+        return this.setState({name: value})
+    };
+
+    handleUserChange = (e) => {
+        let options = e.target.options;
+        let value = 1;
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value = options[i].value;
+            }
+        }
+        this.setState({supervisorid: value});
+        console.log(this.state.supervisorid);
+    };
+
+    handleStudentChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({userids: value});
+        console.log(this.state.userids);
+    };
+
+
     componentDidMount() {
+        this.addUsers();
+        this.addStudents();
+
         const self = this;
         console.log("newgroupid: " + self.state.group.groupId);
         GroupService.getGroupFromBackend(self.state.group.groupId)
             .then(console.log("----Groep met id " + self.state.group.groupId + "---- \n"))
-                .then(group => self.setState({
-                groupId: group.groupId,
-                name: group.name,
-                supervisor: group.supervisor
-            }, console.log(group)))
+            .then(loadedGroup => self.setState({
+                groupId: loadedGroup.groupId,
+                name: loadedGroup.name,
+                supervisor: loadedGroup.supervisor
+            }, console.log(loadedGroup)))
     }
 
-    componentWillMount(){
+    componentWillMount() {
         let response = false;
         response = LoginService.checkToken();
         console.log("response:");
@@ -83,38 +101,21 @@ export default class GroupUpdate extends Component {
         this.setState({redirect: !response})
     }
 
-    setName = event => {
-        let value = event.target.value;
-        return this.setState({name: value})
-    }
-
-    onChangeName = (event, typedName) => {
-        let group = Object.assign({}, this.state.group);
-        group.name = typedName;
-        this.setState({group});
-        console.log("Name:" + this.state.group.name)
-    };
-
-    onChangeSupervisor = (event, typedSupervisor) => {
-        let group = Object.assign({}, this.state.group);
-        group.supervisor = typedSupervisor;
-        this.setState({group});
-        console.log("Name:" + this.state.username)
-    };
-
     handleUpdate = () => {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Instrument Edited',
+            title: 'Groep aangepast',
             showConfirmButton: false,
             timer: 1500
         });
         let self = this;
         GroupService.updateGroup(self.state.groupId, JSON.stringify(
             {
-                name: self.state.name,
-                supervisorid: self.state.supervisorid,
+                name: self.state.group.name,
+                supervisorid: self.state.group.supervisor.id,
+                userids: this.state.userids,
+                groupimage: this.state.group.image
             }
         ));
         console.log("groupId: " + self.state.groupId);
@@ -134,40 +135,83 @@ export default class GroupUpdate extends Component {
                 <Header name={this.state.name}/>
 
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s12 m8 offset-m2 l8 offset-l2">
-                            <div className="card hoverable">
-                                <div className="card-image">
-                                    <span className="card-title white-text">{this.state.name}</span>
-                                </div>
-                                <div className="card-content">
+                    <div className="col s0 m2 l2"/>
+                    <div className="col s12 m8 l8">
+                        <div className="card hoverable">
+                            <div className="card-content">
+                                <div className="section">
                                     <div className="row">
-                                        <div className="col s12 m12 l12">
-                                            <label>Groepsnaam</label>
-                                            <input type="text" value={this.state.name} label="Titel"  onChange={this.setTitle} placeholder="Geef een titel in.."/>
+                                        <div className="col s3 m3 l3">
+                                            <h5 className="truncate">Groepsnaam</h5>
                                         </div>
-                                    </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
-                                            <div className="col s12 m12 l12">
-                                                <label>Begeleider</label>
-                                                <input type="text" value={this.state.group.supervisor.username}  onChange={this.setArtist} placeholder="Geef een artiest in.."/>
-                                            </div>
+                                        <div className="col s9 m9 l9">
+                                            <StyledTextField onChange={this.handleNameChange}
+                                                             hint={this.state.group.name}
+                                                             label="Naam"/>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="card-action">
-                                    <Link to="/muziekstukken" onClick={this.handleUpdate}
-                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
-                                        className="material-icons">done</i>
-                                    </Link>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s3 m3 l3">
+                                            <h5 className="truncate">Gebruikers</h5>
+                                        </div>
+                                        <div className="col s9 m9 l9">
+                                            <Row>
+                                                <Input s={12} multiple={true} type='select'
+                                                       onChange={this.handleUserChange}
+                                                       label="Begeleiders" icon='face' defaultValue='1'>
+                                                    <option key="" value="" disabled>Kies de begeleiders
+                                                    </option>
+                                                    {this.state.allUsers.map((user, index) => (
+                                                        <option key={user.userid}
+                                                                value={user.userid}>{user.firstname} {user.lastname}</option>
+                                                    ))}
+                                                </Input>
+                                            </Row>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s3 m3 l3">
+                                            <h5 className="truncate">Studenten</h5>
+                                        </div>
+                                        <div className="col s9 m9 l9">
+                                            <Row>
+                                                <Input s={12} multiple={true} type='select' label="Studenten"
+                                                       onChange={this.handleStudentChange}
+                                                       icon='child_care' defaultValue='1'>
+                                                    <option key="" value="" disabled>Kies de studenten</option>
+                                                    {this.state.students.map((student, index) => (
+                                                        <option key={student.userid}
+                                                                value={student.userid}>{student.firstname} {student.lastname}</option>
+                                                    ))}
+                                                </Input>
+                                            </Row>
+                                        </div>
+                                        <input name="file"
+                                               className="upload-file"
+                                               id="file"
+                                               onChange={this.handleChangeImage}
+                                               encType="multipart/form-data" accept="image/*" type="file"/>
+                                        <label>{this.state.fileType}</label>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
+                            </div>
 
+                            <div className="card-action">
+                                <Link to="/groups" onClick={this.handleUpdate}
+                                      className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                    <i
+                                        className="material-icons">done</i>
+                                </Link>
                             </div>
                         </div>
-                        <div className="col s0 m2 l2"/>
                     </div>
+                    <div className="col s0 m2 l2"/>
                 </section>
             </div>
         );
