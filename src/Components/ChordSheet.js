@@ -60,8 +60,6 @@ class ChordSheet extends Component {
         C                G              F  C/E Dm C
         Whisper words of wisdom, let it be`.substring(1);
 
-        console.log("klgjsfklgjsdlgfjkdg");
-        console.log(this.props.content);
         const chordSheet = this.props.content;
         this.setState({dataFile: chordSheet});
     }
