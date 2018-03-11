@@ -84,8 +84,6 @@ class Compositions extends Component {
         }
     };
 
-
-
     assignItem = (item,indx) => { // bound arrow function handler
         const sampleBytes = Compositions.base64ToArrayBuffer(item);
         this.saveByteArray([sampleBytes], this.state.compositions[indx].fileFormat);
@@ -139,6 +137,7 @@ class Compositions extends Component {
                             <th>Onderwerp</th>
                             <th>Instrumenttype</th>
                             <th>Bestand</th>
+                            <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -150,17 +149,21 @@ class Compositions extends Component {
                                 <td>{composition.genre}</td>
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
-                                <td><a href="#" onClick={e => this.assignItem(composition.content,index)}>{composition.fileFormat != null ? composition.fileFormat : "No file"}</a></td>
+                                <td>{composition.fileFormat != null ? composition.fileFormat : "No file"}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/play/${composition.muziekstukId}` }>
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={e => this.assignItem(composition.content,index)}>
+                                        <i className="material-icons">file_download</i>
+                                    </a>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn" to={`/play/${composition.muziekstukId}` }>
                                         <i className="material-icons">play_arrow</i>
                                     </Link>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/compositiondetails/${composition.muziekstukId}` }>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn" to={`/compositions/${composition.muziekstukId}` }>
                                         <i className="material-icons">edit</i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(composition.muziekstukId, e)}><i className="material-icons">delete
-                                    </i></a>
-
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(composition.muziekstukId, e)}>
+                                        <i className="material-icons">delete
+                                    </i>
+                                    </a>
                                 </td>
                             </tr>
                         ))}
