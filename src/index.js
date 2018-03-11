@@ -6,7 +6,7 @@ import Sidebar from './Components/Sidebar.js';
 import GroupsAndChat from './Components/GroupsAndChat.js';
 import CheckTokenComponent from './Components/CheckTokenComponent';
 
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter,HashRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 // import PlayPartituur from "./Components/PlayMusic";
@@ -14,7 +14,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 const Application = () => (
     <MuiThemeProvider>
-        <BrowserRouter>
                 <section className="flexBox">
                     <section className="sidebar">
                         <Sidebar/>
@@ -27,12 +26,13 @@ const Application = () => (
                         <GroupsAndChat/>
                     </section>
                 </section>
-        </BrowserRouter>
     </MuiThemeProvider>
 );
 
 
-ReactDOM.render(
-    <Application/>
-    , document.getElementById('root'));
+ReactDOM.render((
+    <HashRouter>
+        <Application/>
+    </HashRouter>
+), document.getElementById('root'))
 registerServiceWorker();

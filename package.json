@@ -11,6 +11,7 @@
     "empty-module": "0.0.2",
     "jquery": "^3.3.1",
     "loadjs": "^3.5.2",
+    "lru-cache": "^4.1.2",
     "material-ui": "^0.20.0",
     "material-ui-table-edit": "^3.0.3",
     "moment": "^2.21.0",
