@@ -85,11 +85,9 @@ class Compositions extends Component {
         }
     };
 
-
-
     assignItem = (item,indx) => { // bound arrow function handler
         const sampleBytes = Compositions.base64ToArrayBuffer(item);
-        this.saveByteArray([sampleBytes], this.state.compositions[indx].fileFormat);
+        this.saveByteArray([sampleBytes], this.state.compositions[indx].fileFormat.substr(fileFormat.lastIndexOf('.') + 1));
     };
 
     static base64ToArrayBuffer(base64) {
