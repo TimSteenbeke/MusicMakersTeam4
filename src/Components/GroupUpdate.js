@@ -160,19 +160,22 @@ export default class GroupUpdate extends Component {
                     <div className="col s0 m2 l2"/>
                     <div className="col s12 m8 l8">
                         <div className="card hoverable">
+                            <div className="card-image">
                             <img
                                 src={"data:image;base64," + this.state.groupimage} alt="Groep"
                                 height="300px"/>
-                            <div className="row">
-                                <div className="col s3 m3 l3">
-                                    <h5 className="truncate">{this.state.name}</h5>
-                                </div>
-                                <div className="col s9 m9 l9">
-                                    <StyledTextField onChange={this.handleNameChange}
-                                                     label="Naam"/>
+                            </div>
+                            <div className="section">
+                                <div className="row">
+                                    <div className="col s3 m3 l3">
+                                        <h5 className="truncate">{this.state.name}</h5>
+                                    </div>
+                                    <div className="col s9 m9 l9">
+                                        <StyledTextField onChange={this.handleNameChange}
+                                                         label="Naam"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div className="divider"></div>
                         <div className="section">
                             <div className="row">
@@ -220,7 +223,6 @@ export default class GroupUpdate extends Component {
                                        encType="multipart/form-data" accept="image/*" type="file"/>
                                 <label>{this.state.fileType}</label>
                             </div>
-
                             <div className="divider"></div>
 
 
@@ -232,6 +234,7 @@ export default class GroupUpdate extends Component {
                                 </Link>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <div className="col s0 m2 l2"/>
                 </section>

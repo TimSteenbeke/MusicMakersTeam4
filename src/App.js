@@ -42,7 +42,7 @@ class App extends Component {
                 {/*<Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>*/}
                 <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
                 <Route name="group" path="/groups" component={Group}/>
-                <Route path="/addgroup" component={AddGroup}/>
+                <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="groupUpdate" path="/groupupdate/:id" component={GroupUpdate}/>
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="play" path="/play/:id" component={PlayMusic}/>

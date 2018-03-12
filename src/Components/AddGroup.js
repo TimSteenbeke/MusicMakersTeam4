@@ -11,14 +11,14 @@ import {Input, Row} from "react-materialize";
 import Link from "react-router-dom/es/Link";
 import StyledTextField from "./StyledTextField";
 import * as GroupService from "../Services/GroupService";
+import Redirect from "react-router-dom/es/Redirect";
 
 class AddGroup extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name:"",
-            bestand: "",
+            name: "",
             supervisorid: 1,
             userids: [],
             allUsers: [],
@@ -118,89 +118,91 @@ class AddGroup extends Component {
     };
 
     render() {
-        return (
-            <div className="Homepage">
-                <Header name="Add Group"/>
+
+        let redirecter = null;
+        if (this.state.redirect) {
+            redirecter = <Redirect to='/login'/>
+        }
+        return (<div className="Homepage">
+                {redirecter}
+                <Header name={this.state.name}/>
                 <section className="containerCss">
                     <div className="col s0 m2 l2"/>
                     <div className="col s12 m8 l8">
                         <div className="card hoverable">
-                            <div className="card-content">
-                                <form className="addGroup" action="/" method="POST" onSubmit={(e) => {
-                                    e.preventDefault();
-                                    this.handleClick();
-                                }}>
-                                    <div className="section">
-                                        <div className="row">
-                                            <div className="col s3 m3 l3">
-                                                <h5 className="truncate">Group</h5>
-                                            </div>
-                                            <div className="col s9 m9 l9">
-                                                <StyledTextField onChange={this.onChangeName}
-                                                                 hint="Geef een naam in..."
-                                                                 label="Naam"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
-                                            <div className="col s3 m3 l3">
-                                                <h5 className="truncate">Gebruikers</h5>
-                                            </div>
-                                            <div className="col s9 m9 l9">
-                                                <Row>
-                                                    <Input s={12} multiple={true} type='select'
-                                                           onChange={this.handleUserChange}
-                                                           label="Begeleiders" icon='face' defaultValue='1'>
-                                                        <option key="" value="" disabled>Kies de begeleiders
-                                                        </option>
-                                                        {this.state.allUsers.map((user, index) => (
-                                                            <option key={user.userid}
-                                                                    value={user.userid}>{user.firstname} {user.lastname}</option>
-                                                        ))}
-                                                    </Input>
-                                                </Row>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="section">
-                                        <div className="row">
-                                            <div className="col s3 m3 l3">
-                                                <h5 className="truncate">Studenten</h5>
-                                            </div>
-                                            <div className="col s9 m9 l9">
-                                                <Row>
-                                                    <Input s={12} multiple={true} type='select' label="Studenten"
-                                                           onChange={this.handleStudentChange}
-                                                           icon='child_care' defaultValue='1'>
-                                                        <option key="" value="" disabled>Kies de studenten</option>
-                                                        {this.state.students.map((student, index) => (
-                                                            <option key={student.userid}
-                                                                    value={student.userid}>{student.firstname} {student.lastname}</option>
-                                                        ))}
-                                                    </Input>
-                                                </Row>
-                                            </div>
-                                            <input name="file"
-                                                   className="upload-file"
-                                                   id="file"
-                                                   onChange={this.handleChangeImage}
-                                                   encType="multipart/form-data" accept="image/*" type="file"/>
-                                            <label>{this.state.fileType}</label>
-                                        </div>
-                                    </div>
-                                    <div className="divider"></div>
-                                </form>
-
+                            <div className="card-image">
+                            <img
+                                src={"data:image;base64," + this.state.image} alt="Groep"
+                                height="300px"/>
                             </div>
+                            <div className="divider"></div>
+                            <div className="row">
+                                <div className="col s3 m3 l3">
+                                    <h5 className="truncate">{this.state.name}</h5>
+                                </div>
+                                <div className="col s9 m9 l9">
+                                    <StyledTextField onChange={this.onChangeName}
+                                                     hint="Geef een naam in..."
+                                                     label="Naam"/>
+                                </div>
+                            </div>
+                            <div className="divider"></div>
+                            <div className="section">
+                                <div className="row">
+                                    <div className="col s3 m3 l3">
+                                        <h5 className="truncate">Begeleider</h5>
+                                    </div>
+                                    <div className="col s9 m9 l9">
+                                        <Row>
+                                            <Input s={12} multiple={true} type='select'
+                                                   onChange={this.handleUserChange}
+                                                   label="Begeleiders" icon='face' defaultValue='1'>
+                                                <option key="" value="" disabled>Kies de begeleiders
+                                                </option>
+                                                {this.state.allUsers.map((user, index) => (
+                                                    <option key={user.userid}
+                                                            value={user.userid}>{user.firstname} {user.lastname}</option>
+                                                ))}
+                                            </Input>
+                                        </Row>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="section">
+                                <div className="row">
+                                    <div className="col s3 m3 l3">
+                                        <h5 className="truncate">Studenten</h5>
+                                    </div>
+                                    <div className="col s9 m9 l9">
+                                        <Row>
+                                            <Input s={12} multiple={true} type='select' label="Studenten"
+                                                   onChange={this.handleStudentChange}
+                                                   icon='child_care' defaultValue='1'>
+                                                <option key="" value="" disabled>Kies de studenten</option>
+                                                {this.state.students.map((student, index) => (
+                                                    <option key={student.userid}
+                                                            value={student.userid}>{student.firstname} {student.lastname}</option>
+                                                ))}
+                                            </Input>
+                                        </Row>
+                                    </div>
+                                    <input name="file"
+                                           className="upload-file"
+                                           id="file"
+                                           onChange={this.handleChangeImage}
+                                           encType="multipart/form-data" accept="image/*" type="file"/>
+                                    <label>{this.state.fileType}</label>
+                                </div>
 
-                            <div className="card-action">
-                                <Link to="/groups" onClick={this.handleClick}
-                                      className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
-                                    <i
-                                        className="material-icons">done</i>
-                                </Link>
+                                <div className="divider"></div>
+
+                                <div className="card-action">
+                                    <Link to="/groups" onClick={this.handleClick}
+                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
+                                        <i
+                                            className="material-icons">done</i>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>

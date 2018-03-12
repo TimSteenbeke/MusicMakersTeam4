@@ -40,7 +40,7 @@ class Sidebar extends Component {
                         <MenuItem  style={styles.menuColor} primaryText="Groepen"/>
                     </Link>
                     <Divider/>
-                    <Link to="/addGroup">
+                    <Link to="/addgroup">
                         <MenuItem style={styles.menuColor} primaryText="Groep toevoegen"/>
                     </Link>
                     <Divider/>
