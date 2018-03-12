@@ -5,6 +5,7 @@ import ActivityPopUp from './ActivityPopUp.js';
 import Header from './Header';
 import {Row, Input} from 'react-materialize'
 import * as UserService from '../Services/UserService.js'
+import * as RoleDefiner from '../Util/RoleDefiner.js'
 
 require('moment/locale/nl.js');
 
@@ -43,13 +44,13 @@ class Agenda extends Component {
             startDate: new Date(),
             agendaItems: [],
             agendaOwner: "",
-            selectableUsers: []
+            selectableUsers: [],
+            userroles: []
         };
     }
 
     updateComponent = () =>{
         this.getUserRoles();
-        this.getUsers();
         this.getMyAgendaItems();
     };
 
@@ -57,26 +58,43 @@ class Agenda extends Component {
         //Ajax call to get user his role
         //If role = admin => extra features (change state)
         this.getUserRoles();
-        this.getUsers();
         this.getMyAgendaItems();
     }
 
 
     getUserRoles =() => {
-        UserService.getUserRoles();
+        UserService.getUserRoles().then(roles => {
+            this.setState({userroles:roles.roles});
+            console.log('is admin?');
+            console.log(RoleDefiner.isUserAdmin(this.state.userroles))
+            console.log('is teacher?');
+            console.log(RoleDefiner.isUserTeacher(this.state.userroles))
+        }).then( () => {
+            this.getUsers();
+        })
+
+
+
     };
 
     getUsers = () => {
-        UserService.getAll().then(console.log("----Teachers---- \n"))
-            .then(users => {
-                this.setState({selectableUsers: users.users}, console.log(users.users));
-            });
-
+        if (RoleDefiner.isUserAdmin(this.state.userroles)) {
+            UserService.getAll().then(console.log("----ALL USERS---- \n"))
+                .then(users => {
+                    this.setState({selectableUsers: users.users}, console.log(users.users));
+                });
+        } else {
+            if (RoleDefiner.isUserTeacher(this.state.userroles)) {
+                UserService.getStudents().then(console.log("----ALL STUDENTS---- \n"))
+                    .then(users => {
+                        this.setState({selectableUsers: users.users}, console.log(users.users));
+                    });
+            }
+        }
     };
 
 
     getMyAgendaItems = () => {
-        //HARDCODED ID (TEMPORARY)
         AgendaService.getMyAgenda().then(agendaItems => {
             this.mapAgendaItems(agendaItems)
         });
@@ -141,30 +159,100 @@ class Agenda extends Component {
 
 
     render() {
-        //Load extra components based on state
+        //TODO: split up the hiddencontrols in a component GOAL: render function no duplicate code and more read-ability
+        if (RoleDefiner.isUserAdmin(this.state.userroles)) {
+            return (
+                <div>
+                <Header name="Agenda"/>
+                <section className="containerCss">
+                    <div className="section">
+                        <div className="row">
+                            <div className="col s3 m3 l3">
+                                <h5 className="truncate">Studenten</h5>
+                            </div>
+                            <div className="col s9 m9 l9">
+                                <Row>
+                                    <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
+                                           icon='child_care' defaultValue='1'>
+                                        <option key="" value="" disabled>Kies de studenten</option>
+                                        {this.state.selectableUsers.map((user, index) => (
+                                            <option key={user.userid}
+                                                    value={user.userid}>{user.firstname} {user.lastname}</option>
+                                        ))}
+                                    </Input>
+                                </Row>
+                            </div>
+                        </div>
+                    </div>
+                    <ReactAgenda
+                        minDate={now}
+                        maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
+                        disablePrevButton={false}
+                        startDate={this.state.startDate}
+                        cellHeight={this.state.cellHeight}
+                        locale={this.state.locale}
+                        items={this.state.items}
+                        numberOfDays={this.state.numberOfDays}
+                        rowsPerHour={this.state.rowsPerHour}
+                        itemColors={colors}
+                        autoScale={false}
+                        fixedHeader={true}
+                        itemComponent={AgendaItem}
+                    />
+                </section>
+            </div>
+        );
+        } else {
+            if (RoleDefiner.isUserTeacher(this.state.userroles)) {
+             return   (
+                 <div>
+                 <Header name="Agenda"/>
+                    <section className="containerCss">
+                    <div className="section">
+                    <div className="row">
+                    <div className="col s3 m3 l3">
+                    <h5 className="truncate">Studenten</h5>
+                    </div>
+                    <div className="col s9 m9 l9">
+                    <Row>
+                    <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser} icon='child_care' defaultValue='1'>
+                    <option key="" value="" disabled>Kies de studenten</option>
+                {this.state.selectableUsers.map((user, index) => (
+                <option key={user.userid}
+                    value={user.userid}>{user.firstname} {user.lastname}</option>
+                ))}
+            </Input>
+                </Row>
+                </div>
+                </div>
+                </div>
+                <ReactAgenda
+                minDate={now}
+                maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
+                disablePrevButton={false}
+                startDate={this.state.startDate}
+                cellHeight={this.state.cellHeight}
+                locale={this.state.locale}
+                items={this.state.items}
+                numberOfDays={this.state.numberOfDays}
+                rowsPerHour={this.state.rowsPerHour}
+                itemColors={colors}
+                autoScale={false}
+                fixedHeader={true}
+                itemComponent={AgendaItem}
+                />
+                </section>
+                </div>
+
+                );
+            } else {
+
 
         return  (
             <div>
                         <Header name="Agenda"/>
                         <section className="containerCss">
                             <div className="section">
-                                <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Studenten</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
-                                        <Row>
-                                            <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
-                                                   icon='child_care' defaultValue='1'>
-                                                <option key="" value="" disabled>Kies de studenten</option>
-                                                {this.state.selectableUsers.map((user, index) => (
-                                                    <option key={user.userid}
-                                                            value={user.userid}>{user.firstname} {user.lastname}</option>
-                                                ))}
-                                            </Input>
-                                        </Row>
-                                    </div>
-                                </div>
                             </div>
                             <ReactAgenda
                                 minDate={now}
@@ -184,6 +272,8 @@ class Agenda extends Component {
                         </section>
                     </div>
         );
+         }
+      }
     }
 }
 
