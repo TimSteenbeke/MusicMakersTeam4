@@ -13,15 +13,17 @@ export default class CheckTokenComponent extends Component{
     componentWillMount(){
         let response;
         response = LoginService.checkToken();
-        console.log("response:");
+        console.log("Tokenchecker response:");
         console.log(response);
         this.setState({redirect: !response})
     }
+
     render(){
         let redirecting=null;
         if (this.state.redirect) {
+            this.setState({redirect: false});
+            console.log("redirecting to login");
             redirecting = <Redirect to='/login'/>
-            this.setState({redirect: false})
         }
 
         return (

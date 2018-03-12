@@ -29,13 +29,13 @@ const styles = {
         color: grey500,
     }
 };
+/*
 const ws = new Sockette('ws://localhost:7070/chat', {
     timeout: 5e3,
     maxAttempts: 10,
     onopen: e => console.log('Connected!', e),
     onmessage: e => {
         console.log('Received:', e);
-        updateChat(e);
     },
     onreconnect: e => console.log('Reconnecting...', e),
     onmaximum: e => console.log('Stop Attempting!', e),
@@ -48,13 +48,9 @@ const ws = new Sockette('ws://localhost:7070/chat', {
         alert("Chat connection Error");
     }
 });
-function updateChat(msg) { // Update chat-panel and list of connected users
-    let data = JSON.parse(msg.data);
-    console.log("msg: ", msg);
-    console.log("msg.data: ", data);
-    // id("chat").insertAdjacentHTML("afterbegin", data.userMessage);
-    //id("userlist").innerHTML = data.userlist.map(user => "<li>" + user + "</li>").join("");
-}
+*/
+
+
 
 export default class ChatComponent extends Component {
     constructor(props) {
@@ -66,29 +62,51 @@ export default class ChatComponent extends Component {
             wsURL: 'ws://localhost:7070/chat'
             // wsURL: 'ws://' + location.hostname + ':' + location.port + '/chat'
         };
+        const self = this;
+        this.socket = new Sockette('ws://localhost:7070/chat', {
+            timeout: 5e3,
+            maxAttempts: 10,
+            onopen: e => console.log('Connected!', e),
+            onmessage: e => {
+                console.log('Received:', e);
+                self.updateChat(e);
+            },
+            onreconnect: e => console.log('Reconnecting...', e),
+            onmaximum: e => console.log('Stop Attempting!', e),
+            onclose: e => {
+                console.log('Closed!', e);
+                alert("Chat connection closed")
+            },
+            onerror: e => {
+                console.log('Error:', e);
+                alert("Chat connection Error");
+            }
+        });
     }
 
     componentDidMount() {
-        ws.open();
+        this.socket.open();
     }
-
     updateChat(msg) { // Update chat-panel and list of connected users
         let data = JSON.parse(msg.data);
         console.log("msg: ", msg);
         console.log("msg.data: ", data);
+        this.setState({
+            data: [...this.state.data, data]
+        })
         // id("chat").insertAdjacentHTML("afterbegin", data.userMessage);
         //id("userlist").innerHTML = data.userlist.map(user => "<li>" + user + "</li>").join("");
     }
 
+
     setMessage(event, typedMessage) {
-        this.setState({message: typedMessage})
+        this.setState({message: typedMessage});
         console.log("setMessage: state typed=> ", this.state.message);
     }
 
     sendAndClear() {
         if (this.state.message !== "") {
-            ws.send(this.state.message);
-            this.state.message = "";
+            this.socket.send(this.state.message);
         }
     }
 
@@ -99,7 +117,9 @@ export default class ChatComponent extends Component {
                 <section className="containerCss">
                     <div id="chatControls">
                         count: <strong>{this.state.count}</strong>
-
+                        {this.state.data.map((data, index) => {
+                            data
+                        })}
                         <TextField
                             style={styles.width}
                             hintText="Type your message here..."
@@ -109,8 +129,7 @@ export default class ChatComponent extends Component {
                             floatingLabelStyle={styles.floatingLabelStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
-                            onChange={(event, typedMessage) => this.setMessage(event, typedMessage)
-                            }
+                            onChange={(event, typedMessage) => this.setMessage(event, typedMessage)}
                         />
                         <button id="send" onClick={() => this.sendAndClear()}>Send</button>
                     </div>

@@ -32,11 +32,13 @@ export function fetchToken(username, password) {
 
 export function checkToken(){
     if(localStorage.getItem('userToken')!= null){
-        let jwt = localStorage.getItem('userToken');
-        var current_time = Date.now() / 1000;
+        let jwt = JSON.parse(localStorage.getItem('userToken'));
+        let current_time = Date.now();
+        console.log("curr time: ", current_time);
+        console.log('jwt.expires_in: ', jwt.expires_in);
         if ( jwt.exp < current_time) {
-            localStorage.removeItem('userToken');
-            return false;
+            //localStorage.removeItem('userToken');
+            return true;
         } else{
             return true;
         }
