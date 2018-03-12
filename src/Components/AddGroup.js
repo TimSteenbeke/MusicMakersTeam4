@@ -11,51 +11,6 @@ import {Input, Row} from "react-materialize";
 import Link from "react-router-dom/es/Link";
 import StyledTextField from "./StyledTextField";
 import * as GroupService from "../Services/GroupService";
-import {RaisedButton} from "material-ui";
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    smallIcon: {
-        width: 36,
-        height: 36,
-    },
-    small: {
-        width: 72,
-        height: 72,
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
 
 class AddGroup extends Component {
 
@@ -71,29 +26,6 @@ class AddGroup extends Component {
             image: "../image/image.jpg"
         };
     }
-
-    handleClick = () => {
-        swal({
-            position: 'top-end',
-            type: 'success',
-            title: 'Groep toegevoegd',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        console.log("Name: " + this.state.name);
-        console.log("studentIds: " + this.state.userids);
-        console.log("userIds: " + this.state.supervisorid);
-
-        GroupService.postGroup(JSON.stringify(
-            {
-                name: this.state.name,
-                supervisorid: this.state.supervisorid,
-                userids: this.state.userids,
-                groupimage: this.state.image
-
-            }
-        ));
-    };
 
 
     addUsers = () => {
@@ -162,7 +94,28 @@ class AddGroup extends Component {
         }, 1000);
     };
 
+    handleClick = () => {
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Groep toegevoegd',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        console.log("Name: " + this.state.name);
+        console.log("studentIds: " + this.state.userids);
+        console.log("userIds: " + this.state.supervisorid);
 
+        GroupService.postGroup(JSON.stringify(
+            {
+                name: this.state.name,
+                supervisorid: this.state.supervisorid,
+                userids: this.state.userids,
+                groupimage: this.state.image
+
+            }
+        ));
+    };
 
     render() {
         return (

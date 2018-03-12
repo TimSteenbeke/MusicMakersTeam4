@@ -5,6 +5,25 @@
 const URL = 'http://localhost:8080/api/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
+export function getUser(userId){
+
+return fetch(URL + "users/" + userId, {
+    mode: 'cors',
+    headers: {
+        'Authorization': userToken.token_type + " " + userToken.access_token,
+        'Content-Type': 'application/json'
+    }
+})
+    .then((response) =>
+        response.json())
+    .then((responseJson) => {
+        return responseJson;
+    })
+    .catch((err) => {
+        console.log("geen response");
+        console.log(err);
+    });
+}
 
 export function getTeachers() {
 

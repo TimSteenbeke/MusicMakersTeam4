@@ -21,15 +21,12 @@ export default class GroupUpdate extends Component {
         this.state = {
             allUsers: [],
             students: [],
-            group: {
-                groupId: this.props.match.params.id,
-                name: "string",
-                supervisor: {
-                    id: 1,
-                    username: ""
-                },
-                image: "../image/image.jpg"
-            },
+            groupId: this.props.match.params.id,
+            name: "",
+            supervisorId: 1,
+            username: "",
+            studentIds: [],
+            groupimage: "../image/image.jpg"
         }
     }
 
@@ -53,6 +50,12 @@ export default class GroupUpdate extends Component {
         return this.setState({name: value})
     };
 
+    updateUsername(supervisorid) {
+        UserService.getUser(supervisorid).then(loadedUser => this.setState({
+            username: loadedUser.username
+        }))
+    }
+
     handleUserChange = (e) => {
         let options = e.target.options;
         let value = 1;
@@ -61,6 +64,7 @@ export default class GroupUpdate extends Component {
                 value = options[i].value;
             }
         }
+        this.updateUsername(value);
         this.setState({supervisorid: value});
         console.log(this.state.supervisorid);
     };
@@ -73,8 +77,24 @@ export default class GroupUpdate extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({userids: value});
-        console.log(this.state.userids);
+        this.setState({studentIds: value});
+        console.log(this.state.studentIds);
+    };
+
+    handleChangeImage = (evt) => {
+        console.log("Uploading");
+        let self = this;
+        let reader = new FileReader();
+        let file = evt.target.files[0];
+        reader.onload = function (upload) {
+            self.setState({
+                groupimage: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
+            });
+        };
+        reader.readAsDataURL(file);
+        setTimeout(function () {
+            console.log("Uploaded");
+        }, 1000);
     };
 
 
@@ -83,13 +103,15 @@ export default class GroupUpdate extends Component {
         this.addStudents();
 
         const self = this;
-        console.log("newgroupid: " + self.state.group.groupId);
-        GroupService.getGroupFromBackend(self.state.group.groupId)
-            .then(console.log("----Groep met id " + self.state.group.groupId + "---- \n"))
+        console.log("newgroupid: " + self.state.groupId);
+        GroupService.getGroupFromBackend(self.state.groupId)
+            .then(console.log("----Groep met id " + self.state.groupId + "---- \n"))
             .then(loadedGroup => self.setState({
                 groupId: loadedGroup.groupId,
                 name: loadedGroup.name,
-                supervisor: loadedGroup.supervisor
+                supervisorId: loadedGroup.supervisorid,
+                username: loadedGroup.supervisor.username,
+                groupimage: loadedGroup.groupImage
             }, console.log(loadedGroup)))
     }
 
@@ -112,16 +134,16 @@ export default class GroupUpdate extends Component {
         let self = this;
         GroupService.updateGroup(self.state.groupId, JSON.stringify(
             {
-                name: self.state.group.name,
-                supervisorid: self.state.group.supervisor.id,
-                userids: this.state.userids,
-                groupimage: this.state.group.image
+                name: self.state.name,
+                supervisorid: self.state.supervisorid,
+                userids: self.state.studentIds,
+                groupimage: self.state.groupimage
             }
         ));
         console.log("groupId: " + self.state.groupId);
         console.log("groepsnaam: " + self.state.name);
-        console.log("supervisorid: " + self.state.supervisor.supervisorid);
-        console.log("supervisornaam: " + self.state.supervisor.username);
+        console.log("supervisorid: " + self.state.supervisorid);
+        console.log("supervisornaam: " + self.state.username);
     };
 
     render() {
@@ -138,69 +160,69 @@ export default class GroupUpdate extends Component {
                     <div className="col s0 m2 l2"/>
                     <div className="col s12 m8 l8">
                         <div className="card hoverable">
-                            <div className="card-content">
-                                <div className="section">
-                                    <div className="row">
-                                        <div className="col s3 m3 l3">
-                                            <h5 className="truncate">Groepsnaam</h5>
-                                        </div>
-                                        <div className="col s9 m9 l9">
-                                            <StyledTextField onChange={this.handleNameChange}
-                                                             hint={this.state.group.name}
-                                                             label="Naam"/>
-                                        </div>
-                                    </div>
+                            <img
+                                src={"data:image;base64," + this.state.groupimage} alt="Groep"
+                                height="300px"/>
+                            <div className="row">
+                                <div className="col s3 m3 l3">
+                                    <h5 className="truncate">{this.state.name}</h5>
                                 </div>
-                                <div className="divider"></div>
-                                <div className="section">
-                                    <div className="row">
-                                        <div className="col s3 m3 l3">
-                                            <h5 className="truncate">Gebruikers</h5>
-                                        </div>
-                                        <div className="col s9 m9 l9">
-                                            <Row>
-                                                <Input s={12} multiple={true} type='select'
-                                                       onChange={this.handleUserChange}
-                                                       label="Begeleiders" icon='face' defaultValue='1'>
-                                                    <option key="" value="" disabled>Kies de begeleiders
-                                                    </option>
-                                                    {this.state.allUsers.map((user, index) => (
-                                                        <option key={user.userid}
-                                                                value={user.userid}>{user.firstname} {user.lastname}</option>
-                                                    ))}
-                                                </Input>
-                                            </Row>
-                                        </div>
-                                    </div>
+                                <div className="col s9 m9 l9">
+                                    <StyledTextField onChange={this.handleNameChange}
+                                                     label="Naam"/>
                                 </div>
-                                <div className="section">
-                                    <div className="row">
-                                        <div className="col s3 m3 l3">
-                                            <h5 className="truncate">Studenten</h5>
-                                        </div>
-                                        <div className="col s9 m9 l9">
-                                            <Row>
-                                                <Input s={12} multiple={true} type='select' label="Studenten"
-                                                       onChange={this.handleStudentChange}
-                                                       icon='child_care' defaultValue='1'>
-                                                    <option key="" value="" disabled>Kies de studenten</option>
-                                                    {this.state.students.map((student, index) => (
-                                                        <option key={student.userid}
-                                                                value={student.userid}>{student.firstname} {student.lastname}</option>
-                                                    ))}
-                                                </Input>
-                                            </Row>
-                                        </div>
-                                        <input name="file"
-                                               className="upload-file"
-                                               id="file"
-                                               onChange={this.handleChangeImage}
-                                               encType="multipart/form-data" accept="image/*" type="file"/>
-                                        <label>{this.state.fileType}</label>
-                                    </div>
-                                </div>
-                                <div className="divider"></div>
                             </div>
+                        </div>
+                        <div className="divider"></div>
+                        <div className="section">
+                            <div className="row">
+                                <div className="col s3 m3 l3">
+                                    <h5 className="truncate">{this.state.username}</h5>
+                                </div>
+                                <div className="col s9 m9 l9">
+                                    <Row>
+                                        <Input s={12} multiple={true} type='select'
+                                               onChange={this.handleUserChange}
+                                               label="Begeleider" icon='face' defaultValue='1'>
+                                            <option key="" value="" disabled>Kies de begeleider
+                                            </option>
+                                            {this.state.allUsers.map((user, index) => (
+                                                <option key={user.userid}
+                                                        value={user.userid}>{user.firstname} {user.lastname}</option>
+                                            ))}
+                                        </Input>
+                                    </Row>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="section">
+                            <div className="row">
+                                <div className="col s3 m3 l3">
+                                    <h5 className="truncate">Studenten</h5>
+                                </div>
+                                <div className="col s9 m9 l9">
+                                    <Row>
+                                        <Input s={12} multiple={true} type='select' label="Studenten"
+                                               onChange={this.handleStudentChange}
+                                               icon='child_care' defaultValue='1'>
+                                            <option key="" value="" disabled>Kies de studenten</option>
+                                            {this.state.students.map((student, index) => (
+                                                <option key={student.userid}
+                                                        value={student.userid}>{student.firstname} {student.lastname}</option>
+                                            ))}
+                                        </Input>
+                                    </Row>
+                                </div>
+                                <input name="file"
+                                       className="upload-file"
+                                       id="file"
+                                       onChange={this.handleChangeImage}
+                                       encType="multipart/form-data" accept="image/*" type="file"/>
+                                <label>{this.state.fileType}</label>
+                            </div>
+
+                            <div className="divider"></div>
+
 
                             <div className="card-action">
                                 <Link to="/groups" onClick={this.handleUpdate}
