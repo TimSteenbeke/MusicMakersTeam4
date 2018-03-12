@@ -153,29 +153,54 @@ class Agenda extends Component {
 
     render() {
         //Load extra components based on state
-
+        if (RoleDefiner.isUserTeacher(this.state.userroles)) {
+            return (
+                <div>
+                <Header name="Agenda"/>
+                <section className="containerCss">
+                    <div className="section">
+                        <div className="row">
+                            <div className="col s3 m3 l3">
+                                <h5 className="truncate">Studenten</h5>
+                            </div>
+                            <div className="col s9 m9 l9">
+                                <Row>
+                                    <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
+                                           icon='child_care' defaultValue='1'>
+                                        <option key="" value="" disabled>Kies de studenten</option>
+                                        {this.state.selectableUsers.map((user, index) => (
+                                            <option key={user.userid}
+                                                    value={user.userid}>{user.firstname} {user.lastname}</option>
+                                        ))}
+                                    </Input>
+                                </Row>
+                            </div>
+                        </div>
+                    </div>
+                    <ReactAgenda
+                        minDate={now}
+                        maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
+                        disablePrevButton={false}
+                        startDate={this.state.startDate}
+                        cellHeight={this.state.cellHeight}
+                        locale={this.state.locale}
+                        items={this.state.items}
+                        numberOfDays={this.state.numberOfDays}
+                        rowsPerHour={this.state.rowsPerHour}
+                        itemColors={colors}
+                        autoScale={false}
+                        fixedHeader={true}
+                        itemComponent={AgendaItem}
+                    />
+                </section>
+            </div>
+        );
+        } else {
         return  (
             <div>
                         <Header name="Agenda"/>
                         <section className="containerCss">
                             <div className="section">
-                                <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Studenten</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
-                                        <Row>
-                                            <Input s={12} multiple={false} type='select' label="Gebruikers"  onChange={this.setSelectedUser}
-                                                   icon='child_care' defaultValue='1'>
-                                                <option key="" value="" disabled>Kies de studenten</option>
-                                                {this.state.selectableUsers.map((user, index) => (
-                                                    <option key={user.userid}
-                                                            value={user.userid}>{user.firstname} {user.lastname}</option>
-                                                ))}
-                                            </Input>
-                                        </Row>
-                                    </div>
-                                </div>
                             </div>
                             <ReactAgenda
                                 minDate={now}
@@ -195,6 +220,7 @@ class Agenda extends Component {
                         </section>
                     </div>
         );
+    }
     }
 }
 
