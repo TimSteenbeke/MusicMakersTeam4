@@ -5,6 +5,7 @@ import ActivityPopUp from './ActivityPopUp.js';
 import Header from './Header';
 import {Row, Input} from 'react-materialize'
 import * as UserService from '../Services/UserService.js'
+import * as RoleDefiner from '../Util/RoleDefiner.js'
 
 require('moment/locale/nl.js');
 
@@ -43,7 +44,8 @@ class Agenda extends Component {
             startDate: new Date(),
             agendaItems: [],
             agendaOwner: "",
-            selectableUsers: []
+            selectableUsers: [],
+            userroles: []
         };
     }
 
@@ -63,7 +65,17 @@ class Agenda extends Component {
 
 
     getUserRoles =() => {
-        UserService.getUserRoles();
+        UserService.getUserRoles().then(roles => {
+            console.log(roles);
+            this.setState({userroles:roles});
+            console.log(this.state.userroles);
+
+            console.log('is admin?');
+            console.log(RoleDefiner.isUserAdmin(this.state.userroles))
+            console.log('is teacher?');
+            console.log(RoleDefiner.isUserTeacher(this.state.userroles))
+        })
+
     };
 
     getUsers = () => {
@@ -76,7 +88,6 @@ class Agenda extends Component {
 
 
     getMyAgendaItems = () => {
-        //HARDCODED ID (TEMPORARY)
         AgendaService.getMyAgenda().then(agendaItems => {
             this.mapAgendaItems(agendaItems)
         });
