@@ -4,7 +4,7 @@
 
 export function isUserAdmin(roles) {
     for (let i=0; i< roles.length; i++) {
-        if (roles[i].roleName == "Admin") {
+        if (roles[i].rolename == "Admin") {
             return true;
         }
     }
@@ -13,7 +13,7 @@ export function isUserAdmin(roles) {
 
 export function isUserTeacher(roles) {
     for (let i=0; i<roles.length;i++) {
-        if (roles[i].roleName == "Teacher") {
+        if (roles[i].rolename == "Teacher") {
             return true;
         }
     }

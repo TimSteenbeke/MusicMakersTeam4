@@ -67,7 +67,7 @@ export function getAll() {
 
 export function getUserRoles() {
 
-    return fetch('http://localhost:8080/api/users/userroles', {
+    return fetch(URL +'userroles', {
         mode: 'cors',
         headers: {
             'Authorization':  userToken.token_type + " " +  userToken.access_token,
