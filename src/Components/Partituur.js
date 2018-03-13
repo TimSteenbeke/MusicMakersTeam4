@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import '../CSS/GlobalStylesheet.css';
 import '../CSS/Partituur.css';
@@ -7,17 +6,31 @@ class Partituur extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            musicXML: '/BackendJsonSimulated/Serenade.xml',
-            gp5: '/BackendJsonSimulated/Canon.gp5',
+            hidden:true
         };
     }
 
     componentDidMount(){
+        this.checkRightFormat();
+
+    }
+
+    checkRightFormat(){
+        const fileformat = this.props.fileFormat;
+        const extension = fileformat.substr(fileformat.lastIndexOf('.')+1);
+        const alphaTabExtensionSupport = "gp5 gp4 gp6 gp3 xml";
+        if(alphaTabExtensionSupport.indexOf(extension) > -1){
+            this.setState({hidden:false});
+            this.load();
+        }
+    }
+
+    load(){
         const $ = window.$;
 
         // Load alphaTab
         $(this.refs.partituur).alphaTab({
-            file: this.state.gp5,
+            file: this.props.content,
             engine: 'svg',
             width: -1
         });
@@ -26,8 +39,8 @@ class Partituur extends Component {
         var as = $(this.refs.partituur).alphaTab('playerInit');
         as.LoadSoundFont('/Libraries/Alphatab/alphaSynth/default.sf2');
         $(this.refs.partituur).alphaTab('playerCursor');
-
     }
+
 
     play(){
         const $ = window.$;
@@ -44,10 +57,9 @@ class Partituur extends Component {
         $(this.refs.partituur).alphaTab('pause');
     }
 
-//this.state.gp5 --> this.props.dataFile
     render() {
-        return (
-            <div hidden={this.props.hidden}>
+       return (
+            <div hidden={this.state.hidden}>
                 <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
                 <input type="button" id="pauseBtn" value="Pause" onClick={(e) => this.pauze(e)}/>
                 <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.stop(e)}/>

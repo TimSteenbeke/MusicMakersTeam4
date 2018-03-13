@@ -4,6 +4,7 @@ import '../CSS/GlobalStylesheet.css';
 import * as MusicService from '../Services/MusicService.js'
 import Partituur from "./Partituur";
 import ChordSheet from "./ChordSheet";
+import Compositions from "./Compositions";
 
 
 class PlayMusic extends Component {
@@ -11,21 +12,33 @@ class PlayMusic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedPartituurId: 1,
-            partituur:[],
-            hidden:true
+            selectedPartituurId: this.props.match.params.id,
+            partituur: []
         };
     }
 
     componentDidMount() {
         MusicService.getPartituurById(this.state.selectedPartituurId).then(partituur => {
             this.setState({partituur: partituur});
+            this.setState({musicObj: URL.createObjectURL(MusicService.getMusicObject(this.state.partituur.content))});
+            this.readTextFile(this.state.musicObj);
         });
     }
 
-    swap(){
-        this.setState({hidden :!this.state.hidden});
+    readTextFile(file) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = () => {
+            this.setState({
+                musicSheet: rawFile.responseText
+            });
+        };
+        rawFile.send(null);
     }
+
+
+
+
 
     render() {
         return (
@@ -33,19 +46,18 @@ class PlayMusic extends Component {
                 <section className="container">
                     <div>
                         <h1 className="header">Play music</h1>
-
-                        <input type="button" id="swap" value="swap" onClick={(e) => this.swap(e)}/>
-                        <p>{this.state.partituur.naam}</p>
-
-                        <ChordSheet
-                            hidden={!this.state.hidden}
-                            DataFile={this.state.partituur.dataFile}
-                        />
-
-                        <Partituur
-                            hidden={this.state.hidden}
-                            DataFile={this.state.partituur.dataFile}
-                        />
+                        {this.state && this.state.musicSheet &&
+                            <ChordSheet
+                                fileFormat={this.state.partituur.fileFormat}
+                                content={(this.state.musicSheet)}
+                            />
+                        }
+                        {this.state && this.state.musicObj &&
+                            <Partituur
+                                fileFormat={this.state.partituur.fileFormat}
+                                content={this.state.musicObj}
+                            />
+                        }
                     </div>
                 </section>
             </div>

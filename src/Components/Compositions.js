@@ -4,13 +4,7 @@
 import React, {Component} from 'react';
 import * as CompositionService from '../Services/CompositionService.js'
 
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import CompDetails from './CompositionDetails.js';
-import CompUpdate from './CompositionUpdate.js';
 import Header from './Header'
-import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 import {Link} from 'react-router-dom';
 
 
@@ -20,7 +14,6 @@ class Compositions extends Component {
         this.state = {
             compositions: [],
             selectedIndex: 0,
-
             selected: [],
             openDetails: false,
             openUpdate: false,
@@ -74,12 +67,22 @@ class Compositions extends Component {
     };
 
     setSearch = event => {
+        this.setState({ compositions: [] });
+
         let value = event.target.value;
+
         console.log(value);
-        return this.setState({search: value});
+
+        if(value === "" || value === null){
+            CompositionService.getCompositionsFromBackend().then(compositions => {
+                this.setState({compositions: compositions});
+            });
+        } else {
+            CompositionService.filterCompositions(value).then(compositions => {
+                this.setState({compositions: compositions});
+            });
+        }
     };
-
-
 
     assignItem = (item,indx) => { // bound arrow function handler
         const sampleBytes = Compositions.base64ToArrayBuffer(item);
@@ -113,39 +116,18 @@ class Compositions extends Component {
 
 
     render() {
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
             <div className="Homepage">
                 <Header name="Muziekstukken" />
                 <div className="section">
                     <div className="row">
-                        <div className="col s12 m2 offset-m1 l2 offset-l1  center">
-                            <input  type="text" placeholder="titel" name="titel" onChange={this.setSearch} style={{textAlign: "center"}}/>
-                            <input type="button" className="btn" id="1" value="Zoeken" onClick={this.filterCompositions}/>
-                        </div>
-                        <div className="col s12 m2 l2 center">
-                            <input  type="text" placeholder="genre" name="titel" onChange={this.setSearch} style={{textAlign: "center"}}/>
-                            <input type="button" className="btn" id="2" value="Zoeken" onClick={this.filterCompositions}/>
-                        </div>
-                        <div className="col s12 m2 l2 center">
-                            <input  type="text" placeholder="onderwerp" name="titel" onChange={this.setSearch} style={{textAlign: "center"}}/>
-                            <input type="button" className="btn" id="3" value="Zoeken" onClick={this.filterCompositions}/>
-                        </div>
-                        <div className="col s12 m2 l2 center">
-                            <input  type="text" placeholder="intstrumenttype" name="titel" onChange={this.setSearch} style={{textAlign: "center"}}/>
-                            <input type="button" className="btn" id="4" value="Zoeken" onClick={this.filterCompositions}/>
-                        </div>
-                        <div className="col s12 m2 l2 center">
-                            <input  type="text" placeholder="formaat" name="titel" onChange={this.setSearch} style={{textAlign: "center"}}/>
-                            <input type="button" className="btn" id="5" value="Zoeken" onClick={this.filterCompositions}/>
+                        <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                            <input  type="text" placeholder="Geef een zoekopdracht in..." name="filter" onChange={this.setSearch} style={{textAlign: "center"}}/>
                         </div>
                     </div>
                 </div>
                 <section className="containerCss">
-                    <table className="white-text bordered responsive-table centered">
+                    <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
                             <th>Id</th>
@@ -155,7 +137,7 @@ class Compositions extends Component {
                             <th>Onderwerp</th>
                             <th>Instrumenttype</th>
                             <th>Bestand</th>
-                            <th>Afspelen</th>
+                            <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -167,22 +149,32 @@ class Compositions extends Component {
                                 <td>{composition.genre}</td>
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
-                                <td><a href="#" onClick={e => this.assignItem(composition.content,index)}>{composition.fileFormat != null ? composition.fileFormat : "No file"}</a></td>
-                                <Link to="/instrumenten" onClick={this.handleClick} className="btn">
-                                </Link>
+                                <td>{composition.fileFormat != null ? composition.fileFormat : "No file"}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/compositiondetails/${composition.muziekstukId}` }>
-                                        <i className="material-icons">edit
-                                        </i>
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={e => this.assignItem(composition.content,index)}>
+                                        <i className="material-icons">file_download</i>
+                                    </a>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn" to={`/play/${composition.muziekstukId}` }>
+                                        <i className="material-icons">play_arrow</i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(composition.muziekstukId, e)}><i className="material-icons">delete
-                                    </i></a>
-
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn" to={`/compositions/${composition.muziekstukId}` }>
+                                        <i className="material-icons">edit</i>
+                                    </Link>
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(composition.muziekstukId, e)}>
+                                        <i className="material-icons">delete
+                                    </i>
+                                    </a>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
+                    <div className="fixed-action-btn">
+                        <Link to="/addcomposition" className="btn-floating btn-large deep-orange darken-4">
+                            <i className="large material-icons">add</i>
+                        </Link>
+                    </div>
+
                 </section>
             </div>
         );

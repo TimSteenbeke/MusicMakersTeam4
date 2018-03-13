@@ -8,15 +8,13 @@ import CourseDetails from './Components/CoursesDetails.js';
 import AddCourse from './Components/AddCourse.js'
 import Courses from './Components/Courses.js'
 import Agenda from './Components/Agenda.js'
-import {Route} from 'react-router'
+import {Route, Switch} from 'react-router'
 import './CSS/GlobalStylesheet.css';
 import Group from "./Components/Group";
 import AddGroup from "./Components/AddGroup"
 import EditGroup from "./Components/EditGroup";
 import Compositions from "./Components/Compositions.js";
-// import MuziekstukDetails from "./Components/MuziekstukDetails.js";
-import AddMuziekstuk from "./Components/AddMuziekstuk";
-
+import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
 import NoMatch from './Components/NoMatch.js';
 import CompositionDetails from "./Components/CompositionDetails";
@@ -27,7 +25,7 @@ class App extends Component {
 
     render() {
         return (
-            <section>
+            <Switch>
                 <Route name="home" exact path="/" component={Home}/>
                 <Route name="login" path="/login" component={Login}/>
                 <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
@@ -37,10 +35,9 @@ class App extends Component {
                 <Route name="agenda" path="/agenda" component={Agenda}/>
                 <Route name="courses" path="/courses" component={Courses}/>
                 <Route name="addCourse" path="/addcourse" component={AddCourse}/>
-                <Route name="muziekStukken" path="/muziekstukken" component={Compositions}/>
-                {/*<Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>*/}
-                <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
-                <Route name="compositionDetails" path="/compositiondetails/:id" component={CompositionUpdate}/>
+                <Route name="compositions" exact path="/compositions" component={Compositions}/>
+                <Route name="addComposition" path="/addcomposition" component={AddComposition}/>
+                <Route name="compositionDetails" path="/compositions/:id" component={CompositionUpdate}/>
                 <Route name="groups" path="/groups" component={Group}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="editGroup" path="/editGroup" component={EditGroup}/>
@@ -48,7 +45,7 @@ class App extends Component {
                 <Route name="play" path="/play/:id" component={PlayMusic}/>
                 {/*<Route component={NoMatch}/>
                 <Route component={NoMatch} path="/404"/>*/}
-            </section>
+            </Switch>
 
         );
     }

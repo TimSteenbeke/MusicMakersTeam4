@@ -40,7 +40,7 @@ class Sidebar extends Component {
                     <Link to="/courses">
                         <MenuItem style={styles.menuColor} primaryText="Courses"/>
                     </Link>
-                    <Link to="/muziekStukken">
+                    <Link to="/compositions">
                         <MenuItem style={styles.menuColor} primaryText="Compositions"/>
                     </Link>
                     <Divider/>
