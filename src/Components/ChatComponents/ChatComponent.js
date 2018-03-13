@@ -56,16 +56,22 @@ export default class ChatComponent extends Component {
         this.state = {
             message: "",
             data: [],
-            count: 90,
             wsURL: 'ws://localhost:7070/chat'
             // wsURL: 'ws://' + location.hostname + ':' + location.port + '/chat'
         };
+        let self = this;
         this.socket = new Sockette('ws://localhost:7070/chat', {
             timeout: 5e3,
             maxAttempts: 10,
             onopen: e => console.log('Connected!', e),
             onmessage: e => {
-                console.log('Received:', e);
+                console.log('Received:', JSON.parse(e.data).userMessage);
+                let msg = JSON.parse(e.data).userMessage;
+                console.log("msg: ", e);
+                console.log("msg.data: ", msg);
+                self.setState({
+                    data: [...self.state.data, msg]
+                });
             },
             onreconnect: e => console.log('Reconnecting...', e),
             onmaximum: e => console.log('Stop Attempting!', e),
@@ -78,22 +84,12 @@ export default class ChatComponent extends Component {
                 alert("Chat connection Error");
             }
         });
+
     }
 
     componentDidMount() {
-        this.socket.open();
     }
 
-    updateChat(msg) { // Update chat-panel and list of connected users
-        let data = JSON.parse(msg.data);
-        console.log("msg: ", msg);
-        console.log("msg.data: ", data);
-        this.setState({
-            data: [...this.state.data, data]
-        })
-        // id("chat").insertAdjacentHTML("afterbegin", data.userMessage);
-        //id("userlist").innerHTML = data.userlist.map(user => "<li>" + user + "</li>").join("");
-    }
 
 
     setMessage(event, typedMessage) {
@@ -108,15 +104,12 @@ export default class ChatComponent extends Component {
     }
 
     render() {
+        console.log(this.state.data);
         return (
             <div className="Homepage">
                 <Header name="Chat"/>
                 <section className="containerCss">
                     <div id="chatControls">
-                        count: <strong>{this.state.count}</strong>
-                        {this.state.data.map((data, index) => {
-                            <div className="data">{data}</div>
-                        })}
                         <TextField
                             style={styles.width}
                             hintText="Type your message here..."
@@ -130,6 +123,10 @@ export default class ChatComponent extends Component {
                         />
                         <button id="send" onClick={() => this.sendAndClear()}>Send</button>
                     </div>
+                    {this.state.data.map((msg) => {
+                            return (<div dangerouslySetInnerHTML={{__html: msg}}></div>)
+                        }
+                    )}
                 </section>
             </div>
         );

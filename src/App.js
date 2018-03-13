@@ -42,6 +42,7 @@ class App extends Component {
                 <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
                 <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
+                <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
                 {/*<Route component={NoMatch}/>
                 <Route component={NoMatch} path="/404"/>*/}
             </Switch>
