@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import Sockette from 'sockette';
 import Header from "../Header";
@@ -51,7 +50,6 @@ const ws = new Sockette('ws://localhost:7070/chat', {
 */
 
 
-
 export default class ChatComponent extends Component {
     constructor(props) {
         super(props);
@@ -62,14 +60,12 @@ export default class ChatComponent extends Component {
             wsURL: 'ws://localhost:7070/chat'
             // wsURL: 'ws://' + location.hostname + ':' + location.port + '/chat'
         };
-        const self = this;
         this.socket = new Sockette('ws://localhost:7070/chat', {
             timeout: 5e3,
             maxAttempts: 10,
             onopen: e => console.log('Connected!', e),
             onmessage: e => {
                 console.log('Received:', e);
-                self.updateChat(e);
             },
             onreconnect: e => console.log('Reconnecting...', e),
             onmaximum: e => console.log('Stop Attempting!', e),
@@ -87,6 +83,7 @@ export default class ChatComponent extends Component {
     componentDidMount() {
         this.socket.open();
     }
+
     updateChat(msg) { // Update chat-panel and list of connected users
         let data = JSON.parse(msg.data);
         console.log("msg: ", msg);
@@ -118,7 +115,7 @@ export default class ChatComponent extends Component {
                     <div id="chatControls">
                         count: <strong>{this.state.count}</strong>
                         {this.state.data.map((data, index) => {
-                            data
+                            <div className="data">{data}</div>
                         })}
                         <TextField
                             style={styles.width}
@@ -132,12 +129,6 @@ export default class ChatComponent extends Component {
                             onChange={(event, typedMessage) => this.setMessage(event, typedMessage)}
                         />
                         <button id="send" onClick={() => this.sendAndClear()}>Send</button>
-                    </div>
-                    <ul id="userlist"></ul>
-                    <div id="chat">
-                        {this.state.data.map((msg, index) => (
-                            <div>{msg}</div>
-                        ))}
                     </div>
                 </section>
             </div>

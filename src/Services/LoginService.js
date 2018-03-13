@@ -39,16 +39,13 @@ export function checkToken(){
         let current_time = Date.now();
         console.log("curr time: ", current_time);
         console.log('jwt.expires_in: ', jwt.expires_in);
-        if ( jwt.expires_in < current_time) {
-            localStorage.removeItem('userToken');
-            return false;
-        } else{
+        if ( jwt.expires_in > current_time) {
             return true;
         }
     }
-        return false;
+    //localStorage.removeItem('userToken');
+    return false;
 }
-
 //Fix Ben
 /*export function fetchLogin() {
     return fetch('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim', {
