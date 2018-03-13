@@ -10,6 +10,7 @@ export default function(WrapperComponent) {
         constructor(props) {
             super(props);
         }
+
         checkAuthentication(params) {
             const { history } = params;
             if(!LoginService.checkToken()){

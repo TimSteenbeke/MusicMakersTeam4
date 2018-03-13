@@ -72,7 +72,7 @@ class AddMuziekstuk extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Instrument Added!',
+            title: 'Composition Added!',
             showConfirmButton: false,
             timer: 1500
         });
