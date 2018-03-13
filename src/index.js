@@ -20,7 +20,6 @@ const Application = () => (
                     </section>
                     <section className="application">
                         <App/>
-                        <CheckTokenComponent/>
                     </section >
                     <section className="groups">
                         <GroupsAndChat/>
@@ -34,5 +33,5 @@ ReactDOM.render((
     <HashRouter>
         <Application/>
     </HashRouter>
-), document.getElementById('root'))
+), document.getElementById('root'));
 registerServiceWorker();

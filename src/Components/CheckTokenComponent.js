@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
+import { withRouter } from 'react-router-dom';
 
-export default class CheckTokenComponent extends Component{
+export function BaseComponent() {
+    class CheckTokenComponent extends Component{
+
     constructor(props){
         super(props);
         this.state={
@@ -11,25 +14,29 @@ export default class CheckTokenComponent extends Component{
     }
 
     componentWillMount(){
-        let response;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
+        this.checkAuthentication(this.props);
     }
-    render(){
-        let redirecting=null;
-        if (this.state.redirect) {
-            redirecting = <Redirect to='/login'/>
-            this.setState({redirect: false})
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location !== this.props.location) {
+            this.checkAuthentication(nextProps);
+        }
+    }
+
+        checkAuthentication(params) {
+            const { history } = params;
+            if(!LoginService.checkToken()){
+                history.replace({ pathname: '/login' });
+            }
         }
 
+    render() {
         return (
             <div>
-                {redirecting}
+                <BaseComponent {...this.props} />
             </div>
         );
-
+    }
 }
-
+    return withRouter(CheckTokenComponent);
 }

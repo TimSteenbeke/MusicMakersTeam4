@@ -19,6 +19,7 @@ import PlayMusic from './Components/PlayMusic.js';
 import NoMatch from './Components/NoMatch.js';
 import CompositionDetails from "./Components/CompositionDetails";
 import CompositionUpdate from "./Components/CompositionUpdate";
+import {BaseComponent} from "./Components/CheckTokenComponent";
 
 class App extends Component {
 
@@ -32,7 +33,7 @@ class App extends Component {
                 <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
                 <Route name="instrumentDetails" path="/coursedetails/:id" component={CourseDetails}/>
-                <Route name="agenda" path="/agenda" component={Agenda}/>
+                <Route name="agenda" path="/agenda" component={check(Agenda)}/>
                 <Route name="courses" path="/courses" component={Courses}/>
                 <Route name="addCourse" path="/addcourse" component={AddCourse}/>
                 <Route name="compositions" exact path="/compositions" component={Compositions}/>
@@ -43,12 +44,16 @@ class App extends Component {
                 <Route name="editGroup" path="/editGroup" component={EditGroup}/>
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="play" path="/play/:id" component={PlayMusic}/>
-                {/*<Route component={NoMatch}/>
-                <Route component={NoMatch} path="/404"/>*/}
+                <Route component={NoMatch}/>
+                <Route component={NoMatch} path="/404"/>
             </Switch>
 
         );
     }
+}
+
+function check(){
+    return BaseComponent();
 }
 
 export default App;
