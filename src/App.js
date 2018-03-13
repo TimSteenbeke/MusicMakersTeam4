@@ -18,6 +18,7 @@ import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
 import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
+import auth from './Components/CheckTokenComponent';
 
 class App extends Component {
 

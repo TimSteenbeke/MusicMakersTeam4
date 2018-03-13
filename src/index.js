@@ -20,7 +20,6 @@ const Application = () => (
                     </section>
                     <section className="application">
                         <App/>
-                        <CheckTokenComponent/>
                     </section >
                     <section className="groups">
                         <GroupsAndChat/>
