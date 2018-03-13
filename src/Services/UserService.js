@@ -1,8 +1,14 @@
 /**
  * Created by jariv on 7/03/2018.
  */
-const URL="https://musicmaker-api-team4.herokuapp.com/api/users/";
-let userToken = JSON.parse(localStorage.getItem('userToken'));
+const URL = "https://musicmaker-api-team4.herokuapp.com/api/users/";
+let userToken = {
+    token_type: "",
+    access_token: ""
+};
+if (localStorage.getItem('userToken') != null) {
+    userToken = JSON.parse(localStorage.getItem('userToken'));
+}
 
 
 export function getTeachers() {
@@ -10,7 +16,7 @@ export function getTeachers() {
     return fetch(URL + "teacherAdmin", {
         mode: 'cors',
         headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -30,7 +36,7 @@ export function getStudents() {
     return fetch(URL + "students", {
         mode: 'cors',
         headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -50,7 +56,7 @@ export function getAll() {
     return fetch(URL, {
         mode: 'cors',
         headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -70,7 +76,7 @@ export function getUserRoles() {
     return fetch(URL + "roles", {
         mode: 'cors',
         headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })

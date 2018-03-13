@@ -3,7 +3,13 @@
  */
 const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 const localURL = 'http://localhost:8080/api/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
+let userToken = {
+    token_type: "",
+    access_token: ""
+};
+if (localStorage.getItem('userToken') != null) {
+    userToken = JSON.parse(localStorage.getItem('userToken'));
+}
 
 export function registerAbsent(lessonid) {
     return fetch(herokuURL + 'lesson/absent/' +lessonid,

@@ -68,13 +68,13 @@ class Login extends Component {
         this.setState({username: typedUsername})
     }
 
-    componentWillMount() {
+/*    componentWillMount() {
         let response;
         response = LoginService.checkToken();
         console.log("response:");
         console.log(response);
         this.setState({redirect: response})
-    }
+    }*/
 
     render() {
         let failedLogin = null, redirecting = null;
