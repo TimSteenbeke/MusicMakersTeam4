@@ -17,7 +17,10 @@ export function fetchToken(username, password) {
             console.log("Json Response Fetch:")
             console.log(responseJson);
             if(responseJson.hasOwnProperty("access_token")){
-                localStorage.setItem('userToken', JSON.stringify(responseJson));
+                let JWT = responseJson;
+                let now = Date.now();
+                JWT.expires_in= now + JWT.expires_in*1000;
+                localStorage.setItem('userToken', JSON.stringify(JWT));
                 return true;
             }
             return false;
@@ -32,18 +35,17 @@ export function fetchToken(username, password) {
 
 export function checkToken(){
     if(localStorage.getItem('userToken')!= null){
-        let jwt = localStorage.getItem('userToken');
-        var current_time = Date.now() / 1000;
-        if ( jwt.exp < current_time) {
-            localStorage.removeItem('userToken');
-            return false;
-        } else{
+        let jwt = JSON.parse(localStorage.getItem('userToken'));
+        let current_time = Date.now();
+        console.log("curr time: ", current_time);
+        console.log('jwt.expires_in: ', jwt.expires_in);
+        if ( jwt.expires_in > current_time) {
             return true;
         }
     }
-        return false;
+    //localStorage.removeItem('userToken');
+    return false;
 }
-
 //Fix Ben
 /*export function fetchLogin() {
     return fetch('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim', {
