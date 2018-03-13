@@ -20,7 +20,7 @@ export default class CheckTokenComponent extends Component{
     render(){
         let redirecting=null;
         if (this.state.redirect) {
-            redirecting = <Redirect to='/login'/>
+            redirecting = <Redirect to='/login'/>;
             this.setState({redirect: false})
         }
 

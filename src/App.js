@@ -16,8 +16,7 @@ import EditGroup from "./Components/EditGroup";
 import Compositions from "./Components/Compositions.js";
 import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
-import NoMatch from './Components/NoMatch.js';
-import CompositionDetails from "./Components/CompositionDetails";
+import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
 
 class App extends Component {
@@ -43,10 +42,8 @@ class App extends Component {
                 <Route name="editGroup" path="/editGroup" component={EditGroup}/>
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="play" path="/play/:id" component={PlayMusic}/>
-                {/*<Route component={NoMatch}/>
-                <Route component={NoMatch} path="/404"/>*/}
+                <Route path='*' exact={true} component={NotFound}/>
             </Switch>
-
         );
     }
 }
