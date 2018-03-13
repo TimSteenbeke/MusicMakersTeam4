@@ -26,7 +26,7 @@ class App extends Component {
     render() {
         return (
             <Switch>
-                <Route name="home" exact path="/" component={Home}/>
+                <Route ex name="home" exact path="/" component={Home}/>
                 <Route name="login" path="/login" component={Login}/>
                 <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
                 <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
