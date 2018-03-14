@@ -21,7 +21,7 @@ class ActivityPopUp extends Component {
 
     componentDidMount() {
         //Call maken om te zien of persoon aanwezig of afwezig is voor die les
-        //State verranderen
+        //State veranderen
         this.getStatus();
 
     }
@@ -29,13 +29,11 @@ class ActivityPopUp extends Component {
     getStatus = () => {
         if (this.props.type == "Optreden") {
             OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
-                this.setState({aanwezigheidsstatus: statusobject.status});
                 this.setIcon(statusobject.status);
                 console.log(this.state.aanwezigheidsstatus);
             })
         } else {
             LesService.getAttendanceStatus(this.props.id).then(statusobject => {
-                this.setState({aanwezigheidsstatus: statusobject.status});
                 this.setIcon(statusobject.status);
                 console.log(this.state.aanwezigheidsstatus);
             })
@@ -46,17 +44,20 @@ class ActivityPopUp extends Component {
         console.log(status);
         if (status === "absent"){
             this.setState({
-                icon: 'not_interested'
+                icon: 'not_interested',
+                aanwezigheidsstatus: "absent",
             });
         }else if(status === "present"){
             this.setState({
-                icon: 'check'
+                icon: 'check',
+                aanwezigheidsstatus: "present",
             });
         }else{
             this.setState({
                 icon: 'notifications'
             });
         }
+        console.log(this.state.icon, this.state.aanwezigheidsstatus);
     };
 
     aanwezig = () => {
@@ -102,6 +103,7 @@ class ActivityPopUp extends Component {
                     'success'
                 );
                 this.aanwezig();
+                this.setIcon('present')
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -112,9 +114,11 @@ class ActivityPopUp extends Component {
                     'error'
                 );
                 this.afwezig();
+                this.setIcon('absent')
+
             }
         });
-        this.getStatus();
+
     };
 
     render() {

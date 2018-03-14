@@ -4,6 +4,7 @@ import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
 import Header from './Header'
 import {Link} from 'react-router-dom';
+import swal from 'sweetalert2'
 
 
 
@@ -53,6 +54,13 @@ class CompositionUpdate extends Component {
 
 
     handleUpdate = () => {
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Composition Updated!',
+            showConfirmButton: false,
+            timer: 1500
+        });
         const self = this;
         console.log("link: " + self.state.link);
         CompositionService.UpdateComposition(this.state.MuziekstukId, JSON.stringify(

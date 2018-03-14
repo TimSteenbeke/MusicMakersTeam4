@@ -16,7 +16,9 @@ class Instrumenten extends Component {
         this.state = {
             instrumenten: [],
             selectedIndex: 0,
+            loading: true
         };
+        console.log(this.state.loading);
     }
 
     handleDelete = (id, e) => {
@@ -59,64 +61,75 @@ class Instrumenten extends Component {
         InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
             this.setState({instrumenten: instrumenten});
         });
+        {{console.log(this.state.loading)}}
     }
 
 
-    componentWillUpdate() {
+    componentDidUpdate() {
         this.getInstrumenten();
     }
 
 
     componentDidMount() {
-       this.getInstrumenten();
+        console.log(this.state.loading);
+        this.getInstrumenten();
+        this.setState({
+            loading: false
+        });
+        console.log(this.state.loading);
+
     }
 
 
     render() {
+        
+            return (
 
-        return (
-            <div className="Homepage">
-                <Header name="Instrumenten" />
+                <div className="Homepage">
+                    <Header name="Instrumenten"/>
 
-                <section className="containerCss">
-                    <table className="highlight striped black-text bordered responsive-table centered">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Naam</th>
-                            <th>Type</th>
-                            <th>Uitvoering</th>
-                            <th>Acties</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.instrumenten.map((instrument, index) => (
-                            <tr key={index} id={instrument.instrumentId}>
-                                <td>{instrument.instrumentId}</td>
-                                <td>{instrument.naam}</td>
-                                <td>{instrument.type}</td>
-                                <td>{instrument.uitvoering}</td>
-                                <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/instrumentdetails/${instrument.instrumentId}` }>
-                                        <i className="material-icons">edit
-                                    </i>
-                                    </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i className="material-icons">delete
-                                    </i></a>
-
-                                </td>
+                    <section className="containerCss">
+                        <table className="highlight striped black-text bordered responsive-table centered">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Naam</th>
+                                <th>Type</th>
+                                <th>Uitvoering</th>
+                                <th>Acties</th>
                             </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                    <div className="fixed-action-btn">
-                        <Link to="/addInstrument" className="btn-floating btn-large deep-orange darken-4">
-                            <i className="large material-icons">add</i>
-                        </Link>
-                    </div>
-                </section>
-            </div>
-        );
+                            </thead>
+                            <tbody>
+                            {this.state.instrumenten.map((instrument, index) => (
+                                <tr key={index} id={instrument.instrumentId}>
+                                    <td>{instrument.instrumentId}</td>
+                                    <td>{instrument.naam}</td>
+                                    <td>{instrument.type}</td>
+                                    <td>{instrument.uitvoering}</td>
+                                    <td>
+                                        <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                              to={`/instrumentdetails/${instrument.instrumentId}` }>
+                                            <i className="material-icons">edit
+                                            </i>
+                                        </Link>
+                                        <a className="waves-effect white-text deep-orange darken-4 btn"
+                                           onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i
+                                            className="material-icons">delete
+                                        </i></a>
+
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                        <div className="fixed-action-btn">
+                            <Link to="/addInstrument" className="btn-floating btn-large deep-orange darken-4">
+                                <i className="large material-icons">add</i>
+                            </Link>
+                        </div>
+                    </section>
+                </div>
+            );
     }
 }
 
