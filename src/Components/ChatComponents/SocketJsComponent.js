@@ -4,6 +4,7 @@ import UsernameGenerator from "username-generator";
 import Fetch from "json-fetch";
 import { TalkBox } from "react-talk";
 import randomstring from 'randomstring';
+import * as ChatService from '../../Services/ChatService';
 
 // const randomstring = require("randomstring");
 
@@ -35,11 +36,14 @@ export default class SocketJsComponent extends Component {
     }
 
     componentWillMount() {
-        Fetch("http://localhost:8080/history", {
-            method: "GET"
+        let history = ChatService.getHistory();
+        this.setState({ messages: history})
+/*        Fetch("http://localhost:8080/history", {
+            method: "GET",
+
         }).then((response) => {
             this.setState({ messages: response.body });
-        });
+        });*/
     }
 
     render() {
