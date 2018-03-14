@@ -32,28 +32,31 @@ class App extends Component {
             <Switch>
                 <Route name="home" exact path="/" component={Home}/>
                 <Route name="login" path="/login" component={Login}/>
+
                 <Route name="addInstrument" path="/addinstrument" component={auth(AddInstrument)}/>
                 <Route name="instrument" path="/instrumenten" component={auth(Instrumenten)}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={auth(InstrumentDetails)}/>
-                <Route name="instrumentDetails" path="/coursedetails/:id" component={auth(CourseDetails)}/>
-                <Route name="agenda" path="/agenda" component={auth(Agenda)}/>
+
+                <Route name="courseDetails" path="/coursedetails/:id" component={auth(CourseDetails)}/>
                 <Route name="courses" path="/courses" component={auth(Courses)}/>
                 <Route name="addCourse" path="/addcourse" component={auth(AddCourse)}/>
+
+                <Route name="agenda" path="/agenda" component={auth(Agenda)}/>
+
                 <Route name="compositions" exact path="/compositions" component={auth(Compositions)}/>
                 <Route name="addComposition" path="/addcomposition" component={auth(AddComposition)}/>
                 <Route name="compositionDetails" path="/compositions/:id" component={auth(CompositionUpdate)}/>
+
                 <Route name="groups" path="/groups" component={auth(Group)}/>
                 <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
                 <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
+
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
-                <Route name="groups" path="/groups" component={Group}/>
-                <Route name="addGroup" path="/addgroup" component={AddGroup}/>
-                <Route name="editGroup" path="/editGroup" component={EditGroup}/>
-                <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
+
                 <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
-                <Route name="play" path="/play/:id" component={PlayMusic}/>
+
                 <Route name="users" path="/users" component={Users}/>
                 <Route path='*' exact={true} component={NotFound}/>
             </Switch>
