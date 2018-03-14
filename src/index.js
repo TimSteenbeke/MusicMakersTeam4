@@ -5,7 +5,6 @@ import App from './App.js';
 import Sidebar from './Components/Sidebar.js';
 import GroupsAndChat from './Components/GroupsAndChat.js';
 import CheckTokenComponent from './Components/CheckTokenComponent';
-
 import {BrowserRouter,HashRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';

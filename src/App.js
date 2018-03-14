@@ -3,6 +3,7 @@ import Home from './Components/Home';
 import Login from './Components/Login.js';
 import AddInstrument from './Components/AddInstrument.js';
 import Instrumenten from './Components/Instrumenten.js';
+import Users from './Components/Users';
 import InstrumentDetails from './Components/InstrumentDetails.js';
 import CourseDetails from './Components/CoursesDetails.js';
 import AddCourse from './Components/AddCourse.js'
@@ -16,6 +17,7 @@ import EditGroup from "./Components/EditGroup";
 import Compositions from "./Components/Compositions.js";
 import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
+import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
 import auth from './Components/CheckTokenComponent';
 import AddCourseType from "./Components/AddCourseType";
@@ -44,11 +46,26 @@ class App extends Component {
                 <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
                 <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
+                <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
+                <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
+                <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
+                <Route name="instrumentDetails" path="/coursedetails/:id" component={CourseDetails}/>
+                <Route name="agenda" path="/agenda" component={Agenda}/>
+                <Route name="courses" path="/courses" component={Courses}/>
+                <Route name="addCourse" path="/addcourse" component={AddCourse}/>
+                <Route name="compositions" exact path="/compositions" component={Compositions}/>
+                <Route name="addComposition" path="/addcomposition" component={AddComposition}/>
+                <Route name="compositionDetails" path="/compositions/:id" component={CompositionUpdate}/>
+                <Route name="groups" path="/groups" component={Group}/>
+                <Route name="addGroup" path="/addgroup" component={AddGroup}/>
+                <Route name="editGroup" path="/editGroup" component={EditGroup}/>
+                <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
-                {/*<Route component={NoMatch}/>
-                <Route component={NoMatch} path="/404"/>*/}
+                <Route name="play" path="/play/:id" component={PlayMusic}/>
+                <Route name="users" path="/users" component={Users}/>
+                <Route path='*' exact={true} component={NotFound}/>
             </Switch>
 
         );
