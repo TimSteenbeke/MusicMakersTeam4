@@ -1,7 +1,6 @@
 @import '~react-agenda/build/styles.css';
 @import '~react-datetime/css/react-datetime.css';
 
-
 .containerCss {
     margin: 0;
 }
@@ -13,15 +12,14 @@
     box-shadow: 5px 5px 40px black;
 }
 
-.chord:hover{
+.chord:hover {
     background: #bfbfbf;
 }
 
-.guitarChord{
-    margin:20px;
+.guitarChord {
+    margin: 20px;
 
 }
-
 
 .fixed-action-btn {
     float: right;
@@ -31,23 +29,21 @@
     margin-right: 20px;
 }
 
-
 .redbg {
     background-color: #000000;
 }
 
-.marginator{
-    margin-right:20px;
+.marginator {
+    margin-right: 20px;
 }
 
-.minimargin{
-    margin-left:10px;
+.minimargin {
+    margin-left: 10px;
 }
 
 .agendaItem {
     padding: 3%;
 }
-
 
 img:before {
     content: "";
@@ -79,7 +75,7 @@ img:after {
     margin-left: 30px;
 }
 
-.logo{
+.logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -91,26 +87,53 @@ img:after {
 .input-field label {
     color: #546e7a;
 }
+
 /* label focus color */
 .input-field input[type=text]:focus + label {
     color: #546e7a;
 }
+
 /* label underline focus color */
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #546e7a;
     box-shadow: 0 1px 0 0 #546e7a;
 }
+
 /* valid color */
 .input-field input[type=text].valid {
     border-bottom: 1px solid #546e7a;
     box-shadow: 0 1px 0 0 #546e7a;
 }
+
 /* invalid color */
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #546e7a;
     box-shadow: 0 1px 0 0 #546e7a;
 }
+
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #546e7a;
 }
+
+/*.flexChat {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; !* align items in Main Axis *!
+    align-items: stretch; !* align items in Cross Axis *!
+    align-content: stretch; !* Extra space in Cross Axis *!
+    min-height: 250px;
+}
+
+.flexChat div{
+    display: inline-list-item;
+}
+
+.chatControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; !* align items in Main Axis *!
+    align-items: stretch; !* align items in Cross Axis *!
+    align-content: stretch; !* Extra space in Cross Axis *!
+    min-height: 30px;
+}*/

@@ -19,6 +19,7 @@ import PlayMusic from './Components/PlayMusic.js';
 import CompositionUpdate from "./Components/CompositionUpdate";
 import ChatComponent from "./Components/ChatComponents/ChatComponent";
 import auth from './Components/CheckTokenComponent';
+import SocketJsComponent from "./Components/ChatComponents/SocketJsComponent";
 
 class App extends Component {
 
@@ -42,7 +43,8 @@ class App extends Component {
                 <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
                 <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
-                <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
+                {/*<Route name="chat" path="/chat" component={auth(ChatComponent)}/>*/}
+                <Route name="chat" path="/chat" component={SocketJsComponent}/>
                 {/*<Route component={NoMatch}/>
                 <Route component={NoMatch} path="/404"/>*/}
             </Switch>

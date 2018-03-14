@@ -3,7 +3,6 @@ import Sockette from 'sockette';
 import Header from "../Header";
 import {TextField} from "material-ui";
 import {black500, deepOrangeA700, grey500} from "material-ui/styles/colors";
-
 const styles = {
     width: {
         width: "90%",
@@ -28,26 +27,6 @@ const styles = {
         color: grey500,
     }
 };
-/*
-const ws = new Sockette('ws://localhost:7070/chat', {
-    timeout: 5e3,
-    maxAttempts: 10,
-    onopen: e => console.log('Connected!', e),
-    onmessage: e => {
-        console.log('Received:', e);
-    },
-    onreconnect: e => console.log('Reconnecting...', e),
-    onmaximum: e => console.log('Stop Attempting!', e),
-    onclose: e => {
-        console.log('Closed!', e);
-        alert("Chat connection closed")
-    },
-    onerror: e => {
-        console.log('Error:', e);
-        alert("Chat connection Error");
-    }
-});
-*/
 
 
 export default class ChatComponent extends Component {
@@ -63,17 +42,19 @@ export default class ChatComponent extends Component {
         this.socket = new Sockette('ws://localhost:7070/chat', {
             timeout: 5e3,
             maxAttempts: 10,
-            onopen: e => console.log('Connected!', e),
+            onopen: e => {
+                console.log('Connected!', e);
+            },
             onmessage: e => {
-                console.log('Received:', JSON.parse(e.data).userMessage);
+                console.log('Received:', e);
                 let msg = JSON.parse(e.data).userMessage;
-                console.log("msg: ", e);
-                console.log("msg.data: ", msg);
                 self.setState({
                     data: [...self.state.data, msg]
                 });
             },
-            onreconnect: e => console.log('Reconnecting...', e),
+            onreconnect: e => {
+                console.log('Reconnecting...', e);
+            },
             onmaximum: e => console.log('Stop Attempting!', e),
             onclose: e => {
                 console.log('Closed!', e);
@@ -91,7 +72,6 @@ export default class ChatComponent extends Component {
     }
 
 
-
     setMessage(event, typedMessage) {
         this.setState({message: typedMessage});
         console.log("setMessage: state typed=> ", this.state.message);
@@ -100,6 +80,7 @@ export default class ChatComponent extends Component {
     sendAndClear() {
         if (this.state.message !== "") {
             this.socket.send(this.state.message);
+            this.setState({message:""});
         }
     }
 
@@ -109,6 +90,12 @@ export default class ChatComponent extends Component {
             <div className="Homepage">
                 <Header name="Chat"/>
                 <section className="containerCss">
+                    <div className="flexChat">
+                        {this.state.data.map((msg) => {
+                                return (<div dangerouslySetInnerHTML={{__html: msg}}></div>)
+                            }
+                        )}
+                    </div>
                     <div id="chatControls">
                         <TextField
                             style={styles.width}
@@ -120,13 +107,10 @@ export default class ChatComponent extends Component {
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
                             onChange={(event, typedMessage) => this.setMessage(event, typedMessage)}
+                            value={this.state.message}
                         />
                         <button id="send" onClick={() => this.sendAndClear()}>Send</button>
                     </div>
-                    {this.state.data.map((msg) => {
-                            return (<div dangerouslySetInnerHTML={{__html: msg}}></div>)
-                        }
-                    )}
                 </section>
             </div>
         );
