@@ -27,7 +27,7 @@ return fetch(URL + "users/" + userId, {
 
 export function getTeachers() {
 
-    return fetch(URL + "teacherAdmin", {
+    return fetch(URL + "users/teacherAdmin", {
         mode: 'cors',
         headers: {
             'Authorization':  userToken.token_type + " " +  userToken.access_token,
@@ -47,7 +47,7 @@ export function getTeachers() {
 
 export function getStudents() {
 
-    return fetch(URL + "students", {
+    return fetch(URL + "users/students", {
         mode: 'cors',
         headers: {
             'Authorization':  userToken.token_type + " " +  userToken.access_token,
@@ -68,7 +68,7 @@ export function getStudents() {
 
 export function getAll() {
 
-    return fetch(URL, {
+    return fetch(URL + "users", {
         mode: 'cors',
         headers: {
             'Authorization':  userToken.token_type + " " +  userToken.access_token,
@@ -88,7 +88,7 @@ export function getAll() {
 
 export function getUserRoles() {
 
-    return fetch(URL + "roles", {
+    return fetch(URL + "users/roles", {
         mode: 'cors',
         headers: {
             'Authorization':  userToken.token_type + " " +  userToken.access_token,
@@ -108,7 +108,7 @@ export function getUserRoles() {
 
 export function deleteUser(userId) {
 
-    return fetch(URL + userId, {
+    return fetch(URL + "users/" + userId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {

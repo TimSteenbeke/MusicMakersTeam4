@@ -31,7 +31,7 @@ class AddGroup extends Component {
 
 
     addUsers = () => {
-        UserService.getAllUsers().then(console.log("----Students---- \n"))
+        UserService.getAll().then(console.log("----Students---- \n"))
             .then(allUsers => {
                 this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
             });

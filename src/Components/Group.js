@@ -30,14 +30,14 @@ export default class Group extends Component {
 
 
     componentDidMount() {
-        GroupService.getAllGroupsFromBackend().then(groups => {
+        GroupService.getGroupsByUser().then(groups => {
             console.log(groups);
             this.setState({groups: groups});
         });
     }
 
     componentWillUpdate() {
-        GroupService.getAllGroupsFromBackend().then(groups => {
+        GroupService.getGroupsByUser().then(groups => {
             this.setState({groups: groups});
         });
     }

@@ -19,6 +19,8 @@ import PlayMusic from './Components/PlayMusic.js';
 import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
 import auth from './Components/CheckTokenComponent';
+import Switch from "react-router-dom/es/Switch";
+import Users from "./Components/Users";
 
 class App extends Component {
 

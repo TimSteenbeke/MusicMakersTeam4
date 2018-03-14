@@ -23,6 +23,27 @@ export function getAllGroupsFromBackend() {
 }
 
 
+export function getGroupsByUser() {
+    return fetch(URL + "groups", {
+        mode: 'cors',
+        headers: {
+            'Authorization': userToken.token_type + " " + userToken.access_token,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) =>
+            response.json())
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((err) => {
+
+            console.log("geen response");
+            console.log(err);
+        });
+}
+
+
 export function getGroupFromBackend(groupId) {
     return fetch(URL + "groups/" + groupId, {
         mode: 'cors',

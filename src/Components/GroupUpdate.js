@@ -31,7 +31,7 @@ export default class GroupUpdate extends Component {
     }
 
     addUsers = () => {
-        UserService.getAllUsers().then(console.log("----Users---- \n"))
+        UserService.getAll().then(console.log("----Users---- \n"))
             .then(allUsers => {
                 this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
             });
@@ -59,8 +59,8 @@ export default class GroupUpdate extends Component {
                 value = options[i].value;
             }
         }
-        this.setState({supervisorid: value});
-        console.log(this.state.supervisorid);
+        this.setState({supervisorId: value});
+        console.log(this.state.supervisorId);
     };
 
     handleStudentChange = (e) => {
@@ -104,6 +104,7 @@ export default class GroupUpdate extends Component {
                 groupid: loadedGroup.groupid,
                 name: loadedGroup.name,
                 supervisorId: loadedGroup.supervisorid,
+                studentIds: loadedGroup.userids,
                 username: loadedGroup.supervisor.username,
                 groupimage: loadedGroup.groupimage
             }, console.log(loadedGroup)))
@@ -188,7 +189,7 @@ export default class GroupUpdate extends Component {
                             <div className="section">
                                 <div className="row">
                                     <div className="col s3 m3 l3">
-                                        <h5 className="truncate">{this.state.username}</h5>
+                                        <h5 className="truncate">{this.state.supervisorId}</h5>
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <Row>
@@ -210,13 +211,13 @@ export default class GroupUpdate extends Component {
                             <div className="section">
                                 <div className="row">
                                     <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Studenten</h5>
+                                        <h5 className="truncate">{this.state.studentIds}</h5>
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <Row>
                                             <Input s={12} multiple={true} type='select' label="Studenten"
                                                    onChange={this.handleStudentChange}
-                                                   icon='child_care' defaultValue='1'>
+                                                   icon='child_care' defaultValue={this.state.studentIds}>
                                                 <option key="" value="" disabled>Kies de studenten</option>
                                                 {this.state.students.map((student, index) => (
                                                     <option key={student.userid}
