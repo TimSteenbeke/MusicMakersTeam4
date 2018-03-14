@@ -3,8 +3,9 @@ import SockJsClient from "react-stomp";
 import UsernameGenerator from "username-generator";
 import Fetch from "json-fetch";
 import { TalkBox } from "react-talk";
+import randomstring from 'randomstring';
 
-const randomstring = require("randomstring");
+// const randomstring = require("randomstring");
 
 export default class SocketJsComponent extends Component {
     constructor(props) {
@@ -19,9 +20,9 @@ export default class SocketJsComponent extends Component {
     }
 
     onMessageReceive = (msg, topic) => {
-        this.setState(prevState => ({
-            messages: [...prevState.messages, msg]
-        }));
+        this.setState({
+            messages: [...this.state.messages, msg]
+        });
     }
 
     sendMessage = (msg, selfMsg) => {
@@ -34,7 +35,7 @@ export default class SocketJsComponent extends Component {
     }
 
     componentWillMount() {
-        Fetch("/history", {
+        Fetch("http://localhost:8080/history", {
             method: "GET"
         }).then((response) => {
             this.setState({ messages: response.body });
@@ -42,7 +43,8 @@ export default class SocketJsComponent extends Component {
     }
 
     render() {
-        const wsSourceUrl = window.location.protocol + "//" + window.location.host + "/handler";
+        // const wsSourceUrl = window.location.protocol + "//" + window.location.host + "/handler";
+        const wsSourceUrl = "http://localhost:8080/handler";
         return (
             <div>
                 <TalkBox topic="react-websocket-template" currentUserId={ this.randomUserId }
