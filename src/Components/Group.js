@@ -23,10 +23,10 @@ export default class Group extends Component {
     };
 
 
- /*   setUsers(group) {
-        console.log(group);
-        return this.setState({users: group.users});
-    }*/
+    /*   setUsers(group) {
+           console.log(group);
+           return this.setState({users: group.users});
+       }*/
 
 
     componentDidMount() {
@@ -59,11 +59,12 @@ export default class Group extends Component {
                         </thead>
                         <tbody>
                         {this.state.groups.map((group, index) => (
-                            <tr key={index} id={group.groupId}>
+                            <tr key={index} id={group.groupid}>
                                 {/*<td><img src={"data:image;base64," + group.groupImage} alt="groepsfoto" height="50px" width="50px"/>
                                 </td>*/}
                                 <td>{group.name}</td>
-                               {/* <td>{group.supervisor.username}</td>*/}
+
+                                {/* <td>{group.supervisor.username}</td>*/}
                                 {/*       <td><Dropdown trigger={<RaisedButton onClick={this.setUsers(group)}>Klik!</RaisedButton>
                                 }>
                                     {this.state.users.map((user, index2) => (
@@ -75,15 +76,14 @@ export default class Group extends Component {
                                 </td>*/}
                                 <td>
                                     <Link className="waves-effect white-text red darken-4 btn marginator"
-                                          to={`/groupupdate/${group.groupId}`}>
+                                          to={`/groupupdate/${group.groupid}`}>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
                                     <a className="waves-effect white-text red darken-4 btn"
-                                       onClick={(e) => this.handleDelete(group.groupId, e)}><i
+                                       onClick={(e) => this.handleDelete(group.groupid, e)}><i
                                         className="material-icons">delete
                                     </i></a>
-
                                 </td>
                             </tr>
                         ))}

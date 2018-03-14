@@ -28,6 +28,8 @@ class AddGroup extends Component {
     }
 
 
+
+
     addUsers = () => {
         UserService.getAllUsers().then(console.log("----Students---- \n"))
             .then(allUsers => {
@@ -134,8 +136,21 @@ class AddGroup extends Component {
                             <img
                                 src={"data:image;base64," + this.state.image} alt="Groep"
                                 height="300px"/>
+                                <span className="card-title white-text">{this.state.name}</span>
+                                <form action="#">
+                                    <div className="file-field input-field">
+                                        <div
+                                            className="btn-floating halfway-fab waves-effect waves-light deep-orange darken-4 pulse">
+                                            <i className="material-icons">attach_file</i>
+                                            <input name="file"
+                                                   className="upload-file"
+                                                   id="file"
+                                                   onChange={this.handleChangeImage}
+                                                   encType="multipart/form-data" accept="image/*" type="file"/>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div className="divider"></div>
                             <div className="row">
                                 <div className="col s3 m3 l3">
                                     <h5 className="truncate">{this.state.name}</h5>
@@ -154,9 +169,9 @@ class AddGroup extends Component {
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <Row>
-                                            <Input s={12} multiple={true} type='select'
+                                            <Input s={12} multiple={false} type='select'
                                                    onChange={this.handleUserChange}
-                                                   label="Begeleiders" icon='face' defaultValue='1'>
+                                                   label="Begeleiders" icon='face'>
                                                 <option key="" value="" disabled>Kies de begeleiders
                                                 </option>
                                                 {this.state.allUsers.map((user, index) => (
@@ -186,12 +201,7 @@ class AddGroup extends Component {
                                             </Input>
                                         </Row>
                                     </div>
-                                    <input name="file"
-                                           className="upload-file"
-                                           id="file"
-                                           onChange={this.handleChangeImage}
-                                           encType="multipart/form-data" accept="image/*" type="file"/>
-                                    <label>{this.state.fileType}</label>
+
                                 </div>
 
                                 <div className="divider"></div>

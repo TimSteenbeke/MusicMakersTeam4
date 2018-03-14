@@ -68,7 +68,7 @@ class Instrumenten extends Component {
 
 
     componentDidMount() {
-       this.getInstrumenten();
+        this.getInstrumenten();
     }
 
 
@@ -76,7 +76,7 @@ class Instrumenten extends Component {
 
         return (
             <div className="Homepage">
-                <Header name="Instrumenten" />
+                <Header name="Instrumenten"/>
 
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
@@ -97,11 +97,14 @@ class Instrumenten extends Component {
                                 <td>{instrument.type}</td>
                                 <td>{instrument.uitvoering}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/instrumentdetails/${instrument.instrumentId}` }>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                          to={`/instrumentdetails/${instrument.instrumentId}`}>
                                         <i className="material-icons">edit
-                                    </i>
+                                        </i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i className="material-icons">delete
+                                    <a className="waves-effect white-text deep-orange darken-4 btn"
+                                       onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i
+                                        className="material-icons">delete
                                     </i></a>
 
                                 </td>
