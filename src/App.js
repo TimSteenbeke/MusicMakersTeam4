@@ -46,16 +46,6 @@ class App extends Component {
                 <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
                 <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
-                <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
-                <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
-                <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
-                <Route name="instrumentDetails" path="/coursedetails/:id" component={CourseDetails}/>
-                <Route name="agenda" path="/agenda" component={Agenda}/>
-                <Route name="courses" path="/courses" component={Courses}/>
-                <Route name="addCourse" path="/addcourse" component={AddCourse}/>
-                <Route name="compositions" exact path="/compositions" component={Compositions}/>
-                <Route name="addComposition" path="/addcomposition" component={AddComposition}/>
-                <Route name="compositionDetails" path="/compositions/:id" component={CompositionUpdate}/>
                 <Route name="groups" path="/groups" component={Group}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="editGroup" path="/editGroup" component={EditGroup}/>
