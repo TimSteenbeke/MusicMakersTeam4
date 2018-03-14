@@ -4,7 +4,9 @@ import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2'
-import * as CourseTypeService from "../Services/InstrumentService";
+import * as CourseTypeService from "../Services/CourseTypeService";
+import {black500, deepOrangeA700, grey500} from "material-ui/styles/colors";
+
 
 class AddCourseType extends Component {
 
@@ -31,7 +33,7 @@ class AddCourseType extends Component {
         CourseTypeService.postCourseType(JSON.stringify(
             {
                 price: this.state.typedPrice,
-                courseTypeDescription: this.state.typedDescription,
+                description: this.state.typedDescription
             }
         ));
     };
@@ -62,23 +64,20 @@ class AddCourseType extends Component {
                 <Header name="Add CourseType"/>
                 <section className="containerCss">
                     <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
                                 <div className="card-content">
-                                    <form className="addCourseType" action="/" method="POST" onSubmit={(e) => {
+                                    <form className="addcoursetype" action="/" method="POST" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
-                                        <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>Beschrijving</h5>
+                                                    <h5>beschrijving</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeDescription()} hint="Geef beschrijving in..."
-                                                                     label="Description"/>
+                                                    <StyledTextField onChange={this.onChangeDescription} placeholder="Geef een beschrijving in..." label="beschrijving"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,11 +85,10 @@ class AddCourseType extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>Prijs</h5>
+                                                    <h5>price</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangePrice} hint="Geef prijs in..."
-                                                                     label="Price"/><br />
+                                                    <StyledTextField onChange={this.onChangePrice} placeholder="Geef een prijs in..." label="prijs"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +96,7 @@ class AddCourseType extends Component {
                                     </form>
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/CourseTypes" onClick={this.handleClick}
+                                    <Link to="/coursetypes" onClick={this.handleClick}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
                                         <i
                                             className="material-icons">done</i>
@@ -114,4 +112,4 @@ class AddCourseType extends Component {
     }
 }
 
-export default AddInstrument;
+export default AddCourseType;

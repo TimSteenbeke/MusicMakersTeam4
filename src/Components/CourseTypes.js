@@ -1,20 +1,17 @@
-/**
- * Created by jariv on 9/02/2018.
- */
+
 import React, {Component} from 'react';
-import * as InstrumentenService from '../Services/InstrumentService.js'
 import {Link} from 'react-router-dom';
 import Header from './Header'
 import swal from 'sweetalert2'
+import * as CourseTypeService from "../Services/CourseTypeService";
 
 
-class Instrumenten extends Component {
+class CourseTypes extends Component {
 
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
-            instrumenten: [],
+            courseTypes: [""],
             selectedIndex: 0,
         };
     }
@@ -37,46 +34,42 @@ class Instrumenten extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'Instrument has been deleted.',
+                    'CourseType has been deleted.',
                     'success'
                 );
-                InstrumentenService.deleteInstrument(id);
+                CourseTypeService.deleteCourseType(id);
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Cancelled',
-                    'Instrument was not deleted',
+                    'CourseType was not deleted',
                     'error'
                 )
             }
         });
-
     };
 
-    getInstrumenten() {
-        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
-            this.setState({instrumenten: instrumenten});
+    getCourseTypes() {
+        CourseTypeService.getCourseTypesFromBackend().then(courseTypes => {
+            console.log(courseTypes);
+            this.setState({courseTypes: courseTypes});
         });
     }
 
-
-    componentWillUpdate() {
-        this.getInstrumenten();
+    componentDidMount(){
+        this.getCourseTypes();
     }
 
 
-    componentDidMount() {
-        this.getInstrumenten();
-    }
 
 
     render() {
 
         return (
             <div className="Homepage">
-                <Header name="Instrumenten" />
+                <Header name="CourseTypes" />
 
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
@@ -87,16 +80,16 @@ class Instrumenten extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.instrumenten.map((courseType, index) => (
+                        {this.state.courseTypes.map((courseType, index) => (
                             <tr key={index} id={courseType.courseTypeId}>
-                                <td>{courseType.courseTypeDescription}</td>
+                                <td>{courseType.description}</td>
                                 <td>{courseType.price}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/instrumentdetails/${courseType.instrumentId}` }>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/coursetypedetails/${courseType.courseTypeId}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(courseType.instrumentId, e)}><i className="material-icons">delete
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(courseType.courseTypeId, e)}><i className="material-icons">delete
                                     </i></a>
 
                                 </td>
@@ -105,7 +98,7 @@ class Instrumenten extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addInstrument" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addcoursetype" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>
@@ -115,5 +108,5 @@ class Instrumenten extends Component {
     }
 }
 
-export default CourseType;
+export default CourseTypes;
 

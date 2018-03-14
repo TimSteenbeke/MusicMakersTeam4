@@ -18,6 +18,9 @@ import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
 import CompositionUpdate from "./Components/CompositionUpdate";
 import auth from './Components/CheckTokenComponent';
+import AddCourseType from "./Components/AddCourseType";
+import CourseTypeDetails from "./Components/CourseTypeDetails";
+import CourseTypes from "./Components/CourseTypes";
 
 class App extends Component {
 
@@ -41,6 +44,9 @@ class App extends Component {
                 <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
                 <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
+                <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
+                <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
+                <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
                 {/*<Route component={NoMatch}/>
                 <Route component={NoMatch} path="/404"/>*/}
             </Switch>

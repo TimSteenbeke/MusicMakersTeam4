@@ -266,6 +266,7 @@ class AddMuziekstuk extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="col s0 m2 l2"/>
                     </div>
                 </section>
             </div>

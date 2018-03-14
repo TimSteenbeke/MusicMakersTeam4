@@ -43,6 +43,9 @@ class Sidebar extends Component {
                     <Link to="/compositions">
                         <MenuItem style={styles.menuColor} primaryText="Compositions"/>
                     </Link>
+                    <Link to="/courseTypes">
+                        <MenuItem style={styles.menuColor} primaryText="CourseTypes"/>
+                    </Link>
                     <Divider/>
                 </Menu>
             </div>
