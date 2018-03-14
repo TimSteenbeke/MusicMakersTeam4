@@ -37,6 +37,7 @@ export function getStudents() {
         .then((response) =>
             response.json())
         .then((responseJson) => {
+            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -85,3 +86,15 @@ export function getUserRoles() {
         });
 }
 
+export function deleteUser(userId) {
+
+    return fetch(URL + userId, {
+        method: 'DELETE',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " +  userToken.access_token
+        }
+    });
+}
