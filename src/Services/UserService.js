@@ -1,7 +1,7 @@
 /**
  * Created by jariv on 7/03/2018.
  */
-//const URL = "https://musicmaker-api-team4.herokuapp.com/api/users/";
+//const URL="https://musicmaker-api-team4.herokuapp.com/api/users/";
 const URL = 'http://localhost:8080/api/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
@@ -30,7 +30,7 @@ export function getTeachers() {
     return fetch(URL + "teacherAdmin", {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " + userToken.access_token,
+            'Authorization':  userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -47,36 +47,17 @@ export function getTeachers() {
 
 export function getStudents() {
 
-    return fetch(URL + "users/students", {
+    return fetch(URL + "students", {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " + userToken.access_token,
+            'Authorization':  userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            return responseJson;
-        })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
-}
-
-export function getAllUsers() {
-
-    return fetch(URL + "users", {
-        mode: 'cors',
-        headers: {
-            'Authorization': userToken.token_type + " " + userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
+            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -90,7 +71,7 @@ export function getAll() {
     return fetch(URL, {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " + userToken.access_token,
+            'Authorization':  userToken.token_type + " " +  userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -105,3 +86,35 @@ export function getAll() {
         });
 }
 
+export function getUserRoles() {
+
+    return fetch(URL + "roles", {
+        mode: 'cors',
+        headers: {
+            'Authorization':  userToken.token_type + " " +  userToken.access_token,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) =>
+            response.json())
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((err) => {
+            console.log("geen response");
+            console.log(err);
+        });
+}
+
+export function deleteUser(userId) {
+
+    return fetch(URL + userId, {
+        method: 'DELETE',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " +  userToken.access_token
+        }
+    });
+}

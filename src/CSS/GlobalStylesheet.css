@@ -22,7 +22,6 @@
 
 }
 
-
 .fixed-action-btn {
     float: right;
     position: relative;
@@ -38,6 +37,10 @@
 
 .marginator{
     margin-right:20px;
+}
+
+.minimargin{
+    margin-left:10px;
 }
 
 .agendaItem {

@@ -4,6 +4,7 @@ import '../CSS/GlobalStylesheet.css';
 import ChordSheetJS from 'chordsheetjs';
 import GuitarChord from 'react-guitar-chord';
 import $ from 'jquery';
+import * as MusicService from '../Services/MusicService.js'
 
 class ChordSheet extends Component {
 
@@ -15,17 +16,22 @@ class ChordSheet extends Component {
             chordQuality:'MIN',
             hideFirst:true,
             currentChord:0,
-            speed:1000
+            speed:1000,
+            hidden:true
         };
 
         this.nextChord = this.nextChord.bind(this);
     }
 
-    componentDidMount() {
-        this.parseChordSheet();
+    componentWillMount() {
+        this.checkRightFormat();
+    }
+    componentDidMount(){
+        this.addHover();
     }
 
-    componentWillReceiveProps(){
+
+    addHover(){
         let _this = this;
         $(".chord").hover(function() {
                 var html = $(this).html();
@@ -37,17 +43,29 @@ class ChordSheet extends Component {
             });
     }
 
+    checkRightFormat(){
+        const fileformat = this.props.fileFormat;
+        const extension = fileformat.substr(fileformat.lastIndexOf('.')+1);
+        const alphaTabExtensionSupport = ["txt"];
+        if(alphaTabExtensionSupport.indexOf(extension) > -1){
+            this.setState({hidden:false});
+            this.parseChordSheet();
+        }
+    }
+
     parseChordSheet(){
-        const chordSheet = `
+        const chordSheetExample = `
         Am         C/G        F          C
         Let it be, let it be, let it be, let it be
         C                G              F  C/E Dm C
         Whisper words of wisdom, let it be`.substring(1);
+
+        const chordSheet = this.props.content;
         this.setState({dataFile: chordSheet});
     }
 
-    parseChordSheetPro(){
-        const chordSheet = `
+    parseChordSheetPro(chordSheet){
+        const chordSheetExample = `
 {title: Let it be}
 {subtitle: ChordSheetJS example version}
 {Chorus}
@@ -101,7 +119,7 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
         var disp = formatter.format(song);
 
         return (
-            <div className="Play" hidden={this.props.hidden}>
+            <div className="Play" hidden={this.state.hidden}>
                 <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
                 <input type="button" id="pauseBtn" value="Pause" onClick={(e) => this.pauze(e)}/>
                 <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.reset(e)}/>

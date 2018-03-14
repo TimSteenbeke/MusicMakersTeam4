@@ -12,18 +12,20 @@ import {Route} from 'react-router'
 import './CSS/GlobalStylesheet.css';
 import Group from "./Components/Group";
 import AddGroup from "./Components/AddGroup"
-import Compositions from "./Components/Compositions.js";
-// import MuziekstukDetails from "./Components/MuziekstukDetails.js";
-import AddMuziekstuk from "./Components/AddMuziekstuk";
-import PlayMusic from './Components/PlayMusic.js'
 import GroupUpdate from "./Components/GroupUpdate";
+import Compositions from "./Components/Compositions.js";
+import AddComposition from "./Components/AddComposition";
+import PlayMusic from './Components/PlayMusic.js';
+import NotFound from "./Components/NotFound";
+import CompositionUpdate from "./Components/CompositionUpdate";
+import auth from './Components/CheckTokenComponent';
 
 class App extends Component {
 
 
     render() {
         return (
-            <section>
+            <Switch>
                 <Route name="home" exact path="/" component={Home}/>
                 <Route name="login" path="/login" component={Login}/>
                 <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
@@ -33,23 +35,17 @@ class App extends Component {
                 <Route name="agenda" path="/agenda" component={Agenda}/>
                 <Route name="courses" path="/courses" component={Courses}/>
                 <Route name="addCourse" path="/addcourse" component={AddCourse}/>
-                <Route name="login" path="/login" component={Login}/>
-                <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
-                <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
-                <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
-                <Route name="agenda" path="/agenda" component={Agenda}/>
-                <Route name="muziekStukken" path="/muziekstukken" component={Compositions}/>
-                {/*<Route name="muziekstukDetails" path="/muziekstukdetails/:id" component={MuziekstukDetails}/>*/}
-                <Route name="addMuziekstuk" path="/addmuziekstuk" component={AddMuziekstuk}/>
-                <Route name="group" path="/groups" component={Group}/>
+                <Route name="compositions" exact path="/compositions" component={Compositions}/>
+                <Route name="addComposition" path="/addcomposition" component={AddComposition}/>
+                <Route name="compositionDetails" path="/compositions/:id" component={CompositionUpdate}/>
+                <Route name="groups" path="/groups" component={Group}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="groupUpdate" path="/groupupdate/:id" component={GroupUpdate}/>
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="play" path="/play/:id" component={PlayMusic}/>
-            </section>
-
-
-            
+                <Route name="users" path="/users" component={Users}/>
+                <Route path='*' exact={true} component={NotFound}/>
+            </Switch>
         );
     }
 }

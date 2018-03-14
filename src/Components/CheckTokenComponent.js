@@ -1,35 +1,31 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
-
-export default class CheckTokenComponent extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            redirect:false
-        }
-    }
-
-    componentWillMount(){
-        let response;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-    render(){
-        let redirecting=null;
-        if (this.state.redirect) {
-            redirecting = <Redirect to='/login'/>
-            this.setState({redirect: false})
+import Login from './Login.js';
+/**
+ * Higher-order component (HOC) to wrap restricted pages
+ */
+export default function(WrapperComponent) {
+    class CheckTokenComponent extends Component {
+        constructor(props) {
+            super(props);
         }
 
-        return (
-            <div>
-                {redirecting}
-            </div>
-        );
-
-}
-
+        checkAuthentication(params) {
+            const { history } = params;
+            if(!LoginService.checkToken()){
+                console.log("redirected");
+                return false;
+            }
+            return true;
+        }
+        render() {
+            if(this.checkAuthentication(this.props)){
+                return <WrapperComponent {...this.props} />
+            }else{
+                return <Login/>
+            }
+        }
+    }
+    return CheckTokenComponent;
 }
