@@ -19,12 +19,8 @@ class Sidebar extends Component {
     render() {
         return (
             <div>
-
-
                 <img className="circle logo" alt="guitar" src={logo}/>
-
                 <Menu>
-
                     <Divider/>
                     <Link to="/">
                         <MenuItem style={styles.menuColor} primaryText="Home"/>
@@ -36,6 +32,9 @@ class Sidebar extends Component {
                     <Divider/>
                     <Link to="/instrumenten">
                         <MenuItem style={styles.menuColor} primaryText="Instrumenten"/>
+                    </Link>
+                    <Link to="/users">
+                        <MenuItem style={styles.menuColor} primaryText="Users"/>
                     </Link>
                     <Link to="/courses">
                         <MenuItem style={styles.menuColor} primaryText="Courses"/>

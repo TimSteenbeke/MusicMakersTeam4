@@ -103,7 +103,7 @@ class ActivityPopUp extends Component {
                     'success'
                 );
                 this.aanwezig();
-                this.getStatus();
+                this.setIcon('present')
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -114,7 +114,8 @@ class ActivityPopUp extends Component {
                     'error'
                 );
                 this.afwezig();
-                this.getStatus();
+                this.setIcon('absent')
+
             }
         });
 

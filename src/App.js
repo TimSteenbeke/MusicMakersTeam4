@@ -3,6 +3,7 @@ import Home from './Components/Home';
 import Login from './Components/Login.js';
 import AddInstrument from './Components/AddInstrument.js';
 import Instrumenten from './Components/Instrumenten.js';
+import Users from './Components/Users';
 import InstrumentDetails from './Components/InstrumentDetails.js';
 import CourseDetails from './Components/CoursesDetails.js';
 import AddCourse from './Components/AddCourse.js'
@@ -42,6 +43,7 @@ class App extends Component {
                 <Route name="editGroup" path="/editGroup" component={EditGroup}/>
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="play" path="/play/:id" component={PlayMusic}/>
+                <Route name="users" path="/users" component={Users}/>
                 <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );
