@@ -37,7 +37,7 @@ export default class SocketJsComponent extends Component {
 
     componentWillMount() {
         let history = ChatService.getHistory();
-        this.setState({ messages: history})
+        this.setState({ messages: [...this.state.messages, history]})
 /*        Fetch("http://localhost:8080/history", {
             method: "GET",
 
