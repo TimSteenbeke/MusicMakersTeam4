@@ -23,6 +23,8 @@ import auth from './Components/CheckTokenComponent';
 import AddCourseType from "./Components/AddCourseType";
 import CourseTypeDetails from "./Components/CourseTypeDetails";
 import CourseTypes from "./Components/CourseTypes";
+import AddUser from "./Components/AddUser";
+import UserDetails from "./Components/UserUpdate";
 
 class App extends Component {
 
@@ -58,7 +60,10 @@ class App extends Component {
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
 
                 <Route name="users" path="/users" component={Users}/>
-                <Route path='*' exact={true} component={NotFound}/>
+                    <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
+                    <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
+
+                    <Route path='*' exact={true} component={NotFound}/>
             </Switch>
 
         );
