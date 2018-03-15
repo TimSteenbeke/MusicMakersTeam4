@@ -7,10 +7,10 @@ import * as InstrumentenService from '../Services/InstrumentService.js'
 import Header from './Header'
 import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
+import * as LoginService from '../Services/LoginService';
 
 class InstrumentDetails extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -45,6 +45,14 @@ class InstrumentDetails extends Component {
         });
     }
 
+    componentWillMount(){
+        let response = false;
+        response = LoginService.checkToken();
+        console.log("response:");
+        console.log(response);
+        this.setState({redirect: !response})
+    }
+
     handleUpdate = () => {
         swal({
             position: 'top-end',
@@ -63,11 +71,6 @@ class InstrumentDetails extends Component {
                 uitvoering: self.state.uitvoering
             }
         ));
-        console.log("instrumentId: " + self.state.instrumentId);
-        console.log("instrumentsoortid: " + self.state.instrumentsoortid);
-        console.log("naam: " + self.state.naam);
-        console.log("type: " + self.state.type);
-        console.log("uitvoering: " + self.state.uitvoering);
     };
 
     handleChangeImage = (evt) => {
@@ -86,6 +89,10 @@ class InstrumentDetails extends Component {
         }, 1000);
     };
 
+    setType = event => {
+        let value = event.target.value;
+        return this.setState({type: value})
+    };
 
     render() {
         return ( <div className="Homepage">
@@ -121,7 +128,7 @@ class InstrumentDetails extends Component {
                                             <h5>{this.state.type}</h5>
                                         </div>
                                         <div className="col s9 m9 l9">
-                                        <StyledTextField hint="Geef nieuw type in..." label="Type"/>
+                                            <input className="center" type="text" value={this.state.type} label="Type"  onChange={this.setType} placeholder="Geef een type in.."/>
                                         </div>
                                         </div>
                                     </div>
