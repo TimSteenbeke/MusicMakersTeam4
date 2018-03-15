@@ -39,7 +39,7 @@ export default class ChatComponent extends Component {
             // wsURL: 'ws://' + location.hostname + ':' + location.port + '/chat'
         };
         let self = this;
-        this.socket = new Sockette('ws://localhost:7070/chat', {
+        this.socket = new Sockette('ws://localhost:8080/handler', {
             timeout: 5e3,
             maxAttempts: 10,
             onopen: e => {

@@ -25,6 +25,7 @@ import SocketJsComponent from "./Components/ChatComponents/SocketJsComponent";
 import AddCourseType from "./Components/AddCourseType";
 import CourseTypeDetails from "./Components/CourseTypeDetails";
 import CourseTypes from "./Components/CourseTypes";
+import AngularComponent from "./Components/ChatComponents/AngularComponent";
 
 class App extends Component {
 
@@ -62,7 +63,8 @@ class App extends Component {
                 <Route name="users" path="/users" component={Users}/>
 
                 {/*<Route name="chat" path="/chat" component={auth(ChatComponent)}/>*/}
-                <Route name="chat" path="/chat" component={SocketJsComponent}/>
+                {/*<Route name="chat" path="/chat" component={SocketJsComponent}/>*/}
+                <Route name="chat" path="/chat" component={AngularComponent}/>
 
                 <Route path='*' exact={true} component={NotFound}/>
             </Switch>
