@@ -157,7 +157,7 @@ export default class GroupUpdate extends Component {
                                 <img
                                     src={"data:image;base64," + this.state.groupimage} alt="Groep"
                                     height="300px"/>
-                                <span className="card-title white-text">{this.state.name}</span>
+                                <span className="card-title white-text"></span>
                                 <form action="#">
                                     <div className="file-field input-field">
                                         <div
@@ -175,7 +175,7 @@ export default class GroupUpdate extends Component {
                             <div className="section">
                                 <div className="row">
                                     <div className="col s3 m3 l3">
-                                        <h5 className="truncate">{this.state.name}</h5>
+                                        <h5 className="truncate">Groepsnaam</h5>
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <StyledTextField onChange={this.handleNameChange}

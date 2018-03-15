@@ -1,9 +1,9 @@
-//const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const URL = 'http://localhost:8080/api/';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/groups/';
+//const URL = 'http://localhost:8080/api/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getAllGroupsFromBackend() {
-    return fetch(URL + "groups/allgroups", {
+    return fetch(URL + "allgroups", {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " + userToken.access_token,
@@ -24,7 +24,7 @@ export function getAllGroupsFromBackend() {
 
 
 export function getGroupsByUser() {
-    return fetch(URL + "groups", {
+    return fetch(URL, {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " + userToken.access_token,
@@ -45,7 +45,7 @@ export function getGroupsByUser() {
 
 
 export function getGroupFromBackend(groupId) {
-    return fetch(URL + "groups/" + groupId, {
+    return fetch(URL + groupId, {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " + userToken.access_token,
@@ -65,7 +65,7 @@ export function getGroupFromBackend(groupId) {
 }
 
 export function postGroup(data) {
-    fetch(URL + "groups", {
+    fetch(URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -77,7 +77,7 @@ export function postGroup(data) {
 }
 
 export function deleteGroup(groupId) {
-    return fetch(URL + 'groups/' + groupId, {
+    return fetch(URL + groupId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
@@ -91,7 +91,7 @@ export function deleteGroup(groupId) {
 export function updateGroup(groupId, data) {
     console.log("id: " + groupId);
     console.log(data);
-    return fetch(URL + 'groups/group/' + groupId, {
+    return fetch(URL + 'group/' + groupId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {

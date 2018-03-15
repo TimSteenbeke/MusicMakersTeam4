@@ -24,7 +24,6 @@ import CourseTypeDetails from "./Components/CourseTypeDetails";
 import CourseTypes from "./Components/CourseTypes";
 import AddUser from "./Components/AddUser";
 import UserDetails from "./Components/UserUpdate";
-import Switch from "react-router-dom/es/Switch";
 import Users from "./Components/Users";
 
 class App extends Component {
