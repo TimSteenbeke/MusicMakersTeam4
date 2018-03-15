@@ -51,7 +51,7 @@ class Login extends Component {
         console.log(response);
         response.then((value) => {
             if (value) {
-                this.setState({redirect: true})
+                this.setState({redirect: true});
             } else {
                 this.setState({failLogin: true})
             }

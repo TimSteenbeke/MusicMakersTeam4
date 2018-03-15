@@ -65,9 +65,9 @@ class Instrumenten extends Component {
     }
 
 
-    componentDidUpdate() {
+    /*componentDidUpdate() {
         this.getInstrumenten();
-    }
+    }*/
 
 
     componentDidMount() {
