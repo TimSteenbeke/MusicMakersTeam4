@@ -1,12 +1,10 @@
 import React ,{Component}from "react";
 import SockJsClient from "react-stomp";
 import UsernameGenerator from "username-generator";
-import Fetch from "json-fetch";
 import { TalkBox } from "react-talk";
 import randomstring from 'randomstring';
 import * as ChatService from '../../Services/ChatService';
 
-// const randomstring = require("randomstring");
 
 export default class SocketJsComponent extends Component {
     constructor(props) {
