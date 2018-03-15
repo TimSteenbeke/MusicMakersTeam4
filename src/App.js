@@ -3,7 +3,6 @@ import Home from './Components/Home';
 import Login from './Components/Login.js';
 import AddInstrument from './Components/AddInstrument.js';
 import Instrumenten from './Components/Instrumenten.js';
-import Users from './Components/Users';
 import InstrumentDetails from './Components/InstrumentDetails.js';
 import CourseDetails from './Components/CoursesDetails.js';
 import AddCourse from './Components/AddCourse.js'
@@ -13,7 +12,7 @@ import {Route, Switch} from 'react-router'
 import './CSS/GlobalStylesheet.css';
 import Group from "./Components/Group";
 import AddGroup from "./Components/AddGroup"
-import EditGroup from "./Components/EditGroup";
+import GroupUpdate from "./Components/GroupUpdate";
 import Compositions from "./Components/Compositions.js";
 import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
@@ -25,6 +24,7 @@ import CourseTypeDetails from "./Components/CourseTypeDetails";
 import CourseTypes from "./Components/CourseTypes";
 import AddUser from "./Components/AddUser";
 import UserDetails from "./Components/UserUpdate";
+import Users from "./Components/Users";
 
 class App extends Component {
 
@@ -49,9 +49,9 @@ class App extends Component {
                 <Route name="addComposition" path="/addcomposition" component={auth(AddComposition)}/>
                 <Route name="compositionDetails" path="/compositions/:id" component={auth(CompositionUpdate)}/>
 
-                <Route name="groups" path="/groups" component={auth(Group)}/>
-                <Route name="addGroup" path="/addgroup" component={auth(AddGroup)}/>
-                <Route name="editGroup" path="/editGroup" component={auth(EditGroup)}/>
+                <Route name="groups" path="/groups" component={Group}/>
+                <Route name="addGroup" path="/addgroup" component={AddGroup}/>
+                <Route name="groupUpdate" path="/groupupdate/:id" component={GroupUpdate}/>
 
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
 
@@ -65,7 +65,6 @@ class App extends Component {
 
                     <Route path='*' exact={true} component={NotFound}/>
             </Switch>
-
         );
     }
 }

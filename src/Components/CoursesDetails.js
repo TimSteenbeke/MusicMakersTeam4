@@ -34,7 +34,7 @@ class CoursesDetails extends Component {
                     beschrijving: course.description,
                 });
                 console.log(self.state.beschrijving);
-                console.log(course.students);
+                console.log(course.users);
             }).catch((error) => {
             console.log(error);
         });

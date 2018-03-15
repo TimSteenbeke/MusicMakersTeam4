@@ -17,6 +17,7 @@ class AddInstrument extends Component {
         this.state = {
             value: 1,
             soorten: [],
+            open: false,
             typedName: "",
             typedType: "",
             typedVersion: "",
@@ -50,6 +51,12 @@ class AddInstrument extends Component {
         console.log("Type: " + this.state.typedType);
         console.log("Version: " + this.state.typedVersion);
 
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
     };
 
     componentDidMount() {
@@ -198,6 +205,9 @@ class AddInstrument extends Component {
                         </div>
                         <div className="col s0 m2 l2"/>
                     </div>
+
+
+                        
                 </section>
             </div>
         );

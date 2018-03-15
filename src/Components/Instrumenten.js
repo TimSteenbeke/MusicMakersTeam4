@@ -82,7 +82,7 @@ class Instrumenten extends Component {
 
 
     render() {
-        
+
             return (
 
                 <div className="Homepage">
