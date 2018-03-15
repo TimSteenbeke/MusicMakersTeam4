@@ -56,31 +56,33 @@ export default class AngularComponent extends Component {
         const ws = new SockJS(this.state.serverUrl);
         this.stompClient = Stomp.over(ws);
         // this.stompClient = Stomp.overWS('ws://localhost:8080');
-        this.stompClient.connect({},() => {
-            this.stompClient.subscribe('/chat/' + this.state.chatroom, (message) => {
+        var self = this;
+        self.stompClient.connect({},() => {
+            self.stompClient.subscribe('/chat/' + self.state.chatroom, (message) => {
+                console.log("msg");
+                console.log(message);
                 if (message.body) {
-                    this.setState({messages: [...this.state.messages, message.body]});
+                    self.setState({messages: [...self.state.messages, message.body]});
                     console.log(message.body);
                 }
             });
         });
+        console.log("init is done");
     }
 
     sendMessage() {
-        let message = this.state.name + ': ' + this.state.message;
-        this.stompClient.send('/app/send/message/' + this.state.chatroom, {}, message);
+        let name = this.state.name;
+        let content = this.state.message;
+        let message = name + ': ' + content;
+        this.stompClient.send('/chat/' + this.state.chatroom, {}, message);
         this.setState({message: ''});
     }
 
     render() {
+        console.log("chat content");
+        console.log(this.state.messages);
         return (
             <div>
-                <div class="chat">
-                        {this.state.messages.map((msg) => {
-                                return (<div dangerouslySetInnerHTML={{__html: msg}}></div>)
-                            }
-                        )}
-                </div>
 
                 <TextField
                     style={styles.width}
@@ -96,7 +98,7 @@ export default class AngularComponent extends Component {
                     }}
                     value={this.state.message}
                 />
-                <button onClick={this.sendMessage}>send</button>
+                <button onClick={(e) => this.sendMessage(e)}>send</button>
                 <label>Naam:</label>
                 <TextField
                     style={styles.width}
@@ -127,7 +129,15 @@ export default class AngularComponent extends Component {
                     }}
                     value={this.state.chatroom}
                 />
-                <button onClick={this.ChangeRoom}>Change room</button>
+                <button onClick={(e) => this.ChangeRoom(e)}>Change room</button>
+
+                <div className="chat">
+                    {this.state.messages.map((msg) => {
+                            return (<div>{msg}</div>)
+                        }
+                    )}
+                </div>
+
             </div>
         )
             ;
