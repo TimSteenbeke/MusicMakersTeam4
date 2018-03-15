@@ -22,6 +22,7 @@ class AddInstrument extends Component {
             typedType: "",
             typedVersion: "",
             image: "..image/image.jpg",
+            bestandType: "",
         };
 
 

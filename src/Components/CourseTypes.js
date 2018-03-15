@@ -1,21 +1,17 @@
-/**
- * Created by jariv on 14/03/2018.
- */
 
 import React, {Component} from 'react';
-import * as UserService from '../Services/UserService'
 import {Link} from 'react-router-dom';
 import Header from './Header'
 import swal from 'sweetalert2'
+import * as CourseTypeService from "../Services/CourseTypeService";
 
 
-class Users extends Component {
+class CourseTypes extends Component {
 
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
-            users: [],
+            courseTypes: [""],
             selectedIndex: 0,
         };
     }
@@ -38,69 +34,62 @@ class Users extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'User has been deleted.',
+                    'CourseType has been deleted.',
                     'success'
                 );
-                console.log(id);
-                UserService.deleteUser(id);
+                CourseTypeService.deleteCourseType(id);
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Cancelled',
-                    'User was not deleted',
+                    'CourseType was not deleted',
                     'error'
                 )
             }
         });
-
     };
 
-    getUsers() {
-        UserService.getAll().then(users => {
-            this.setState({users: users.users});
+    getCourseTypes() {
+        CourseTypeService.getCourseTypesFromBackend().then(courseTypes => {
+            console.log(courseTypes);
+            this.setState({courseTypes: courseTypes});
         });
     }
 
-
-    componentWillUpdate() {
-        this.getUsers();
+    componentDidMount(){
+        this.getCourseTypes();
     }
 
 
-    componentDidMount() {
-        this.getUsers();
-    }
 
 
     render() {
 
         return (
             <div className="Homepage">
-                <Header name="Instrumenten" />
+                <Header name="CourseTypes" />
 
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Voornaam</th>
-                            <th>Achternaam</th>
+                            <th>Beschrijving</th>
+                            <th>Prijs</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.users.map((users, index) => (
-                            <tr key={index} id={users.userid}>
-                                <td>{users.userid}</td>
-                                <td>{users.firstname}</td>
-                                <td>{users.lastname}</td>
+                        {this.state.courseTypes.map((courseType, index) => (
+                            <tr key={index} id={courseType.courseTypeId}>
+                                <td>{courseType.description}</td>
+                                <td>{courseType.price}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/userdetails/${users.userid}` }>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/coursetypedetails/${courseType.courseTypeId}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(users.userid, e)}><i className="material-icons">delete
+                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(courseType.courseTypeId, e)}><i className="material-icons">delete
                                     </i></a>
 
                                 </td>
@@ -109,7 +98,7 @@ class Users extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addUser" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addcoursetype" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>
@@ -119,5 +108,5 @@ class Users extends Component {
     }
 }
 
-export default Users;
+export default CourseTypes;
 

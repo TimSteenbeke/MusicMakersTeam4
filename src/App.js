@@ -8,7 +8,7 @@ import CourseDetails from './Components/CoursesDetails.js';
 import AddCourse from './Components/AddCourse.js'
 import Courses from './Components/Courses.js'
 import Agenda from './Components/Agenda.js'
-import {Route} from 'react-router'
+import {Route, Switch} from 'react-router'
 import './CSS/GlobalStylesheet.css';
 import Group from "./Components/Group";
 import AddGroup from "./Components/AddGroup"
@@ -19,6 +19,11 @@ import PlayMusic from './Components/PlayMusic.js';
 import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
 import auth from './Components/CheckTokenComponent';
+import AddCourseType from "./Components/AddCourseType";
+import CourseTypeDetails from "./Components/CourseTypeDetails";
+import CourseTypes from "./Components/CourseTypes";
+import AddUser from "./Components/AddUser";
+import UserDetails from "./Components/UserUpdate";
 import Switch from "react-router-dom/es/Switch";
 import Users from "./Components/Users";
 
@@ -30,23 +35,36 @@ class App extends Component {
             <Switch>
                 <Route name="home" exact path="/" component={Home}/>
                 <Route name="login" path="/login" component={Login}/>
-                <Route name="addInstrument" path="/addinstrument" component={AddInstrument}/>
-                <Route name="instrument" path="/instrumenten" component={Instrumenten}/>
-                <Route name="instrumentDetails" path="/instrumentdetails/:id" component={InstrumentDetails}/>
-                <Route name="instrumentDetails" path="/coursedetails/:id" component={CourseDetails}/>
-                <Route name="agenda" path="/agenda" component={Agenda}/>
-                <Route name="courses" path="/courses" component={Courses}/>
-                <Route name="addCourse" path="/addcourse" component={AddCourse}/>
-                <Route name="compositions" exact path="/compositions" component={Compositions}/>
-                <Route name="addComposition" path="/addcomposition" component={AddComposition}/>
-                <Route name="compositionDetails" path="/compositions/:id" component={CompositionUpdate}/>
+
+                <Route name="addInstrument" path="/addinstrument" component={auth(AddInstrument)}/>
+                <Route name="instrument" path="/instrumenten" component={auth(Instrumenten)}/>
+                <Route name="instrumentDetails" path="/instrumentdetails/:id" component={auth(InstrumentDetails)}/>
+
+                <Route name="courseDetails" path="/coursedetails/:id" component={auth(CourseDetails)}/>
+                <Route name="courses" path="/courses" component={auth(Courses)}/>
+                <Route name="addCourse" path="/addcourse" component={auth(AddCourse)}/>
+
+                <Route name="agenda" path="/agenda" component={auth(Agenda)}/>
+
+                <Route name="compositions" exact path="/compositions" component={auth(Compositions)}/>
+                <Route name="addComposition" path="/addcomposition" component={auth(AddComposition)}/>
+                <Route name="compositionDetails" path="/compositions/:id" component={auth(CompositionUpdate)}/>
+
                 <Route name="groups" path="/groups" component={Group}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="groupUpdate" path="/groupupdate/:id" component={GroupUpdate}/>
-                <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
-                <Route name="play" path="/play/:id" component={PlayMusic}/>
+
+                <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
+
+                <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
+                <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
+                <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
+
                 <Route name="users" path="/users" component={Users}/>
-                <Route path='*' exact={true} component={NotFound}/>
+                    <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
+                    <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
+
+                    <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );
     }

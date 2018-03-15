@@ -21,12 +21,15 @@ class Sidebar extends Component {
             <div>
                 <img className="circle logo" alt="guitar" src={logo}/>
                 <Menu>
+                    <Divider/>
                     <Link to="/">
                         <MenuItem style={styles.menuColor} primaryText="Home"/>
                     </Link>
+                    <Divider/>
                     <Link to="/agenda">
                         <MenuItem style={styles.menuColor} primaryText="Agenda"/>
                     </Link>
+                    <Divider/>
                     <Link to="/instrumenten">
                         <MenuItem style={styles.menuColor} primaryText="Instrumenten"/>
                     </Link>
@@ -42,9 +45,10 @@ class Sidebar extends Component {
                     <Link to="/compositions">
                         <MenuItem style={styles.menuColor} primaryText="Compositions"/>
                     </Link>
-                    <Link to="/playpartituur">
-                        <MenuItem style={styles.menuColor} primaryText="Play Partituur"/>
+                    <Link to="/courseTypes">
+                        <MenuItem style={styles.menuColor} primaryText="CourseTypes"/>
                     </Link>
+                    <Divider/>
                 </Menu>
             </div>
         );
