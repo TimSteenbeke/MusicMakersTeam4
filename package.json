@@ -16,6 +16,7 @@
     "material-ui-superselectfield": "^1.8.9",
     "material-ui-table-edit": "^3.0.3",
     "moment": "^2.21.0",
+    "moment-timezone": "^0.5.14",
     "prop-types": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
     "react": "^16.2.0",
     "react-agenda": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",

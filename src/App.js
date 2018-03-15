@@ -49,7 +49,7 @@ class App extends Component {
                 <Route name="addComposition" path="/addcomposition" component={auth(AddComposition)}/>
                 <Route name="compositionDetails" path="/compositions/:id" component={auth(CompositionUpdate)}/>
 
-                <Route name="groups" path="/groups" component={Group}/>
+                <Route name="groups" path="/groups" component={auth(Group)}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="groupUpdate" path="/groupupdate/:id" component={GroupUpdate}/>
 
@@ -59,7 +59,7 @@ class App extends Component {
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
 
-                <Route name="users" path="/users" component={Users}/>
+                <Route name="users" path="/users" component={auth(Users)}/>
                     <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
                     <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
 
