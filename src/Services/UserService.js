@@ -18,8 +18,8 @@ export function postUser(data) {
     })
 }
 
-export function getUserByUsernameFromBackend(username) {
-    return fetch(URL + "username/" + username, {
+export function getUserByUsernameFromBackend() {
+    return fetch(URL + "loggedin", {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " +  userToken.access_token,

@@ -33,6 +33,11 @@ export function fetchToken(username, password) {
 
 }
 
+export function logout() {
+    localStorage.removeItem('userToken');
+    return true;
+}
+
 export function checkToken(){
     if(localStorage.getItem('userToken')!= null){
         let jwt = JSON.parse(localStorage.getItem('userToken'));
