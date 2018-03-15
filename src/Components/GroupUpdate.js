@@ -24,7 +24,6 @@ export default class GroupUpdate extends Component {
             students: [],
             name: "",
             supervisorId: 1,
-            username: "",
             studentIds: [],
             groupimage: "../image/image.jpg"
         }
@@ -105,7 +104,6 @@ export default class GroupUpdate extends Component {
                 name: loadedGroup.name,
                 supervisorId: loadedGroup.supervisorid,
                 studentIds: loadedGroup.userids,
-                username: loadedGroup.supervisor.username,
                 groupimage: loadedGroup.groupimage
             }, console.log(loadedGroup)))
     }

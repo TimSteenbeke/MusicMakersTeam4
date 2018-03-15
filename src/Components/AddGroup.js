@@ -153,11 +153,10 @@ class AddGroup extends Component {
                             </div>
                             <div className="row">
                                 <div className="col s3 m3 l3">
-                                    <h5 className="truncate">{this.state.name}</h5>
+                                    <h5 className="truncate">Groepsnaam</h5>
                                 </div>
                                 <div className="col s9 m9 l9">
                                     <StyledTextField onChange={this.onChangeName}
-                                                     hint="Geef een naam in..."
                                                      label="Naam"/>
                                 </div>
                             </div>
@@ -171,8 +170,8 @@ class AddGroup extends Component {
                                         <Row>
                                             <Input s={12} multiple={false} type='select'
                                                    onChange={this.handleUserChange}
-                                                   label="Begeleiders" icon='face'>
-                                                <option key="" value="" disabled>Kies de begeleiders
+                                                   label="Begeleider" icon='face'>
+                                                <option key="" value="" disabled>Kies de begeleider
                                                 </option>
                                                 {this.state.allUsers.map((user, index) => (
                                                     <option key={user.userid}

@@ -28,7 +28,6 @@ export default class Group extends Component {
            return this.setState({users: group.users});
        }*/
 
-
     componentDidMount() {
         GroupService.getGroupsByUser().then(groups => {
             console.log(groups);
@@ -64,7 +63,7 @@ export default class Group extends Component {
                                 </td>*/}
                                 <td>{group.name}</td>
 
-                                {/* <td>{group.supervisor.username}</td>*/}
+                                <td>{group.supervisorname}</td>
                                 {/*       <td><Dropdown trigger={<RaisedButton onClick={this.setUsers(group)}>Klik!</RaisedButton>
                                 }>
                                     {this.state.users.map((user, index2) => (
@@ -89,7 +88,11 @@ export default class Group extends Component {
                         ))}
                         </tbody>
                     </table>
-
+                    <div className="fixed-action-btn">
+                        <Link to="/addgroup" className="btn-floating btn-large deep-orange darken-4">
+                            <i className="large material-icons">add</i>
+                        </Link>
+                    </div>
                 </section>
             </div>
         );
