@@ -97,7 +97,7 @@ class UserUpdate extends Component {
         let file = evt.target.files[0];
         reader.onload = function (upload) {
             self.setState({
-                afbeelding: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
+                userimage: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
             });
         };
         reader.readAsDataURL(file);
