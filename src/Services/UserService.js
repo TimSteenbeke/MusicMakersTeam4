@@ -1,7 +1,7 @@
 /**
  * Created by jariv on 7/03/2018.
  */
-const URL="http://localhost:8080/api/users/";
+const URL="http://musicmaker-api-team4.herokuapp.com/api/users/";
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function postUser(data) {
