@@ -4,14 +4,13 @@ import * as LoginService from '../../Services/LoginService';
 import * as GroupService from '../../Services/GroupService.js';
 import * as AgendaService from '../../Services/AgendaService.js';
 import swal from 'sweetalert2';
-import Redirect from "react-router-dom/es/Redirect";
 import {CardPanel} from 'react-materialize';
+import "./GroupsAndChat.css";
 
-class GroupsAndChat extends Component {
+export default class GroupsAndChat extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false,
             username: "",
             firstname: "",
             lastname: "",
@@ -31,14 +30,12 @@ class GroupsAndChat extends Component {
                 );
         });
         GroupService.getGroupsByUser().then(groups => {
-            console.log("groeps:"  + groups);
             this.setState({groups: groups});
         });
         this.getMyAgendaItems();
     }
 
     getMyAgendaItems = () => {
-        //HARDCODED ID (TEMPORARY)
         AgendaService.getMyAgenda().then(agendaItems => {
             this.mapAgendaItems(agendaItems)
         });
@@ -47,10 +44,6 @@ class GroupsAndChat extends Component {
     mapAgendaItems = (agendaItems) => {
         if (agendaItems !== undefined) {
             let AgendaItems= [];
-            //Eigenaar toewijzen (Agenda van: ....)
-            // this.setState({agendaOwner: agendaItems.agendaEigenaar})
-            console.log(agendaItems);
-
 
             //Over lessons loopen en info in AgendaItem steken
             //type en basic info
@@ -87,8 +80,6 @@ class GroupsAndChat extends Component {
     userLogout = () => {
         let response = LoginService.logout();
 
-        console.log("responseee:" + response);
-
         if(response){
             this.setState({redirect: true});
             swal({
@@ -102,12 +93,6 @@ class GroupsAndChat extends Component {
     };
 
     render() {
-        let redirecting = null;
-
-        if (this.state.redirect) {
-            redirecting = <Redirect to='/'/>
-        }
-
         return (
             <div>
             <div className="containerCss">
@@ -138,10 +123,7 @@ class GroupsAndChat extends Component {
                         </div>
                     </CardPanel>
             </div>
-                {redirecting}
             </div>
         );
     }
 }
-
-export default GroupsAndChat;

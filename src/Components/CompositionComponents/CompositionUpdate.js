@@ -9,7 +9,6 @@ import './CompositionUpdate.css';
 
 
 export default class CompositionUpdate extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

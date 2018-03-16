@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import * as GroupService from '../../Services/GroupService.js'
 import {black500} from 'material-ui/styles/colors';
-import * as LoginService from "../../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 import Header from "../GeneralComponents/Header";
 import * as UserService from "../../Services/UserService";
+import './MyGroupDetails.css';
 
 export default class MyGroupDetails extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -34,7 +32,6 @@ export default class MyGroupDetails extends Component {
             .then(students => {
                 this.setState({students: students.users}, console.log(students.users));
             });
-
     };
 
     componentDidMount() {
@@ -42,7 +39,6 @@ export default class MyGroupDetails extends Component {
         this.addStudents();
 
         const self = this;
-        console.log("newgroupid: " + self.state.groupid);
         GroupService.getGroupFromBackend(self.state.groupid)
             .then(console.log("----Groep met id " + self.state.groupid + "---- \n"))
             .then(loadedGroup => self.setState({
@@ -55,25 +51,11 @@ export default class MyGroupDetails extends Component {
             }));
     }
 
-    componentWillMount() {
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
     render() {
 
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
             <div className="Homepage">
-                {redirecter}
                 <Header name="Groepdetails"/>
-
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s12 m12 l12 center">

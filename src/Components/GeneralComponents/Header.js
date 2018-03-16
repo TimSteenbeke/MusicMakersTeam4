@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import * as LoginService from '../Services/LoginService';
-import Login from './Login';
+import * as LoginService from '../../Services/LoginService';
+import Login from '../Login';
+import './Header.css';
 
 export default class Header extends Component {
     constructor(props) {

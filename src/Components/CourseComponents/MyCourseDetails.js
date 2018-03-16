@@ -29,16 +29,16 @@ export default class MyCourseDetails extends Component {
                     students: course.students,
                     teachers: course.teachers
                 });
-                console.log(self.state.beschrijving);
-                console.log(course.users);
-                console.log(course);
+                console.log("beschrijving: "+self.state.beschrijving);
+                console.log("users: " + course.users);
+                console.log("course: " +course);
+                console.log("---- ---- ---- ----\n");
             }).catch((error) => {
             console.log(error);
         });
     }
 
     render() {
-
         return (
             <div className="Homepage">
                 <Header name="Course details"/>

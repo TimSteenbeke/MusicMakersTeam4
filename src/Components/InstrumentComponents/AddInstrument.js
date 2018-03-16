@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js'
-import Header from '../GeneralComponents/Header'
-import StyledTextField from '../GeneralComponents/StyledTextField'
+import * as InstrumentenService from '../../Services/InstrumentService.js';
+import Header from '../GeneralComponents/Header';
+import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
-import {Row, Input} from 'react-materialize'
-import swal from 'sweetalert2'
+import {Row, Input} from 'react-materialize';
+import swal from 'sweetalert2';
+import './AddInstrument.css';
 
-class AddInstrument extends Component {
-
+export default class AddInstrument extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,8 +20,6 @@ class AddInstrument extends Component {
             image: "..image/image.jpg",
             bestandType: "",
         };
-
-
     }
 
     handleClick = () => {
@@ -41,11 +39,6 @@ class AddInstrument extends Component {
                 uitvoering: this.state.typedVersion
             }
         ));
-        console.log("Image: " + this.state.image);
-        console.log("Value: " + this.state.value);
-        console.log("Name: " + this.state.typedName);
-        console.log("Type: " + this.state.typedType);
-        console.log("Version: " + this.state.typedVersion);
 
     };
 
@@ -65,22 +58,18 @@ class AddInstrument extends Component {
 
     onChangeType = (e) => {
         this.setState({typedType: e.target.value});
-        console.log("Type:" + e.target.value)
     };
 
     onChangeNaam = (e) => {
         this.setState({typedName: e.target.value});
-        console.log("Naam:" + e.target.value)
     };
 
     onChangeVersion = (e) => {
         this.setState({typedVersion:  e.target.value});
-        console.log("Version:" + e.target.value)
     };
 
     handleChange = (event, value) => {
         this.setState({value});
-        console.log(value)
     };
 
     handleChangeImage = (evt) => {
@@ -95,13 +84,12 @@ class AddInstrument extends Component {
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("Uploaded");
+            console.log("successfully Uploaded");
         }, 1000);
     };
 
     render() {
         return (
-
             <div className="Homepage">
                 <Header name="Add Instrument"/>
                 <section className="containerCss">
@@ -201,13 +189,8 @@ class AddInstrument extends Component {
                         </div>
                         <div className="col s0 m2 l2"/>
                     </div>
-
-
-                        
                 </section>
             </div>
         );
     }
 }
-
-export default AddInstrument;

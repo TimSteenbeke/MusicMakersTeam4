@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import logo from '../../images/logo.png'
 import * as LoginService from "../../Services/LoginService";
+import './Sidebar.css';
 
 const styles = {
     menuColor: {
@@ -12,7 +13,7 @@ const styles = {
     }
 };
 
-class Sidebar extends Component {
+export default class Sidebar extends Component {
 
     render() {
         return (
@@ -64,5 +65,3 @@ class Sidebar extends Component {
         );
     }
 }
-
-export default Sidebar;

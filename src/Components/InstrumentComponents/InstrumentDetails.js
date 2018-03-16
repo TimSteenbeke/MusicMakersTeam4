@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js'
-import Header from '../GeneralComponents/Header'
-import StyledTextField from '../GeneralComponents/StyledTextField'
+import * as InstrumentenService from '../../Services/InstrumentService.js';
+import Header from '../GeneralComponents/Header';
+import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
-import * as LoginService from '../../Services/LoginService';
+import './InstrumentDetails.css';
 
-class InstrumentDetails extends Component {
+export default class InstrumentDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,19 +34,9 @@ class InstrumentDetails extends Component {
                     uitvoering: instrument.uitvoering
 
                 });
-                console.log(self.state.naam);
-                console.log(self.state.instrumentsoortid);
             }).catch((error) => {
             console.log(error);
         });
-    }
-
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
     }
 
     handleUpdate = () => {
@@ -81,7 +71,7 @@ class InstrumentDetails extends Component {
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("Uploaded");
+            console.log("successfully Uploaded");
         }, 1000);
     };
 
@@ -157,5 +147,3 @@ class InstrumentDetails extends Component {
         );
     }
 }
-
-export default InstrumentDetails;

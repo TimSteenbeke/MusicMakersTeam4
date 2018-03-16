@@ -11,7 +11,6 @@ import './AddCourse.css';
 export default class AddCourse extends Component {
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
             beschrijving: "",
             teacherids: [],

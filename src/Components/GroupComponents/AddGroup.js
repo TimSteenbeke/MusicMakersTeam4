@@ -7,10 +7,9 @@ import {Input, Row} from "react-materialize";
 import Link from "react-router-dom/es/Link";
 import StyledTextField from "../GeneralComponents/StyledTextField";
 import * as GroupService from "../../Services/GroupService";
-import Redirect from "react-router-dom/es/Redirect";
+import './AddGroup.css';
 
-class AddGroup extends Component {
-
+export default class AddGroup extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,9 +21,6 @@ class AddGroup extends Component {
             image: "../image/image.jpg"
         };
     }
-
-
-
 
     addUsers = () => {
         UserService.getAll().then(console.log("----Students---- \n"))
@@ -43,9 +39,7 @@ class AddGroup extends Component {
 
     onChangeName = (e) => {
         this.setState({name: e.target.value});
-        console.log("name:" + e.target.value)
     };
-
 
     handleUserChange = (e) => {
         let options = e.target.options;
@@ -56,7 +50,6 @@ class AddGroup extends Component {
             }
         }
         this.setState({supervisorid: value});
-        console.log(this.state.supervisorid);
     };
 
     handleStudentChange = (e) => {
@@ -68,7 +61,6 @@ class AddGroup extends Component {
             }
         }
         this.setState({userids: value});
-        console.log(this.state.userids);
     };
 
     componentDidMount() {
@@ -100,10 +92,6 @@ class AddGroup extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        console.log("Name: " + this.state.name);
-        console.log("studentIds: " + this.state.userids);
-        console.log("userIds: " + this.state.supervisorid);
-
         GroupService.postGroup(JSON.stringify(
             {
                 name: this.state.name,
@@ -116,13 +104,7 @@ class AddGroup extends Component {
     };
 
     render() {
-
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (<div className="Homepage">
-                {redirecter}
                 <Header name={this.state.name}/>
                 <section className="containerCss">
                     <div className="col s0 m2 l2"/>
@@ -217,5 +199,3 @@ class AddGroup extends Component {
         );
     }
 }
-
-export default AddGroup;

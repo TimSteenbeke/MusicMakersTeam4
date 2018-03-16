@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js'
+import * as InstrumentenService from '../../Services/InstrumentService.js';
 import {Link} from 'react-router-dom';
-import Header from '../GeneralComponents/Header'
-import swal from 'sweetalert2'
+import Header from '../GeneralComponents/Header';
+import swal from 'sweetalert2';
+import './Instruments.css';
 
-class Instrumenten extends Component {
-
+export default class Instruments extends Component {
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
-            instrumenten: [],
+            Instruments: [],
             selectedIndex: 0,
         };
     }
@@ -48,27 +47,18 @@ class Instrumenten extends Component {
                 )
             }
         });
-
     };
 
     getInstrumenten() {
-        InstrumentenService.getInstrumentenFromBackend().then(instrumenten => {
-            this.setState({instrumenten: instrumenten});
+        InstrumentenService.getInstrumentenFromBackend().then(Instruments => {
+            this.setState({Instruments: Instruments});
         });
-        {{console.log(this.state.loading)}}
     }
-
-
-    /*componentDidUpdate() {
-        this.getInstrumenten();
-    }*/
 
 
     componentDidMount() {
         this.getInstrumenten();
-
     }
-
 
     render() {
 
@@ -76,7 +66,6 @@ class Instrumenten extends Component {
 
                 <div className="Homepage">
                     <Header name="Instrumenten"/>
-
                     <section className="containerCss">
                         <table className="highlight striped black-text bordered responsive-table centered">
                             <thead>
@@ -89,7 +78,7 @@ class Instrumenten extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.instrumenten.map((instrument, index) => (
+                            {this.state.Instruments.map((instrument, index) => (
                                 <tr key={index} id={instrument.instrumentId}>
                                     <td>{instrument.instrumentId}</td>
                                     <td>{instrument.naam}</td>
@@ -105,7 +94,6 @@ class Instrumenten extends Component {
                                            onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i
                                             className="material-icons">delete
                                         </i></a>
-
                                     </td>
                                 </tr>
                             ))}
@@ -121,6 +109,4 @@ class Instrumenten extends Component {
             );
     }
 }
-
-export default Instrumenten;
 

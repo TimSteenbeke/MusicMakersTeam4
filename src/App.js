@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Home from './Components/Home';
 import Login from './Components/Login.js';
 import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
-import Instrumenten from './Components/InstrumentComponents/Instrumenten.js';
+import Instrumenten from './Components/InstrumentComponents/Instruments.js';
 import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
 import CourseDetails from './Components/CourseComponents/CoursesDetails.js';
 import AddCourse from './Components/CourseComponents/AddCourse.js'

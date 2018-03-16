@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './IntroScreen.css';
 
 export default class IntroScreen extends Component {
     render(){

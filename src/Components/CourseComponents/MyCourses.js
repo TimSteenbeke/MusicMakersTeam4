@@ -8,7 +8,6 @@ import './MyCourses.css';
 export default class MyCourses extends Component {
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
             courses: [],
             selectedIndex: 0,

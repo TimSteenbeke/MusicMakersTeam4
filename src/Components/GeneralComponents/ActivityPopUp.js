@@ -16,8 +16,6 @@ export default class ActivityPopUp extends Component {
     }
 
     componentDidMount() {
-        //Call maken om te zien of persoon present of absent is voor die les
-        //State veranderen
         this.getStatus();
     }
 
@@ -52,7 +50,6 @@ export default class ActivityPopUp extends Component {
                 icon: 'notifications'
             });
         }
-        console.log(this.state.icon, this.state.aanwezigheidsstatus);
     };
 
     present = () => {

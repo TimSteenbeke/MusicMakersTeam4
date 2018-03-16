@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from './Header'
 import swal from 'sweetalert2'
 import Redirect from "react-router-dom/es/Redirect";
+import './NotFound.css';
 
 export default class NotFound extends Component {
 

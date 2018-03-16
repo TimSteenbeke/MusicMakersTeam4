@@ -25,8 +25,9 @@ export default class CoursesDetails extends Component {
                     courseId: this.props.match.params.id,
                     beschrijving: course.description,
                 });
-                console.log(self.state.beschrijving);
-                console.log(course.users);
+                console.log("beschrijving: " + self.state.beschrijving);
+                console.log("users: "+course.users);
+                console.log("---- ---- ---- ----\n");
             }).catch((error) => {
             console.log(error);
         });
@@ -46,15 +47,12 @@ export default class CoursesDetails extends Component {
                 beschrijving: self.state.beschrijving,
             }
         ));
-        console.log("coursebeschrijving: " + self.state.beschrijving);
-        console.log("prijs: " + self.state.prijs);
 
     };
 
 
     onChangeDescription = (e) => {
         this.setState({beschrijving: e.target.value});
-        console.log("beschrijving:" + e.target.value)
     };
 
     render() {

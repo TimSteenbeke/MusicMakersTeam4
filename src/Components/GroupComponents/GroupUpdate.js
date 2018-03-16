@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import * as GroupService from '../../Services/GroupService.js';
 import {black500} from 'material-ui/styles/colors';
 import swal from 'sweetalert2'
-import * as LoginService from "../../Services/LoginService";
 import Link from "react-router-dom/es/Link";
-import Redirect from "react-router-dom/es/Redirect";
 import Header from "../GeneralComponents/Header";
 import * as UserService from "../../Services/UserService";
 import {Input, Row} from "react-materialize";
 import StyledTextField from "../GeneralComponents/StyledTextField";
+import './GroupUpdate.css';
 
 export default class GroupUpdate extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -55,7 +53,6 @@ export default class GroupUpdate extends Component {
             }
         }
         this.setState({supervisorId: value});
-        console.log("newsupid: " + this.state.supervisorId);
     };
 
     handleStudentChange = (e) => {
@@ -67,7 +64,6 @@ export default class GroupUpdate extends Component {
             }
         }
         this.setState({studentIds: value});
-        console.log(this.state.studentIds);
     };
 
     handleChangeImage = (evt) => {
@@ -82,7 +78,7 @@ export default class GroupUpdate extends Component {
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("Uploaded");
+            console.log("successfully Uploaded");
         }, 1000);
     };
 
@@ -92,7 +88,6 @@ export default class GroupUpdate extends Component {
         this.addStudents();
 
         const self = this;
-        console.log("newgroupid: " + self.state.groupid);
         GroupService.getGroupFromBackend(self.state.groupid)
             .then(console.log("----Groep met id " + self.state.groupid + "---- \n"))
             .then(loadedGroup => self.setState({
@@ -101,15 +96,7 @@ export default class GroupUpdate extends Component {
                 supervisorId: loadedGroup.supervisorid,
                 studentIds: loadedGroup.userids,
                 groupimage: loadedGroup.groupimage
-            }, console.log(loadedGroup)))
-    }
-
-    componentWillMount() {
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
+            }, console.log("loadGroup: " + loadedGroup)))
     }
 
     handleUpdate = () => {
@@ -129,22 +116,11 @@ export default class GroupUpdate extends Component {
                 groupimage: self.state.groupimage
             }
         ));
-        console.log("groupId: " + self.state.groupid);
-        console.log("groepsnaam: " + self.state.name);
-        console.log("supervisorid: " + self.state.supervisorid);
-        console.log("supervisornaam: " + self.state.username);
     };
 
     render() {
-
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (<div className="Homepage">
-                {redirecter}
                 <Header name={this.state.name}/>
-
                 <section className="containerCss">
                     <div className="col s0 m2 l2"/>
                     <div className="col s12 m8 l8">

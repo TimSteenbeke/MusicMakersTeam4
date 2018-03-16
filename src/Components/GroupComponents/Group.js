@@ -3,6 +3,7 @@ import * as GroupService from '../../Services/GroupService.js';
 import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
 import {black500} from 'material-ui/styles/colors';
+import './Group.css';
 
 export default class Group extends Component {
     constructor(props) {
@@ -19,32 +20,16 @@ export default class Group extends Component {
         GroupService.deleteGroup(id);
     };
 
-
-    /*   setUsers(group) {
-           console.log(group);
-           return this.setState({users: group.users});
-       }*/
-
     componentDidMount() {
         GroupService.getAllGroupsFromBackend().then(groups => {
-            console.log(groups);
-            this.setState({groups: groups});
-        });
-    }
-
-    componentWillMount() {
-        GroupService.getAllGroupsFromBackend().then(groups => {
-            console.log(groups);
             this.setState({groups: groups});
         });
     }
 
     render() {
-
         return (
             <div className="Homepage">
                 <Header name="Groepen"/>
-
                 <section className="containerCss">
                     <table className="black-text bordered responsive-table centered">
                         <thead>
