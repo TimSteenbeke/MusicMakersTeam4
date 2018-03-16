@@ -1,7 +1,6 @@
-import {Component} from 'react';
+import React,{Component} from 'react';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import React from "react";
 import {TextField} from "material-ui";
 import {black500, deepOrangeA700, grey500} from "material-ui/styles/colors";
 const styles = {
@@ -29,22 +28,23 @@ const styles = {
     }
 };
 
+const serverUrl = 'http://localhost:8080/socket';
+
 export default class AngularComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            serverUrl: 'http://localhost:8080/socket',
             title: 'WebSockets chat',
             text: "",
             chatroom: 'poef',
-            messages: [],
+            messages: ["10:20:50 - Tim: Hello there bro","10:20:55 - Jos: jo test"],
             message: "Hello there",
             name: "UserX"
         };
         this.stompClient = null;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.initializeWebSocketConnection();
     }
 
@@ -53,10 +53,11 @@ export default class AngularComponent extends Component {
     }
 
     initializeWebSocketConnection() {
-        const ws = new SockJS(this.state.serverUrl);
+        const self = this;
+        const ws = new SockJS(serverUrl);
         this.stompClient = Stomp.over(ws);
-        // this.stompClient = Stomp.overWS('ws://localhost:8080');
-        var self = this;
+        console.log("initializeWebSocketConnection");
+        console.log(ws);
         self.stompClient.connect({},() => {
             self.stompClient.subscribe('/chat/' + self.state.chatroom, (message) => {
                 console.log("msg");
@@ -83,7 +84,6 @@ export default class AngularComponent extends Component {
         console.log(this.state.messages);
         return (
             <div>
-
                 <TextField
                     style={styles.width}
                     hintText="Type your message here..."
@@ -132,8 +132,8 @@ export default class AngularComponent extends Component {
                 <button onClick={(e) => this.ChangeRoom(e)}>Change room</button>
 
                 <div className="chat">
-                    {this.state.messages.map((msg) => {
-                            return (<p>{msg}</p>)
+                    {this.state.messages.map((msg,key) => {
+                            return (<p id={key}>{msg}</p>)
                         }
                     )}
                 </div>
