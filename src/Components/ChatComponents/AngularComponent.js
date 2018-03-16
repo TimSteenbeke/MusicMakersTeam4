@@ -133,7 +133,7 @@ export default class AngularComponent extends Component {
 
                 <div className="chat">
                     {this.state.messages.map((msg) => {
-                            return (<div>{msg}</div>)
+                            return (<p>{msg}</p>)
                         }
                     )}
                 </div>
