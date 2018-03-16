@@ -1,5 +1,5 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/groups/';
-//const URL = 'http://localhost:8080/api/';
+//const URL = 'http://localhost:8080/api/groups/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getAllGroupsFromBackend() {
@@ -50,12 +50,12 @@ export function getGroupFromBackend(groupId) {
         headers: {
             'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
-
         }
     })
         .then((response) => response.json()
         )
         .then((responseJson) => {
+        console.log("groep: " + responseJson);
             return responseJson;
         })
         .catch((err) => {

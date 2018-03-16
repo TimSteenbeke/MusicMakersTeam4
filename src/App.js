@@ -25,6 +25,10 @@ import CourseTypes from "./Components/CourseTypes";
 import AddUser from "./Components/AddUser";
 import UserDetails from "./Components/UserUpdate";
 import Users from "./Components/Users";
+import MyGroup from "./Components/MyGroups";
+import MyGroupDetails from "./Components/MyGroupDetails";
+import MyCourses from "./Components/MyCourses";
+import MyCourseDetails from "./Components/MyCourseDetails";
 
 class App extends Component {
 
@@ -52,6 +56,12 @@ class App extends Component {
                 <Route name="groups" path="/groups" component={auth(Group)}/>
                 <Route name="addGroup" path="/addgroup" component={AddGroup}/>
                 <Route name="groupUpdate" path="/groupupdate/:id" component={GroupUpdate}/>
+
+                <Route name="myGroups" path="/mygroups" component={auth(MyGroup)}/>
+                <Route name="myGroupDetails" path="/mygroupdetails/:id" component={auth(MyGroupDetails)}/>
+
+                <Route name="myCourses" path="/mycourses" component={auth(MyCourses)}/>
+                <Route name="myCourseDetails" path="/mycoursedetails/:id" component={auth(MyCourseDetails)}/>
 
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
 
