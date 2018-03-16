@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import {black500} from 'material-ui/styles/colors';
-import * as LoginService from "../../Services/LoginService";
 import Link from "react-router-dom/es/Link";
-import Redirect from "react-router-dom/es/Redirect";
 import Header from "../GeneralComponents/Header";
 import * as CourseService from "../../Services/CourseService";
 import './MyCourseDetails.css';

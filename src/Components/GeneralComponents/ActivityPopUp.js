@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {ReactAgenda, guid} from 'react-agenda';
 import * as LesService from '../../Services/LesService.js';
 import * as OptredenService from '../../Services/OptredenService.js';
 import swal from 'sweetalert2';
@@ -10,7 +9,7 @@ export default class ActivityPopUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            aanwezigheidsstatus: "Te beslissen",
+            presenceStatus: "Te beslissen",
             icon: 'notifications'
         };
     }
@@ -20,15 +19,15 @@ export default class ActivityPopUp extends Component {
     }
 
     getStatus = () => {
-        if (this.props.type == "Optreden") {
+        if (this.props.type === "Optreden") {
             OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setIcon(statusobject.status);
-                console.log(this.state.aanwezigheidsstatus);
+                console.log(this.state.presenceStatus);
             })
         } else {
             LesService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setIcon(statusobject.status);
-                console.log(this.state.aanwezigheidsstatus);
+                console.log(this.state.presenceStatus);
             })
         }
     };
@@ -38,12 +37,12 @@ export default class ActivityPopUp extends Component {
         if (status === "absent"){
             this.setState({
                 icon: 'not_interested',
-                aanwezigheidsstatus: "absent",
+                presenceStatus: "absent",
             });
         }else if(status === "present"){
             this.setState({
                 icon: 'check',
-                aanwezigheidsstatus: "present",
+                presenceStatus: "present",
             });
         }else{
             this.setState({
@@ -54,7 +53,7 @@ export default class ActivityPopUp extends Component {
 
     present = () => {
         let id = this.props.id;
-        if (this.props.type == "Optreden") {
+        if (this.props.type === "Optreden") {
             OptredenService.registerPresent(id);
 
         } else {
@@ -64,7 +63,7 @@ export default class ActivityPopUp extends Component {
 
     absent = () => {
         let id = this.props.id;
-        if (this.props.type == "Optreden") {
+        if (this.props.type === "Optreden") {
             OptredenService.registerAbsent(id);
         } else {
             LesService.registerAbsent(id);
@@ -115,11 +114,9 @@ export default class ActivityPopUp extends Component {
         return (
             <div>
                 {/*Popup*/}
-                <a onClick={this.setPresence} className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.aanwezigheidsstatus}
+                <a onClick={this.setPresence} className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.presenceStatus}
                 </a>
             </div>
         );
     }
 }
-
-export default ActivityPopUp;

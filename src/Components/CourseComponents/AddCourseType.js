@@ -4,7 +4,6 @@ import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import * as CourseTypeService from "../../Services/CourseTypeService";
-import {black500} from "material-ui/styles/colors";
 import './AddCourseType.css';
 
 export default class AddCourseType extends Component {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js';
+import * as InstrumentService from '../../Services/InstrumentService.js';
 import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
 import swal from 'sweetalert2';
@@ -35,7 +35,7 @@ export default class Instruments extends Component {
                     'Instrument has been deleted.',
                     'success'
                 );
-                InstrumentenService.deleteInstrument(id);
+                InstrumentService.deleteInstrument(id);
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -50,7 +50,7 @@ export default class Instruments extends Component {
     };
 
     getInstrumenten() {
-        InstrumentenService.getInstrumentenFromBackend().then(Instruments => {
+        InstrumentService.getInstrumentenFromBackend().then(Instruments => {
             this.setState({Instruments: Instruments});
         });
     }

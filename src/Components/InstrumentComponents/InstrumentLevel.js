@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js';
+import * as InstrumentService from '../../Services/InstrumentService.js';
 import Header from '../GeneralComponents/Header';
 import './InstrumentLevel.css';
 
@@ -13,7 +13,7 @@ export default class InstrumentLevel extends Component {
     }
 
     getLevels() {
-        InstrumentenService.getLevelsFromBackend().then(levels => {
+        InstrumentService.getLevelsFromBackend().then(levels => {
             this.setState({levels: levels});
         });
     }

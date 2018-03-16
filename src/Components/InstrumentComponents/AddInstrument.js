@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js';
+import * as InstrumentService from '../../Services/InstrumentService.js';
 import Header from '../GeneralComponents/Header';
 import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
@@ -30,7 +30,7 @@ export default class AddInstrument extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        InstrumentenService.postInstrument(JSON.stringify(
+        InstrumentService.postInstrument(JSON.stringify(
             {
                 afbeelding: this.state.image,
                 instrumentsoortid: this.state.value,
@@ -49,7 +49,7 @@ export default class AddInstrument extends Component {
     };
 
     componentDidMount() {
-        InstrumentenService.getInstrumentSoortenFromBackend()
+        InstrumentService.getInstrumentSoortenFromBackend()
             .then(console.log("----soorten---- \n"))
             .then(soorten => {
                 this.setState({soorten: soorten}, console.log(soorten));

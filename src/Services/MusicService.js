@@ -1,8 +1,7 @@
 import * as fetchService from "./FetchService";
 
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-
-//const URL = 'http://localhost:8080/api/';
+/*const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+//const URL = 'http://localhost:8080/api/';*/
 
 export function getPartituurById(partituurId) {
     return fetchService.fetchWithHeader("compositions/" + partituurId, "GET", {}, {});

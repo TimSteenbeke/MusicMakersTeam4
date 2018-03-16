@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
 import './Partituur.css';
 
-class Partituur extends Component {
+export default class Partituur extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,5 +69,3 @@ class Partituur extends Component {
         );
     }
 }
-
-export default Partituur;

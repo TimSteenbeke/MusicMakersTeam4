@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as InstrumentenService from '../../Services/InstrumentService.js';
+import * as InstrumentService from '../../Services/InstrumentService.js';
 import Header from '../GeneralComponents/Header';
 import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
@@ -22,7 +22,7 @@ export default class InstrumentDetails extends Component {
 
     componentDidMount() {
         let self = this;
-        InstrumentenService.getInstrumentFromBackend(self.state.instrumentId)
+        InstrumentService.getInstrumentFromBackend(self.state.instrumentId)
             .then(console.log("----Instrument met id " + self.state.instrumentId + "---- \n"))
             .then(instrument => {
                 self.setState({
@@ -48,7 +48,7 @@ export default class InstrumentDetails extends Component {
             timer: 1500
         });
         let self = this;
-        InstrumentenService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
+        InstrumentService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
             {
                 afbeelding: self.state.afbeelding,
                 instrumentsoortid: self.state.instrumentsoortid,

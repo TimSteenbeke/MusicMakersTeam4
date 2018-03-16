@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as GroupService from '../../Services/GroupService.js';
 import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
-import {black500} from 'material-ui/styles/colors';
 import './Group.css';
 
 export default class Group extends Component {

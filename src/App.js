@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Home from './Components/Home';
-import Login from './Components/Login.js';
 import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
 import Instrumenten from './Components/InstrumentComponents/Instruments.js';
 import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
@@ -30,7 +29,7 @@ import MyGroupDetails from "./Components/GroupComponents/MyGroupDetails";
 import MyCourses from "./Components/CourseComponents/MyCourses";
 import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
 
-class App extends Component {
+export default class App extends Component {
 
 
     render() {
@@ -76,5 +75,3 @@ class App extends Component {
         );
     }
 }
-
-export default App;

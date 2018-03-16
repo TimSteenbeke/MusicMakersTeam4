@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import * as GroupService from '../../Services/GroupService.js'
-import {black500} from 'material-ui/styles/colors';
+import * as GroupService from '../../Services/GroupService.js';
 import Header from "../GeneralComponents/Header";
 import * as UserService from "../../Services/UserService";
 import './MyGroupDetails.css';

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as CourseService from '../../Services/CourseService';
 import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
-import {black500} from 'material-ui/styles/colors';
 import './MyCourses.css';
 
 export default class MyCourses extends Component {

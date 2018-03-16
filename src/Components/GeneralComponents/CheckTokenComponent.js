@@ -7,12 +7,9 @@ import Home from '../Home.js';
 
 export default function(WrapperComponent) {
     class CheckTokenComponent extends Component {
-        constructor(props) {
-            super(props);
-        }
 
         checkAuthentication(params) {
-            const { history } = params;
+            const {history} = params;
             if(!LoginService.checkToken()){
                 console.log("redirected");
                 return false;

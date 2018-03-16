@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import * as CompositionService from '../../Services/CompositionService.js';
-import * as LoginService from "../../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';

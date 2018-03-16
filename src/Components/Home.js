@@ -17,7 +17,6 @@ export default class Home extends Component{
     handleChange = (event, index, value) => this.setState({value});
 
     render(){
-        {
             if (LoginService.checkToken()){
             return (
                 <div className="Homepage">
@@ -67,7 +66,5 @@ export default class Home extends Component{
                     </div>
                 )
             }
-
-        }
     }
 }

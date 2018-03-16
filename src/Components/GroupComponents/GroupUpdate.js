@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import * as GroupService from '../../Services/GroupService.js';
-import {black500} from 'material-ui/styles/colors';
 import swal from 'sweetalert2'
 import Link from "react-router-dom/es/Link";
 import Header from "../GeneralComponents/Header";
