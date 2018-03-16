@@ -28,6 +28,7 @@ import MyGroup from "./Components/GroupComponents/MyGroups";
 import MyGroupDetails from "./Components/GroupComponents/MyGroupDetails";
 import MyCourses from "./Components/CourseComponents/MyCourses";
 import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
+import ChatComponent from "./Components/ChatComponent";
 
 export default class App extends Component {
 
@@ -67,10 +68,12 @@ export default class App extends Component {
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
 
                 <Route name="users" path="/users" component={auth(Users)}/>
-                    <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
-                    <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
+                <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
+                <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
 
-                    <Route path='*' exact={true} component={NotFound}/>
+                <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
+
+                <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );
     }

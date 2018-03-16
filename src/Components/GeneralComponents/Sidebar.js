@@ -20,7 +20,7 @@ export default class Sidebar extends Component {
             <div>
                 <img className="circle logo" alt="guitar" src={logo}/>
                 <Menu>
-                    { LoginService.checkToken() ? <section>
+                    {LoginService.checkToken() ? <section>
 
                         <Divider/>
                         <Link to="/">
@@ -29,6 +29,10 @@ export default class Sidebar extends Component {
                         <Divider/>
                         <Link to="/agenda">
                             <MenuItem style={styles.menuColor} primaryText="Agenda"/>
+                        </Link>
+                        <Divider/>
+                        <Link to="/chat">
+                            <MenuItem style={styles.menuColor} primaryText="Chat"/>
                         </Link>
                         <Divider/>
                         <Link to="/instrumenten">
