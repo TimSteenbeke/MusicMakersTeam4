@@ -28,6 +28,8 @@ const styles = {
     }
 };
 
+
+
 const serverUrl = 'http://localhost:8080/socket';
 
 export default class AngularComponent extends Component {
@@ -55,7 +57,7 @@ export default class AngularComponent extends Component {
     initializeWebSocketConnection() {
         const self = this;
         const ws = new SockJS(serverUrl);
-        this.stompClient = Stomp.over(ws);
+        self.stompClient = Stomp.over(ws);
         console.log("initializeWebSocketConnection");
         console.log(ws);
         self.stompClient.connect({},() => {
@@ -133,7 +135,7 @@ export default class AngularComponent extends Component {
 
                 <div className="chat">
                     {this.state.messages.map((msg,key) => {
-                            return (<p id={key}>{msg}</p>)
+                            return (<div id={key}>{msg}</div>)
                         }
                     )}
                 </div>
