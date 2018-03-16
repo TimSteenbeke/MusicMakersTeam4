@@ -21,6 +21,7 @@ class AddCourse extends Component {
             studentids: [],
             teachers: [],
             students: [],
+            courseTypes: []
         };
 
     }
@@ -117,9 +118,18 @@ class AddCourse extends Component {
                                                     <h5 className="truncate">Beschrijving</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeDescription}
-                                                                     hint="Geef een beschrijving in..."
-                                                                     label="Beschrijving"/>
+                                                    <Row>
+                                                        <Input s={12} multiple={false} type='select'
+                                                               onChange={this.handleTeacherChange}
+                                                               label="Leerkrachten" icon='face' defaultValue='1'>
+                                                            <option key="" value="" disabled>Kies lesType
+                                                            </option>
+                                                            {this.state.courseTypes.map((courseType, index) => (
+                                                                <option key={courseType.userid}
+                                                                        value={courseType.userid}>{courseType.firstname} {courseType.lastname}</option>
+                                                            ))}
+                                                        </Input>
+                                                    </Row>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,7 +165,7 @@ class AddCourse extends Component {
                                                         <Input s={12} multiple={true} type='select' label="Studenten" onChange={this.handleStudentChange}
                                                                icon='child_care' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies de studenten</option>
-                                                            {this.state.users.map((student, index) => (
+                                                            {this.state.students.map((student, index) => (
                                                                 <option key={student.userid}
                                                                         value={student.userid}>{student.firstname} {student.lastname}</option>
                                                             ))}

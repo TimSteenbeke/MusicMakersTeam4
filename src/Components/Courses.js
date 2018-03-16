@@ -23,6 +23,7 @@ class Courses extends Component {
 
     componentDidMount() {
         this.getCourses();
+
     }
 
     getCourses() {
@@ -67,12 +68,6 @@ class Courses extends Component {
     };
 
 
-    componentWillUpdate() {
-        CourseService.getCoursesFromBackend().then(courses => {
-            this.setState({courses: courses});
-        });
-    }
-
 
     render() {
 
@@ -94,8 +89,8 @@ class Courses extends Component {
                         {this.state.courses.map((course, index) => (
                             <tr key={course.courseId} id={course.courseId}>
                                 <td>{course.courseId}</td>
-                                <td>{course.beschrijving}</td>
-                                <td>{course.prijs}</td>
+                                <td>{course.courseType.description}</td>
+                                <td>{course.courseType.price}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
                                           to={`/coursedetails/${course.courseId}` }>
