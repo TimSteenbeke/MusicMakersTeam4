@@ -18,6 +18,7 @@ import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
 import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
+import InstrumentLevels from "./Components/InstrumentLevel";
 import auth from './Components/CheckTokenComponent';
 import AddCourseType from "./Components/AddCourseType";
 import CourseTypeDetails from "./Components/CourseTypeDetails";

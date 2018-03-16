@@ -16,9 +16,7 @@ class Instrumenten extends Component {
         this.state = {
             instrumenten: [],
             selectedIndex: 0,
-            loading: true
         };
-        console.log(this.state.loading);
     }
 
     handleDelete = (id, e) => {
@@ -71,12 +69,7 @@ class Instrumenten extends Component {
 
 
     componentDidMount() {
-        console.log(this.state.loading);
         this.getInstrumenten();
-        this.setState({
-            loading: false
-        });
-        console.log(this.state.loading);
 
     }
 
