@@ -26,6 +26,10 @@ class Sidebar extends Component {
                         <MenuItem style={styles.menuColor} primaryText="Home"/>
                     </Link>
                     <Divider/>
+                    <Link to="/chat">
+                        <MenuItem style={styles.menuColor} primaryText="Chat"/>
+                    </Link>
+                    <Divider/>
                     <Link to="/agenda">
                         <MenuItem style={styles.menuColor} primaryText="Agenda"/>
                     </Link>
