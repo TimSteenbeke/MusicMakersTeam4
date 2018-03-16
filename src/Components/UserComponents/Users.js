@@ -60,7 +60,7 @@ class Users extends Component {
     }
 
 
-    componentWillUpdate() {
+    componentWillReceiveProps() {
         this.getUsers();
     }
 
@@ -74,8 +74,7 @@ class Users extends Component {
 
         return (
             <div className="Homepage">
-                <Header name="Instrumenten" />
-
+                <Header name="Users" />
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>

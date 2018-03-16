@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
-import '../../CSS/Partituur.css';
+import './Partituur.css';
 
 class Partituur extends Component {
     constructor(props) {

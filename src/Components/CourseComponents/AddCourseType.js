@@ -5,10 +5,9 @@ import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import * as CourseTypeService from "../../Services/CourseTypeService";
 import {black500} from "material-ui/styles/colors";
+import './AddCourseType.css';
 
-
-class AddCourseType extends Component {
-
+export default class AddCourseType extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,8 +16,6 @@ class AddCourseType extends Component {
             typedDescription: "",
             typedVersion: "",
         };
-
-
     }
 
     handleClick = () => {
@@ -110,5 +107,3 @@ class AddCourseType extends Component {
         );
     }
 }
-
-export default AddCourseType;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../CSS/Login.css';
+import './Login.css';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';

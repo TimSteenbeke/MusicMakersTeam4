@@ -4,16 +4,15 @@ import Header from '../GeneralComponents/Header';
 import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
+import './CoursesDetails.css';
 
-class CoursesDetails extends Component {
-
+export default class CoursesDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             courseId: this.props.match.params.id,
             beschrijving: "string",
-        }
-
+        };
     }
 
 
@@ -96,5 +95,3 @@ class CoursesDetails extends Component {
         );
     }
 }
-
-export default CoursesDetails;

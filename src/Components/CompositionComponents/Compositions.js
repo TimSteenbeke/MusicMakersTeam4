@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import * as CompositionService from '../../Services/CompositionService.js'
-import swal from 'sweetalert2'
-import Header from '../GeneralComponents/Header'
+import * as CompositionService from '../../Services/CompositionService.js';
+import swal from 'sweetalert2';
+import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
+import './Compositions.css';
 
 
-class Compositions extends Component {
+export default class Compositions extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +16,6 @@ class Compositions extends Component {
             openDetails: false,
             openUpdate: false,
             search: ""
-
         };
     }
 
@@ -187,7 +187,7 @@ class Compositions extends Component {
                                             </a></div>
                                         <div className="col s6 m6 l6">
                                             <Link className="waves-effect white-text deep-orange darken-4 btn"
-                                                  to={`/play/${composition.muziekstukId}` }>
+                                                  to={`/play/${composition.muziekstukId}`}>
                                                 <i className="material-icons">play_arrow</i>
                                             </Link>
                                         </div>
@@ -195,7 +195,7 @@ class Compositions extends Component {
                                     <div className="row">
                                         <div className="col s6 m6 l6">
                                             <Link className="waves-effect white-text deep-orange darken-4 btn"
-                                                  to={`/compositions/${composition.muziekstukId}` }>
+                                                  to={`/compositions/${composition.muziekstukId}`}>
                                                 <i className="material-icons">edit</i>
                                             </Link></div>
                                         <div className="col s6 m6 l6">
@@ -222,5 +222,3 @@ class Compositions extends Component {
         );
     }
 }
-
-export default Compositions;

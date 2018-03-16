@@ -1,23 +1,26 @@
-const URL="https://musicmaker-api-team4.herokuapp.com/api/users/";
-//const URL="http://localhost:8080/api/users/";
+import * as fetchService from "./FetchService";
+
+/*const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+//const URL = 'http://localhost:8080/api/';*/
 
 export function postUser(data) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    fetch(URL, {
-
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
-        },
-        body: data
-    })
+    fetchService.fetchWithHeader("users", "POST", data, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        fetch(URL + "users/", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken.token_type + " " +  userToken.access_token
+            },
+            body: data
+        })*/
 }
 
 export function getUserByUsernameFromBackend() {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + "loggedin", {
+    return fetchService.fetchWithHeader("users/loggedin", "GET", {}, {naam: "User niet gevonden"});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + "users/loggedin", {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " +  userToken.access_token,
@@ -34,12 +37,13 @@ export function getUserByUsernameFromBackend() {
         })
         .catch((err) => {
             return {naam: "User niet gevonden"};
-        });
+        });*/
 }
 
 export function getUserFromBackend(userId) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + userId, {
+    return fetchService.fetchWithHeader("users/" + userId, "GET", {}, {naam: "User niet gevonden"});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + "users/" + userId, {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " +  userToken.access_token,
@@ -54,15 +58,16 @@ export function getUserFromBackend(userId) {
         .catch((err) => {
             const instrument = {naam: "User niet gevonden"};
             return instrument;
-        });
+        });*/
 }
 
 export function UpdateUser(id, data) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetchService.fetchWithHeader("users/user/" + id, "PUT", data, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log("useridddd: "+ id);
     console.log(data);
 
-    return fetch(URL + 'user/' + id, {
+    return fetch(URL + "users/user/" + id, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
@@ -71,53 +76,56 @@ export function UpdateUser(id, data) {
             'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
-    });
+    });*/
 }
 
 export function getTeachers() {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + "teacherAdmin", {
-        mode: 'cors',
-        headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            return responseJson;
+    return fetchService.fetchWithHeader("users/teacherAdmin", "GET", {}, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + "users/teacherAdmin", {
+            mode: 'cors',
+            headers: {
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
+                'Content-Type': 'application/json'
+            }
         })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
+            .then((response) =>
+                response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });*/
 }
 
 export function getStudents() {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + "students", {
-        mode: 'cors',
-        headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            console.log(responseJson);
-            return responseJson;
+    return fetchService.fetchWithHeader("users/students", "GET", {}, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + "users/students", {
+            mode: 'cors',
+            headers: {
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
+                'Content-Type': 'application/json'
+            }
         })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
+            .then((response) =>
+                response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                return responseJson;
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });*/
 }
 
 export function getAll() {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL, {
+    return fetchService.fetchWithHeader("users/", "GET", {}, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL +"users/", {
         mode: 'cors',
         headers: {
             'Authorization':  userToken.token_type + " " +  userToken.access_token,
@@ -132,38 +140,40 @@ export function getAll() {
         .catch((err) => {
             console.log("geen response");
             console.log(err);
-        });
+        });*/
 }
 
 export function getUserRoles() {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + "roles", {
-        mode: 'cors',
-        headers: {
-            'Authorization':  userToken.token_type + " " +  userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            return responseJson;
+    return fetchService.fetchWithHeader("users/roles", "GET", {}, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + "users/roles", {
+            mode: 'cors',
+            headers: {
+                'Authorization':  userToken.token_type + " " +  userToken.access_token,
+                'Content-Type': 'application/json'
+            }
         })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
+            .then((response) =>
+                response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });*/
 }
 
 export function deleteUser(userId) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + userId, {
-        method: 'DELETE',
-        mode: 'CORS',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
-        }
-    });
+    return fetchService.fetchWithHeader("users/" + userId, "DELETE", {}, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + "users/" + userId, {
+            method: 'DELETE',
+            mode: 'CORS',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken.token_type + " " +  userToken.access_token
+            }
+        });*/
 }

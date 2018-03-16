@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import * as CompositionService from '../../Services/CompositionService.js'
+import * as CompositionService from '../../Services/CompositionService.js';
 import * as LoginService from "../../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
-import Header from '../GeneralComponents/Header'
+import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
+import './CompositionUpdate.css';
 
 
-
-class CompositionUpdate extends Component {
+export default class CompositionUpdate extends Component {
 
     constructor(props) {
         super(props);
@@ -44,7 +44,7 @@ class CompositionUpdate extends Component {
             }, console.log(composition)))
     }
 
-    componentWillMount(){
+    componentWillMount() {
         let response = false;
         response = LoginService.checkToken();
         console.log("response:");
@@ -131,18 +131,20 @@ class CompositionUpdate extends Component {
                                     <span className="card-title white-text">{this.state.titel}</span>
                                 </div>
                                 <div className="card-content">
-                                        <div className="row">
-                                            <div className="col s12 m12 l12">
-                                                <label>Titel</label>
-                                                <input type="text" value={this.state.titel} label="Titel"  onChange={this.setTitle} placeholder="Geef een titel in.."/>
-                                            </div>
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <label>Titel</label>
+                                            <input type="text" value={this.state.titel} label="Titel"
+                                                   onChange={this.setTitle} placeholder="Geef een titel in.."/>
                                         </div>
+                                    </div>
                                     <div className="divider"></div>
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Artiest</label>
-                                                <input type="text" value={this.state.artist}  onChange={this.setArtist} placeholder="Geef een artiest in.."/>
+                                                <input type="text" value={this.state.artist} onChange={this.setArtist}
+                                                       placeholder="Geef een artiest in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -151,7 +153,8 @@ class CompositionUpdate extends Component {
                                         <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Taal</label>
-                                                <input type="text" value={this.state.language} onChange={this.setLanguage} placeholder="Geef een taal in.."/>
+                                                <input type="text" value={this.state.language}
+                                                       onChange={this.setLanguage} placeholder="Geef een taal in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +163,8 @@ class CompositionUpdate extends Component {
                                         <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Genre</label>
-                                                <input type="text" value={this.state.genre}  onChange={this.setGenre} placeholder="Geef een genre in.."/>
+                                                <input type="text" value={this.state.genre} onChange={this.setGenre}
+                                                       placeholder="Geef een genre in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +173,8 @@ class CompositionUpdate extends Component {
                                         <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Onderwerp</label>
-                                                <input type="text" value={this.state.subject}  onChange={this.setSubject} placeholder="Geef een onderwerp in.."/>
+                                                <input type="text" value={this.state.subject} onChange={this.setSubject}
+                                                       placeholder="Geef een onderwerp in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +183,8 @@ class CompositionUpdate extends Component {
                                         <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Instrumenttype</label>
-                                                <input type="text" value={this.state.instrumentType}  onChange={this.setType} placeholder="Geef een type in.."/>
+                                                <input type="text" value={this.state.instrumentType}
+                                                       onChange={this.setType} placeholder="Geef een type in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +193,8 @@ class CompositionUpdate extends Component {
                                         <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Link</label>
-                                                <input type="text" value={this.state.link}  onChange={this.setLink} placeholder="Geef een link in.."/>
+                                                <input type="text" value={this.state.link} onChange={this.setLink}
+                                                       placeholder="Geef een link in.."/>
                                             </div>
                                         </div>
                                     </div>
@@ -208,5 +215,3 @@ class CompositionUpdate extends Component {
         );
     }
 }
-
-export default CompositionUpdate;

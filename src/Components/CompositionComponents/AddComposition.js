@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import Header from '../GeneralComponents/Header'
+import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
+import './AddComposition.css';
 
-class AddMuziekstuk extends Component {
-
+export default class AddComposition extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -143,5 +143,3 @@ class AddMuziekstuk extends Component {
         );
     }
 }
-
-export default AddMuziekstuk;

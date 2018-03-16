@@ -3,7 +3,6 @@ import * as UserService from '../../Services/UserService';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
-import * as LoginService from '../../Services/LoginService';
 
 class UserUpdate extends Component {
 
@@ -50,19 +49,11 @@ class UserUpdate extends Component {
         });
     }
 
-    componentWillMount(){
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
     handleUpdate = () => {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Instrument Edited',
+            title: 'User Edited',
             showConfirmButton: false,
             timer: 1500
         });
@@ -160,7 +151,7 @@ class UserUpdate extends Component {
                                     <div className="col s12 m6 offset-m3 l6 offset-l3 center" style={{marginBottom:20}}>
                                         <label>Foto</label>
                                         <div className="card-image">
-                                            <img src={"data:image;base64," + this.state.userimage} alt="Instrument" style={{width: 100, height: 100}}/>
+                                            <img src={"data:image;base64," + this.state.userimage} alt="User" style={{width: 100, height: 100}}/>
                                             <div className="file-field input-field">
                                                 <div
                                                     className="btn-floating waves-effect waves-light deep-orange darken-4 pulse">

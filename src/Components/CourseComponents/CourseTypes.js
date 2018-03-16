@@ -3,10 +3,9 @@ import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
 import swal from 'sweetalert2';
 import * as CourseTypeService from "../../Services/CourseTypeService";
+import './CourseTypes.css';
 
-
-class CourseTypes extends Component {
-
+export default class CourseTypes extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,18 +56,16 @@ class CourseTypes extends Component {
         });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getCourseTypes();
     }
-
-
 
 
     render() {
 
         return (
             <div className="Homepage">
-                <Header name="CourseTypes" />
+                <Header name="CourseTypes"/>
 
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
@@ -84,11 +81,14 @@ class CourseTypes extends Component {
                                 <td>{courseType.description}</td>
                                 <td>{courseType.price}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/coursetypedetails/${courseType.courseTypeId}` }>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                          to={`/coursetypedetails/${courseType.courseTypeId}`}>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn" onClick={(e) => this.handleDelete(courseType.courseTypeId, e)}><i className="material-icons">delete
+                                    <a className="waves-effect white-text deep-orange darken-4 btn"
+                                       onClick={(e) => this.handleDelete(courseType.courseTypeId, e)}><i
+                                        className="material-icons">delete
                                     </i></a>
 
                                 </td>
@@ -106,6 +106,3 @@ class CourseTypes extends Component {
         );
     }
 }
-
-export default CourseTypes;
-
