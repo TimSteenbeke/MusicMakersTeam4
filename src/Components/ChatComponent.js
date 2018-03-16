@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {TextField} from "material-ui";
-import {deepOrangeA700, grey500} from "material-ui/styles/colors";
+import {black500,deepOrangeA700, grey500} from "material-ui/styles/colors";
 const styles = {
     width: {
         width: "90%",
