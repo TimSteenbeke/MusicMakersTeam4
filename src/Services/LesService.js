@@ -1,18 +1,12 @@
 /**
  * Created by Ben on 28/02/2018.
  */
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'http://localhost:8080/api/';
-let userToken = {
-    token_type: "",
-    access_token: ""
-};
-if (localStorage.getItem('userToken') != null) {
-    userToken = JSON.parse(localStorage.getItem('userToken'));
-}
+// const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const URL = 'http://localhost:8080/api/';
 
 export function registerAbsent(lessonid) {
-    return fetch(herokuURL + 'lesson/absent/' +lessonid,
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + 'lesson/absent/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
@@ -29,7 +23,8 @@ export function registerAbsent(lessonid) {
 }
 
 export function registerPresent(lessonid) {
-    return fetch(herokuURL + 'lesson/present/' +lessonid,
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + 'lesson/present/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
@@ -45,7 +40,8 @@ export function registerPresent(lessonid) {
 }
 
 export function getAttendanceStatus(lessonid) {
-    return fetch(herokuURL + 'lesson/attendancestatus/' +lessonid,
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + 'lesson/attendancestatus/' +lessonid,
         {
             method: 'GET',
             mode: 'cors',

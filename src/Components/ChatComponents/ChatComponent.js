@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import Sockette from 'sockette';
-import Header from "../Header";
+import React,{Component} from 'react';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 import {TextField} from "material-ui";
 import {black500, deepOrangeA700, grey500} from "material-ui/styles/colors";
 const styles = {
@@ -29,90 +29,120 @@ const styles = {
 };
 
 
+
+const serverUrl = 'http://localhost:8080/socket';
+
 export default class ChatComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: "",
-            data: [],
-            wsURL: 'ws://localhost:7070/chat'
-            // wsURL: 'ws://' + location.hostname + ':' + location.port + '/chat'
+            title: 'WebSockets chat',
+            text: "",
+            chatroom: 'poef',
+            messages: ["10:20:50 - Tim: Hello there bro","10:20:55 - Jos: jo test"],
+            message: "Hello there, Users",
+            name: "UserX"
         };
-        let self = this;
-        this.socket = new Sockette('ws://localhost:8080/handler', {
-            timeout: 5e3,
-            maxAttempts: 10,
-            onopen: e => {
-                console.log('Connected!', e);
-            },
-            onmessage: e => {
-                console.log('Received:', e);
-                let msg = JSON.parse(e.data).userMessage;
-                self.setState({
-                    data: [...self.state.data, msg]
-                });
-            },
-            onreconnect: e => {
-                console.log('Reconnecting...', e);
-            },
-            onmaximum: e => console.log('Stop Attempting!', e),
-            onclose: e => {
-                console.log('Closed!', e);
-                alert("Chat connection closed")
-            },
-            onerror: e => {
-                console.log('Error:', e);
-                alert("Chat connection Error");
-            }
-        });
-
+        this.stompClient = null;
     }
 
     componentDidMount() {
+        this.initializeWebSocketConnection();
     }
 
-
-    setMessage(event, typedMessage) {
-        this.setState({message: typedMessage});
-        console.log("setMessage: state typed=> ", this.state.message);
+    ChangeRoom() {
+        this.initializeWebSocketConnection();
     }
 
-    sendAndClear() {
-        if (this.state.message !== "") {
-            this.socket.send(this.state.message);
-            this.setState({message:""});
-        }
+    initializeWebSocketConnection() {
+        const self = this;
+        const ws = new SockJS(serverUrl);
+        self.stompClient = Stomp.over(ws);
+        console.log("initializeWebSocketConnection");
+        console.log(ws);
+        self.stompClient.connect({},() => {
+            self.stompClient.subscribe('/chat/' + self.state.chatroom, (message) => {
+                console.log("msg");
+                console.log(message);
+                if (message.body) {
+                    self.setState({messages: [...self.state.messages, message.body]});
+                    console.log(message.body);
+                }
+            });
+        });
+        console.log("init is done");
+    }
+
+    sendMessage() {
+        let name = this.state.name;
+        let content = this.state.message;
+        let message = name + ': ' + content;
+        this.stompClient.send('/chat/' + this.state.chatroom, {}, message);
+        this.setState({message: ''});
     }
 
     render() {
-        console.log(this.state.data);
+        console.log("chat content");
+        console.log(this.state.messages);
         return (
-            <div className="Homepage">
-                <Header name="Chat"/>
-                <section className="containerCss">
-                    <div className="flexChat">
-                        {this.state.data.map((msg) => {
-                                return (<div dangerouslySetInnerHTML={{__html: msg}}></div>)
-                            }
-                        )}
-                    </div>
-                    <div id="chatControls">
-                        <TextField
-                            style={styles.width}
-                            hintText="Type your message here..."
-                            floatingLabelText="Message"
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                            onChange={(event, typedMessage) => this.setMessage(event, typedMessage)}
-                            value={this.state.message}
-                        />
-                        <button id="send" onClick={() => this.sendAndClear()}>Send</button>
-                    </div>
-                </section>
+            <div>
+                <TextField
+                    style={styles.width}
+                    hintText="Type your message here..."
+                    floatingLabelText="Message"
+                    inputStyle={styles.inputstyle}
+                    hintStyle={styles.floatingLabelFocusStyle}
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    underlineFocusStyle={styles.underlineStyle}
+                    onChange={(event, typedMessage) => {
+                        this.setState({message: typedMessage});
+                    }}
+                    value={this.state.message}
+                />
+                <button onClick={(e) => this.sendMessage(e)}>send</button>
+                <label>Naam:</label>
+                <TextField
+                    style={styles.width}
+                    hintText="Type your name here..."
+                    floatingLabelText="Name"
+                    inputStyle={styles.inputstyle}
+                    hintStyle={styles.floatingLabelFocusStyle}
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    underlineFocusStyle={styles.underlineStyle}
+                    onChange={(event, typedName) => {
+                        this.setState({name: typedName});
+                    }}
+                    value={this.state.name}
+                />
+                <label>Chatroom:</label>
+                <TextField
+                    style={styles.width}
+                    hintText="Type your chatroom here..."
+                    floatingLabelText="Name"
+                    inputStyle={styles.inputstyle}
+                    hintStyle={styles.floatingLabelFocusStyle}
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    underlineFocusStyle={styles.underlineStyle}
+                    onChange={(event, typedRoom) => {
+                        this.setState({chatroom: typedRoom});
+                    }}
+                    value={this.state.chatroom}
+                />
+                <button onClick={(e) => this.ChangeRoom(e)}>Change room</button>
+
+                <div className="chat">
+                    {this.state.messages.map((msg,key) => {
+                            return (<div id={key}>{msg}</div>)
+                        }
+                    )}
+                </div>
+
             </div>
-        );
+        )
+            ;
     }
+
 }

@@ -1,16 +1,10 @@
 
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-// const URL = 'http://localhost:8080/api/';
-let userToken = {
-    token_type: "",
-    access_token: ""
-};
-if (localStorage.getItem('userToken') != null) {
-    userToken = JSON.parse(localStorage.getItem('userToken'));
-}
+// const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+const URL = 'http://localhost:8080/api/';
 
 
 export function getInstrumentenFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "instruments", {
         mode: 'cors',
         headers: {
@@ -30,6 +24,7 @@ export function getInstrumentenFromBackend() {
 }
 
 export function getInstrumentFromBackend(instrumentNr) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
 
     return fetch(URL + "instruments/" + instrumentNr, {
         mode: 'cors',
@@ -50,6 +45,7 @@ export function getInstrumentFromBackend(instrumentNr) {
 }
 
 export function getInstrumentSoortenFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 
     return fetch(URL + "instrumentsoorten", {
@@ -71,6 +67,7 @@ export function getInstrumentSoortenFromBackend() {
 }
 
 export function postInstrument(data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
 
     fetch(URL + 'instruments', {
  
@@ -85,6 +82,7 @@ export function postInstrument(data) {
 }
 
 export function deleteInstrument(instrumentId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
 
     return fetch(URL + 'instruments/' + instrumentId, {
         method: 'DELETE',
@@ -98,6 +96,7 @@ export function deleteInstrument(instrumentId) {
 }
 
 export function UpdateInstrument(instrumentId, data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(data);
 
     return fetch(URL + 'instruments/instrument/' + instrumentId, {

@@ -51,27 +51,5 @@ export function checkToken(){
     //localStorage.removeItem('userToken');
     return false;
 }
-//Fix Ben
-/*export function fetchLogin() {
-    return fetch('http://localhost:8080/oauth/token?grant_type=password&username=tim&password=tim', {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE=',
-            'Content-Type': 'application/json'
-        },
-        mode: "cors",
-
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            console.log(responseJson);
-            return responseJson;
-        })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
-}*/
 
 

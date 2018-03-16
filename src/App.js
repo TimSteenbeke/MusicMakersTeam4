@@ -20,12 +20,9 @@ import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
 import ChatComponent from "./Components/ChatComponents/ChatComponent";
 import auth from './Components/CheckTokenComponent';
-import SocketJsComponent from "./Components/ChatComponents/SocketJsComponent";
 import AddCourseType from "./Components/AddCourseType";
 import CourseTypeDetails from "./Components/CourseTypeDetails";
 import CourseTypes from "./Components/CourseTypes";
-
-import AngularComponent from "./Components/ChatComponents/AngularComponent";
 import AddUser from "./Components/AddUser";
 import UserDetails from "./Components/UserUpdate";
 import Users from "./Components/Users";
@@ -63,9 +60,7 @@ class App extends Component {
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
 
-                {/*<Route name="chat" path="/chat" component={auth(ChatComponent)}/>*/}
-                {/*<Route name="chat" path="/chat" component={SocketJsComponent}/>*/}
-                <Route name="chat" path="/chat" component={AngularComponent}/>
+                <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
 
 
                 <Route name="users" path="/users" component={auth(Users)}/>
