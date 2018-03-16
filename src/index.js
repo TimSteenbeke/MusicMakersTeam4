@@ -9,6 +9,8 @@ import {BrowserRouter,HashRouter} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 // import PlayPartituur from "./Components/PlayMusic";
+import * as LoginService from './Services/LoginService';
+import IntroScreen from './Components/IntroScreen'
 
 
 const Application = () => (
@@ -19,10 +21,10 @@ const Application = () => (
                     </section>
                     <section className="application">
                         <App/>
-                    </section >
-                    <section className="groups">
-                        <GroupsAndChat/>
                     </section>
+                    { LoginService.checkToken() ? <section className="groups">
+                        <GroupsAndChat/>
+                    </section> : <IntroScreen/> }
                 </section>
     </MuiThemeProvider>
 );

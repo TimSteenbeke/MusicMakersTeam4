@@ -33,6 +33,9 @@ class Sidebar extends Component {
                     <Link to="/instrumenten">
                         <MenuItem style={styles.menuColor} primaryText="Instrumenten"/>
                     </Link>
+                    <Link to="/groups">
+                        <MenuItem style={styles.menuColor} primaryText="Groepen"/>
+                    </Link>
                     <Link to="/users">
                         <MenuItem style={styles.menuColor} primaryText="Users"/>
                     </Link>
@@ -41,6 +44,16 @@ class Sidebar extends Component {
                     </Link>
                     <Link to="/compositions">
                         <MenuItem style={styles.menuColor} primaryText="Compositions"/>
+                    </Link>
+                    <Link to="/courseTypes">
+                        <MenuItem style={styles.menuColor} primaryText="CourseTypes"/>
+                    </Link>
+                    <Divider/>
+                    <Link to="/mygroups">
+                        <MenuItem style={styles.menuColor} primaryText="Mijn groepen"/>
+                    </Link>
+                    <Link to="/mycourses">
+                        <MenuItem style={styles.menuColor} primaryText="Mijn Vakken"/>
                     </Link>
                     <Divider/>
                 </Menu>

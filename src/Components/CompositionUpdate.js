@@ -193,7 +193,7 @@ class CompositionUpdate extends Component {
                                     </div>
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/muziekstukken" onClick={this.handleUpdate}
+                                    <Link to="/compositions" onClick={this.handleUpdate}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
                                         className="material-icons">done</i>
                                     </Link>

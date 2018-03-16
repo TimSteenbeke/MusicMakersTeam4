@@ -1,42 +1,18 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-// const URL = 'http://localhost:8080/api/';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/groups/';
+//const URL = 'http://localhost:8080/api/groups/';
 let userToken = JSON.parse(localStorage.getItem('userToken'));
 
-export function getGroupsFromBackend(userId) {
-    return fetch(URL + "groups/" + userId, {
-        mode: 'cors',
-        headers: {
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
-            return responseJson;
-        })
-        .catch((err) => {
-
-            console.log("geen response");
-            console.log(err);
-        });
-}
-
 export function getAllGroupsFromBackend() {
-    return fetch(URL + "groups/", {
+    return fetch(URL + "allgroups", {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -47,20 +23,17 @@ export function getAllGroupsFromBackend() {
 }
 
 
-//in de toekomst is dit de methode om alle data van 1 groep op te vragen, voorlopig doet bovenstaande methode hetzelfde maar moet nog aangepast worden eens Users in orde zijn
-export function loadDataIntoEdit(groupId) {
-    return fetch(URL + "groups/" + groupId, {
+export function getGroupsByUser() {
+    return fetch(URL, {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log('hallo');
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -68,4 +41,64 @@ export function loadDataIntoEdit(groupId) {
             console.log("geen response");
             console.log(err);
         });
+}
+
+
+export function getGroupFromBackend(groupId) {
+    return fetch(URL + groupId, {
+        mode: 'cors',
+        headers: {
+            'Authorization': userToken.token_type + " " + userToken.access_token,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => response.json()
+        )
+        .then((responseJson) => {
+        console.log("groep: " + responseJson);
+            return responseJson;
+        })
+        .catch((err) => {
+            const group = {naam: "groep niet gevonden"};
+            return group;
+        });
+}
+
+export function postGroup(data) {
+    fetch(URL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " + userToken.access_token
+        },
+        body: data
+    });
+}
+
+export function deleteGroup(groupId) {
+    return fetch(URL + groupId, {
+        method: 'DELETE',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " + userToken.access_token
+        }
+    });
+}
+
+export function updateGroup(groupId, data) {
+    console.log("id: " + groupId);
+    console.log(data);
+    return fetch(URL + 'group/' + groupId, {
+        method: 'PUT',
+        mode: 'CORS',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': userToken.token_type + " " + userToken.access_token
+        },
+        body: data
+    });
 }

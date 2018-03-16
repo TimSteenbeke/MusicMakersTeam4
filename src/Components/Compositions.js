@@ -17,7 +17,7 @@ class Compositions extends Component {
             selected: [],
             openDetails: false,
             openUpdate: false,
-            search: "empty"
+            search: ""
 
         };
     }
@@ -63,11 +63,19 @@ class Compositions extends Component {
         });
     }
 
-    componentWillUpdate(){
-        CompositionService.getCompositionsFromBackend().then(compositions => {
-            this.setState({compositions: compositions});
-        });
-    }
+    /*componentWillUpdate(){
+        console.log("upddatte: "+ this.state.search);
+
+        if (this.state.search === "" || this.state.search === null) {
+            CompositionService.getCompositionsFromBackend().then(compositions => {
+                this.setState({compositions: compositions});
+            });
+        } else {
+            CompositionService.filterCompositions(this.state.search).then(compositions => {
+                this.setState({compositions: compositions});
+            });
+        }
+    }*/
 
     filterCompositions = (e) => {
         const self = this;
@@ -90,7 +98,11 @@ class Compositions extends Component {
     setSearch = event => {
         this.setState({compositions: []});
         let value = event.target.value;
-        console.log(value);
+
+        this.setState({search: value});
+
+        console.log("updddd: " + value);
+
         if (value === "" || value === null) {
             CompositionService.getCompositionsFromBackend().then(compositions => {
                 this.setState({compositions: compositions});
@@ -168,7 +180,7 @@ class Compositions extends Component {
                                 <td>{composition.genre}</td>
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
-                                <td>{composition.fileFormat != null ? composition.fileFormat : "No file"}</td>
+                                <td>{composition.fileFormat !== null ? composition.fileFormat : "No file"}</td>
                                 <td>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
@@ -197,8 +209,6 @@ class Compositions extends Component {
                                             </a>
                                         </div>
                                     </div>
-
-
                                 </td>
                             </tr>
                         ))}

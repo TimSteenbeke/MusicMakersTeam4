@@ -63,9 +63,9 @@ class Instrumenten extends Component {
     }
 
 
-    componentDidUpdate() {
+    /*componentDidUpdate() {
         this.getInstrumenten();
-    }
+    }*/
 
 
     componentDidMount() {
@@ -75,7 +75,7 @@ class Instrumenten extends Component {
 
 
     render() {
-        
+
             return (
 
                 <div className="Homepage">

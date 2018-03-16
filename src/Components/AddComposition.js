@@ -3,50 +3,10 @@
  */
 
 import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import axios from 'axios';
 import Header from './Header'
-import StyledTextField from './StyledTextField'
 import {Link} from 'react-router-dom';
-import {Row, Input} from 'react-materialize'
 import swal from 'sweetalert2'
-
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 2px 5px #616161",
-        margin: 12,
-    },
-    errorStyle: {
-        color: deepOrangeA700,
-
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: black500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    },
-    exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-    },
-};
 
 class AddMuziekstuk extends Component {
 
@@ -55,16 +15,10 @@ class AddMuziekstuk extends Component {
         this.state = {
             formdata: new FormData(),
             value: 1,
-            open: false,
-            typedTitel: "",
-            typedArtiest: "",
-            typedLang: "",
-            typedGenre: "",
-            typedSubject: "",
-            typedInstrumenttype: "",
-            typedLink: "",
             bestandType: "",
             bestand: "",
+            fields: {},
+            errors: {}
         };
     }
 
@@ -79,52 +33,19 @@ class AddMuziekstuk extends Component {
         this.state.formdata.append("compresource",JSON.stringify(
             {
                 content: this.state.bestand,
-                titel: this.state.typedTitel,
-                artist: this.state.typedArtiest,
-                language: this.state.typedLang,
-                genre: this.state.typedGenre,
-                subject: this.state.typedSubject,
-                instrumentType: this.state.typedInstrumenttype,
-                link: this.state.typedLink,
+                titel: this.state.fields["titel"],
+                artist: this.state.fields["artiest"],
+                language: this.state.fields["taal"],
+                genre: this.state.fields["genre"],
+                subject: this.state.fields["onderwerp"],
+                instrumentType: this.state.fields["type"],
+                link: this.state.fields["link"],
                 fileFormat: this.state.bestandType
             }));
 
         axios.post('http://musicmaker-api-team4.herokuapp.com/api/compositions/', this.state.formdata, {
             "Content-Type": "multipart/form-data"
         });
-    };
-
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
-    };
-
-    onChangeTitel = (e) => {
-        this.setState({typedTitel: e.target.value});
-    };
-
-    onChangeArtiest = (e) => {
-        this.setState({typedArtiest: e.target.value});
-    };
-
-    onChangeLanguage = (e) => {
-        this.setState({typedLang: e.target.value});
-    };
-
-    onChangeGenre = (e) => {
-        this.setState({typedGenre: e.target.value});
-    };
-    onChangeSubject = (e) => {
-        this.setState({typedSubject: e.target.value});
-    };
-
-    onChangeInstrType = (e) => {
-        this.setState({typedInstrumenttype: e.target.value});
-    };
-
-    onChangeLink = (e) => {
-        this.setState({typedLink: e.target.value});
     };
 
     handleChangeImage = (evt) => {
@@ -141,133 +62,87 @@ class AddMuziekstuk extends Component {
         this.state.formdata.append("files", evt.target.files[0]);
     };
 
+
+    compositionSubmit(e){
+        e.preventDefault();
+        console.log("Form submitted");
+        this.handleClick();
+        this.props.history.push('/compositions')
+    }
+
+    handleChange(field, e){
+        let fields = this.state.fields;
+        fields[field] = e.target.value;
+        console.log(field + " - " + fields[field]);
+        this.setState({fields});
+    }
+
     render() {
 
         return (
-
-            <div className="Homepage">
+            <div className="row col s12 m12 l12">
                 <Header name="Muziekstuk toevoegen"/>
-                <section className="containerCss">
-                    <div className="row">
-                        <div className="col s12 m8 offset-m2 l8 offset-l2">
-                            <div className="card hoverable">
-                                <div className="card-content">
-                                    <form className="addmuziekstuk" action="/" method="POST" onSubmit={(e) => {
-                                        e.preventDefault();
-                                        this.handleClick();
-                                    } }>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Titel</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <Row>
-                                                        <StyledTextField onChange={this.onChangeTitel} placeholder="Geef een titel in..." label="Titel"/>
-                                                    </Row>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Artiest</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeArtiest} placeholder="Geef een artiest in..." label="Artiest"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Taal</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeLanguage} placeholder="Geef een taal in..." label="Taal"/><br />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Genre</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeGenre} placeholder="Geef een genre in..." label="Genre"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Onderwep</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeSubject} placeholder="Geef een onderwerp in..." label="Onderwerp"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Instrumenttype</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeInstrType} placeholder="Geef een type in..." label="Instrumenttype"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Link</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeLink} placeholder="Geef een link in..." label="Link"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="divider"></div>
-                                        <div className="section">
-                                            <RaisedButton
-                                                label="Selecteer een bestand"
-                                                labelPosition="before"
-                                                containerElement="label"
-                                            >
-                                                <input type="file"
-                                                       style={styles.exampleImageInput}
-                                                       name="file"
-                                                       className="upload-file"
-                                                       id="file"
-                                                       onChange={this.handleChangeImage}
-                                                       encType="multipart/form-data"
-                                                />
-                                            </RaisedButton>
+                <div className="section">
+                    <div className="card hoverable z-depth-3" style={{marginRight: 50,marginLeft:50}}>
+                        <form name="compositionForm" className="compositionForm" onSubmit= {this.compositionSubmit.bind(this)}>
 
-                                            <label>{this.state.bestandType}</label>
-                                        </div>
-
-                                    </form>
-
+                        <div className="card-content">
+                            <div className="row">
+                                <div className="col s12 m12  l12 center">
+                                    <h2>Muziekstuk toevoegen</h2>
                                 </div>
-                                <div className="card-action">
-                                    <Link to="/muziekstukken" onClick={this.handleClick}
-                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
-                                        <i
-                                            className="material-icons">done</i>
-                                    </Link>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Titel</label>
+                                    <input ref="titel" className="center" required onChange={this.handleChange.bind(this, "titel")} placeholder="Geef een titel in..." label="Titel"/>
                                 </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Artiest</label>
+                                    <input ref="artiest" className="center" required onChange={this.handleChange.bind(this, "artiest")} placeholder="Geef een artiest in..." label="Artiest"/>
+                                </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Taal</label>
+                                    <input ref="taal" className="center" required onChange={this.handleChange.bind(this, "taal")} placeholder="Geef een taal in..." label="Taal"/>
+                                </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Genre</label>
+                                    <input ref="genre" className="center" required onChange={this.handleChange.bind(this, "genre")} placeholder="Geef een genre in..." label="Genre"/>
+                                </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Onderwerp</label>
+                                    <input ref="onderwerp" className="center" required onChange={this.handleChange.bind(this, "onderwerp")} placeholder="Geef een onderwerp in..." label="Onderwerp"/>
+                                </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Instrumenttype</label>
+                                    <input ref="type" className="center" required onChange={this.handleChange.bind(this, "type")} placeholder="Geef een type in..." label="Type"/>
+                                </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Link</label>
+                                    <input ref="link" className="center" onChange={this.handleChange.bind(this, "link")} placeholder="Geef een link in..." label="Link"/>
+                                </div>
+                                <div className="col s12 m6 offset-m3 l6 offset-l3 center">
+                                    <label>Bestand</label>
+                                    <div className="file-field input-field">
+                                        <div className="btn-floating waves-effect waves-light deep-orange darken-4 pulse">
+                                            <i className="material-icons">attach_file</i>
+                                            <input name="file"
+                                                   className="upload-file"
+                                                   id="file"
+                                                   onChange={this.handleChangeImage}
+                                                   encType="multipart/form-data" type="file"/>
+                                        </div>
+                                    </div>
+                                    <label>{this.state.bestandType}</label>
+                                </div>
+
                             </div>
                         </div>
+                        <div className="card-action center">
+                            <input style={{marginRight: 20,width: 150}} type="submit" value="Opslaan" className="btn waves-effect waves-light deep-orange darken-4 pulse"/>
+                            <Link style={{width: 150}} to="/compositions" className="btn waves-effect waves-light deep-orange darken-4 pulse">Terug</Link>
+                        </div>
+                        </form>
                     </div>
-                </section>
+                </div>
             </div>
         );
     }

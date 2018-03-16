@@ -1,9 +1,13 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-//const URL = 'http://localhost:8080/api/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
 
-export function getCoursesFromBackend() {
-    return fetch(URL + "courses", {
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'http://localhost:8080/api/';
+
+
+
+export function getCourseTypesFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+
+    return fetch(URL + "courseTypes", {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " +  userToken.access_token,
@@ -16,13 +20,14 @@ export function getCoursesFromBackend() {
             return responseJson;
         })
         .catch((err) => {
-            console.log("no courses found");
+            console.log("geen response");
             console.log(err);
         });
 }
 
-export function getCourseFromBackend(courseNr) {
-    return fetch(URL + "courses/" + courseNr, {
+export function getCourseTypeFromBackend(courseTypeNr) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + "courseTypes/" + courseTypeNr, {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " +  userToken.access_token,
@@ -32,17 +37,19 @@ export function getCourseFromBackend(courseNr) {
         .then((response) => response.json()
         )
         .then((responseJson) => {
+            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
-            const course = {beschrijving: "course niet gevonden"};
-            return course;
+            const courseType = {naam: "instrument niet gevonden"};
+            return courseType;
         });
 }
 
-export function postCourse(data) {
-    console.log(data);
-    fetch(URL + 'courses/', {
+export function postCourseType(data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    fetch(URL + 'courseTypes', {
+
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -53,9 +60,9 @@ export function postCourse(data) {
     })
 }
 
-export function deleteCourse(courseId) {
-    console.log(courseId);
-    return fetch(URL + 'courses/' + courseId, {
+export function deleteCourseType(courseTypeId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + 'courseTypes/' + courseTypeId, {
         method: 'DELETE',
         mode: 'CORS',
         headers: {
@@ -66,15 +73,16 @@ export function deleteCourse(courseId) {
     });
 }
 
-export function updateCourse(courseId, data) {
+export function UpdateCourseType(courseTypeId, data) {
     console.log(data);
-    return fetch(URL + 'courses/' + courseId, {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + 'courseTypes/' + courseTypeId, {
         method: 'PUT',
         mode: 'CORS',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " +  userToken.access_token
         },
         body: data
     });

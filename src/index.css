@@ -27,13 +27,22 @@ html, body
 }
 
 .groups{
+    width:  25%;
+    background-color: #242728;
+    position: relative;
+    padding-top: 4%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.introscreen{
     width:  15%;
     background-color: #242728;
     position: relative;
     padding-top: 4%;
     padding-left: 20px;
     padding-right: 20px;
-
+    color: white;
 }
 
 

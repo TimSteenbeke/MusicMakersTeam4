@@ -71,9 +71,7 @@ class Agenda extends Component {
             .then(users => {
                 this.setState({selectableUsers: users.users}, console.log(users.users));
             });
-
     };
-
 
     getMyAgendaItems = () => {
         //HARDCODED ID (TEMPORARY)
@@ -84,8 +82,6 @@ class Agenda extends Component {
 
     mapAgendaItems = (agendaItems) => {
         if (agendaItems != undefined) {
-
-
             let AgendaItems= [];
             //Eigenaar toewijzen (Agenda van: ....)
             // this.setState({agendaOwner: agendaItems.agendaEigenaar})
@@ -124,7 +120,6 @@ class Agenda extends Component {
 
             this.setState({items: AgendaItems});
         }
-
     };
 
 
