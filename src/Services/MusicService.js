@@ -1,13 +1,8 @@
-import Compositions from "../Components/Compositions";
-
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 //const URL = 'http://localhost:8080/api/';
 
-
-let userToken = JSON.parse(localStorage.getItem('userToken'));
-
 export function getPartituurById(partituurId) {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "compositions/" + partituurId, {
         mode: 'cors',
         headers: {

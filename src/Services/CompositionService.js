@@ -1,9 +1,8 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 //const URL = 'http://localhost:8080/api/';
 
-let userToken = JSON.parse(localStorage.getItem('userToken'));
-
 export function getCompositionsFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "compositions", {
         mode: 'cors',
         headers: {
@@ -23,6 +22,7 @@ export function getCompositionsFromBackend() {
 }
 
 export function filterCompositions(search){
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "compositions/filter/" + search, {
         mode: 'cors',
         headers: {
@@ -42,6 +42,7 @@ export function filterCompositions(search){
 }
 
 export function getCompositionFromBackend(compositionId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "compositions/" + compositionId, {
         mode: 'cors',
         headers: {
@@ -61,6 +62,7 @@ export function getCompositionFromBackend(compositionId) {
 }
 
 export function postMuziekstuk(data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(data);
     fetch(URL + 'compositions/', {
         mode: 'no-cors',
@@ -74,6 +76,7 @@ export function postMuziekstuk(data) {
 }
 
 export function deleteComposition(compositionId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + 'compositions/' + compositionId, {
         method: 'DELETE',
         mode: 'CORS',
@@ -86,6 +89,7 @@ export function deleteComposition(compositionId) {
 }
 
 export function UpdateComposition(compositionId, data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log("id: " + compositionId);
     console.log(data);
     return fetch(URL + 'compositions/composition/' + compositionId, {

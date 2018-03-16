@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { ReactAgenda , guid ,ReactAgendaCtrl, Modal } from 'react-agenda';
-import * as AgendaService from '../Services/AgendaService'
-import ActivityPopUp from './ActivityPopUp.js';
-import Header from './Header';
-import {Row, Input} from 'react-materialize'
-import * as UserService from '../Services/UserService.js'
+import * as AgendaService from '../Services/AgendaService';
+import ActivityPopUp from './GeneralComponents/ActivityPopUp.js';
+import Header from './GeneralComponents/Header';
+import {Row, Input} from 'react-materialize';
+import * as UserService from '../Services/UserService.js';
 
 require('moment/locale/nl.js');
 

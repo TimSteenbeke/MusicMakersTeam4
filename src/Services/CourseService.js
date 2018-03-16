@@ -1,8 +1,8 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 //const URL = 'http://localhost:8080/api/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
 
 export function getCoursesFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "courses", {
         mode: 'cors',
         headers: {
@@ -22,6 +22,7 @@ export function getCoursesFromBackend() {
 }
 
 export function getCourseFromBackend(courseNr) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "courses/" + courseNr, {
         mode: 'cors',
         headers: {
@@ -41,6 +42,7 @@ export function getCourseFromBackend(courseNr) {
 }
 
 export function postCourse(data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(data);
     fetch(URL + 'courses/', {
         method: 'POST',
@@ -54,6 +56,7 @@ export function postCourse(data) {
 }
 
 export function deleteCourse(courseId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(courseId);
     return fetch(URL + 'courses/' + courseId, {
         method: 'DELETE',
@@ -67,6 +70,7 @@ export function deleteCourse(courseId) {
 }
 
 export function updateCourse(courseId, data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(data);
     return fetch(URL + 'courses/' + courseId, {
         method: 'PUT',

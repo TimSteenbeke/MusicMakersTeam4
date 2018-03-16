@@ -1,12 +1,6 @@
-/**
- * Created by TimS on 15/02/2018.
- */
-
 import guitar from '../images/guitar.jpg';
 import React, {Component} from 'react';
-import Header from './Header';
-import Divider from 'material-ui/Divider';
-import {Card,CardTitle} from 'react-materialize';
+import Header from './GeneralComponents/Header';
 
 
 export default class Home extends Component{

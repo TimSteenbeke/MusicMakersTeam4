@@ -1,13 +1,8 @@
-/**
- * Created by jariv on 7/03/2018.
- */
 const URL="https://musicmaker-api-team4.herokuapp.com/api/users/";
 //const URL="http://localhost:8080/api/users/";
 
-let userToken = JSON.parse(localStorage.getItem('userToken'));
-
 export function postUser(data) {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     fetch(URL, {
 
         method: 'POST',
@@ -21,6 +16,7 @@ export function postUser(data) {
 }
 
 export function getUserByUsernameFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "loggedin", {
         mode: 'cors',
         headers: {
@@ -42,7 +38,7 @@ export function getUserByUsernameFromBackend() {
 }
 
 export function getUserFromBackend(userId) {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + userId, {
         mode: 'cors',
         headers: {
@@ -62,6 +58,7 @@ export function getUserFromBackend(userId) {
 }
 
 export function UpdateUser(id, data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log("useridddd: "+ id);
     console.log(data);
 
@@ -78,7 +75,7 @@ export function UpdateUser(id, data) {
 }
 
 export function getTeachers() {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "teacherAdmin", {
         mode: 'cors',
         headers: {
@@ -98,7 +95,7 @@ export function getTeachers() {
 }
 
 export function getStudents() {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "students", {
         mode: 'cors',
         headers: {
@@ -119,7 +116,7 @@ export function getStudents() {
 }
 
 export function getAll() {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL, {
         mode: 'cors',
         headers: {
@@ -139,7 +136,7 @@ export function getAll() {
 }
 
 export function getUserRoles() {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "roles", {
         mode: 'cors',
         headers: {
@@ -159,7 +156,7 @@ export function getUserRoles() {
 }
 
 export function deleteUser(userId) {
-
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + userId, {
         method: 'DELETE',
         mode: 'CORS',
