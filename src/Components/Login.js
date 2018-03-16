@@ -5,10 +5,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
+import swal from 'sweetalert2';
 
 const styles = {
     width: {
         width: "90%",
+        textAlign: "center"
     },
     loginButton: {
         boxShadow: "2px 10px 5px #616161",
@@ -51,7 +53,14 @@ class Login extends Component {
         console.log(response);
         response.then((value) => {
             if (value) {
-                this.setState({redirect: true})
+                this.setState({redirect: true});
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Ingelogd!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else {
                 this.setState({failLogin: true})
             }
@@ -87,14 +96,7 @@ class Login extends Component {
         return (
 
             <div className="App">
-                <section className="container">
-                    <div className="left-half" style={{flex: this.state.flex}}>
-                    </div>
-                    <div className="right-half">
-                    </div>
-                </section>
-
-                <div className="loginForm">
+<div className="loginForm">
                     <h1 className="header">Music Makers</h1>
                     <div className="border">
                         <TextField

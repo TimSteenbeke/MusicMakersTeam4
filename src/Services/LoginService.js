@@ -14,7 +14,7 @@ export function fetchToken(username, password) {
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log("Json Response Fetch:")
+            console.log("Json Response Fetch:");
             console.log(responseJson);
             if(responseJson.hasOwnProperty("access_token")){
                 let JWT = responseJson;
@@ -31,6 +31,11 @@ export function fetchToken(username, password) {
             return false;
         });
 
+}
+
+export function logout() {
+    localStorage.removeItem('userToken');
+    return true;
 }
 
 export function checkToken(){

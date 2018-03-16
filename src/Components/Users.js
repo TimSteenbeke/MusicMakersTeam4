@@ -96,7 +96,7 @@ class Users extends Component {
                                 <td>{users.firstname}</td>
                                 <td>{users.lastname}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/instrumentdetails/${users.userid}` }>
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator" to={`/userdetails/${users.userid}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
@@ -109,7 +109,7 @@ class Users extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addInstrument" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addUser" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>

@@ -34,14 +34,14 @@ class AddCourse extends Component {
             timer: 1500
         });
         console.log("Beschrijving: " + this.state.beschrijving);
-        console.log("studentIds: " + this.state.studentids);
+        console.log("studentIds: " + this.state.userids);
         console.log("teacherIds: " + this.state.teacherids);
 
         CourseService.postCourse(JSON.stringify(
             {
                 coursebeschrijving: this.state.beschrijving,
                 teacherids: this.state.teacherids,
-                studentids: this.state.studentids,
+                userids: this.state.userids,
                 prijs: 1
             }
         ));
@@ -55,7 +55,7 @@ class AddCourse extends Component {
     addTeachers = () => {
         UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
+                this.setState({users: students.users}, console.log(students.users));
             });
     };
 
@@ -93,8 +93,8 @@ class AddCourse extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({studentids: value});
-        console.log(this.state.studentids);
+        this.setState({userids: value});
+        console.log(this.state.userids);
     };
 
     render() {
@@ -155,7 +155,7 @@ class AddCourse extends Component {
                                                         <Input s={12} multiple={true} type='select' label="Studenten" onChange={this.handleStudentChange}
                                                                icon='child_care' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies de studenten</option>
-                                                            {this.state.students.map((student, index) => (
+                                                            {this.state.users.map((student, index) => (
                                                                 <option key={student.userid}
                                                                         value={student.userid}>{student.firstname} {student.lastname}</option>
                                                             ))}

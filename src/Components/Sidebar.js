@@ -33,6 +33,9 @@ class Sidebar extends Component {
                     <Link to="/instrumenten">
                         <MenuItem style={styles.menuColor} primaryText="Instrumenten"/>
                     </Link>
+                    <Link to="/groups">
+                        <MenuItem style={styles.menuColor} primaryText="Groepen"/>
+                    </Link>
                     <Link to="/users">
                         <MenuItem style={styles.menuColor} primaryText="Users"/>
                     </Link>
