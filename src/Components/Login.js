@@ -1,21 +1,14 @@
 import React, {Component} from 'react';
 import '../CSS/Login.css';
 import * as LoginService from "../Services/LoginService";
-import Redirect from "react-router-dom/es/Redirect";
-import Header from './Header'
 import swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-
-
-const mySwal = withReactContent(swal);
-
-const loginDesign = [];
 
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            errorMessage: "",
             username: "",
             password: "",
             isLoggedIn: true,
@@ -32,22 +25,35 @@ class Login extends Component {
             if (value) {
                 console.log("check login service => " + LoginService.checkToken());
                 console.log("Logged in");
+                window.location.reload();
             } else {
                 console.log("check login service => " + LoginService.checkToken());
                 console.log("Failed to log in");
-                this.openSwat();
+                this.setState({errorMessage: "Username of password incorrect"}, () => {
+                    console.log("Trying to open Swat");
+                    if (!this.state.isLoggedIn) {
+                        console.log("Opening Swat");
+                        this.openSwat();
+                    }
+                });
+
             }
         });
     };
 
     getLoggedIn = () => {
         let self = this;
-        if (LoginService.checkToken()) {
-            self.setState({isLoggedIn: true});
-        }else{
-            self.setState({isLoggedIn: false});
+        console.log("Getting Log in");
+        if (!LoginService.checkToken()) {
+            self.setState({isLoggedIn: LoginService.checkToken()}, () => {
+                console.log("Trying to open Swat");
+                if (!self.state.isLoggedIn) {
+                    console.log("Opening Swat");
+                    self.openSwat();
+                }
+            });
         }
-        console.log("Logged in LoginScreen? => " + self.state.isLoggedIn);
+
     };
 
     openSwat = () => {
@@ -62,7 +68,7 @@ class Login extends Component {
         let steps = [
             {
                 title: 'Username',
-                text: 'Please enter your username',
+                html: '<div>Please enter your username</div><div class="red-text">{this.state.errorMessage}</div>',
                 input: 'text',
             },
             {
@@ -87,9 +93,6 @@ class Login extends Component {
 
     componentDidMount() {
         this.getLoggedIn();
-        if (!this.state.isLoggedIn) {
-            this.openSwat();
-        }
     };
 
     render() {
