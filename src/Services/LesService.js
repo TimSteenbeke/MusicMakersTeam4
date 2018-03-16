@@ -1,8 +1,5 @@
-/**
- * Created by Ben on 28/02/2018.
- */
-// const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const URL = 'http://localhost:8080/api/';
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'http://localhost:8080/api/';
 
 export function registerAbsent(lessonid) {
     let userToken = JSON.parse(localStorage.getItem('userToken'));

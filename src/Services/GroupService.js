@@ -1,8 +1,8 @@
-// const URL = 'https://musicmaker-api-team4.herokuapp.com/api/groups/';
-const URL = 'http://localhost:8080/api/groups/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/groups/';
+//const URL = 'http://localhost:8080/api/groups/';
 
 export function getAllGroupsFromBackend() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "allgroups", {
         mode: 'cors',
         headers: {
@@ -24,6 +24,7 @@ export function getAllGroupsFromBackend() {
 
 
 export function getGroupsByUser() {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL, {
         mode: 'cors',
         headers: {
@@ -45,17 +46,18 @@ export function getGroupsByUser() {
 
 
 export function getGroupFromBackend(groupId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + groupId, {
         mode: 'cors',
         headers: {
             'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
-
         }
     })
         .then((response) => response.json()
         )
         .then((responseJson) => {
+        console.log("groep: " + responseJson);
             return responseJson;
         })
         .catch((err) => {
@@ -65,6 +67,7 @@ export function getGroupFromBackend(groupId) {
 }
 
 export function postGroup(data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     fetch(URL, {
         method: 'POST',
         headers: {
@@ -77,6 +80,7 @@ export function postGroup(data) {
 }
 
 export function deleteGroup(groupId) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + groupId, {
         method: 'DELETE',
         mode: 'CORS',
@@ -89,6 +93,7 @@ export function deleteGroup(groupId) {
 }
 
 export function updateGroup(groupId, data) {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log("id: " + groupId);
     console.log(data);
     return fetch(URL + 'group/' + groupId, {

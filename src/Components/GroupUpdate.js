@@ -59,7 +59,7 @@ export default class GroupUpdate extends Component {
             }
         }
         this.setState({supervisorId: value});
-        console.log(this.state.supervisorId);
+        console.log("newsupid: " + this.state.supervisorId);
     };
 
     handleStudentChange = (e) => {
@@ -128,7 +128,7 @@ export default class GroupUpdate extends Component {
         GroupService.updateGroup(self.state.groupid, JSON.stringify(
             {
                 name: self.state.name,
-                supervisorid: self.state.supervisorid,
+                supervisorid: self.state.supervisorId,
                 userids: self.state.studentIds,
                 groupimage: self.state.groupimage
             }

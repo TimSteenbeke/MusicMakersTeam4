@@ -1,8 +1,5 @@
-
-// const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const URL = 'http://localhost:8080/api/';
-
-
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'http://localhost:8080/api/';
 
 export function getCourseTypesFromBackend() {
     let userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -10,7 +7,7 @@ export function getCourseTypesFromBackend() {
     return fetch(URL + "courseTypes", {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -30,7 +27,7 @@ export function getCourseTypeFromBackend(courseTypeNr) {
     return fetch(URL + "courseTypes/" + courseTypeNr, {
         mode: 'cors',
         headers: {
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
             'Content-Type': 'application/json'
         }
     })
@@ -54,7 +51,7 @@ export function postCourseType(data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
+            'Authorization': userToken.token_type + " " + userToken.access_token
         },
         body: data
     })
@@ -68,7 +65,7 @@ export function deleteCourseType(courseTypeId) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
+            'Authorization': userToken.token_type + " " + userToken.access_token
         }
     });
 }
@@ -82,7 +79,7 @@ export function UpdateCourseType(courseTypeId, data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
+            'Authorization': userToken.token_type + " " + userToken.access_token
         },
         body: data
     });

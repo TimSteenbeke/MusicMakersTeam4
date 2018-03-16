@@ -29,14 +29,15 @@ export default class Group extends Component {
        }*/
 
     componentDidMount() {
-        GroupService.getGroupsByUser().then(groups => {
+        GroupService.getAllGroupsFromBackend().then(groups => {
             console.log(groups);
             this.setState({groups: groups});
         });
     }
 
-    componentWillUpdate() {
-        GroupService.getGroupsByUser().then(groups => {
+    componentWillMount() {
+        GroupService.getAllGroupsFromBackend().then(groups => {
+            console.log(groups);
             this.setState({groups: groups});
         });
     }
@@ -63,7 +64,7 @@ export default class Group extends Component {
                                 </td>*/}
                                 <td>{group.name}</td>
 
-                                <td>{group.supervisorname}</td>
+                                <td>{group.supervisor.firstname}</td>
                                 {/*       <td><Dropdown trigger={<RaisedButton onClick={this.setUsers(group)}>Klik!</RaisedButton>
                                 }>
                                     {this.state.users.map((user, index2) => (
