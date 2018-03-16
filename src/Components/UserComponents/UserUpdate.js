@@ -3,8 +3,9 @@ import * as UserService from '../../Services/UserService';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
+import './UserUpdate.css';
 
-class UserUpdate extends Component {
+export default class UserUpdate extends Component {
 
     constructor(props) {
         super(props);
@@ -88,7 +89,7 @@ class UserUpdate extends Component {
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("Uploaded");
+            console.log("successfully Uploaded");
         }, 1000);
     };
 
@@ -138,6 +139,7 @@ class UserUpdate extends Component {
         this.handleUpdate();
         this.props.history.push('/users')
     }
+
     render() {
         return (
             <div className="row col s12 m12 l12">
@@ -210,13 +212,6 @@ class UserUpdate extends Component {
                     </div>
                 </div>
             </div>
-
-
-
-
-
         );
     }
 }
-
-export default UserUpdate;

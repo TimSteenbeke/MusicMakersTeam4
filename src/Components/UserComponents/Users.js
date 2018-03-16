@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import * as UserService from '../../Services/UserService'
+import * as UserService from '../../Services/UserService';
 import {Link} from 'react-router-dom';
-import Header from '../GeneralComponents/Header'
-import swal from 'sweetalert2'
+import Header from '../GeneralComponents/Header';
+import swal from 'sweetalert2';
+import './Users.css';
 
 
-class Users extends Component {
-
+export default class Users extends Component {
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
             users: [],
             selectedIndex: 0,
@@ -37,7 +36,6 @@ class Users extends Component {
                     'User has been deleted.',
                     'success'
                 );
-                console.log(id);
                 UserService.deleteUser(id);
             } else if (
                 // Read more about handling dismissals
@@ -59,19 +57,15 @@ class Users extends Component {
         });
     }
 
-
     componentWillReceiveProps() {
         this.getUsers();
     }
-
 
     componentDidMount() {
         this.getUsers();
     }
 
-
     render() {
-
         return (
             <div className="Homepage">
                 <Header name="Users" />
@@ -113,6 +107,4 @@ class Users extends Component {
         );
     }
 }
-
-export default Users;
 

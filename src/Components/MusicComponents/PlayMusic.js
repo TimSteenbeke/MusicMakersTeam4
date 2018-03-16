@@ -3,9 +3,9 @@ import '../../CSS/GlobalStylesheet.css';
 import * as MusicService from '../../Services/MusicService.js'
 import Partituur from "./Partituur";
 import ChordSheet from "./ChordSheet";
+import './PlayMusic';
 
-
-class PlayMusic extends Component {
+export default class PlayMusic extends Component {
 
     constructor(props) {
         super(props);
@@ -34,10 +34,6 @@ class PlayMusic extends Component {
         rawFile.send(null);
     }
 
-
-
-
-
     render() {
         return (
             <div className="PlayPartituur">
@@ -62,6 +58,4 @@ class PlayMusic extends Component {
         );
     }
 }
-
-export default PlayMusic;
 

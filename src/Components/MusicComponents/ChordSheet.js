@@ -3,8 +3,9 @@ import '../../CSS/GlobalStylesheet.css';
 import ChordSheetJS from 'chordsheetjs';
 import GuitarChord from 'react-guitar-chord';
 import $ from 'jquery';
-class ChordSheet extends Component {
+import './ChordSheet.css';
 
+export default class ChordSheet extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +17,6 @@ class ChordSheet extends Component {
             speed:1000,
             hidden:true
         };
-
         this.nextChord = this.nextChord.bind(this);
     }
 
@@ -31,8 +31,8 @@ class ChordSheet extends Component {
     addHover(){
         let _this = this;
         $(".chord").hover(function() {
-                var html = $(this).html();
-                var htmlTrim = html.replace(/&nbsp;/g, '');
+                let html = $(this).html();
+                let htmlTrim = html.replace(/&nbsp;/g, '');
                 _this.setChord(htmlTrim);
             }
             ,function () {
@@ -86,8 +86,8 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
     }
 
     play(){
-        var chordList = $(".chord").map(function(){return $(this).html()}).get();
-        var _this = this;
+        let chordList = $(".chord").map(function(){return $(this).html()}).get();
+        let _this = this;
         this.interval = setInterval(function() {_this.nextChord(chordList)}, this.state.speed);
     }
 
@@ -109,11 +109,10 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
     }
 
     render() {
-
-        var parser = new ChordSheetJS.ChordSheetParser();
-        var song = parser.parse(this.state.dataFile);
-        var formatter = new ChordSheetJS.HtmlTableFormatter();
-        var disp = formatter.format(song);
+        let parser = new ChordSheetJS.ChordSheetParser();
+        let song = parser.parse(this.state.dataFile);
+        let formatter = new ChordSheetJS.HtmlTableFormatter();
+        let disp = formatter.format(song);
 
         return (
             <div className="Play" hidden={this.state.hidden}>
@@ -132,6 +131,4 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
         );
     }
 }
-
-export default ChordSheet;
 

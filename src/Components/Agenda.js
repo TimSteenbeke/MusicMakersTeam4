@@ -5,9 +5,9 @@ import ActivityPopUp from './GeneralComponents/ActivityPopUp.js';
 import Header from './GeneralComponents/Header';
 import {Row, Input} from 'react-materialize';
 import * as UserService from '../Services/UserService.js';
+import './Agenda';
 
 require('moment/locale/nl.js');
-
 
 let colors= {
     'color-1': '#242728' ,
@@ -16,8 +16,6 @@ let colors= {
 };
 
 let now = new Date();
-
-
 
 let AgendaItem = function(props){
     console.log( 'ik ga renderen:' , props);
@@ -29,7 +27,7 @@ let AgendaItem = function(props){
     </div>
 };
 
-class Agenda extends Component {
+export default class Agenda extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -85,7 +83,6 @@ class Agenda extends Component {
             let AgendaItems= [];
             //Eigenaar toewijzen (Agenda van: ....)
             // this.setState({agendaOwner: agendaItems.agendaEigenaar})
-            console.log(agendaItems);
 
 
             //Over lessons loopen en info in AgendaItem steken
@@ -132,12 +129,8 @@ class Agenda extends Component {
         });
     };
 
-
-
-
     render() {
         //Load extra components based on state
-
         return  (
             <div>
                         <Header name="Agenda"/>
@@ -181,5 +174,3 @@ class Agenda extends Component {
         );
     }
 }
-
-export default Agenda;

@@ -3,9 +3,9 @@ import Header from '../GeneralComponents/Header'
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import * as UserService from '../../Services/UserService';
+import './AddUser.css';
 
-class AddUser extends Component {
-
+export default class AddUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,12 +41,6 @@ class AddUser extends Component {
                 country: this.state.fields["land"],
             }
         ));
-        console.log("Image: " + this.state.image);
-        console.log("Value: " + this.state.value);
-        console.log("Name: " + this.state.typedName);
-        console.log("Type: " + this.state.typedType);
-        console.log("Version: " + this.state.typedVersion);
-
     };
 
     handleChangeImage = (evt) => {

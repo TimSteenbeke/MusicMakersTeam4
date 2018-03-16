@@ -1,11 +1,10 @@
 import guitar from '../images/guitar.jpg';
 import React, {Component} from 'react';
 import Header from './GeneralComponents/Header';
+import './Home.css';
 
 
 export default class Home extends Component{
-
-
     constructor(props){
         super(props);
         this.state = {
@@ -15,7 +14,6 @@ export default class Home extends Component{
     }
 
     handleChange = (event, index, value) => this.setState({value});
-
 
     render(){
         return (

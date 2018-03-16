@@ -4,7 +4,6 @@ import {black500} from 'material-ui/styles/colors';
 import * as LoginService from "../Services/LoginService";
 import swal from 'sweetalert2'
 
-
 export default class Login extends Component {
     constructor(props) {
         super(props);
