@@ -37,8 +37,6 @@ class App extends Component {
         return (
             <Switch>
                 <Route name="home" exact path="/" component={Home}/>
-                <Route name="login" path="/login" component={Login}/>
-
                 <Route name="addInstrument" path="/addinstrument" component={auth(AddInstrument)}/>
                 <Route name="instrument" path="/instrumenten" component={auth(Instrumenten)}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={auth(InstrumentDetails)}/>

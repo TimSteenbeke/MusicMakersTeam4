@@ -25,7 +25,17 @@ export default class Login extends Component {
             if (value) {
                 console.log("check login service => " + LoginService.checkToken());
                 console.log("Logged in");
-                window.location.reload();
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Je bent ingelogd!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.reload();
+                });
+
+
             } else {
                 console.log("check login service => " + LoginService.checkToken());
                 console.log("Failed to log in");
@@ -33,7 +43,16 @@ export default class Login extends Component {
                     console.log("Trying to open Swat");
                     if (!this.state.isLoggedIn) {
                         console.log("Opening Swat");
-                        this.openSwat();
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Username of password incorrect!',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        }).then(() => {
+                            this.openSwat();
+                        });
+
                     }
                 });
 
@@ -56,26 +75,26 @@ export default class Login extends Component {
 
     };
 
+
     openSwat = () => {
         swal.setDefaults({
-            input: 'text',
-            confirmButtonText: 'Next',
             showCancelButton: false,
             allowOutsideClick: false,
-            confirmButtonClass: 'btn waves-effect waves-light deep-orange darken-4',
+            confirmButtonColor: '#bf360c',
         });
 
         let steps = [
             {
                 title: 'Username',
-                html: '<div>Please enter your username</div><div class="red-text">{this.state.errorMessage}</div>',
+                html: 'Please enter your username',
                 input: 'text',
+                confirmButtonText: 'Next',
             },
             {
                 title: 'Password',
                 text: 'Please enter your password',
                 input: 'password',
-
+                confirmButtonText: 'Next',
             },
         ];
 

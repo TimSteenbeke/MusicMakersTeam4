@@ -8,7 +8,7 @@ export default class IntroScreen extends Component {
                 <h3>Welkom bij Music Makers!</h3>
                 <br/>
                 <p>
-                    Please log in!
+                    Gelieve in te loggen!
                 </p>
             </div>
         )
