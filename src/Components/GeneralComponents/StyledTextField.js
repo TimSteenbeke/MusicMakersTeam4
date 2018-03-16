@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Header extends Component {
+export default class StyledTextField extends Component {
 
     render() {
         return (
@@ -13,4 +13,3 @@ class Header extends Component {
         )
     }
 }
-export default Header;

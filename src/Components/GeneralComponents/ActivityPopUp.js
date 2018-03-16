@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {ReactAgenda, guid} from 'react-agenda';
-import * as LesService from '../../Services/LesService.js'
-import * as OptredenService from '../../Services/OptredenService.js'
-import swal from 'sweetalert2'
+import * as LesService from '../../Services/LesService.js';
+import * as OptredenService from '../../Services/OptredenService.js';
+import swal from 'sweetalert2';
+
 
 class ActivityPopUp extends Component {
     constructor(props) {

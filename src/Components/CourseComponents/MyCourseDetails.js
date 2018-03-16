@@ -5,6 +5,7 @@ import Link from "react-router-dom/es/Link";
 import Redirect from "react-router-dom/es/Redirect";
 import Header from "../GeneralComponents/Header";
 import * as CourseService from "../../Services/CourseService";
+import './MyCourseDetails.css';
 
 export default class MyCourseDetails extends Component {
     constructor(props) {
@@ -14,8 +15,7 @@ export default class MyCourseDetails extends Component {
             beschrijving: "string",
             students: [],
             teachers: [],
-        }
-
+        };
     }
 
     componentDidMount() {

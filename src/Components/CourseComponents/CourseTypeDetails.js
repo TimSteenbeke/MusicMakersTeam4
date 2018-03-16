@@ -3,16 +3,16 @@ import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import * as CourseTypeService from "../../Services/CourseTypeService";
+import './CourseTypeDetails.css';
 
-class InstrumentDetails extends Component {
-
+export default class CourseTypeDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             courseTypeId: this.props.match.params.id,
             price:"",
             description:""
-        }
+        };
     }
 
     componentDidMount() {
@@ -103,5 +103,3 @@ class InstrumentDetails extends Component {
         );
     }
 }
-
-export default InstrumentDetails;

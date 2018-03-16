@@ -6,9 +6,9 @@ import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize';
 import swal from 'sweetalert2';
 import * as UserService from '../../Services/UserService';
+import './AddCourse.css';
 
-class AddCourse extends Component {
-
+export default class AddCourse extends Component {
     constructor(props) {
         super(props);
         console.log("Constructed");
@@ -19,7 +19,6 @@ class AddCourse extends Component {
             teachers: [],
             students: [],
         };
-
     }
 
     handleClick = () => {
@@ -107,7 +106,7 @@ class AddCourse extends Component {
                                     <form className="addCourse" action="/" method="POST" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
-                                    } }>
+                                    }}>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
@@ -149,7 +148,8 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple={true} type='select' label="Studenten" onChange={this.handleStudentChange}
+                                                        <Input s={12} multiple={true} type='select' label="Studenten"
+                                                               onChange={this.handleStudentChange}
                                                                icon='child_care' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies de studenten</option>
                                                             {this.state.users.map((student, index) => (
@@ -182,6 +182,4 @@ class AddCourse extends Component {
         );
     }
 }
-
-export default AddCourse;
 

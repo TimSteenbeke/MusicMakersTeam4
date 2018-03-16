@@ -3,19 +3,16 @@ import * as CourseService from '../../Services/CourseService';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
+import './CoursesDetails.css';
 
-
-class Courses extends Component {
-
+export default class Courses extends Component {
     constructor(props) {
         super(props);
         console.log("Constructed");
         this.state = {
             courses: [],
             selectedIndex: 0,
-        }
-
-        ;
+        };
     }
 
     componentDidMount() {
@@ -119,5 +116,3 @@ class Courses extends Component {
         );
     }
 }
-
-export default Courses;
