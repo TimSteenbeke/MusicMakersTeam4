@@ -135,11 +135,6 @@ class GroupsAndChat extends Component {
                                     : <span>Geen agenda!<br/></span>
                                 }
                             </div>
-
-                            <div className="col s12 m12 l12">
-                                <input type="button" value="Uitloggen" className="btn right" onClick={this.userLogout}/>
-
-                            </div>
                         </div>
                     </CardPanel>
             </div>

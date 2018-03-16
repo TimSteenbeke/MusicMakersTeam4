@@ -62,11 +62,9 @@ export default class CourseTypes extends Component {
 
 
     render() {
-
         return (
             <div className="Homepage">
                 <Header name="CourseTypes"/>
-
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>

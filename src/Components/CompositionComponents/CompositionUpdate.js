@@ -23,12 +23,11 @@ export default class CompositionUpdate extends Component {
             link: "",
             fileFormat: "",
             content: "",
-        }
+        };
     }
 
     componentDidMount() {
         const self = this;
-
         CompositionService.getCompositionFromBackend(self.state.MuziekstukId)
             .then(console.log("----Composition with id " + self.state.MuziekstukId + "---- \n"))
             .then(composition => self.setState({
@@ -44,15 +43,6 @@ export default class CompositionUpdate extends Component {
             }, console.log(composition)))
     }
 
-    componentWillMount() {
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
-
     handleUpdate = () => {
         swal({
             position: 'top-end',
@@ -62,18 +52,17 @@ export default class CompositionUpdate extends Component {
             timer: 1500
         });
         const self = this;
-        console.log("link: " + self.state.link);
-        CompositionService.UpdateComposition(this.state.MuziekstukId, JSON.stringify(
+        CompositionService.UpdateComposition(self.state.MuziekstukId, JSON.stringify(
             {
-                content: this.state.content,
-                artist: this.state.artist,
-                language: this.state.language,
-                genre: this.state.genre,
-                subject: this.state.subject,
-                instrumentType: this.state.instrumentType,
-                link: this.state.link,
-                fileFormat: this.state.fileFormat,
-                titel: this.state.titel
+                content: self.state.content,
+                artist: self.state.artist,
+                language: self.state.language,
+                genre: self.state.genre,
+                subject: self.state.subject,
+                instrumentType: self.state.instrumentType,
+                link: self.state.link,
+                fileFormat: self.state.fileFormat,
+                titel: self.state.titel
             }
         ));
     };
@@ -114,13 +103,7 @@ export default class CompositionUpdate extends Component {
     };
 
     render() {
-
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (<div className="Homepage">
-                {redirecter}
                 <Header name={this.state.titel}/>
 
                 <section className="containerCss">

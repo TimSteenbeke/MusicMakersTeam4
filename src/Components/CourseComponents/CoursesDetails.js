@@ -61,7 +61,6 @@ export default class CoursesDetails extends Component {
         return (
             <div className="Homepage">
                 <Header name={"Course " + this.state.courseId}/>
-
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s0 m2 l2"/>

@@ -74,7 +74,6 @@ export default class AddComposition extends Component {
     }
 
     render() {
-
         return (
             <div className="row col s12 m12 l12">
                 <Header name="Muziekstuk toevoegen"/>

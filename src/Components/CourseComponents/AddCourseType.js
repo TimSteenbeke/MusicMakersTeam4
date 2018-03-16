@@ -40,22 +40,18 @@ export default class AddCourseType extends Component {
 
     onChangePrice = (e) => {
         this.setState({typedPrice: e.target.value});
-        console.log("Price:" + e.target.value)
     };
 
     onChangeDescription = (e) => {
         this.setState({typedDescription:  e.target.value});
-        console.log("Description:" + e.target.value)
     };
 
     handleChange = (event, value) => {
         this.setState({value});
-        console.log(value)
     };
 
     render() {
         return (
-
             <div className="Homepage">
                 <Header name="Add CourseType"/>
                 <section className="containerCss">

@@ -45,6 +45,27 @@ export function getInstrumentFromBackend(instrumentId) {
         });*/
 }
 
+export function getLevelsFromBackend() {
+    return fetchService.fetchWithHeader("instrumentlevels/", "GET", {}, {});
+    /*    return fetch(URL + "instrumentlevels", {
+            mode: 'cors',
+            headers: {
+                'Authorization': userToken.token_type + " " +  userToken.access_token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) =>
+                response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                return responseJson;
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });*/
+}
+
 export function getInstrumentSoortenFromBackend() {
     return fetchService.fetchWithHeader("instrumentsoorten/", "GET", {}, {});
     /*    let userToken = JSON.parse(localStorage.getItem('userToken'));

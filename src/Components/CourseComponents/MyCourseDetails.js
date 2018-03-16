@@ -37,25 +37,11 @@ export default class MyCourseDetails extends Component {
         });
     }
 
-    componentWillMount() {
-        let response = false;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: !response})
-    }
-
     render() {
 
-        let redirecter = null;
-        if (this.state.redirect) {
-            redirecter = <Redirect to='/login'/>
-        }
         return (
             <div className="Homepage">
-                {redirecter}
                 <Header name="Course details"/>
-
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s12 m12 l12 center">

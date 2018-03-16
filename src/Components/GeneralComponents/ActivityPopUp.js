@@ -3,23 +3,22 @@ import {ReactAgenda, guid} from 'react-agenda';
 import * as LesService from '../../Services/LesService.js';
 import * as OptredenService from '../../Services/OptredenService.js';
 import swal from 'sweetalert2';
+import './ActivityPopUp.css';
 
 
-class ActivityPopUp extends Component {
+export default class ActivityPopUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
             aanwezigheidsstatus: "Te beslissen",
             icon: 'notifications'
         };
-
     }
 
     componentDidMount() {
-        //Call maken om te zien of persoon aanwezig of afwezig is voor die les
+        //Call maken om te zien of persoon present of absent is voor die les
         //State veranderen
         this.getStatus();
-
     }
 
     getStatus = () => {
@@ -56,8 +55,7 @@ class ActivityPopUp extends Component {
         console.log(this.state.icon, this.state.aanwezigheidsstatus);
     };
 
-    aanwezig = () => {
-        console.log(this.props);
+    present = () => {
         let id = this.props.id;
         if (this.props.type == "Optreden") {
             OptredenService.registerPresent(id);
@@ -67,8 +65,7 @@ class ActivityPopUp extends Component {
         }
     };
 
-    afwezig = () => {
-        console.log(this.props);
+    absent = () => {
         let id = this.props.id;
         if (this.props.type == "Optreden") {
             OptredenService.registerAbsent(id);
@@ -77,7 +74,7 @@ class ActivityPopUp extends Component {
         }
     };
 
-    setAanwezigheid = () =>{
+    setPresence = () =>{
         swal({
             title: 'Aanwezigheid?',
             text: "Kies je status voor deze les!",
@@ -95,10 +92,10 @@ class ActivityPopUp extends Component {
             if (result.value) {
                 swal(
                     'Aanwezig!',
-                    'Je bent aanwezig op deze les.',
+                    'Je bent present op deze les.',
                     'success'
                 );
-                this.aanwezig();
+                this.present();
                 this.setIcon('present')
             } else if (
                 // Read more about handling dismissals
@@ -106,10 +103,10 @@ class ActivityPopUp extends Component {
             ) {
                 swal(
                     'Afwezig',
-                    'Je bent afwezig op deze les',
+                    'Je bent absent op deze les',
                     'error'
                 );
-                this.afwezig();
+                this.absent();
                 this.setIcon('absent')
 
             }
@@ -121,7 +118,7 @@ class ActivityPopUp extends Component {
         return (
             <div>
                 {/*Popup*/}
-                <a onClick={this.setAanwezigheid} className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.aanwezigheidsstatus}
+                <a onClick={this.setPresence} className="waves-effect waves-light deep-orange darken-4 btn"><i className="material-icons left">{this.state.icon}</i>{this.state.aanwezigheidsstatus}
                 </a>
             </div>
         );

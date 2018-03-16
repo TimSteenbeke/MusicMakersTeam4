@@ -29,10 +29,6 @@ export default class AddCourse extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        console.log("Beschrijving: " + this.state.beschrijving);
-        console.log("studentIds: " + this.state.userids);
-        console.log("teacherIds: " + this.state.teacherids);
-
         CourseService.postCourse(JSON.stringify(
             {
                 coursebeschrijving: this.state.beschrijving,
@@ -65,7 +61,6 @@ export default class AddCourse extends Component {
 
     onChangeDescription = (e) => {
         this.setState({beschrijving: e.target.value});
-        console.log("beschrijving:" + e.target.value)
     };
 
 
@@ -78,7 +73,6 @@ export default class AddCourse extends Component {
             }
         }
         this.setState({teacherids: value});
-        console.log(this.state.teacherids);
     };
 
     handleStudentChange = (e) => {
@@ -90,7 +84,6 @@ export default class AddCourse extends Component {
             }
         }
         this.setState({userids: value});
-        console.log(this.state.userids);
     };
 
     render() {

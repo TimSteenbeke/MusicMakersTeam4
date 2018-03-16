@@ -76,7 +76,6 @@ export default class Compositions extends Component {
 
     filterCompositions = (e) => {
         const self = this;
-        console.log(e.target.id);
         this.setState({compositions: []});
 
         if (self.state.search === "") {
@@ -97,8 +96,6 @@ export default class Compositions extends Component {
         let value = event.target.value;
 
         this.setState({search: value});
-
-        console.log("updddd: " + value);
 
         if (value === "" || value === null) {
             CompositionService.getCompositionsFromBackend().then(compositions => {

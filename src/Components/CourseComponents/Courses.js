@@ -61,7 +61,7 @@ export default class Courses extends Component {
     };
 
 
-    componentWillUpdate() {
+    componentWillReceiveProps() {
         CourseService.getCoursesFromBackend().then(courses => {
             this.setState({courses: courses});
         });
@@ -69,9 +69,7 @@ export default class Courses extends Component {
 
 
     render() {
-
         return (
-
             <div className="Homepage">
                 <Header name="Courses"/>
                 <section className="containerCss">
@@ -92,7 +90,7 @@ export default class Courses extends Component {
                                 <td>{course.prijs}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/coursedetails/${course.courseId}` }>
+                                          to={`/coursedetails/${course.courseId}`}>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
