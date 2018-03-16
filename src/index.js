@@ -32,5 +32,5 @@ ReactDOM.render((
     <HashRouter>
         <Application/>
     </HashRouter>
-), document.getElementById('root'))
+), document.getElementById('root'));
 registerServiceWorker();

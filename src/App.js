@@ -19,6 +19,7 @@ import AddComposition from "./Components/AddComposition";
 import PlayMusic from './Components/PlayMusic.js';
 import NotFound from "./Components/NotFound";
 import CompositionUpdate from "./Components/CompositionUpdate";
+import InstrumentLevels from "./Components/InstrumentLevel";
 import auth from './Components/CheckTokenComponent';
 
 class App extends Component {
@@ -45,6 +46,7 @@ class App extends Component {
                 <Route name="playPartituur" path="/playpartituur" component={PlayMusic}/>
                 <Route name="play" path="/play/:id" component={PlayMusic}/>
                 <Route name="users" path="/users" component={Users}/>
+                <Route name="levels" path="/levels" component={InstrumentLevels}/>
                 <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );

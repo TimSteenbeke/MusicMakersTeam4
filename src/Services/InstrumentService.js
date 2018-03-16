@@ -23,6 +23,26 @@ export function getInstrumentenFromBackend() {
         });
 }
 
+export function getLevelsFromBackend() {
+    return fetch(URL + "instrumentlevels", {
+        mode: 'cors',
+        headers: {
+            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) =>
+            response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            return responseJson;
+        })
+        .catch((err) => {
+            console.log("geen response");
+            console.log(err);
+        });
+}
+
 export function getInstrumentFromBackend(instrumentNr) {
 
     return fetch(URL + "instruments/" + instrumentNr, {

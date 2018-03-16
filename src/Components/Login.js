@@ -1,49 +1,28 @@
 import React, {Component} from 'react';
 import '../CSS/Login.css';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import {black500, deepOrangeA700, grey500} from 'material-ui/styles/colors';
 import * as LoginService from "../Services/LoginService";
 import Redirect from "react-router-dom/es/Redirect";
+import Header from './Header'
+import swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-const styles = {
-    width: {
-        width: "90%",
-    },
-    loginButton: {
-        boxShadow: "2px 10px 5px #616161",
-    },
-    errorStyle: {
-        color: deepOrangeA700,
 
-    },
-    underlineStyle: {
-        borderColor: deepOrangeA700,
-    },
-    inputstyle: {
-        color: black500,
-    },
-    floatingLabelStyle: {
-        color: grey500,
-    },
-    floatingLabelFocusStyle: {
-        color: grey500,
-    }
-};
+const mySwal = withReactContent(swal);
+
+const loginDesign = [];
+
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flex: 2.2,
-            failLogin: false,
-            redirect: false,
             username: "",
-            password: ""
+            password: "",
+            isLoggedIn: true,
         };
     }
 
-    animateLogin = () => {
+    login = () => {
         let user = this.state.username;
         let pass = this.state.password;
         let response = LoginService.fetchToken(user, pass);
@@ -51,88 +30,74 @@ class Login extends Component {
         console.log(response);
         response.then((value) => {
             if (value) {
-                this.setState({redirect: true})
+                console.log("check login service => " + LoginService.checkToken());
+                console.log("Logged in");
             } else {
-                this.setState({failLogin: true})
+                console.log("check login service => " + LoginService.checkToken());
+                console.log("Failed to log in");
+                this.openSwat();
             }
         });
     };
 
-    setPassword(event, typedPassword) {
-        console.log("setPassword: type=> ", typedPassword);
-        this.setState({password: typedPassword})
-    }
+    getLoggedIn = () => {
+        let self = this;
+        if (LoginService.checkToken()) {
+            self.setState({isLoggedIn: true});
+        }else{
+            self.setState({isLoggedIn: false});
+        }
+        console.log("Logged in LoginScreen? => " + self.state.isLoggedIn);
+    };
 
-    setUsername(event, typedUsername) {
-        console.log("setPassword: type=> ", typedUsername);
-        this.setState({username: typedUsername})
-    }
+    openSwat = () => {
+        swal.setDefaults({
+            input: 'text',
+            confirmButtonText: 'Next',
+            showCancelButton: false,
+            allowOutsideClick: false,
+            confirmButtonClass: 'btn waves-effect waves-light deep-orange darken-4',
+        });
 
-/*    componentWillMount() {
-        let response;
-        response = LoginService.checkToken();
-        console.log("response:");
-        console.log(response);
-        this.setState({redirect: response})
-    }*/
+        let steps = [
+            {
+                title: 'Username',
+                text: 'Please enter your username',
+                input: 'text',
+            },
+            {
+                title: 'Password',
+                text: 'Please enter your password',
+                input: 'password',
+
+            },
+        ];
+
+        swal.queue(steps).then((result) => {
+            if (result.value) {
+                this.setState({username: result.value[0]});
+                console.log(this.state.username);
+                this.setState({password: result.value[1]});
+                console.log(this.state.password);
+                this.login();
+            }
+        })
+    };
+
+
+    componentDidMount() {
+        this.getLoggedIn();
+        if (!this.state.isLoggedIn) {
+            this.openSwat();
+        }
+    };
 
     render() {
-        let failedLogin = null, redirecting = null;
-        if (this.state.failLogin) {
-            failedLogin = <p className="red-text"> Username or password incorrect !</p>
-        }
-        if (this.state.redirect) {
-            redirecting = <Redirect to='/'/>
-        }
         return (
+            <div>
 
-            <div className="App">
-                <section className="container">
-                    <div className="left-half" style={{flex: this.state.flex}}>
-                    </div>
-                    <div className="right-half">
-                    </div>
-                </section>
-
-                <div className="loginForm">
-                    <h1 className="header">Music Makers</h1>
-                    <div className="border">
-                        <TextField
-                            style={styles.width}
-                            hintText="Type username here..."
-                            floatingLabelText="Username"
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                            onChange={(event, typedUsername) => this.setUsername(event, typedUsername)}
-                        /><br/>
-                        <TextField
-                            type="password"
-
-                            hintText="Type password here..."
-                            floatingLabelText="Password"
-                            style={styles.width}
-                            inputStyle={styles.inputstyle}
-                            hintStyle={styles.floatingLabelFocusStyle}
-                            floatingLabelStyle={styles.floatingLabelStyle}
-                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                            underlineFocusStyle={styles.underlineStyle}
-                            onChange={(event, typedPassword) => this.setPassword(event, typedPassword)}
-                        /><br/>
-                    </div>
-                    {failedLogin}
-                    <RaisedButton label="Login" onClick={this.animateLogin} backgroundColor="#DD2C00"
-                                  style={styles.loginButton}
-                                  labelColor="#FFEBEE"
-                                  className="loginButton"/>
-                </div>
-                {redirecting}
             </div>
-
-
-        );
+        )
     }
 }
 
