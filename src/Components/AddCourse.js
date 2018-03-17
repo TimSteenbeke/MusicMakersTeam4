@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize'
 import swal from 'sweetalert2'
 import * as UserService from '../Services/UserService'
+import * as CourseTypeService from '../Services/CourseTypeService.js'
 
 class AddCourse extends Component {
 
@@ -19,6 +20,7 @@ class AddCourse extends Component {
             beschrijving: "",
             teacherids: [],
             studentids: [],
+            courseTypeId: 0,
             teachers: [],
             students: [],
             courseTypes: []
@@ -34,36 +36,46 @@ class AddCourse extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        console.log("Beschrijving: " + this.state.beschrijving);
-        console.log("studentIds: " + this.state.userids);
-        console.log("teacherIds: " + this.state.teacherids);
 
         CourseService.postCourse(JSON.stringify(
             {
-                coursebeschrijving: this.state.beschrijving,
+                courseTypeId: this.state.courseTypeId,
                 teacherids: this.state.teacherids,
-                userids: this.state.userids,
-                prijs: 1
+                studentids: this.state.studentids
             }
         ));
     };
 
     componentDidMount() {
+        this.addCourseTypes();
         this.addStudents();
         this.addTeachers();
     }
 
-    addTeachers = () => {
-        UserService.getStudents().then(console.log("----Students---- \n"))
-            .then(students => {
-                this.setState({users: students.users}, console.log(students.users));
-            });
-    };
+    addCourseTypes = () => {
+        CourseTypeService.getCourseTypesFromBackend().then(console.log("-----CourseTypes------"))
+            .then(courseTypes => {
+                this.setState({courseTypes: courseTypes});
+                console.log(courseTypes);
+            })
+    }
 
     addStudents = () => {
-        UserService.getTeachers().then(console.log("----Teachers---- \n"))
+        UserService.getStudents().then(console.log("----students---- \n"))
+            .then(students => {
+                this.setState({students: students.users}, console.log(students.users));
+                console.log(students);
+            });
+        console.log("this state");
+        console.log(this.state.students);
+    };
+
+    addTeachers = () => {
+        UserService.getTeachers().then(console.log("----teachers---- \n"))
             .then(teachers => {
                 this.setState({teachers: teachers.users}, console.log(teachers.users));
+                console.log('teachers');
+                console.log(teachers);
             });
 
     };
@@ -73,6 +85,10 @@ class AddCourse extends Component {
         console.log("beschrijving:" + e.target.value)
     };
 
+    handleCourseTypeChange = (e, value) => {
+
+        this.setState({courseTypeId: value});
+    };
 
     handleTeacherChange = (e) => {
         let options = e.target.options;
@@ -94,8 +110,8 @@ class AddCourse extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({userids: value});
-        console.log(this.state.userids);
+        this.setState({studentids: value});
+        console.log(this.state.studentids);
     };
 
     render() {
@@ -120,13 +136,13 @@ class AddCourse extends Component {
                                                 <div className="col s9 m9 l9">
                                                     <Row>
                                                         <Input s={12} multiple={false} type='select'
-                                                               onChange={this.handleTeacherChange}
+                                                               onChange={this.handleCourseTypeChange}
                                                                label="Leerkrachten" icon='face' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies lesType
                                                             </option>
                                                             {this.state.courseTypes.map((courseType, index) => (
-                                                                <option key={courseType.userid}
-                                                                        value={courseType.userid}>{courseType.firstname} {courseType.lastname}</option>
+                                                                <option key={courseType.courseTypeId}
+                                                                        value={courseType.courseTypeId}>{courseType.description}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>

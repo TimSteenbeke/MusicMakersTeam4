@@ -2,8 +2,6 @@
 const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 // const URL = 'http://localhost:8080/api/';
 
-
-
 export function getCourseTypesFromBackend() {
     let userToken = JSON.parse(localStorage.getItem('userToken'));
 
