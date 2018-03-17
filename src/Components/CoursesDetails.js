@@ -109,6 +109,53 @@ class CoursesDetails extends Component {
 
     };
 
+    handleCourseTypeChange = (e, value) => {
+
+        this.setState({selectedCourseType: value});
+    };
+
+    handleTeacherChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({selectedTeachers: value});
+        console.log(this.state.selectedTeachers);
+    };
+
+    handleStudentChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({selectedStudents: value});
+        console.log(this.state.selectedStudents);
+    };
+
+    handleClick = () => {
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Course Updated',
+            showConfirmButton: false,
+            timer: 1500
+        });
+
+        CourseService.updateCourse(this.state.courseId, JSON.stringify(
+            {
+                courseTypeId: this.state.selectedCourseType,
+                teacherids: this.state.selectedTeachers,
+                studentids: this.state.selectedStudents
+            }
+        ));
+    };
+
 
 
 
