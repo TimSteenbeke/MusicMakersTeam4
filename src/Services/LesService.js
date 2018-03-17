@@ -1,12 +1,12 @@
-/**
- * Created by Ben on 28/02/2018.
- */
-const herokuURL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'http://localhost:8080/api/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
+import * as fetchService from "./FetchService";
+
+/*const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+// const URL = 'http://localhost:8080/api/';*/
 
 export function registerAbsent(lessonid) {
-    return fetch(herokuURL + 'lesson/absent/' +lessonid,
+    fetchService.fetchWithHeader("lesson/absent/" + lessonid, "POST", {}, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetch(URL + 'lesson/absent/' +lessonid,
         {
             method: 'POST',
             mode: 'cors',
@@ -18,44 +18,47 @@ export function registerAbsent(lessonid) {
         .catch((err) => {
             console.log("geen response");
             console.log(err);
-        });
-
+        });*/
 }
 
 export function registerPresent(lessonid) {
-    return fetch(herokuURL + 'lesson/present/' +lessonid,
-        {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Authorization':  userToken.token_type + " " +  userToken.access_token,
-                'Content-Type': 'application/json'
-            }
-        })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
+    fetchService.fetchWithHeader("lesson/present/" + lessonid, "POST", {}, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + 'lesson/present/' +lessonid,
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Authorization':  userToken.token_type + " " +  userToken.access_token,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });*/
 }
 
 export function getAttendanceStatus(lessonid) {
-    return fetch(herokuURL + 'lesson/attendancestatus/' +lessonid,
-        {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Authorization':  userToken.token_type + " " +  userToken.access_token,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            console.log(responseJson);
-            return responseJson;
-        })
-        .catch((err) => {
-            console.log("geen response");
-            console.log(err);
-        });
+    fetchService.fetchWithHeader("lesson/attendancestatus/" + lessonid, "GET", {}, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + 'lesson/attendancestatus/' +lessonid,
+            {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Authorization':  userToken.token_type + " " +  userToken.access_token,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) =>
+                response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                return responseJson;
+            })
+            .catch((err) => {
+                console.log("geen response");
+                console.log(err);
+            });*/
 }
