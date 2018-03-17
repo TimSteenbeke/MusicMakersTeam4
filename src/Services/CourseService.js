@@ -16,6 +16,7 @@ export function getCoursesFromBackend() {
         .then((response) =>
             response.json())
         .then((responseJson) => {
+            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
