@@ -2,8 +2,8 @@
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
-import * as CourseService from '../Services/CourseService'
-import Header from './Header'
+import * as CourseService from '../../Services/CourseService.js'
+import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2'
 

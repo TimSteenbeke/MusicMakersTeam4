@@ -2,14 +2,13 @@
  * Created by Ben on 27/02/2018.
  */
 import React, {Component} from 'react';
-import * as CourseService from '../Services/CourseService.js'
-import Header from './Header'
-import StyledTextField from './StyledTextField'
+import * as CourseService from '../../Services/CourseService.js'
+import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize'
 import swal from 'sweetalert2'
-import * as UserService from '../Services/UserService'
-import * as CourseTypeService from '../Services/CourseTypeService.js'
+import * as UserService from '../../Services/UserService'
+import * as CourseTypeService from '../../Services/CourseTypeService.js'
 
 class AddCourse extends Component {
 

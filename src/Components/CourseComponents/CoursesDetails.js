@@ -6,14 +6,13 @@
  */
 
 import React, {Component} from 'react';
-import * as CourseService from '../Services/CourseService'
-import Header from './Header'
-import StyledTextField from './StyledTextField'
+import * as CourseService from '../../Services/CourseService.js'
+import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize'
 import swal from 'sweetalert2'
-import * as CourseTypeService from "../Services/CourseTypeService";
-import * as UserService from "../Services/UserService";
+import * as CourseTypeService from "../../Services/CourseTypeService";
+import * as UserService from "../../Services/UserService";
 
 class CoursesDetails extends Component {
 
