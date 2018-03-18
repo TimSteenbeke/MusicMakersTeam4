@@ -1,7 +1,7 @@
 const AuthStr = 'Basic TXVzaWNNYWtlckFQSWNsaWVudGlkOlZjbWpQS0p6NjZBUzE=';
 
-// const URL = 'http://localhost:8080/oauth/token';
-const URL = 'https://musicmaker-api-team4.herokuapp.com/oauth/token';
+const URL = 'http://localhost:8080/oauth/token';
+//const URL = 'https://musicmaker-api-team4.herokuapp.com/oauth/token';
 
 export function fetchToken(username, password) {
     return fetch(URL + '?grant_type=password&username=' + username + '&password=' + password, {
@@ -21,6 +21,7 @@ export function fetchToken(username, password) {
                 let JWT = responseJson;
                 let now = Date.now();
                 JWT.expires_in = now + JWT.expires_in * 1000;
+                localStorage.setItem('currentUser', JSON.stringify(username));
                 localStorage.setItem('userToken', JSON.stringify(JWT));
                 return true;
             }
@@ -34,6 +35,7 @@ export function fetchToken(username, password) {
 }
 
 export function logout() {
+    localStorage.removeItem('currentUser');
     localStorage.removeItem('userToken');
     return true;
 }

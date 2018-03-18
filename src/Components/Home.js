@@ -16,15 +16,18 @@ export default class Home extends Component{
     }
 
     componentDidMount(){
-        NewsItemService.getNewsItemsFromBackend().then(newsitems =>
-        {this.setState({newsitems: newsitems});
-        });
+        if (LoginService.checkToken()){
+            NewsItemService.getNewsItemsFromBackend().then(newsitems =>
+            {this.setState({newsitems: newsitems});
+            });
+        }
     }
+
 
     render(){
             if (LoginService.checkToken()){
             return (
-                <div className="Homepage">
+                <div className="eume">
                     <Header name="Home"/>
                     <div className="row">
                         {this.state.newsitems.map((item, index) => (
