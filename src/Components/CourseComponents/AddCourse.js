@@ -1,30 +1,23 @@
-/**
- * Created by Ben on 27/02/2018.
- */
 import React, {Component} from 'react';
-import * as CourseService from '../../Services/CourseService.js'
+import * as CourseService from '../../Services/CourseService.js';
 import Header from '../GeneralComponents/Header';
+import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
-import {Row, Input} from 'react-materialize'
-import swal from 'sweetalert2'
-import * as UserService from '../../Services/UserService'
-import * as CourseTypeService from '../../Services/CourseTypeService.js'
+import {Row, Input} from 'react-materialize';
+import swal from 'sweetalert2';
+import * as UserService from '../../Services/UserService';
+import './AddCourse.css';
 
-class AddCourse extends Component {
-
+export default class AddCourse extends Component {
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
             beschrijving: "",
             teacherids: [],
             studentids: [],
-            courseTypeId: 0,
             teachers: [],
             students: [],
-            courseTypes: []
         };
-
     }
 
     handleClick = () => {
@@ -35,59 +28,40 @@ class AddCourse extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-
         CourseService.postCourse(JSON.stringify(
             {
-                courseTypeId: this.state.courseTypeId,
+                coursebeschrijving: this.state.beschrijving,
                 teacherids: this.state.teacherids,
-                studentids: this.state.studentids
+                userids: this.state.userids,
+                prijs: 1
             }
         ));
     };
 
     componentDidMount() {
-        this.addCourseTypes();
         this.addStudents();
         this.addTeachers();
     }
 
-    addCourseTypes = () => {
-        CourseTypeService.getCourseTypesFromBackend().then(console.log("-----CourseTypes------"))
-            .then(courseTypes => {
-                this.setState({courseTypes: courseTypes});
-                console.log(courseTypes);
-            })
-    }
-
-    addStudents = () => {
-        UserService.getStudents().then(console.log("----students---- \n"))
+    addTeachers = () => {
+        UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
-                console.log(students);
+                this.setState({users: students.users}, console.log(students.users));
             });
-        console.log("this state");
-        console.log(this.state.students);
     };
 
-    addTeachers = () => {
-        UserService.getTeachers().then(console.log("----teachers---- \n"))
+    addStudents = () => {
+        UserService.getTeachers().then(console.log("----Teachers---- \n"))
             .then(teachers => {
                 this.setState({teachers: teachers.users}, console.log(teachers.users));
-                console.log('teachers');
-                console.log(teachers);
             });
 
     };
 
     onChangeDescription = (e) => {
         this.setState({beschrijving: e.target.value});
-        console.log("beschrijving:" + e.target.value)
     };
 
-    handleCourseTypeChange = (e, value) => {
-
-        this.setState({courseTypeId: value});
-    };
 
     handleTeacherChange = (e) => {
         let options = e.target.options;
@@ -98,7 +72,6 @@ class AddCourse extends Component {
             }
         }
         this.setState({teacherids: value});
-        console.log(this.state.teacherids);
     };
 
     handleStudentChange = (e) => {
@@ -109,8 +82,7 @@ class AddCourse extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({studentids: value});
-        console.log(this.state.studentids);
+        this.setState({userids: value});
     };
 
     render() {
@@ -126,25 +98,16 @@ class AddCourse extends Component {
                                     <form className="addCourse" action="/" method="POST" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
-                                    } }>
+                                    }}>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
                                                     <h5 className="truncate">Beschrijving</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <Row>
-                                                        <Input s={12} multiple={false} type='select'
-                                                               onChange={this.handleCourseTypeChange}
-                                                               label="Leerkrachten" icon='face' defaultValue='1'>
-                                                            <option key="" value="" disabled>Kies lesType
-                                                            </option>
-                                                            {this.state.courseTypes.map((courseType, index) => (
-                                                                <option key={courseType.courseTypeId}
-                                                                        value={courseType.courseTypeId}>{courseType.description}</option>
-                                                            ))}
-                                                        </Input>
-                                                    </Row>
+                                                    <StyledTextField onChange={this.onChangeDescription}
+                                                                     hint="Geef een beschrijving in..."
+                                                                     label="Beschrijving"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,10 +140,11 @@ class AddCourse extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple={true} type='select' label="Studenten" onChange={this.handleStudentChange}
+                                                        <Input s={12} multiple={true} type='select' label="Studenten"
+                                                               onChange={this.handleStudentChange}
                                                                icon='child_care' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies de studenten</option>
-                                                            {this.state.students.map((student, index) => (
+                                                            {this.state.users.map((student, index) => (
                                                                 <option key={student.userid}
                                                                         value={student.userid}>{student.firstname} {student.lastname}</option>
                                                             ))}
@@ -210,6 +174,4 @@ class AddCourse extends Component {
         );
     }
 }
-
-export default AddCourse;
 

@@ -8812,11 +8812,10 @@
     },
     "react-agenda": {
       "version": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",
-      "integrity": "sha512-MYC3L9VGNxZyGQz2VQY3eOF3eVHr0e4VOL1K43E9gZVux9Ez5/n3fVy9aUxTwS+ry/kxICrbtwzGARSUKpSfLA==",
+      "integrity": "sha1-iiNTXnT3hTRBu58NCITCMC9bQEM=",
       "requires": {
         "classnames": "2.2.5",
         "drag-drop-touch-polyfill": "1.0.0",
-        "prop-types": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
         "react-datetime": "2.14.0"
       }
     },
