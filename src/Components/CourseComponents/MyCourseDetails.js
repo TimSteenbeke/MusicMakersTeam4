@@ -12,6 +12,9 @@ export default class MyCourseDetails extends Component {
             beschrijving: "string",
             students: [],
             teachers: [],
+
+            lessons: []
+
         };
     }
 
@@ -33,6 +36,15 @@ export default class MyCourseDetails extends Component {
             }).catch((error) => {
             console.log(error);
         });
+        this.retrieveLessons(self.state.courseId);
+    }
+
+    retrieveLessons(courseId) {
+        CourseService.getLessonsFromCourse(courseId)
+            .then(lessons => {
+                console.log(lessons.lessonResources);
+                this.setState({lessons: lessons.lessonResources});
+            })
     }
 
     render() {
@@ -67,6 +79,32 @@ export default class MyCourseDetails extends Component {
                                 </Link>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h5>Lessen:</h5>
+                        {this.state.lessons.map((lesson, index) => (
+                          <section>
+                              <div>
+                                  <p>Les: {index+1}</p>
+                                  <div> {new Date(lesson.startdatetime).toLocaleString()} / {new Date(lesson.enddatetime).toLocaleString()}</div>
+                                  <div>
+                                      <p>Afwezigen: </p>
+                                    <div>{lesson.absentStudents.map((absentStudent, index) => {return <p><i className="material-icons">person</i> {absentStudent.firstname + " " + absentStudent.lastname}<br/></p>})}</div>
+                                  </div>
+                                  <div>
+                                      <p>Geen status:</p>
+                                     <div>{lesson.noStatusStudents.map((noStatusStudent, index) => {return  <p><i className="material-icons">person</i> {noStatusStudent.firstname + " " + noStatusStudent.lastname}<br/></p>})}</div>
+                                  </div>
+                                  <div>
+                                      <p>Aanwezigen: </p>
+                                     <div>{lesson.presentStudents.map((presentStudent) => { return <p><i className="material-icons">person</i> {presentStudent.firstname + " " + presentStudent.lastname}<br/></p>})}</div>
+                                  </div>
+                                  </div>
+                          </section>
+                        ))}
+
+                    </div>
                     </div>
                 </section>
             </div>

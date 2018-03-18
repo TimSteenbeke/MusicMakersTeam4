@@ -91,3 +91,7 @@ export function updateCourse(courseId, data) {
         body: data
     });*/
 }
+
+export function getLessonsFromCourse(courseId) {
+    return fetchService.fetchWithHeader("courses/" + courseId +"/lessons", "GET",{},{})
+}
