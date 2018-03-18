@@ -4,7 +4,6 @@ import Header from './GeneralComponents/Header';
 import './Home.css';
 import * as LoginService from "../Services/LoginService";
 import * as NewsItemService from "../Services/NewsItemService";
-import {Link} from 'react-router-dom';
 
 export default class Home extends Component{
     constructor(props){
@@ -21,8 +20,6 @@ export default class Home extends Component{
         {this.setState({newsitems: newsitems});
         });
     }
-
-    handleChange = (event, index, value) => this.setState({value});
 
     render(){
             if (LoginService.checkToken()){
