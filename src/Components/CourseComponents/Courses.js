@@ -1,21 +1,29 @@
+/**
+ * Created by Ben on 27/02/2018.
+ */
 import React, {Component} from 'react';
-import * as CourseService from '../../Services/CourseService';
+import * as CourseService from '../../Services/CourseService.js'
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
-import swal from 'sweetalert2';
-import './CoursesDetails.css';
+import swal from 'sweetalert2'
 
-export default class Courses extends Component {
+
+class Courses extends Component {
+
     constructor(props) {
         super(props);
+        console.log("Constructed");
         this.state = {
             courses: [],
             selectedIndex: 0,
-        };
+        }
+
+        ;
     }
 
     componentDidMount() {
         this.getCourses();
+
     }
 
     getCourses() {
@@ -60,15 +68,11 @@ export default class Courses extends Component {
     };
 
 
-    componentWillReceiveProps() {
-        CourseService.getCoursesFromBackend().then(courses => {
-            this.setState({courses: courses});
-        });
-    }
-
 
     render() {
+
         return (
+
             <div className="Homepage">
                 <Header name="Courses"/>
                 <section className="containerCss">
@@ -85,11 +89,11 @@ export default class Courses extends Component {
                         {this.state.courses.map((course, index) => (
                             <tr key={course.courseId} id={course.courseId}>
                                 <td>{course.courseId}</td>
-                                <td>{course.beschrijving}</td>
-                                <td>{course.prijs}</td>
+                                <td>{course.courseType.description}</td>
+                                <td>{course.courseType.price}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/coursedetails/${course.courseId}`}>
+                                          to={`/coursedetails/${course.courseId}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
@@ -113,3 +117,5 @@ export default class Courses extends Component {
         );
     }
 }
+
+export default Courses;
