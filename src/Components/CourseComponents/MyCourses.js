@@ -43,7 +43,7 @@ export default class MyCourses extends Component {
                         <tbody>
                         {this.state.courses.map((course, index) => (
                             <tr key={index} id={course.courseId}>
-                                <td>{course.beschrijving}</td>
+                                <td>{course.courseType.description}</td>
                                 <td>
                                     <Link className="waves-effect white-text red darken-4 btn marginator" to={`/mycoursedetails/${course.courseId}`}>Details</Link>
                                 </td>
