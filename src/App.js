@@ -29,6 +29,8 @@ import MyGroupDetails from "./Components/GroupComponents/MyGroupDetails";
 import MyCourses from "./Components/CourseComponents/MyCourses";
 import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
 import ChatComponent from "./Components/ChatComponent";
+import NewsItems from "./Components/NewsItemComponents/NewsItems";
+import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 
 export default class App extends Component {
 
@@ -72,6 +74,9 @@ export default class App extends Component {
                 <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
 
                 <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
+
+                <Route name="newsitems" path="/newsitems" component={auth(NewsItems)}/>
+                <Route name="addNewsItem" path="/addNewsItem" component={auth(AddNewsItem)}/>
 
                 <Route path='*' exact={true} component={NotFound}/>
             </Switch>
