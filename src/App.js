@@ -29,6 +29,8 @@ import MyGroupDetails from "./Components/GroupComponents/MyGroupDetails";
 import MyCourses from "./Components/CourseComponents/MyCourses";
 import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
 import ChatComponent from "./Components/ChatComponent";
+import AddLesson from './Components/CourseComponents/AddLesson.js'
+
 
 export default class App extends Component {
 
@@ -66,6 +68,7 @@ export default class App extends Component {
                 <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
+                <Route name="addLesson" path="/addLesson" component={auth(AddLesson)}  />
 
                 <Route name="users" path="/users" component={auth(Users)}/>
                 <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
