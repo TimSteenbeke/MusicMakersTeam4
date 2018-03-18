@@ -4,6 +4,7 @@ import Header from './GeneralComponents/Header';
 import './Home.css';
 import * as LoginService from "../Services/LoginService";
 import * as NewsItemService from "../Services/NewsItemService";
+import * as MomentJs from "moment";
 
 export default class Home extends Component{
     constructor(props){
@@ -38,7 +39,7 @@ export default class Home extends Component{
                                     </div>
                                     <div className="card-content darken-2">
                                         <span className="card-title activator black-text text-darken-4"><p>{item.title}<br/>
-                                            <small>{item.date} - {item.editor}</small>
+                                            <small>{ MomentJs(item.date).utc().format('YYYY-MM-DD')} - {item.editor}</small>
                                         </p><i
                                         className="material-icons right">more_vert</i></span>
                                     </div>

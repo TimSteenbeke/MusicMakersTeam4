@@ -3,6 +3,7 @@ import * as NewsItemService from '../../Services/NewsItemService';
 import swal from 'sweetalert2';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
+import MomentJs from "moment";
 
 export default class Compositions extends Component {
     constructor(props) {
@@ -35,10 +36,11 @@ export default class Compositions extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'Composition has been deleted.',
+                    'Melding is verwijderd.',
                     'success'
                 );
                 //DELETEMETHOD
+                NewsItemService.deleteNewsItem(id);
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -53,7 +55,12 @@ export default class Compositions extends Component {
     };
 
     componentDidMount() {
+        this.getNewsItem();
+    }
+
+    getNewsItem(){
         NewsItemService.getNewsItemsFromBackend().then(newsitems => {
+            console.log(newsitems)
             this.setState({newsitems: newsitems});
         });
     }
@@ -66,30 +73,30 @@ export default class Compositions extends Component {
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Melding</th>
-                            <th>Beheerder</th>
                             <th>Datum</th>
+                            <th>Geplaats door</th>
+                            <th>Melding</th>
+                            <th>Groep</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.newsitems.map((item, index) => (
-                            <tr key={index} id={item.newsitemid}>
-                                <td>{item.newsitemid}</td>
-                                <td>{item.title}</td>
+                            <tr key={index} id={item.newsItemId}>
+                                <td>{ MomentJs(item.date).utc().format('YYYY-MM-DD')}</td>
                                 <td>{item.editor}</td>
-                                <td>{item.date}</td>
+                                <td>{item.title}</td>
+                                <td></td>
                                 <td>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
                                             <Link className="waves-effect white-text deep-orange darken-4 btn"
-                                                  to={`/compositions/${item.newsitemid}`}>
+                                                  to={`/updatenewsitem/${item.newsItemId}`}>
                                                 <i className="material-icons">edit</i>
                                             </Link></div>
                                         <div className="col s6 m6 l6">
                                             <a className="waves-effect white-text deep-orange darken-4 btn"
-                                               onClick={(e) => this.handleDelete(item.newsitemid, e)}>
+                                               onClick={(e) => this.handleDelete(item.newsItemId, e)}>
                                                 <i className="material-icons">delete
                                                 </i>
                                             </a>

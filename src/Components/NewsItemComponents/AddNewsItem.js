@@ -5,6 +5,7 @@ import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize';
 import swal from 'sweetalert2';
+import * as GroupService from "../../Services/GroupService";
 
 export default class AddNewsItem extends Component {
     constructor(props) {
@@ -12,6 +13,8 @@ export default class AddNewsItem extends Component {
         this.state = {
             value: 1,
             soorten: [],
+            groups: [],
+            groupid: 1,
             open: false,
             title: "",
             message: "",
@@ -20,19 +23,31 @@ export default class AddNewsItem extends Component {
         };
     }
 
+    componentDidMount() {
+        this.addGroups();
+    }
+
+    addGroups = () => {
+        GroupService.getAllGroupsFromBackend().then(console.log("----Groups---- \n"))
+            .then(groups => {
+                this.setState({groups: groups}, console.log(groups));
+            });
+    };
+
     handleClick = () => {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Instrument Added!',
+            title: 'Melding toegevoegd!',
             showConfirmButton: false,
             timer: 1500
         });
-        NewsItemService.postInstrument(JSON.stringify(
+        NewsItemService.postNewsItem(JSON.stringify(
             {
                 title: this.state.fields["title"],
                 message: this.state.fields["message"],
                 messageImage: this.state.image,
+                groupid: this.state.groupid
             }
         ));
 
@@ -58,6 +73,17 @@ export default class AddNewsItem extends Component {
         setTimeout(function () {
             console.log("successfully Uploaded");
         }, 1000);
+    };
+
+    handleGroupChange = (e) => {
+        let options = e.target.options;
+        let value = 1;
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value = options[i].value;
+            }
+        }
+        this.setState({groupid: value});
     };
 
     render() {
@@ -97,10 +123,10 @@ export default class AddNewsItem extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>Titel</h5>
+                                                    <h5>Titel *</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <input ref="title" className="center" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel"/>
+                                                    <input ref="title" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,10 +134,10 @@ export default class AddNewsItem extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>Bericht</h5>
+                                                    <h5>Bericht *</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
-                                                    <textarea ref="message" className="center" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht"/>
+                                                    <textarea ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,10 +149,14 @@ export default class AddNewsItem extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
-                                                            {this.state.soorten.map((soort, index) => (
-                                                                <option key={soort.instrumentSoortId}
-                                                                        value={soort.instrumentSoortId}>{soort.soortNaam}</option>
+                                                        <Input s={12} multiple={false} type='select'
+                                                               onChange={this.handleGroupChange}
+                                                               label="Groep" icon='face'>
+                                                            <option key="" value="" disabled>Selecteer een groep
+                                                            </option>
+                                                            {this.state.groups.map((group, index) => (
+                                                                <option key={group.groupid}
+                                                                        value={group.groupid}>{group.name}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
@@ -136,18 +166,8 @@ export default class AddNewsItem extends Component {
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Vak</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <Row>
-                                                        <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
-                                                            {this.state.soorten.map((soort, index) => (
-                                                                <option key={soort.instrumentSoortId}
-                                                                        value={soort.instrumentSoortId}>{soort.soortNaam}</option>
-                                                            ))}
-                                                        </Input>
-                                                    </Row>
+                                                <div className="col s12 m12 l12">
+                                                    <span>Velden met een * zijn verplicht!</span>
                                                 </div>
                                             </div>
                                         </div>

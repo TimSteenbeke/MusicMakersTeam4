@@ -31,6 +31,7 @@ import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
 import ChatComponent from "./Components/ChatComponent";
 import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
+import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 
 export default class App extends Component {
 
@@ -77,8 +78,10 @@ export default class App extends Component {
 
                 <Route name="newsitems" path="/newsitems" component={auth(NewsItems)}/>
                 <Route name="addNewsItem" path="/addNewsItem" component={auth(AddNewsItem)}/>
+                    <Route name="updatenNewsItem" path="/updatenewsitem/:id" component={auth(UpdateNewsItem)}/>
 
-                <Route path='*' exact={true} component={NotFound}/>
+
+                    <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );
     }
