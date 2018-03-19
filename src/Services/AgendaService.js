@@ -1,10 +1,11 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-const localURL = 'http://localhost:8080/api/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
+import * as fetchService from "./FetchService";
 
-
+/*const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+//const URL = 'http://localhost:8080/api/';*/
 
 export function getMyAgenda() {
+    return fetchService.fetchWithHeader("agenda", "GET", {}, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + 'agenda',
         {
             mode: 'cors',
@@ -22,11 +23,12 @@ export function getMyAgenda() {
         .catch((err) => {
             console.log("geen response");
             console.log(err);
-        });
+        });*/
 }
 
-
 export function getOtherAgenda(userid) {
+    return fetchService.fetchWithHeader("agenda/"+userid, "GET", {}, {});
+/*    let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + 'agenda/' + userid,
         {
             mode: 'cors',
@@ -45,5 +47,5 @@ export function getOtherAgenda(userid) {
         .catch((err) => {
             console.log("geen response");
             console.log(err);
-        });
+        });*/
 }

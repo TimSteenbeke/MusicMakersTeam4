@@ -1,37 +1,39 @@
 import React, {Component} from 'react';
 import Home from './Components/Home';
-import Login from './Components/Login.js';
-import AddInstrument from './Components/AddInstrument.js';
-import Instrumenten from './Components/Instrumenten.js';
-import InstrumentDetails from './Components/InstrumentDetails.js';
-import CourseDetails from './Components/CoursesDetails.js';
-import AddCourse from './Components/AddCourse.js'
-import Courses from './Components/Courses.js'
+import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
+import Instrumenten from './Components/InstrumentComponents/Instruments.js';
+import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
+import CourseDetails from './Components/CourseComponents/CoursesDetails.js';
+import AddCourse from './Components/CourseComponents/AddCourse.js'
+import Courses from './Components/CourseComponents/Courses.js'
 import Agenda from './Components/Agenda.js'
 import {Route, Switch} from 'react-router'
 import './CSS/GlobalStylesheet.css';
-import Group from "./Components/Group";
-import AddGroup from "./Components/AddGroup"
-import GroupUpdate from "./Components/GroupUpdate";
-import Compositions from "./Components/Compositions.js";
-import AddComposition from "./Components/AddComposition";
-import PlayMusic from './Components/PlayMusic.js';
-import NotFound from "./Components/NotFound";
-import CompositionUpdate from "./Components/CompositionUpdate";
-import InstrumentLevels from "./Components/InstrumentLevel";
-import auth from './Components/CheckTokenComponent';
-import AddCourseType from "./Components/AddCourseType";
-import CourseTypeDetails from "./Components/CourseTypeDetails";
-import CourseTypes from "./Components/CourseTypes";
-import AddUser from "./Components/AddUser";
-import UserDetails from "./Components/UserUpdate";
-import Users from "./Components/Users";
-import MyGroup from "./Components/MyGroups";
-import MyGroupDetails from "./Components/MyGroupDetails";
-import MyCourses from "./Components/MyCourses";
-import MyCourseDetails from "./Components/MyCourseDetails";
+import Group from "./Components/GroupComponents/Group";
+import AddGroup from "./Components/GroupComponents/AddGroup"
+import GroupUpdate from "./Components/GroupComponents/GroupUpdate";
+import Compositions from "./Components/CompositionComponents/Compositions.js";
+import AddComposition from "./Components/CompositionComponents/AddComposition";
+import PlayMusic from './Components/MusicComponents/PlayMusic.js';
+import NotFound from "./Components/GeneralComponents/NotFound";
+import CompositionUpdate from "./Components/CompositionComponents/CompositionUpdate";
+import auth from './Components/GeneralComponents/CheckTokenComponent';
+import AddCourseType from "./Components/CourseComponents/AddCourseType";
+import CourseTypeDetails from "./Components/CourseComponents/CourseTypeDetails";
+import CourseTypes from "./Components/CourseComponents/CourseTypes";
+import AddUser from "./Components/UserComponents/AddUser";
+import UserDetails from "./Components/UserComponents/UserUpdate";
+import Users from "./Components/UserComponents/Users";
+import MyGroup from "./Components/GroupComponents/MyGroups";
+import MyGroupDetails from "./Components/GroupComponents/MyGroupDetails";
+import MyCourses from "./Components/CourseComponents/MyCourses";
+import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
+import ChatComponent from "./Components/ChatComponent";
+import NewsItems from "./Components/NewsItemComponents/NewsItems";
+import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
+import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 
-class App extends Component {
+export default class App extends Component {
 
 
     render() {
@@ -69,13 +71,18 @@ class App extends Component {
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
 
                 <Route name="users" path="/users" component={auth(Users)}/>
-                    <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
-                    <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
+                <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
+                <Route name="userDetails" path="/userdetails/:id" component={auth(UserDetails)}/>
+
+                <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
+
+                <Route name="newsitems" path="/newsitems" component={auth(NewsItems)}/>
+                <Route name="addNewsItem" path="/addNewsItem" component={auth(AddNewsItem)}/>
+                    <Route name="updatenNewsItem" path="/updatenewsitem/:id" component={auth(UpdateNewsItem)}/>
+
 
                     <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );
     }
 }
-
-export default App;

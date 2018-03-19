@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import '../CSS/Login.css';
+import './Login.css';
 import * as LoginService from "../Services/LoginService";
 import swal from 'sweetalert2'
 
-
-class Login extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -121,6 +120,3 @@ class Login extends Component {
         )
     }
 }
-
-
-export default Login;
