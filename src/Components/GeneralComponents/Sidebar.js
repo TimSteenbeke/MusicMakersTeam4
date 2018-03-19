@@ -6,6 +6,8 @@ import Divider from 'material-ui/Divider';
 import logo from '../../images/logo.png'
 import * as LoginService from "../../Services/LoginService";
 import './Sidebar.css';
+import i18n from './i18n'
+import detectBrowserLanguage from 'detect-browser-language'
 
 const styles = {
     menuColor: {
@@ -14,6 +16,24 @@ const styles = {
 };
 
 export default class Sidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lng: ""
+        };
+    }
+
+    componentDidMount() {
+        this.setState({lng: navigator.language});
+        localStorage.setItem("i18nextLng", this.state.lng.substring(0,2));
+        console.log("User language: " + this.state.lng);
+    }
+
+    componentWillMount() {
+        this.setState({lng: navigator.language});
+        localStorage.setItem("i18nextLng", this.state.lng.substring(0,2));
+        console.log("User language: " + this.state.lng);
+    }
 
     render() {
         return (
@@ -24,7 +44,7 @@ export default class Sidebar extends Component {
 
                         <Divider/>
                         <Link to="/">
-                            <MenuItem style={styles.menuColor} primaryText="Home"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('home.label')}/>
                         </Link>
                         <Divider/>
                         <Link to="/agenda">
@@ -36,10 +56,10 @@ export default class Sidebar extends Component {
                         </Link>
                         <Divider/>
                         <Link to="/instrumenten">
-                            <MenuItem style={styles.menuColor} primaryText="Instrumenten"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('instruments.label')}/>
                         </Link>
                         <Link to="/groups">
-                            <MenuItem style={styles.menuColor} primaryText="Groepen"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('groups.label')}/>
                         </Link>
                         <Link to="/users">
                             <MenuItem style={styles.menuColor} primaryText="Users"/>
