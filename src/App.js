@@ -1,38 +1,38 @@
 import React, {Component} from 'react';
-import Home from './Components/Home';
-import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
-import Instruments from './Components/InstrumentComponents/Instruments.js';
-import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
-import CourseDetails from './Components/CourseComponents/CoursesDetails.js';
-import AddCourse from './Components/CourseComponents/AddCourse.js'
-import Courses from './Components/CourseComponents/Courses.js'
-import Agenda from './Components/Agenda.js'
 import {Route, Switch} from 'react-router'
 import './CSS/GlobalStylesheet.css';
-import Group from "./Components/GroupComponents/Group";
-import AddGroup from "./Components/GroupComponents/AddGroup"
-import GroupUpdate from "./Components/GroupComponents/GroupUpdate";
-import Compositions from "./Components/CompositionComponents/Compositions.js";
-import AddComposition from "./Components/CompositionComponents/AddComposition";
-import PlayMusic from './Components/MusicComponents/PlayMusic.js';
-import NotFound from "./Components/GeneralComponents/NotFound";
-import CompositionUpdate from "./Components/CompositionComponents/CompositionUpdate";
 import auth from './Components/GeneralComponents/CheckTokenComponent';
+import AddComposition from "./Components/CompositionComponents/AddComposition";
+import AddCourse from './Components/CourseComponents/AddCourse.js'
 import AddCourseType from "./Components/CourseComponents/AddCourseType";
+import AddGroup from "./Components/GroupComponents/AddGroup"
+import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
+import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
+import AddUser from "./Components/UserComponents/AddUser";
+import Agenda from './Components/Agenda.js'
+import ChatComponent from "./Components/ChatComponent";
+import Compositions from "./Components/CompositionComponents/Compositions.js";
+import CompositionUpdate from "./Components/CompositionComponents/CompositionUpdate";
+import CourseDetails from './Components/CourseComponents/CoursesDetails.js';
+import Courses from './Components/CourseComponents/Courses.js'
 import CourseTypeDetails from "./Components/CourseComponents/CourseTypeDetails";
 import CourseTypes from "./Components/CourseComponents/CourseTypes";
-import AddUser from "./Components/UserComponents/AddUser";
-import UserDetails from "./Components/UserComponents/UserUpdate";
-import Users from "./Components/UserComponents/Users";
+import Group from "./Components/GroupComponents/Group";
+import GroupUpdate from "./Components/GroupComponents/GroupUpdate";
+import Home from './Components/Home';
+import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
+import Instruments from './Components/InstrumentComponents/Instruments.js';
+import Login from "./Components/Login";
+import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
+import MyCourses from "./Components/CourseComponents/MyCourses";
 import MyGroup from "./Components/GroupComponents/MyGroups";
 import MyGroupDetails from "./Components/GroupComponents/MyGroupDetails";
-import MyCourses from "./Components/CourseComponents/MyCourses";
-import MyCourseDetails from "./Components/CourseComponents/MyCourseDetails";
-import ChatComponent from "./Components/ChatComponent";
 import NewsItems from "./Components/NewsItemComponents/NewsItems";
-import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
+import NotFound from "./Components/GeneralComponents/NotFound";
+import PlayMusic from './Components/MusicComponents/PlayMusic.js';
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
-import Login from "./Components/Login";
+import UserDetails from "./Components/UserComponents/UserUpdate";
+import Users from "./Components/UserComponents/Users";
 
 export default class App extends Component {
 

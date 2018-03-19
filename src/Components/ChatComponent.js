@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {TextField} from "material-ui";
-import {black500,deepOrangeA700, grey500} from "material-ui/styles/colors";
+import {black500, deepOrangeA700, grey500} from "material-ui/styles/colors";
+import * as GroupService from "../Services/GroupService";
+import {Input} from "react-materialize";
+
 const styles = {
     width: {
         width: "90%",
@@ -37,27 +40,52 @@ export default class ChatComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: 'WebSockets chat',
             text: "",
-            chatroom: 'Poef',
-            messages: ["Welcome to chatroom Poef", "Tim: Hello there", "Jos: jo test"],
-            message: "Hello world !",
-            name: currentUser.firstname
+            chatroom: 'global',
+            messages: ["Welcome to Global Chat"],
+            message: "",
+            name: currentUser,
+            chatrooms: [global]
         };
         this.stompClient = null;
     }
 
     componentDidMount() {
+        this.addChatrooms();
         this.initializeWebSocketConnection();
+    }
+
+    addChatrooms() {
+        let self = this;
+        let chatrooms = [];
+        GroupService.getGroupsByUser().then(groups => {
+            groups.forEach((group) => {
+                chatrooms.push(group.name)
+            });
+        });
+        self.setState({
+            chatrooms: [...self.state.chatrooms, chatrooms]
+        });
     }
 
     ChangeRoom() {
         let self = this;
         self.setState({
-            messages: ["Welcome to Chatroom " + self.state.chatroom]
+            messages: ["Welcome to Chatroom met" + self.state.chatroom]
         });
         this.initializeWebSocketConnection();
     }
+
+    handleChatroomChange = (e) => {
+        let options = e.target.options;
+        let value = 1;
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value = options[i].value;
+            }
+        }
+        this.setState({chatroom: value});
+    };
 
     initializeWebSocketConnection() {
         const self = this;
@@ -106,37 +134,19 @@ export default class ChatComponent extends Component {
                     value={this.state.message}
                 />
                 <button onClick={(e) => this.sendMessage(e)}>send</button>
-                {/*<label>Naam:</label>
-                <TextField
-                    style={styles.width}
-                    hintText="Type your name here..."
-                    floatingLabelText="Name"
-                    inputStyle={styles.inputstyle}
-                    hintStyle={styles.floatingLabelFocusStyle}
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    underlineFocusStyle={styles.underlineStyle}
-                    onChange={(event, typedName) => {
-                        this.setState({name: typedName});
-                    }}
-                    value={this.state.name}
-                />*/}
-                <label>Chatroom:</label>
-                <TextField
-                    style={styles.width}
-                    hintText="Type your chatroom here..."
-                    floatingLabelText="Name"
-                    inputStyle={styles.inputstyle}
-                    hintStyle={styles.floatingLabelFocusStyle}
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                    underlineFocusStyle={styles.underlineStyle}
-                    onChange={(event, typedRoom) => {
-                        this.setState({chatroom: typedRoom});
-                    }}
-                    value={this.state.chatroom}
-                />
+
+                <Input s={12} multiple={false} type='select'
+                       onChange={this.handleChatroomChange}
+                       label="Chatroom" icon='receipt'>
+                    <option key="" value="" disabled>chose your chatroom
+                    </option>
+                    {this.state.chatrooms.map((chatroom, index) => (
+                        <option key={chatroom}
+                                value={chatroom}>{chatroom}</option>
+                    ))}
+                </Input>
                 <button onClick={(e) => this.ChangeRoom(e)}>Change room</button>
+
                 <div>
                     <p>|</p>
                 </div>

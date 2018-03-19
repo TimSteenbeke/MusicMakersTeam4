@@ -7,7 +7,11 @@ import swal from 'sweetalert2';
 import {CardPanel} from 'react-materialize';
 import "./GroupsAndChat.css";
 import {Link} from 'react-router-dom';
+import * as Stomp from "stompjs";
+import * as SockJS from "sockjs-client";
 
+const serverUrl = 'https://musicmaker-api-team4.herokuapp.com/socket';
+// const serverUrl = 'http://localhost:8080/socket';
 
 export default class GroupsAndChat extends Component {
     constructor(props) {
@@ -17,8 +21,9 @@ export default class GroupsAndChat extends Component {
             firstname: "",
             lastname: "",
             groups: [],
-            items: [],
+            items: []
         };
+        this.stompClient = null;
     }
 
     componentDidMount(){
@@ -34,10 +39,23 @@ export default class GroupsAndChat extends Component {
         GroupService.getGroupsByUser().then(groups => {
             this.setState({groups: groups});
         });
-        console.log("grouups");
+        console.log("groups");
         console.log(this.state.groups.newsItems);
 
         this.getMyAgendaItems();
+        this.initializeWebSocketConnection();
+    }
+
+    initializeWebSocketConnection() {
+        const self = this;
+        const ws = new SockJS(serverUrl);
+        self.stompClient = Stomp.over(ws);
+        console.log("initializeWebSocketConnection");
+        console.log(ws);
+        self.stompClient.connect({}, () => {
+            self.stompClient.subscribe('/chat/global');
+        });
+        console.log("init is done");
     }
 
     getMyAgendaItems = () => {
