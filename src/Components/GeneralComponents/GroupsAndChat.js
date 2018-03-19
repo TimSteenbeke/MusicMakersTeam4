@@ -6,6 +6,8 @@ import * as AgendaService from '../../Services/AgendaService.js';
 import swal from 'sweetalert2';
 import {Button, CardPanel} from 'react-materialize';
 import "./GroupsAndChat.css";
+import {Link} from 'react-router-dom';
+
 
 export default class GroupsAndChat extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ export default class GroupsAndChat extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount(){
         UserService.getUserByUsernameFromBackend().then(users => {
             this.setState(
                 {
@@ -27,11 +29,14 @@ export default class GroupsAndChat extends Component {
                     firstname: users.firstname,
                     lastname: users.lastname,
                 }
-            );
+                );
         });
         GroupService.getGroupsByUser().then(groups => {
             this.setState({groups: groups});
         });
+        console.log("groups");
+        console.log(this.state.groups.newsItems);
+
         this.getMyAgendaItems();
     }
 
@@ -43,13 +48,13 @@ export default class GroupsAndChat extends Component {
 
     mapAgendaItems = (agendaItems) => {
         if (agendaItems !== undefined) {
-            let AgendaItems = [];
+            let AgendaItems= [];
 
             //Over lessons loopen en info in AgendaItem steken
             //type en basic info
-            for (let i = 0; i < agendaItems.lessons.length; i++) {
+            for (let i= 0; i < agendaItems.lessons.length; i++) {
                 let les = {
-                    id: agendaItems.lessons[i].lessonId,
+                    id: agendaItems.lessons[i].lessonId ,
                     name: "Les coming soon (relatie ligt nog niet)",
                     startDateTime: new Date(agendaItems.lessons[i].startDateTime),
                     endDateTime: new Date(agendaItems.lessons[i].endDateTime),
@@ -61,7 +66,7 @@ export default class GroupsAndChat extends Component {
 
             //over performances loopen en info in AgendaItem steken
             //type en basic info
-            for (let x = 0; x < agendaItems.performances.length; x++) {
+            for (let x= 0; x < agendaItems.performances.length; x++) {
                 let optreden = {
                     id: agendaItems.performances[x].performanceId,
                     name: agendaItems.performances[x].beschrijving,
@@ -80,7 +85,7 @@ export default class GroupsAndChat extends Component {
     userLogout = () => {
         let response = LoginService.logout();
 
-        if (response) {
+        if(response){
             this.setState({redirect: true});
             swal({
                 position: 'top-end',
@@ -95,28 +100,29 @@ export default class GroupsAndChat extends Component {
     render() {
         return (
             <div>
-                <div className="containerCss">
+            <div className="containerCss">
                     <CardPanel className="white black-text">
                         <div className="row">
                             <div className="col s12 m12 l12 center">
-                                <h4>Welkom, {this.state.firstname}!</h4>
+                                <h4 >Welkom, {this.state.firstname}!</h4>
                             </div>
                             <div className="col s12 m12 l12">
                                 <h5><i className="material-icons small">groups</i>Mijn groepen</h5>
-                                {this.state.groups && this.state.groups.length > 0 ?
-                                    this.state.groups.map((group, index) => (
-                                        <span><i
-                                            className="material-icons tiny">arrow_forward</i> {group.name}<br/></span>
-                                    ))
-                                    : <span>Geen groepen!<br/></span>
-                                }
+                                <div className="collection">
+                                    { this.state.groups && this.state.groups.length > 0 ?
+                                        this.state.groups.map((group, index) => (
+                                            <Link className="collection-item" to={`/mygroupdetails/${group.groupid}`}><span className="badge">1</span>{group.name}</Link>
+                                        ))
+                                        :  <a className="collection-item">Geen groepen!</a>
+                                    }
+                                </div>
+
                             </div>
-                            <div className="col s12 m12 l12" style={{marginBottom: 15}}>
+                            <div className="col s12 m12 l12" style={{marginBottom:15}}>
                                 <h5><i className="material-icons small">date_range</i> Agenda:</h5>
-                                {this.state.items && this.state.items.length > 0 ?
+                                { this.state.items && this.state.items.length > 0 ?
                                     this.state.items.map((item, index) => (
-                                        <span><i
-                                            className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
+                                        <span><i className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
                                 <span><i className="material-icons tiny">trending_flat</i> {item.name}</span><br/><br/></span>
                                     ))
                                     : <span>Geen agenda!<br/></span>
@@ -124,7 +130,7 @@ export default class GroupsAndChat extends Component {
                             </div>
                         </div>
                     </CardPanel>
-                </div>
+            </div>
             </div>
         );
     }

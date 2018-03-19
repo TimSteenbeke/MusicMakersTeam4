@@ -40,7 +40,7 @@ export function registerPresent(lessonid) {
 }
 
 export function getAttendanceStatus(lessonid) {
-    fetchService.fetchWithHeader("lesson/attendancestatus/" + lessonid, "GET", {}, {});
+   return fetchService.fetchWithHeader("lesson/attendancestatus/" + lessonid, "GET", {}, {});
     /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
         return fetch(URL + 'lesson/attendancestatus/' +lessonid,
             {
