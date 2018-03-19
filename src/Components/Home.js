@@ -24,7 +24,6 @@ export default class Home extends Component{
         }
     }
 
-
     render(){
             if (LoginService.checkToken()){
             return (

@@ -21,44 +21,36 @@ export default class Users extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
-            confirmButtonClass: 'btn red',
-            cancelButtonClass: 'btn green marginator',
-            buttonsStyling: false,
-            reverseButtons: true
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
         }).then((result) => {
             if (result.value) {
-                swal(
-                    'Deleted!',
-                    'User has been deleted.',
-                    'success'
-                );
                 UserService.deleteUser(id);
-            } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
-            ) {
+                swal({
+                    title: "Deleted!",
+                    text: "User has been deleted!",
+                    type: "success"
+                }).then(() => {
+                    this.props.history.push("/users");
+                });
+            } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Cancelled',
-                    'User was not deleted',
+                    'Your imaginary file is safe :)',
                     'error'
                 )
             }
-        });
-
+        })
     };
+
+    componentWillReceiveProps() {
+        this.getUsers();
+    }
 
     getUsers() {
         UserService.getAll().then(users => {
             this.setState({users: users.users});
         });
-    }
-
-    componentWillReceiveProps() {
-        this.getUsers();
     }
 
     componentDidMount() {

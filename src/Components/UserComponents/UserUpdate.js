@@ -4,6 +4,7 @@ import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import './UserUpdate.css';
+import StyledTextField from "../GeneralComponents/StyledTextField";
 
 export default class UserUpdate extends Component {
 
@@ -43,8 +44,6 @@ export default class UserUpdate extends Component {
                     city: user.city,
                     country: user.country,
                 });
-                console.log(self.state.username);
-                console.log(self.state.firstname);
             }).catch((error) => {
             console.log(error);
         });
@@ -75,6 +74,8 @@ export default class UserUpdate extends Component {
                 country: self.state.country,
             }
         ));
+
+        this.props.history.push('/users')
     };
 
     handleChangeImage = (evt) => {
@@ -137,80 +138,105 @@ export default class UserUpdate extends Component {
         e.preventDefault();
         console.log("Form submitted");
         this.handleUpdate();
-        this.props.history.push('/users')
     }
 
     render() {
         return (
-            <div className="row col s12 m12 l12">
-                <Header name="Gebruiker details"/>
-                <div className="section">
-                    <div className="card hoverable z-depth-3" style={{marginRight: 50,marginLeft:50}}>
-                        <form name="compositionForm" className="compositionForm" onSubmit= {this.compositionSubmit.bind(this)}>
+            <div className="Homepage">
+                <Header name="Gebruiker bewerken"/>
+                <section className="containerCss">
+                    <div className="col s12 m8 offset-m2 l8 offset-l2">
+                        <div className="card hoverable z-depth-3">
+                            <div className="card-image">
+                                <img
+                                    src={"data:image;base64," + this.state.userimage} alt="Instrument"
+                                    height="300px"/>
+                                <form action="#">
+                                    <div className="file-field input-field">
+                                        <div
 
-                            <div className="card-content">
-                                <div className="row">
-                                    <div className="col s12 m6 offset-m3 l6 offset-l3 center" style={{marginBottom:20}}>
-                                        <label>Foto</label>
-                                        <div className="card-image">
-                                            <img src={"data:image;base64," + this.state.userimage} alt="User" style={{width: 100, height: 100}}/>
-                                            <div className="file-field input-field">
-                                                <div
-                                                    className="btn-floating waves-effect waves-light deep-orange darken-4 pulse">
-                                                    <i className="material-icons">attach_file</i>
-                                                    <input name="file"
-                                                           className="upload-file"
-                                                           id="file"
-                                                           onChange={this.handleChangeImage}
-                                                           encType="multipart/form-data" accept="image/*" type="file"/>
-                                                </div>
-                                            </div>
+                                            className="btn-floating halfway-fab waves-effect waves-light deep-orange darken-4 pulse">
+                                            <i className="material-icons">attach_file</i>
+                                            <input name="file"
+                                                   className="upload-file"
+                                                   id="file"
+                                                   onChange={this.handleChangeImage}
+                                                   encType="multipart/form-data" accept="image/*" type="file"/>
                                         </div>
                                     </div>
-                                    <div className="col s12 m6 offset-m3 l6 offset-l3 center">
-                                        <label>Gebruikersnaam</label>
-                                        <input className="center" type="text" value={this.state.username} label="Titel"  onChange={this.setUsername} placeholder="Geef een gebruikersnaam in.."/>
-                                    </div>
-                                    <div className="col s12 m6 offset-m3 l6 offset-l3 center">
-                                        <label>Voornaam</label>
-                                        <input className="center" type="text" value={this.state.firstname} label="Titel"  onChange={this.setFirstname} placeholder="Geef een voornaam in.."/>
-                                    </div>
-                                    <div className="col s12 m6 offset-m3 l6 offset-l3 center">
-                                        <label>Achternaam</label>
-                                        <input className="center" type="text" value={this.state.lastname} label="Titel"  onChange={this.setLastname} placeholder="Geef een achternaam in.."/>
-                                    </div>
-                                    <div className="col s12 m6 offset-m3 l6 offset-l3 center">
-                                        <label>Adres</label>
-                                    </div>
-                                    <div className="col s12 m6 l6 center">
-                                        <label>Straat</label>
-                                        <input className="center" type="text" value={this.state.street} label="Titel"  onChange={this.setStreet} placeholder="Geef een straat in.."/>
-                                    </div>
-                                    <div className="col s12 m6 l6 center">
-                                        <label>Nummer</label>
-                                        <input className="center" type="text" value={this.state.streetnumber} label="Titel"  onChange={this.setStreetnumber} placeholder="Geef een huisnummer in.."/>
-                                    </div>
-                                    <div className="col s12 m4 l4 center">
-                                        <label>Postcode</label>
-                                        <input className="center" type="text" value={this.state.postalcode} label="Titel"  onChange={this.setPostalcode} placeholder="Geef een postcode in.."/>
-                                    </div>
-                                    <div className="col s12 m4 l4 center">
-                                        <label>Woonplaats</label>
-                                        <input className="center" type="text" value={this.state.city} label="Titel"  onChange={this.setCity} placeholder="Geef een woonplaats in.."/>
-                                    </div>
-                                    <div className="col s12 m4 l4 center">
-                                        <label>Land</label>
-                                        <input className="center" type="text" value={this.state.country} label="Titel"  onChange={this.setCountry} placeholder="Geef een land in.."/>
+                                </form>
+                            </div>
+                            <div className="card-content">
+                                   <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField  type="text" value={this.state.username} label="Gebruikersnaam"  onChange={this.setUsername} placeholder="Geef een gebruikersnaam in.."/>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField  type="text" value={this.state.firstname} label="Voornaam"  onChange={this.setFirstname} placeholder="Geef een voornaam in.."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField  type="text" value={this.state.lastname} label="Achternaam"  onChange={this.setLastname} placeholder="Geef een achternaam in.."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m6 l6">
+                                            <StyledTextField  type="text" value={this.state.street} label="Straat"  onChange={this.setStreet} placeholder="Geef een straat in.."/>
+                                        </div>
+                                        <div className="col s12 m6 l6">
+                                            <StyledTextField  type="text" value={this.state.streetnumber} label="Huisnummer"  onChange={this.setStreetnumber} placeholder="Geef een huisnummer in.."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField type="text" value={this.state.postalcode} label="Postcode"  onChange={this.setPostalcode} placeholder="Geef een postcode in.."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField type="text" value={this.state.city} label="Woonplaats"  onChange={this.setCity} placeholder="Geef een woonplaats in.."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
+                                <div className="section">
+                                    <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField  type="text" value={this.state.country} label="Land"  onChange={this.setCountry} placeholder="Geef een land in.."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="divider"></div>
                             </div>
-                            <div className="card-action center">
-                                <input style={{marginRight: 20,width: 150}} type="submit" value="Opslaan" className="btn waves-effect waves-light deep-orange darken-4 pulse"/>
-                                <Link style={{width: 150}} to="/users" className="btn waves-effect waves-light deep-orange darken-4 pulse">Terug</Link>
+                            <div className="card-action">
+                                <button  onClick={this.handleUpdate}
+                                      className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
+                                    className="material-icons">done</i>
+                                </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         );
     }

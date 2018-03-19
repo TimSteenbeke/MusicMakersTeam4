@@ -33,6 +33,7 @@ class CoursesDetails extends Component {
 
 
     componentDidMount() {
+
         let self = this;
         CourseService.getCourseFromBackend(self.state.courseId)
             .then(console.log("----Course met id " + self.state.courseId + "---- \n"))

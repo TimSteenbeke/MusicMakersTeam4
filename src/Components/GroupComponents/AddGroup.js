@@ -103,11 +103,11 @@ export default class AddGroup extends Component {
     };
 
     render() {
-        return (<div className="Homepage">
-                <Header name={this.state.name}/>
+        return (
+            <div className="Homepage">
+                <Header name="Groep toevoegen"/>
                 <section className="containerCss">
-                    <div className="col s0 m2 l2"/>
-                    <div className="col s12 m8 l8">
+                    <div className="col s12 m8 offset-m2 l8 offset-l2">
                         <div className="card hoverable">
                             <div className="card-image">
                             <img
@@ -129,21 +129,14 @@ export default class AddGroup extends Component {
                                 </form>
                             </div>
                             <div className="row">
-                                <div className="col s3 m3 l3">
-                                    <h5 className="truncate">Groepsnaam</h5>
-                                </div>
-                                <div className="col s9 m9 l9">
-                                    <StyledTextField onChange={this.onChangeName}
-                                                     label="Naam"/>
+                                <div className="col s12 m12 l12">
+                                    <StyledTextField placeholder="Geef een groepsnaam in..."  label="Groepsnaam" onChange={this.onChangeName}/>
                                 </div>
                             </div>
                             <div className="divider"></div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Begeleider</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
+                                    <div className="col s12 m12 l12">
                                         <Row>
                                             <Input s={12} multiple={false} type='select'
                                                    onChange={this.handleUserChange}
@@ -161,10 +154,7 @@ export default class AddGroup extends Component {
                             </div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Studenten</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
+                                    <div className="col s12 m12 l12">
                                         <Row>
                                             <Input s={12} multiple={true} type='select' label="Studenten"
                                                    onChange={this.handleStudentChange}
@@ -192,7 +182,6 @@ export default class AddGroup extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col s0 m2 l2"/>
                 </section>
             </div>
         );

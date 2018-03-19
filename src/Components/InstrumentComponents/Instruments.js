@@ -20,34 +20,34 @@ export default class Instruments extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
-            confirmButtonClass: 'btn red',
-            cancelButtonClass: 'btn green marginator',
-            buttonsStyling: false,
-            reverseButtons: true
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
         }).then((result) => {
             if (result.value) {
-                swal(
-                    'Deleted!',
-                    'Instrument has been deleted.',
-                    'success'
-                );
                 InstrumentService.deleteInstrument(id);
-            } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
-            ) {
+                swal({
+                    title: "Deleted!",
+                    text: "Instrument has been deleted!",
+                    type: "success"
+                }).then(() => {
+                    this.props.history.push("/instrumenten");
+                });
+
+                // For more information about handling dismissals please visit
+                // https://sweetalert2.github.io/#handling-dismissals
+            } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Cancelled',
-                    'Instrument was not deleted',
+                    'Your imaginary file is safe :)',
                     'error'
                 )
             }
-        });
+        })
     };
+
+    componentWillReceiveProps() {
+        this.getInstrumenten();
+    }
 
     getInstrumenten() {
         InstrumentService.getInstrumentenFromBackend().then(Instruments => {
@@ -61,9 +61,7 @@ export default class Instruments extends Component {
     }
 
     render() {
-
             return (
-
                 <div className="Homepage">
                     <Header name="Instrumenten"/>
                     <section className="containerCss">
@@ -81,9 +79,9 @@ export default class Instruments extends Component {
                             {this.state.Instruments.map((instrument, index) => (
                                 <tr key={index} id={instrument.instrumentId}>
                                     <td>{instrument.instrumentId}</td>
-                                    <td>{instrument.naam}</td>
+                                    <td>{instrument.instrumentName}</td>
                                     <td>{instrument.type}</td>
-                                    <td>{instrument.uitvoering}</td>
+                                    <td>{instrument.details}</td>
                                     <td>
                                         <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
                                               to={`/instrumentdetails/${instrument.instrumentId}` }>
@@ -106,6 +104,7 @@ export default class Instruments extends Component {
                         </div>
                     </section>
                 </div>
+
             );
     }
 }

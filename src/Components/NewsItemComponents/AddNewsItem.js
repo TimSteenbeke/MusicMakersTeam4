@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import * as NewsItemService from '../../Services/NewsItemService';
 import Header from '../GeneralComponents/Header';
-import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize';
 import swal from 'sweetalert2';
 import * as GroupService from "../../Services/GroupService";
+import StyledTextField from "../GeneralComponents/StyledTextField";
 
 export default class AddNewsItem extends Component {
     constructor(props) {
@@ -51,6 +51,7 @@ export default class AddNewsItem extends Component {
             }
         ));
 
+        this.props.history.push('/newsitems')
     };
 
     handleChange(field, e){
@@ -91,9 +92,7 @@ export default class AddNewsItem extends Component {
             <div className="Meldingen">
                 <Header name="Melding toevoegen"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-m2">
                             <div className="card hoverable">
                                 <div className="card-image">
                                     <img
@@ -122,32 +121,23 @@ export default class AddNewsItem extends Component {
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Titel *</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <input ref="title" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel"/>
+                                                <div className="col s12 m12 l12">
+                                                    <StyledTextField ref="title" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Bericht *</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <textarea ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht"/>
+                                                <div className="col s12 m12 l12">
+                                                    <textarea ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht *"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Groep</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
+                                                <div className="col s12 m12 l12">
                                                     <Row>
                                                         <Input s={12} multiple={false} type='select'
                                                                onChange={this.handleGroupChange}
@@ -175,16 +165,14 @@ export default class AddNewsItem extends Component {
 
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/" onClick={this.handleClick}
+                                    <button  onClick={this.handleClick}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
                                         <i
                                             className="material-icons">done</i>
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div className="col s0 m2 l2"/>
-                    </div>
                 </section>
             </div>
         );
