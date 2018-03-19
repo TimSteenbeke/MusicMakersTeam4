@@ -95,7 +95,8 @@ export default class GroupUpdate extends Component {
                 supervisorId: loadedGroup.supervisorid,
                 studentIds: loadedGroup.userids,
                 groupimage: loadedGroup.groupimage
-            }, console.log("loadGroup: " + loadedGroup)))
+            }, console.log("loadGroup: " + loadedGroup),
+            console.log("supervisorId" + this.state.supervisorId)))
     }
 
     handleUpdate = () => {
@@ -145,11 +146,9 @@ export default class GroupUpdate extends Component {
                             </div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Groepsnaam</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
+                                    <div className="col s12 m12 l12">
                                         <StyledTextField onChange={this.handleNameChange}
+                                                         value={this.state.name}
                                                          label="Naam"/>
                                     </div>
                                 </div>
@@ -157,14 +156,11 @@ export default class GroupUpdate extends Component {
                             <div className="divider"></div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">{this.state.supervisorId}</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
+                                    <div className="col s12 m12 l12">
                                         <Row>
                                             <Input s={12} multiple={false} type='select'
                                                    onChange={this.handleUserChange}
-                                                   label="Begeleider" icon='face'
+                                                   label="Begeleider" icon='face' value={this.state.supervisorId}
                                                    defaultValue={this.state.supervisorId}>
                                                 <option key="" value="" disabled>Kies de begeleider
                                                 </option>
@@ -179,14 +175,12 @@ export default class GroupUpdate extends Component {
                             </div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s3 m3 l3">
-                                        <h5 className="truncate">{this.state.studentIds}</h5>
-                                    </div>
-                                    <div className="col s9 m9 l9">
+                                    <div className="col s12 m12 l12">
                                         <Row>
                                             <Input s={12} multiple={true} type='select' label="Studenten"
                                                    onChange={this.handleStudentChange}
-                                                   icon='child_care' defaultValue={this.state.studentIds}>
+                                                   icon='child_care' value={this.state.studentIds}
+                                                   defaultValue={this.state.studentIds}>
                                                 <option key="" value="" disabled>Kies de studenten</option>
                                                 {this.state.students.map((student, index) => (
                                                     <option key={student.userid}

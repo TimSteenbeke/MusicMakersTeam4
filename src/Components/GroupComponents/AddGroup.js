@@ -148,7 +148,7 @@ export default class AddGroup extends Component {
                                             <Input s={12} multiple={false} type='select'
                                                    onChange={this.handleUserChange}
                                                    label="Begeleider" icon='face'>
-                                                <option key="" value="" disabled>Kies de begeleider
+                                                <option key="" value="" >Kies de begeleider
                                                 </option>
                                                 {this.state.allUsers.map((user, index) => (
                                                     <option key={user.userid}

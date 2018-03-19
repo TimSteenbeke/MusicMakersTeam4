@@ -7,7 +7,6 @@ import logo from '../../images/logo.png'
 import * as LoginService from "../../Services/LoginService";
 import './Sidebar.css';
 import i18n from './i18n'
-import detectBrowserLanguage from 'detect-browser-language'
 
 const styles = {
     menuColor: {
@@ -23,16 +22,18 @@ export default class Sidebar extends Component {
         };
     }
 
-    componentDidMount() {
+    setLanguage(){
         this.setState({lng: navigator.language});
         localStorage.setItem("i18nextLng", this.state.lng.substring(0,2));
         console.log("User language: " + this.state.lng);
     }
 
+    componentDidMount() {
+        this.setLanguage()
+    }
+
     componentWillMount() {
-        this.setState({lng: navigator.language});
-        localStorage.setItem("i18nextLng", this.state.lng.substring(0,2));
-        console.log("User language: " + this.state.lng);
+        this.setLanguage()
     }
 
     render() {
@@ -62,16 +63,16 @@ export default class Sidebar extends Component {
                             <MenuItem style={styles.menuColor} primaryText={i18n.t('groups.label')}/>
                         </Link>
                         <Link to="/users">
-                            <MenuItem style={styles.menuColor} primaryText="Users"/>
+                            <MenuItem style={styles.menuColor} primaryText="Gebruikers"/>
                         </Link>
                         <Link to="/courses">
-                            <MenuItem style={styles.menuColor} primaryText="Courses"/>
+                            <MenuItem style={styles.menuColor} primaryText="Vakken"/>
                         </Link>
                         <Link to="/compositions">
-                            <MenuItem style={styles.menuColor} primaryText="Compositions"/>
+                            <MenuItem style={styles.menuColor} primaryText="Muziekstukken"/>
                         </Link>
                         <Link to="/courseTypes">
-                            <MenuItem style={styles.menuColor} primaryText="CourseTypes"/>
+                            <MenuItem style={styles.menuColor} primaryText="Vaktypes"/>
                         </Link>
                         <Link to="/newsitems">
                             <MenuItem style={styles.menuColor} primaryText="Meldingen"/>
