@@ -14,7 +14,7 @@ export default class AddNewsItem extends Component {
             value: 1,
             soorten: [],
             groups: [],
-            groupids: {},
+            groupids: [],
             open: false,
             title: "",
             message: "",
@@ -47,7 +47,7 @@ export default class AddNewsItem extends Component {
                 title: this.state.fields["title"],
                 message: this.state.fields["message"],
                 messageImage: this.state.image,
-                groupid: this.state.groupid
+                groupids: this.state.groupids
             }
         ));
 
@@ -76,12 +76,14 @@ export default class AddNewsItem extends Component {
         }, 1000);
     };
 
+
+
     handleGroupChange = (e) => {
         let options = e.target.options;
-        let value = {};
+        let value = [];
         for (let i = 0, l = options.length; i < l; i++) {
             if (options[i].selected) {
-                value = options[i].value;
+                value.push(options[i].value);
             }
         }
         this.setState({groupids: value});
