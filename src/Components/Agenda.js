@@ -105,7 +105,7 @@ export default class Agenda extends Component {
                 let optreden = {
                     _id: guid(),
                     id: agendaItems.performances[x].performanceId,
-                    name: agendaItems.performances[x].beschrijving,
+                    name: agendaItems.performances[x].description,
                     startDateTime: new Date(agendaItems.performances[x].startDateTime),
                     endDateTime: new Date(agendaItems.performances[x].endDateTime),
                     type: 'Optreden',
