@@ -116,7 +116,6 @@ export default class GroupsAndChat extends Component {
                                         :  <a className="collection-item">Geen groepen!</a>
                                     }
                                 </div>
-
                             </div>
                             <div className="col s12 m12 l12" style={{marginBottom:15}}>
                                 <h5><i className="material-icons small">date_range</i> Agenda:</h5>
