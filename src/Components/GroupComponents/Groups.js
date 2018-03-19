@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
 import './Group.css';
 import swal from 'sweetalert2';
+import './Groups.css';
 
 export default class Group extends Component {
     constructor(props) {
@@ -73,7 +74,7 @@ export default class Group extends Component {
                                 </td>*/}
                                 <td>{group.name}</td>
 
-                                <td>{group.supervisor.firstname}</td>
+                                {/*<td>{group.supervisor.firstname}</td>*/}
                                 {/*       <td><Dropdown trigger={<RaisedButton onClick={this.setUsers(group)}>Klik!</RaisedButton>
                                 }>
                                     {this.state.users.map((user, index2) => (
