@@ -34,7 +34,7 @@ export default class ChatComponent extends Component {
         let self = this;
         console.log(self.state.chatroom);
         console.log(self.state.currentChatroom);
-        this.setState({currentChatroom: self.state.chatroom}, () => {
+        this.setState({currentChatroom: self.state.chatroom, messages: []}, () => {
             console.log("chat =>" + self.state.currentChatroom);
             self.initializeWebSocketConnection();
         });
@@ -103,7 +103,9 @@ export default class ChatComponent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="section chat">
+                <div className="rowcontainer chat">
+                    <div className="groupschat">
+                    </div>
                     <div className="paddingnator">
                         {this.state.messages.map((msg, key) => {
                                 return (<div key={key} className="speech-bubble chatmargin" id={key}>{msg}</div>)
@@ -112,6 +114,7 @@ export default class ChatComponent extends Component {
                     </div>
                 </div>
                 <div className="divider"></div>
+                <form>
                 <div className="rowcontainer messagetyper">
                     <div className="chatbar">
                         <StyledTextField
@@ -120,10 +123,11 @@ export default class ChatComponent extends Component {
                             value={this.state.message}
                         />
                     </div>
-                    <div className="chatbutton">
+                    <div className="marginator">
                         <button onClick={(e) => this.sendMessage(e)}>send</button>
                     </div>
                 </div>
+                </form>
 
             </div>
         );

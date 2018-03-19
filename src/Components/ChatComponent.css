@@ -40,11 +40,11 @@
 }
 
 .chatbutton{
-    width: 30%;
+    width: 15%;
 }
 
 .chatbar{
-    width: 70%;
+    width: 85%;
 }
 
 .columncontainer{
@@ -72,9 +72,12 @@
 .messagetyper{
     height: 15%;
     position: relative;
+    padding-top: 10px;
 }
 
 .chatheader{
+    padding-top: 10px;
     height:  15%;
     position: relative;
+    padding-bottom: 10px;
 }
