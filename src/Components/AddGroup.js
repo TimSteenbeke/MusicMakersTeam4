@@ -12,8 +12,16 @@ import Link from "react-router-dom/es/Link";
 import StyledTextField from "./StyledTextField";
 import * as GroupService from "../Services/GroupService";
 import Redirect from "react-router-dom/es/Redirect";
+import AutoComplete from 'material-ui/AutoComplete';
+import MenuItem from 'material-ui/MenuItem';
 
 class AddGroup extends Component {
+
+    dataSourceConfig = {
+        text: 'fullname',
+        value: 'userid',
+    };
+
 
     constructor(props) {
         super(props);
@@ -33,6 +41,10 @@ class AddGroup extends Component {
     addUsers = () => {
         UserService.getAll().then(console.log("----Students---- \n"))
             .then(allUsers => {
+                let users = allUsers.users;
+                users.forEach((user) => {
+                    user["fullname"] = user.firstname + ' ' + user.lastname;
+                });
                 this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
             });
     };
@@ -40,6 +52,10 @@ class AddGroup extends Component {
     addStudents = () => {
         UserService.getStudents().then(console.log("----Users---- \n"))
             .then(students => {
+                let users = students.users;
+                users.forEach((students) => {
+                    students["fullname"] = students.firstname + ' ' + students.lastname;
+                });
                 this.setState({students: students.users}, console.log(students.users));
             });
 
@@ -50,30 +66,15 @@ class AddGroup extends Component {
         console.log("name:" + e.target.value)
     };
 
-
-    handleUserChange = (e) => {
-        let options = e.target.options;
-        let value = 1;
-        for (let i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                value = options[i].value;
-            }
+    handleBegeleider = (chosenRequest, index) => {
+        console.log(index);
+        if (index != -1){
+            this.setState({supervisorid: chosenRequest.userid});
         }
-        this.setState({supervisorid: value});
         console.log(this.state.supervisorid);
+
     };
 
-    handleStudentChange = (e) => {
-        let options = e.target.options;
-        let value = [];
-        for (let i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
-        }
-        this.setState({userids: value});
-        console.log(this.state.userids);
-    };
 
     componentDidMount() {
         this.addUsers();
@@ -168,16 +169,13 @@ class AddGroup extends Component {
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <Row>
-                                            <Input s={12} multiple={false} type='select'
-                                                   onChange={this.handleUserChange}
-                                                   label="Begeleider" icon='face'>
-                                                <option key="" value="" disabled>Kies de begeleider
-                                                </option>
-                                                {this.state.allUsers.map((user, index) => (
-                                                    <option key={user.userid}
-                                                            value={user.userid}>{user.firstname} {user.lastname}</option>
-                                                ))}
-                                            </Input>
+                                            <AutoComplete
+                                                floatingLabelText="Studenten"
+                                                dataSource={this.state.allUsers}
+                                                dataSourceConfig={this.dataSourceConfig}
+                                                fullWidth={true}
+                                                onNewRequest={this.handleBegeleider}
+                                            />
                                         </Row>
                                     </div>
                                 </div>
@@ -189,15 +187,12 @@ class AddGroup extends Component {
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <Row>
-                                            <Input s={12} multiple={true} type='select' label="Studenten"
-                                                   onChange={this.handleStudentChange}
-                                                   icon='child_care' defaultValue='1'>
-                                                <option key="" value="" disabled>Kies de studenten</option>
-                                                {this.state.students.map((student, index) => (
-                                                    <option key={student.userid}
-                                                            value={student.userid}>{student.firstname} {student.lastname}</option>
-                                                ))}
-                                            </Input>
+                                            <AutoComplete
+                                                floatingLabelText="Begeleiders"
+                                                dataSource={this.state.students}
+                                                dataSourceConfig={this.dataSourceConfig}
+                                                fullWidth={true}
+                                            />
                                         </Row>
                                     </div>
 
