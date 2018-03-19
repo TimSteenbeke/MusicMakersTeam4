@@ -1,8 +1,11 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-//const URL = 'http://localhost:8080/api/';
+import * as fetchService from "./FetchService";
+
+/*const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+//const URL = 'http://localhost:8080/api/';*/
 
 export function getCoursesFromBackend() {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetchService.fetchWithHeader("courses", "GET", {}, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
     return fetch(URL + "courses", {
         mode: 'cors',
         headers: {
@@ -13,50 +16,54 @@ export function getCoursesFromBackend() {
         .then((response) =>
             response.json())
         .then((responseJson) => {
+            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
             console.log("no courses found");
             console.log(err);
-        });
+        });*/
 }
 
 export function getCourseFromBackend(courseNr) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    return fetch(URL + "courses/" + courseNr, {
-        mode: 'cors',
-        headers: {
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) => response.json()
-        )
-        .then((responseJson) => {
-            return responseJson;
+    return fetchService.fetchWithHeader("courses/" + courseNr, "GET", {}, {beschrijving: "course niet gevonden"});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        return fetch(URL + "courses/" + courseNr, {
+            mode: 'cors',
+            headers: {
+                'Authorization': userToken.token_type + " " + userToken.access_token,
+                'Content-Type': 'application/json'
+            }
         })
-        .catch((err) => {
-            const course = {beschrijving: "course niet gevonden"};
-            return course;
-        });
+            .then((response) => response.json()
+            )
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((err) => {
+                const course = {beschrijving: "course niet gevonden"};
+                return course;
+            });*/
 }
 
 export function postCourse(data) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    console.log(data);
-    fetch(URL + 'courses/', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
-        },
-        body: data
-    })
+    fetchService.fetchWithHeader("courses/", "POST", data, {});
+    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
+        console.log(data);
+        fetch(URL + 'courses/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken.token_type + " " + userToken.access_token
+            },
+            body: data
+        })*/
 }
 
 export function deleteCourse(courseId) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetchService.fetchWithHeader("courses/" + courseId, "DELETE", {}, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(courseId);
     return fetch(URL + 'courses/' + courseId, {
         method: 'DELETE',
@@ -64,13 +71,14 @@ export function deleteCourse(courseId) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token
+            'Authorization': userToken.token_type + " " + userToken.access_token
         }
-    });
+    });*/
 }
 
 export function updateCourse(courseId, data) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    return fetchService.fetchWithHeader("courses/" + courseId, "PUT", data, {});
+    /*let userToken = JSON.parse(localStorage.getItem('userToken'));
     console.log(data);
     return fetch(URL + 'courses/' + courseId, {
         method: 'PUT',
@@ -78,8 +86,12 @@ export function updateCourse(courseId, data) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': userToken.token_type + " " +  userToken.access_token,
+            'Authorization': userToken.token_type + " " + userToken.access_token,
         },
         body: data
-    });
+    });*/
+}
+
+export function getLessonsFromCourse(courseId) {
+    return fetchService.fetchWithHeader("courses/" + courseId +"/lessons", "GET",{},{})
 }

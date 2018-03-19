@@ -2968,7 +2968,7 @@ AlphaTab.Audio.Model.MidiFile.prototype = {
         // magic number "MThd" (0x4D546864)
         var b = new Uint8Array([77, 84, 104, 100]);
         s.Write(b, 0, b.length);
-        // Header Length 6 (0x00000006)
+        // StyledTextField Length 6 (0x00000006)
         b = new Uint8Array([0, 0, 0, 6]);
         s.Write(b, 0, b.length);
         // format 
@@ -5074,7 +5074,7 @@ AlphaTab.Importer.Gp3To5Importer.prototype = {
         // Padding Top (4)
         // Padding Bottom (4)
         // Size Proportion(4)
-        // Header and Footer display flags (2)
+        // StyledTextField and Footer display flags (2)
         this.Data.Skip(30);
         // title format
         // subtitle format
