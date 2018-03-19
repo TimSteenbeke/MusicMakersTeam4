@@ -7,6 +7,8 @@ import './ActivityPopUp.css';
 
 export default class ActivityPopUp extends Component {
     constructor(props) {
+        console.log('props');
+        console.log(props);
         super(props);
         this.state = {
             presenceStatus: "Te beslissen",
