@@ -4,28 +4,19 @@ import swal from 'sweetalert2'
 import Header from "../GeneralComponents/Header";
 import {Input, Row} from "react-materialize";
 import Link from "react-router-dom/es/Link";
-<<<<<<< HEAD:src/Components/AddGroup.js
-import StyledTextField from "./StyledTextField";
-import * as GroupService from "../Services/GroupService";
 import Redirect from "react-router-dom/es/Redirect";
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
-
-class AddGroup extends Component {
-
-    dataSourceConfig = {
-        text: 'fullname',
-        value: 'userid',
-    };
-
-
-=======
 import StyledTextField from "../GeneralComponents/StyledTextField";
 import * as GroupService from "../../Services/GroupService";
 import './AddGroup.css';
 
 export default class AddGroup extends Component {
->>>>>>> master:src/Components/GroupComponents/AddGroup.js
+    dataSourceConfig = {
+        text: 'fullname',
+        value: 'userid',
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -65,37 +56,30 @@ export default class AddGroup extends Component {
         this.setState({name: e.target.value});
     };
 
-<<<<<<< HEAD:src/Components/AddGroup.js
     handleBegeleider = (chosenRequest, index) => {
         console.log(index);
-        if (index != -1){
+        if (index != -1) {
             this.setState({supervisorid: chosenRequest.userid});
         }
         console.log(this.state.supervisorid);
-
-=======
-    handleUserChange = (e) => {
-        let options = e.target.options;
-        let value = 1;
-        for (let i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                value = options[i].value;
-            }
-        }
-        this.setState({supervisorid: value});
     };
 
-    handleStudentChange = (e) => {
-        let options = e.target.options;
-        let value = [];
-        for (let i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
+    handleUser = (chosenRequest, index) => {
+        console.log(index);
+        if (index != -1) {
+            let value = [];
+            console.log(chosenRequest);
+            let users = this.state.userids;
+            users.forEach((user) => {
+                value.push(user);
+            });
+            value.push(chosenRequest.userid);
+            const ids = value.filter((val,id,array) => array.indexOf(val) == id);
+            this.setState({userids: ids});
+            console.log(ids)
         }
-        this.setState({userids: value});
->>>>>>> master:src/Components/GroupComponents/AddGroup.js
     };
+
 
 
     componentDidMount() {
@@ -192,6 +176,17 @@ export default class AddGroup extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <ul className="collection">
+
+                                <li className="collection-item avatar">
+                                    <img src="images/yuna.jpg" alt="" className="circle" />
+                                        <span className="title">Title</span>
+                                        <p>First Line <br />
+
+                                        </p>
+                                        <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
+                                </li>
+                            </ul>
                             <div className="section">
                                 <div className="row">
                                     <div className="col s3 m3 l3">
@@ -204,6 +199,7 @@ export default class AddGroup extends Component {
                                                 dataSource={this.state.students}
                                                 dataSourceConfig={this.dataSourceConfig}
                                                 fullWidth={true}
+                                                onNewRequest={this.handleUser}
                                             />
                                         </Row>
                                     </div>
