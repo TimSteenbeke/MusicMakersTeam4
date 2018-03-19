@@ -4,7 +4,7 @@ import * as LoginService from '../../Services/LoginService';
 import * as GroupService from '../../Services/GroupService.js';
 import * as AgendaService from '../../Services/AgendaService.js';
 import swal from 'sweetalert2';
-import {CardPanel} from 'react-materialize';
+import {Button, CardPanel} from 'react-materialize';
 import "./GroupsAndChat.css";
 import {Link} from 'react-router-dom';
 
@@ -34,7 +34,7 @@ export default class GroupsAndChat extends Component {
         GroupService.getGroupsByUser().then(groups => {
             this.setState({groups: groups});
         });
-        console.log("grouups");
+        console.log("groups");
         console.log(this.state.groups.newsItems);
 
         this.getMyAgendaItems();
@@ -125,7 +125,7 @@ export default class GroupsAndChat extends Component {
                                         <span><i className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
                                 <span><i className="material-icons tiny">trending_flat</i> {item.name}</span><br/><br/></span>
                                     ))
-                                    : <div className="collection"><a className="collection-item">Geen agenda!</a></div>
+                                    : <span>Geen agenda!<br/></span>
                                 }
                             </div>
                         </div>

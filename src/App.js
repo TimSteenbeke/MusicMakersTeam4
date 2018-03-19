@@ -3,13 +3,13 @@ import Home from './Components/Home';
 import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
 import Instrumenten from './Components/InstrumentComponents/Instruments.js';
 import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
-import CourseDetails from './Components/CourseComponents/CoursesDetails.js';
+import CourseDetails from './Components/CourseComponents/CourseDetails.js';
 import AddCourse from './Components/CourseComponents/AddCourse.js'
 import Courses from './Components/CourseComponents/Courses.js'
 import Agenda from './Components/Agenda.js'
 import {Route, Switch} from 'react-router'
 import './CSS/GlobalStylesheet.css';
-import Group from "./Components/GroupComponents/Group";
+import Group from "./Components/GroupComponents/Groups";
 import AddGroup from "./Components/GroupComponents/AddGroup"
 import GroupUpdate from "./Components/GroupComponents/GroupUpdate";
 import Compositions from "./Components/CompositionComponents/Compositions.js";
