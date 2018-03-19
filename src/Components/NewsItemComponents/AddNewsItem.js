@@ -14,7 +14,7 @@ export default class AddNewsItem extends Component {
             value: 1,
             soorten: [],
             groups: [],
-            groupid: 1,
+            groupids: {},
             open: false,
             title: "",
             message: "",
@@ -78,13 +78,13 @@ export default class AddNewsItem extends Component {
 
     handleGroupChange = (e) => {
         let options = e.target.options;
-        let value = 1;
+        let value = {};
         for (let i = 0, l = options.length; i < l; i++) {
             if (options[i].selected) {
                 value = options[i].value;
             }
         }
-        this.setState({groupid: value});
+        this.setState({groupids: value});
     };
 
     render() {
@@ -139,11 +139,9 @@ export default class AddNewsItem extends Component {
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input s={12} multiple={false} type='select'
-                                                               onChange={this.handleGroupChange}
-                                                               label="Groep" icon='face'>
-                                                            <option key="" value="" disabled>Selecteer een groep
-                                                            </option>
+                                                        <Input s={12} multiple={true} type='select' label="Groepen" onChange={this.handleGroupChange}
+                                                               icon='child_care' defaultValue='1'>
+                                                            <option key="" value="" disabled>Selecteer groepen</option>
                                                             {this.state.groups.map((group, index) => (
                                                                 <option key={group.groupid}
                                                                         value={group.groupid}>{group.name}</option>

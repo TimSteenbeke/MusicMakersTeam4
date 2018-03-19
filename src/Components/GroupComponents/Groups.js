@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import * as GroupService from '../../Services/GroupService.js';
 import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
-import './Group.css';
-import swal from 'sweetalert2';
 import './Groups.css';
+import swal from 'sweetalert2';
 
 export default class Group extends Component {
     constructor(props) {

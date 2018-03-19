@@ -3,8 +3,8 @@ import * as GroupService from '../../Services/GroupService.js';
 import Header from "../GeneralComponents/Header";
 import * as UserService from "../../Services/UserService";
 import './MyGroupDetails.css';
-import {Card,CardTitle } from 'react-materialize';
 import MomentJs from "moment";
+import blankProfile from '../../images/BlankProfile.png';
 
 export default class MyGroupDetails extends Component {
     constructor(props) {
@@ -89,14 +89,26 @@ export default class MyGroupDetails extends Component {
                             <div className="divider" style={{marginTop:20}}></div>
                             <div>
                                 <h4>Leden</h4>
+
                                 { this.state.students && this.state.students.length > 0 ?
                                     this.state.students.map((student, index) => (
-                                        <div className="collection">
-                                            <a  className="collection-item" style={{padding:5}}><img src={"data:image;base64," + student.userImage} alt={student.firstname} height="50px" width="50px"/>{student.firstname} {student.lastname}</a>
+
+                                        <div className="row valign-wrapper z-depth-1" style={{paddingTop:5}}>
+                                            <div className="col s2">
+                                                {student.userImage !== "" ?
+                                                    <img className="circle responsive-img" height="50px" width="50px" alt="guitar"  src={"data:image;base64," + student.userImage}/> :
+                                                    <img className="circle" alt="profile" height="50px" width="50px" src={blankProfile}/>
+                                                }
+                                            </div>
+                                            <div className="col s10">
+                                                {student.firstname} {student.lastname}
+                                            </div>
                                         </div>
+
                                     ))
                                     :  <div className="collection"><a className="collection-item">Geen meldingen!</a></div>
                                 }
+
 
                             </div>
                         </div>
