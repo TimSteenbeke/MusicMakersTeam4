@@ -80,11 +80,11 @@ export default class Compositions extends Component {
 
         if (self.state.search === "") {
             CompositionService.getCompositionsFromBackend().then(compositions => {
-                this.setState({compositions: compositions});
+                this.setState({compositions: [...this.state.compositions, compositions]});
             });
         } else {
             CompositionService.filterCompositions(self.state.search, e.target.id).then(compositions => {
-                this.setState({compositions: compositions});
+                this.setState({compositions: [...this.state.compositions, compositions]});
             });
         }
 
@@ -99,11 +99,11 @@ export default class Compositions extends Component {
 
         if (value === "" || value === null) {
             CompositionService.getCompositionsFromBackend().then(compositions => {
-                this.setState({compositions: compositions});
+                this.setState({compositions: [...this.state.compositions,compositions]});
             });
         } else {
             CompositionService.filterCompositions(value).then(compositions => {
-                this.setState({compositions: compositions});
+                this.setState({compositions: [...this.state.compositions, compositions]});
             });
         }
     };

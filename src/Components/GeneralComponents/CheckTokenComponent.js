@@ -1,9 +1,6 @@
-
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import Login from '../Login.js';
 import * as LoginService from "../../Services/LoginService";
-import Home from '../Home.js';
 /**
  * Higher-order component (HOC) to wrap restricted pages
  */
@@ -25,8 +22,6 @@ export default function(WrapperComponent) {
                 return <WrapperComponent {...this.props} />
             } else {
                 return <Login/>
-            } else{
-                return <Home/>
             }
         }
     }

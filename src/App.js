@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Home from './Components/Home';
 import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
-import Instrumenten from './Components/InstrumentComponents/Instruments.js';
+import Instruments from './Components/InstrumentComponents/Instruments.js';
 import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
 import CourseDetails from './Components/CourseComponents/CoursesDetails.js';
 import AddCourse from './Components/CourseComponents/AddCourse.js'
@@ -32,6 +32,7 @@ import ChatComponent from "./Components/ChatComponent";
 import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
+import Login from "./Components/Login";
 
 export default class App extends Component {
 
@@ -43,7 +44,7 @@ export default class App extends Component {
                 <Route name="login" path="/login" component={Login}/>
 
                 <Route name="addInstrument" path="/addinstrument" component={auth(AddInstrument)}/>
-                <Route name="instrument" path="/instrumenten" component={auth(Instrumenten)}/>
+                <Route name="instrument" path="/instrumenten" component={auth(Instruments)}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={auth(InstrumentDetails)}/>
 
                 <Route name="courseDetails" path="/coursedetails/:id" component={auth(CourseDetails)}/>
