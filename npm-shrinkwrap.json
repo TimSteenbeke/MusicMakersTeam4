@@ -2081,9 +2081,9 @@
       }
     },
     "chordsheetjs": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/chordsheetjs/-/chordsheetjs-2.0.0.tgz",
-      "integrity": "sha512-GX9k1u1kuxgkMgMneH6idD2XwjBM9TkOCoMbHcIavxtQ/g/+1alDptOl7SwWn/5ThW3IiB4ekhm+7cr61g6Rqw=="
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/chordsheetjs/-/chordsheetjs-2.1.0.tgz",
+      "integrity": "sha512-Rj2J8tCQPJWD7GJriPm8SrYBqxeyGWHGBJ3BJ9Y83UWnu3M8tXzriq/Xsh9/pTsv3QcB/jp7aeCGBoTY5ZaHRw=="
     },
     "ci-info": {
       "version": "1.1.2",
@@ -5174,9 +5174,9 @@
       "integrity": "sha1-MRYKNpMK2vH8BMYHT360FGXU7Es="
     },
     "i18next": {
-      "version": "10.5.1",
-      "resolved": "https://registry.npmjs.org/i18next/-/i18next-10.5.1.tgz",
-      "integrity": "sha1-+OHKThXEQOvDqaXD0BXDptKIeJA="
+      "version": "10.6.0",
+      "resolved": "https://registry.npmjs.org/i18next/-/i18next-10.6.0.tgz",
+      "integrity": "sha1-kP/Z+bxhfzS5oS4DcmD1JERfdoQ="
     },
     "i18next-browser-languagedetector": {
       "version": "2.1.0",
@@ -8832,7 +8832,7 @@
     },
     "react-agenda": {
       "version": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",
-      "integrity": "sha512-MYC3L9VGNxZyGQz2VQY3eOF3eVHr0e4VOL1K43E9gZVux9Ez5/n3fVy9aUxTwS+ry/kxICrbtwzGARSUKpSfLA==",
+      "integrity": "sha1-iiNTXnT3hTRBu58NCITCMC9bQEM=",
       "requires": {
         "classnames": "2.2.5",
         "drag-drop-touch-polyfill": "1.0.0",
@@ -10765,9 +10765,9 @@
       }
     },
     "sweetalert2": {
-      "version": "7.16.0",
-      "resolved": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-7.16.0.tgz",
-      "integrity": "sha512-yPkxwvZt6+jyTjqFpAy+drKKahA5MRyAz7jQ/tq73TLswhXhJAUT04RR5xUwBA4oJQkRpJIO/S86wu9ofgqUoA=="
+      "version": "7.17.0",
+      "resolved": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-7.17.0.tgz",
+      "integrity": "sha512-W1oKX6w2heDwt5e+cxsT8A2j7n9EwvhuFPqFCeCRLF5Nin6mIrNIX4kB3HccZTidmYBEdqr2388HmVajkdllYQ=="
     },
     "sweetalert2-react-content": {
       "version": "0.4.0",

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Header from '../GeneralComponents/Header'
-import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import * as UserService from '../../Services/UserService';
 import './AddUser.css';

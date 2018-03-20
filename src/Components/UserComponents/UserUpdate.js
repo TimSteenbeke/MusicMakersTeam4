@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import * as UserService from '../../Services/UserService';
 import Header from '../GeneralComponents/Header';
-import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import './UserUpdate.css';
 import StyledTextField from "../GeneralComponents/StyledTextField";

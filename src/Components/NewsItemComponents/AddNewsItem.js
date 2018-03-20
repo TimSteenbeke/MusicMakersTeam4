@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import * as NewsItemService from '../../Services/NewsItemService';
 import Header from '../GeneralComponents/Header';
-import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize';
 import swal from 'sweetalert2';
 import * as GroupService from "../../Services/GroupService";
@@ -116,27 +115,27 @@ export default class AddNewsItem extends Component {
                                     </form>
                                 </div>
                                 <div className="card-content">
-                                    <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
+                                    <form className="addNewsItem" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
-                                                    <StyledTextField ref="title" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
+                                                    <input ref="title" required="true" onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
-                                                    <textarea ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht *"/>
+                                                    <input ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht *"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
@@ -153,7 +152,7 @@ export default class AddNewsItem extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
@@ -165,11 +164,11 @@ export default class AddNewsItem extends Component {
 
                                 </div>
                                 <div className="card-action">
-                                    <button  onClick={this.handleClick}
+                                    <input type="submit" onClick={this.handleClick}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
                                         <i
                                             className="material-icons">done</i>
-                                    </button>
+                                    </input>
                                 </div>
                             </div>
                         </div>

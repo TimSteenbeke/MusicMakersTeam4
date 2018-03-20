@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import * as UserService from "../../Services/UserService";
 import swal from 'sweetalert2'
 import Header from "../GeneralComponents/Header";
-import {Row} from "react-materialize";
+import {Row,Input} from "react-materialize";
 import Link from "react-router-dom/es/Link";
 import AutoComplete from 'material-ui/AutoComplete';
 import StyledTextField from "../GeneralComponents/StyledTextField";
@@ -56,7 +56,7 @@ export default class AddGroup extends Component {
 
     handleBegeleider = (chosenRequest, index) => {
         console.log(index);
-        if (index != -1) {
+        if (index !== -1) {
             this.setState({supervisor: chosenRequest});
         }
         console.log(this.state.supervisor);
@@ -64,7 +64,7 @@ export default class AddGroup extends Component {
 
     handleUser = (chosenRequest, index) => {
         console.log(index);
-        if (index != -1) {
+        if (index !== -1) {
             let value = [];
             console.log(chosenRequest);
             let users = this.state.userids;
@@ -72,7 +72,7 @@ export default class AddGroup extends Component {
                 value.push(user);
             });
             value.push(chosenRequest.userid);
-            const ids = value.filter((val, id, array) => array.indexOf(val) == id);
+            const ids = value.filter((val, id, array) => array.indexOf(val) === id);
             this.setState({userids: ids});
             console.log(ids)
         }
@@ -94,7 +94,7 @@ export default class AddGroup extends Component {
                 let value = [];
                     let users = this.state.userids;
                     users.forEach((user) => {
-                        if (user != i){
+                        if (user !== i){
                             value.push(user);
                         }
                     });
@@ -182,7 +182,7 @@ export default class AddGroup extends Component {
                                     <StyledTextField placeholder="Geef een groepsnaam in..."  label="Groepsnaam" onChange={this.onChangeName}/>
                                 </div>
                             </div>
-                            <div className="divider"></div>
+                            <div className="divider"/>
                             <div className="section">
                                 <div className="row">
                                     <div className="col s12 m12 l12">
@@ -223,7 +223,7 @@ export default class AddGroup extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="divider"></div>
+                                <div className="divider"/>
 
                                 <div className="section">
                                     <div className="row">
@@ -259,7 +259,7 @@ export default class AddGroup extends Component {
                                         </div>
                                     </div>
 
-                                    <div className="divider"></div>
+                                    <div className="divider"/>
                                     <div className="card-action">
                                         <Link to="/groups" onClick={this.handleClick}
                                               className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">

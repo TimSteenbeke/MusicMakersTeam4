@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import './AddComposition.css';
 import StyledTextField from "../GeneralComponents/StyledTextField";
+import * as CompositionService from "../../Services/CompositionService";
 
 export default class AddComposition extends Component {
     constructor(props) {
@@ -40,13 +41,11 @@ export default class AddComposition extends Component {
                 fileFormat: this.state.bestandType
             }));
 
-        axios.post('http://localhost:8080/api/compositions/', this.state.formdata, {
-            "Content-Type": "multipart/form-data"
-        });
+        CompositionService.postComposition(this.state.formdata);
+
     };
 
     handleChangeImage = (evt) => {
-        console.log("Uploading");
         const file = evt.target.files[0];
         const extension = file.name;
 
@@ -62,7 +61,6 @@ export default class AddComposition extends Component {
 
     compositionSubmit(e){
         e.preventDefault();
-        console.log("Form submitted");
         this.handleClick();
         this.props.history.push('/compositions')
     }
@@ -70,7 +68,6 @@ export default class AddComposition extends Component {
     handleChange(field, e){
         let fields = this.state.fields;
         fields[field] = e.target.value;
-        console.log(field + " - " + fields[field]);
         this.setState({fields});
     }
 
