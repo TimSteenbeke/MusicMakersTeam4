@@ -95,3 +95,7 @@ export function updateCourse(courseId, data) {
 export function getLessonsFromCourse(courseId) {
     return fetchService.fetchWithHeader("courses/" + courseId +"/lessons", "GET",{},{})
 }
+
+export function getMyCourses() {
+    return fetchService.fetchWithHeader("mycourses", "GET", {}, {});
+}

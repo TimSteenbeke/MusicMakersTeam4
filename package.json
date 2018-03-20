@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@axetroy/react-download": "^1.1.0",
+    "add-subtract-date": "^1.0.13",
     "animate.css": "^3.6.1",
     "axios": "^0.18.0",
     "base-64": "^0.1.0",

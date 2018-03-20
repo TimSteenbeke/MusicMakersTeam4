@@ -41,24 +41,8 @@ export function registerPresent(lessonid) {
 
 export function getAttendanceStatus(lessonid) {
    return fetchService.fetchWithHeader("lesson/attendancestatus/" + lessonid, "GET", {}, {});
-    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
-        return fetch(URL + 'lesson/attendancestatus/' +lessonid,
-            {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Authorization':  userToken.token_type + " " +  userToken.access_token,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) =>
-                response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                return responseJson;
-            })
-            .catch((err) => {
-                console.log("geen response");
-                console.log(err);
-            });*/
+}
+
+export function postLesson(data) {
+    fetchService.fetchWithHeader("lesson", "POST", data, {});
 }
