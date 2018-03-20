@@ -155,6 +155,7 @@ export default class ChatComponent extends Component {
                     <div className="rowcontainer messagetyper">
                         <div className="chatbar">
                             <StyledTextField
+                                required={true}
                                 onChange={this.setText}
                                 label="Message"
                                 value={this.state.message.text}
