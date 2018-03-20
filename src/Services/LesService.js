@@ -46,3 +46,7 @@ export function getAttendanceStatus(lessonid) {
 export function postLesson(data) {
     fetchService.fetchWithHeader("lesson", "POST", data, {});
 }
+
+export function getLessons() {
+    fetchService.fetchWithHeader("lesson", "GET", {}, {});
+}
