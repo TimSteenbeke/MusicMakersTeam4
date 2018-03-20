@@ -59,7 +59,7 @@ export default class Header extends Component {
                 <div className="navbar">
                     <nav className="nav">
                         <div className="nav-wrapper orange deep-orange darken-4">
-                            <a className="brand-logo">{this.props.name}</a>
+                            <a className="left brand-logo">{this.props.name}</a>
                             <ul id="nav-mobile" className="right hide-on-small-and-down">
                                 <li><a className="waves-effect deep-orange darken-4 waves-light btn"
                                        onClick={this.checkLogin}>{this.state.loginButton}</a></li>

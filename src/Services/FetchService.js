@@ -6,7 +6,7 @@ export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {})
     let headers = {
         'Authorization': userToken.token_type + " " + userToken.access_token,
         'Content-Type': 'application/json',
-    }
+    };
     if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
         headers = {
             'Accept': 'application/json',

@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import * as UserService from "../../Services/UserService";
 import swal from 'sweetalert2'
 import Header from "../GeneralComponents/Header";
-import {Input, Row} from "react-materialize";
+import {Row} from "react-materialize";
 import Link from "react-router-dom/es/Link";
-import Redirect from "react-router-dom/es/Redirect";
 import AutoComplete from 'material-ui/AutoComplete';
-import MenuItem from 'material-ui/MenuItem';
 import StyledTextField from "../GeneralComponents/StyledTextField";
 import * as GroupService from "../../Services/GroupService";
 import './AddGroup.css';
