@@ -10189,6 +10189,11 @@
         }
       }
     },
+    "reflex-grid": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/reflex-grid/-/reflex-grid-2.0.1.tgz",
+      "integrity": "sha1-bvcKGYa4LZxo5cRz5i28rxxdwV0="
+    },
     "regenerate": {
       "version": "1.3.3",
       "resolved": "https://registry.npmjs.org/regenerate/-/regenerate-1.3.3.tgz",

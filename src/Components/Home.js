@@ -40,8 +40,7 @@ export default class Home extends Component{
                                     <div className="card-content darken-2">
                                         <span className="card-title activator black-text text-darken-4"><p>{item.title}<br/>
                                             <small>{ MomentJs(item.date).utc().format('YYYY-MM-DD')} - {item.editor}</small>
-                                        </p><i
-                                        className="material-icons right">more_vert</i></span>
+                                        </p></span>
                                     </div>
                                     <div className="card-reveal darken-2 lighten-4 black-text">
                                     <span className="card-title black-text text-darken-4">{item.title}<i

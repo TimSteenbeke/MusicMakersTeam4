@@ -52,6 +52,10 @@
 }
 
 
+.emification{
+    font-size: 0.9em;
+}
+
 img:before {
     content: "";
     display: block;
