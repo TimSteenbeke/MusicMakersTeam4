@@ -3,6 +3,7 @@ import {Row, Input} from 'react-materialize'
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import * as LesService from "../../Services/LesService";
+import * as CourseService from '../../Services/CourseService'
 import swal from "sweetalert2";
 
 
@@ -13,6 +14,8 @@ class AddLesson extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            myCourses: [],
+
             minDate: new Date(),
 
             chosenDate: new Date(),
@@ -20,7 +23,7 @@ class AddLesson extends Component {
             endDate : new Date(),
 
             //Resource fields to POST
-            selectedCourseId: 1,
+            selectedCourseId: 0,
             selectedStartDate: new Date(),
             selectedEndDate: new Date()
 
@@ -29,15 +32,13 @@ class AddLesson extends Component {
 
     componentDidMount() {
         //TODO: ajax call to load all courses for logged in user
+      CourseService.getMyCourses().then(courses => {
+          this.setState({myCourses: courses.teachesCourses});
+      })
 
     }
 
     addLesson = () => {
-        console.log('adding lesson');
-        console.log(this.state.selectedCourseId);
-        console.log(this.state.selectedStartDate);
-        console.log(this.state.selectedEndDate);
-
         swal({
             position: 'top-end',
             type: 'success',
@@ -101,10 +102,34 @@ class AddLesson extends Component {
         this.setState({selectedEndDate: newEndHour});
     }
 
+    handleCourseChange = (e,value) => {
+        console.log('course change');
+        console.log(value);
+        console.log(this.state.myCourses);
+        this.setState({selectedCourseId: value});
+    };
+
 
     render() {
         return (
             <div>Add lesson component
+
+                <div className="col s9 m9 l9">
+                    <Row>
+                        <Input s={12} multiple={false} type='select'
+                               onChange={this.handleCourseChange}
+                               label="Leerkrachten" icon='face' defaultValue='1'>
+                            <option key="" value="" disabled>Kies het vak
+                            </option>
+                            {this.state.myCourses.map((course, index) => (
+                                <option key={course.courseId}
+                                        value={course.courseId}>{course.courseType.description}</option>
+                            ))}
+                        </Input>
+                    </Row>
+                </div>
+
+
                 <DatePicker hintText="Lesdatum"  container="inline"   minDate={this.state.minDate}   disableYearSelection={this.state.disableYearSelection}
                             onChange={this.choosedate}/>
                 <TimePicker

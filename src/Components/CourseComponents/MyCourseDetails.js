@@ -74,7 +74,7 @@ export default class MyCourseDetails extends Component {
                         </div>
                         <div className="col s12 m12 l12">
                             <div className="fixed-action-btn">
-                                <Link to="/addgroup" className="btn-floating btn-large deep-orange darken-4">
+                                <Link to="/addLesson" className="btn-floating btn-large deep-orange darken-4">
                                     <i className="large material-icons">add</i>
                                 </Link>
                             </div>
