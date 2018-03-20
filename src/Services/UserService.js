@@ -179,3 +179,7 @@ export function deleteUser(userId) {
             }
         });*/
 }
+
+export function getRolesCurrentUser(){
+    return fetchService.fetchWithHeader("users/userroles", "GET", {}, {});
+}
