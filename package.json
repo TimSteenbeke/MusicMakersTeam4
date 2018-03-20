@@ -11,8 +11,12 @@
     "chordsheetjs": "^2.0.0",
     "detect-browser-language": "0.0.1",
     "empty-module": "0.0.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
     "i18next": "^10.5.1",
     "i18next-browser-languagedetector": "^2.1.0",
+    "jest-cli": "^23.0.0-alpha.0",
     "jquery": "^3.3.1",
     "loadjs": "^3.5.2",
     "lru-cache": "^4.1.2",
@@ -36,6 +40,7 @@
     "react-scripts": "1.1.0",
     "react-scroll-parallax": "^1.3.3",
     "react-select": "^1.2.1",
+    "react-test-renderer": "^16.2.0",
     "reflex-grid": "^2.0.1",
     "sockjs-client": "^1.1.4",
     "stompjs": "^2.3.3",
@@ -48,5 +53,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-jest": "^23.0.0-alpha.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^22.4.2"
   }
 }
