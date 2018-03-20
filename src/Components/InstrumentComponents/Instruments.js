@@ -68,7 +68,6 @@ export default class Instruments extends Component {
                         <table className="highlight striped black-text bordered responsive-table centered">
                             <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Naam</th>
                                 <th>Type</th>
                                 <th>Uitvoering</th>
@@ -78,8 +77,9 @@ export default class Instruments extends Component {
                             <tbody>
                             {this.state.Instruments.map((instrument, index) => (
                                 <tr key={index} id={instrument.instrumentId}>
-                                    <td>{instrument.instrumentId}</td>
-                                    <td>{instrument.instrumentName}</td>
+
+                                    <td>{instrument.instrumentname}</td>
+
                                     <td>{instrument.type}</td>
                                     <td>{instrument.details}</td>
                                     <td>

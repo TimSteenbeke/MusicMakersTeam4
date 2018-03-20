@@ -11,6 +11,7 @@ import i18n from './i18n'
 const styles = {
     menuColor: {
         color: "#D9CDC7",
+        fontSize: "0.9em"
     }
 };
 
@@ -42,7 +43,6 @@ export default class Sidebar extends Component {
                 <img className="circle logo" alt="guitar" src={logo}/>
                 <Menu>
                     {LoginService.checkToken() ? <section>
-
                         <Divider/>
                         <Link to="/">
                             <MenuItem style={styles.menuColor} primaryText={i18n.t('home.label')}/>
@@ -83,6 +83,9 @@ export default class Sidebar extends Component {
                         </Link>
                         <Link to="/mycourses">
                             <MenuItem style={styles.menuColor} primaryText="Mijn Vakken"/>
+                        </Link>
+                        <Link to="/addLesson">
+                            <MenuItem style={styles.menuColor} primaryText="Les toevoegen"/>
                         </Link>
                         <Divider/>
                     </section> : <section><Divider/><Link to="/">

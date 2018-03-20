@@ -43,10 +43,18 @@
     margin-left:10px;
 }
 
+.paddingnator{
+    padding: 20px;
+}
+
 .agendaItem {
     padding: 3%;
 }
 
+
+.emification{
+    font-size: 0.9em;
+}
 
 img:before {
     content: "";

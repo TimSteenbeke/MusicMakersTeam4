@@ -51,6 +51,7 @@ export default class Home extends Component{
                                                 </span>
                                             </div>
                                         </div>
+
                                     </div>
 
                                     <div className="card-reveal darken-2 lighten-4 black-text">

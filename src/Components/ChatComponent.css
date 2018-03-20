@@ -1,0 +1,133 @@
+.speech-bubbleYou {
+    position: relative;
+    background: #000000;
+    border-radius: .4em;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.speech-bubble {
+    position: relative;
+    background: #bf360c;
+    border-radius: .4em;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.speech-bubbleYou:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left-color: #000000;
+    border-right: 0;
+    margin-top: -6px;
+    margin-right: -6px;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-right-color: #bf360c;
+    border-left: 0;
+    margin-top: -6px;
+    margin-left: -6px;
+}
+
+
+
+
+
+.chatmargin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 50%;
+}
+
+.chatMarginYou{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 50%;
+}
+
+
+.rowcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* align items in Main Axis */
+    align-items: stretch; /* align items in Cross Axis */
+    align-content: stretch; /* Extra space in Cross Axis */
+    min-height: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.texting{
+    width: 80%;
+}
+
+.groupschat{
+    width: 20%;
+    border-right: solid #e0e0e0;
+    border-width: 2px;
+}
+
+
+.chatbutton{
+    width: 15%;
+}
+
+.chatbar{
+    width: 85%;
+}
+
+.columncontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* align items in Main Axis */
+    align-items: stretch; /* align items in Cross Axis */
+    align-content: stretch; /* Extra space in Cross Axis */
+    min-height: 0;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.btnSize{
+   margin-top: 20px;
+}
+
+.chat{
+    height: 70%;
+    overflow: auto;
+    position: relative;
+    background: #FFFFFF;
+}
+
+.messagetyper{
+    height: 15%;
+    position: relative;
+    padding-top: 10px;
+}
+
+.chatheader{
+    padding-top: 10px;
+    height:  15%;
+    position: relative;
+    padding-bottom: 10px;
+}

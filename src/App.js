@@ -32,7 +32,7 @@ import ChatComponent from "./Components/ChatComponent";
 import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
-
+import AddLesson from './Components/CourseComponents/AddLesson.js'
 export default class App extends Component {
 
 
@@ -69,6 +69,7 @@ export default class App extends Component {
                 <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={auth(CourseTypeDetails)}/>
+                <Route name="addLesson" path="/addLesson" component={auth(AddLesson)}  />
 
                 <Route name="users" path="/users" component={auth(Users)}/>
                 <Route name="addUser" path="/addUser" component={auth(AddUser)}/>
