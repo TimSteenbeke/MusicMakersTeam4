@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 import logo from '../../images/logo.png'
 import * as LoginService from "../../Services/LoginService";
 import './Sidebar.css';
+import i18n from './i18n'
 
 const styles = {
     menuColor: {
@@ -14,6 +15,26 @@ const styles = {
 };
 
 export default class Sidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lng: ""
+        };
+    }
+
+    setLanguage(){
+        this.setState({lng: navigator.language});
+        localStorage.setItem("i18nextLng", this.state.lng.substring(0,2));
+        console.log("User language: " + this.state.lng);
+    }
+
+    componentDidMount() {
+        this.setLanguage()
+    }
+
+    componentWillMount() {
+        this.setLanguage()
+    }
 
     render() {
         return (
@@ -24,7 +45,7 @@ export default class Sidebar extends Component {
 
                         <Divider/>
                         <Link to="/">
-                            <MenuItem style={styles.menuColor} primaryText="Home"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('home.label')}/>
                         </Link>
                         <Divider/>
                         <Link to="/agenda">
@@ -36,22 +57,25 @@ export default class Sidebar extends Component {
                         </Link>
                         <Divider/>
                         <Link to="/instrumenten">
-                            <MenuItem style={styles.menuColor} primaryText="Instrumenten"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('instruments.label')}/>
                         </Link>
                         <Link to="/groups">
-                            <MenuItem style={styles.menuColor} primaryText="Groepen"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('groups.label')}/>
                         </Link>
                         <Link to="/users">
-                            <MenuItem style={styles.menuColor} primaryText="Users"/>
+                            <MenuItem style={styles.menuColor} primaryText="Gebruikers"/>
                         </Link>
                         <Link to="/courses">
-                            <MenuItem style={styles.menuColor} primaryText="Courses"/>
+                            <MenuItem style={styles.menuColor} primaryText="Vakken"/>
                         </Link>
                         <Link to="/compositions">
-                            <MenuItem style={styles.menuColor} primaryText="Compositions"/>
+                            <MenuItem style={styles.menuColor} primaryText="Muziekstukken"/>
                         </Link>
                         <Link to="/courseTypes">
-                            <MenuItem style={styles.menuColor} primaryText="CourseTypes"/>
+                            <MenuItem style={styles.menuColor} primaryText="Vaktypes"/>
+                        </Link>
+                        <Link to="/newsitems">
+                            <MenuItem style={styles.menuColor} primaryText="Meldingen"/>
                         </Link>
                         <Divider/>
                         <Link to="/mygroups">

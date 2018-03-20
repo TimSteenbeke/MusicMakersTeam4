@@ -4,8 +4,10 @@ import * as LoginService from '../../Services/LoginService';
 import * as GroupService from '../../Services/GroupService.js';
 import * as AgendaService from '../../Services/AgendaService.js';
 import swal from 'sweetalert2';
-import {CardPanel} from 'react-materialize';
+import {Button, CardPanel} from 'react-materialize';
 import "./GroupsAndChat.css";
+import {Link} from 'react-router-dom';
+
 
 export default class GroupsAndChat extends Component {
     constructor(props) {
@@ -32,6 +34,9 @@ export default class GroupsAndChat extends Component {
         GroupService.getGroupsByUser().then(groups => {
             this.setState({groups: groups});
         });
+        console.log("groups");
+        console.log(this.state.groups.newsItems);
+
         this.getMyAgendaItems();
     }
 
@@ -103,18 +108,20 @@ export default class GroupsAndChat extends Component {
                             </div>
                             <div className="col s12 m12 l12">
                                 <h5><i className="material-icons small">groups</i>Mijn groepen</h5>
-                                { this.state.groups && this.state.groups.length > 0 ?
-                                    this.state.groups.map((group, index) => (
-                                        <span><i className="material-icons tiny">arrow_forward</i> {group.name}<br/></span>
-                                    ))
-                                    : <span>Geen groepen!<br/></span>
-                                }
+                                <div className="collection">
+                                    { this.state.groups && this.state.groups.length > 0 ?
+                                        this.state.groups.map((group, index) => (
+                                            <Link key={index} className="collection-item" to={`/mygroupdetails/${group.groupid}`}><span className="badge">1</span>{group.name}</Link>
+                                        ))
+                                        :  <a className="collection-item">Geen groepen!</a>
+                                    }
+                                </div>
                             </div>
                             <div className="col s12 m12 l12" style={{marginBottom:15}}>
                                 <h5><i className="material-icons small">date_range</i> Agenda:</h5>
                                 { this.state.items && this.state.items.length > 0 ?
                                     this.state.items.map((item, index) => (
-                                        <span><i className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
+                                        <span key={index}><i className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
                                 <span><i className="material-icons tiny">trending_flat</i> {item.name}</span><br/><br/></span>
                                     ))
                                     : <span>Geen agenda!<br/></span>
