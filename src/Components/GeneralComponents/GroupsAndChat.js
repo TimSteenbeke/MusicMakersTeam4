@@ -111,18 +111,17 @@ export default class GroupsAndChat extends Component {
                                 <div className="collection">
                                     { this.state.groups && this.state.groups.length > 0 ?
                                         this.state.groups.map((group, index) => (
-                                            <Link className="collection-item" to={`/mygroupdetails/${group.groupid}`}><span className="badge">1</span>{group.name}</Link>
+                                            <Link key={index} className="collection-item" to={`/mygroupdetails/${group.groupid}`}><span className="badge">1</span>{group.name}</Link>
                                         ))
                                         :  <a className="collection-item">Geen groepen!</a>
                                     }
                                 </div>
-
                             </div>
                             <div className="col s12 m12 l12" style={{marginBottom:15}}>
                                 <h5><i className="material-icons small">date_range</i> Agenda:</h5>
                                 { this.state.items && this.state.items.length > 0 ?
                                     this.state.items.map((item, index) => (
-                                        <span><i className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
+                                        <span key={index}><i className="material-icons tiny">check</i> {item.startDateTime.getDate()}-{item.startDateTime.getMonth() + 1}-{item.startDateTime.getFullYear()} {item.startDateTime.getHours()}:{item.startDateTime.getMinutes()}<br/>
                                 <span><i className="material-icons tiny">trending_flat</i> {item.name}</span><br/><br/></span>
                                     ))
                                     : <span>Geen agenda!<br/></span>
