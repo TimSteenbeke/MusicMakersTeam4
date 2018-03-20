@@ -96,7 +96,7 @@ export default class MyGroupDetails extends Component {
                                         <div className="row valign-wrapper z-depth-1" style={{paddingTop:5}}>
                                             <div className="col s2">
                                                 {student.userImage !== "" ?
-                                                    <img className="circle responsive-img" height="50px" width="50px" alt="guitar"  src={"data:image;base64," + student.userImage}/> :
+                                                    <img className="circle" height="50px" width="50px" alt="guitar"  src={"data:image;base64," + student.userImage}/> :
                                                     <img className="circle" alt="profile" height="50px" width="50px" src={blankProfile}/>
                                                 }
                                             </div>
