@@ -1,6 +1,8 @@
 /**
  * Created by jariv on 20/03/2018.
  */
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import * as LesService from '../../Services/LesService'
 import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
@@ -21,9 +23,46 @@ export default class Lessons extends Component {
 
     getLessons() {
         LesService.getLessons().then(lessons => {
-            this.setState({lessons: lessons});
+            this.setState({lessons: lessons}, () =>{
+                console.log(this.state.lessons);
+            });
         });
     }
+
+    handleDelete = (id, e) => {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swal(
+                    'Deleted!',
+                    'Instrument has been deleted.',
+                    'success'
+                );
+                LesService.deleteLesson(id);
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal(
+                    'Cancelled',
+                    'Instrument was not deleted',
+                    'error'
+                )
+            }
+        });
+    };
 
     render() {
 
@@ -35,26 +74,26 @@ export default class Lessons extends Component {
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>CourseId</th>
                             <th>Beschrijving</th>
                             <th>Begindatum</th>
                             <th>Einddatum</th>
+                            <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.lessons.map((les, index) => (
-                            <tr key={index} id={les.instrumentId}>
-                                <td>{instrument.instrumentname}</td>
-                                <td>{instrument.type}</td>
-                                <td>{instrument.uitvoering}</td>
+                            <tr key={index} id={les.id}>
+                                <td>{les.course.description}</td>
+                                <td>{les.startdatetime}</td>
+                                <td>{les.enddatetime}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/instrumentdetails/${instrument.instrumentId}` }>
+                                          to={`/instrumentdetails/${les.id}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
                                     <a className="waves-effect white-text deep-orange darken-4 btn"
-                                       onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i
+                                       onClick={(e) => this.handleDelete(les.id, e)}><i
                                         className="material-icons">delete
                                     </i></a>
                                 </td>
@@ -63,7 +102,7 @@ export default class Lessons extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addInstrument" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addLesson" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>

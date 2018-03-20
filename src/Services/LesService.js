@@ -47,6 +47,20 @@ export function postLesson(data) {
     fetchService.fetchWithHeader("lesson", "POST", data, {});
 }
 
-export function getLessons() {
-    fetchService.fetchWithHeader("lesson", "GET", {}, {});
+export function deleteLesson(lessonid) {
+    return fetchService.fetchWithHeader("lesson/" + lessonid, "DELETE", {}, {});
 }
+
+
+export function getLessons() {
+    return fetchService.fetchWithHeader("lesson", "GET", {}, {});
+}
+
+export function updateLesson(lessonid, data) {
+    return fetchService.fetchWithHeader("lesson/lesson/" + lessonid, "PUT", data, {});
+}
+
+export function getLesson(lessonid) {
+    return fetchService.fetchWithHeader("lesson/" + lessonid, "GET", {}, {});
+}
+

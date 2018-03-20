@@ -35,6 +35,7 @@ class AddLesson extends Component {
     componentDidMount() {
         //TODO: ajax call to load all courses for logged in user
       CourseService.getMyCourses().then(courses => {
+          console.log(courses);
           this.setState({myCourses: courses.teachesCourses});
       })
 
