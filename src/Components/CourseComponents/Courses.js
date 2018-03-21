@@ -70,13 +70,12 @@ class Courses extends Component {
         return (
 
             <div className="Homepage">
-                <Header name="Courses"/>
+                <Header name="Vakken"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Course</th>
+                            <th>Vak</th>
                             <th>Prijs</th>
                             <th>Acties</th>
                         </tr>
@@ -84,7 +83,6 @@ class Courses extends Component {
                         <tbody>
                         {this.state.courses.map((course, index) => (
                             <tr key={course.courseId} id={course.courseId}>
-                                <td>{course.courseId}</td>
                                 <td>{course.courseType.description}</td>
                                 <td>{course.courseType.price}</td>
                                 <td>
