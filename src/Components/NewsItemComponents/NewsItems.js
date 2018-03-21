@@ -38,7 +38,7 @@ export default class Compositions extends Component {
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Geannuleerd',
+                    'Gestopt',
                     'Item is behouden',
                     'error'
                 )

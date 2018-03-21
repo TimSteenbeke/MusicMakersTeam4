@@ -35,7 +35,7 @@ export default class Users extends Component {
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Geannuleerd',
+                    'Gestopt',
                     'De data is veilig',
                     'error'
                 )

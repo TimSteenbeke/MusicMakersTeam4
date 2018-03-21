@@ -50,7 +50,7 @@ export default class Courses extends Component {
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Geannuleerd',
+                    'Gestopt',
                     'Cursus werd niet verwijderd',
                     'error'
                 )

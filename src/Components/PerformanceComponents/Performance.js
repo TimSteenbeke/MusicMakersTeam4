@@ -59,7 +59,7 @@ export default class Performance extends Component {
                 result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Geannuleerd',
+                    'Gestopt',
                     'Preformance werd niet verwijderd',
                     'error'
                 )
