@@ -7,10 +7,8 @@ export default class StyledTextField extends Component {
         return (
             <div className="row">
                 <div className="input-field col s12 m12 l12">
-
                     <input classID={this.props.id} required={this.props.required} ref={this.props.ref} placeholder={this.props.placeholder} value={this.props.value} disabled={this.props.disabled} defaultValue={this.props.hint} onChange={this.props.onChange} id="hint" type="text" className="validate" />
-
-                        <label className="active" htmlFor="hint">{this.props.label}</label>
+                    <label className="active" htmlFor="hint">{this.props.label}</label>
                 </div>
             </div>
         )
