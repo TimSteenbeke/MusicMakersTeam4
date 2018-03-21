@@ -18,7 +18,6 @@ export default class AddInstrument extends Component {
             typedType: "",
             typedVersion: "",
             image: "..image/image.jpg",
-            bestandType: "",
         };
     }
 
@@ -32,25 +31,18 @@ export default class AddInstrument extends Component {
         });
         InstrumentService.postInstrument(JSON.stringify(
             {
-                afbeelding: this.state.image,
-                instrumentsoortid: this.state.value,
-                naam: this.state.typedName,
+                image: this.state.image,
+                instrumentid: this.state.value,
+                instrumentname: this.state.typedName,
                 type: this.state.typedType,
-                uitvoering: this.state.typedVersion
+                details: this.state.typedVersion
             }
         ));
 
     };
 
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
-    };
-
     componentDidMount() {
         InstrumentService.getInstrumentSoortenFromBackend()
-            .then(console.log("----soorten---- \n"))
             .then(soorten => {
                 this.setState({soorten: soorten}, console.log(soorten));
             });
@@ -91,11 +83,9 @@ export default class AddInstrument extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Add Instrument"/>
+                <Header name="Instrument toevoegen"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-m2">
                             <div className="card hoverable">
                                 <div className="card-image">
                                     <img
@@ -110,6 +100,7 @@ export default class AddInstrument extends Component {
                                                 <input name="file"
                                                        className="upload-file"
                                                        id="file"
+                                                       required
                                                        onChange={this.handleChangeImage}
                                                        encType="multipart/form-data" accept="image/*" type="file"/>
                                             </div>
@@ -123,15 +114,12 @@ export default class AddInstrument extends Component {
                                     } }>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Soort</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
+                                                <div className="col s12 m12 l12">
                                                     <Row>
                                                         <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
                                                             {this.state.soorten.map((soort, index) => (
-                                                                <option key={soort.instrumentSoortId}
-                                                                        value={soort.instrumentSoortId}>{soort.soortNaam}</option>
+                                                                <option key={soort.instrumentCategoryId}
+                                                                        value={soort.instrumentCategoryId}>{soort.categoryName}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
@@ -141,42 +129,29 @@ export default class AddInstrument extends Component {
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Naam</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeNaam} hint="Geef naam in..."
-                                                                     label="Naam"/>
+                                                <div className="col s12 m12 l12">
+                                                <StyledTextField onChange={this.onChangeNaam} placeholder="Geef naam in..." label="Naam *"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Type</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeType} hint="Geef type in..."
-                                                                     label="Type"/><br />
+                                                <div className="col s12 m12 l12">
+                                                    <StyledTextField onChange={this.onChangeType} placeholder="Geef type in..." label="Type *"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Uitvoering</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <StyledTextField onChange={this.onChangeVersion}
-                                                                     hint="Geef uitvoering in..." label="Uitvoering"/>
+                                                <div className="col s12 m12 l12">
+                                                    <StyledTextField onChange={this.onChangeVersion} placeholder="Geef uitvoering in..." label="Uitvoering *"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="divider"></div>
                                     </form>
-
                                 </div>
                                 <div className="card-action">
                                     <Link to="/instrumenten" onClick={this.handleClick}
@@ -187,8 +162,6 @@ export default class AddInstrument extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col s0 m2 l2"/>
-                    </div>
                 </section>
             </div>
         );

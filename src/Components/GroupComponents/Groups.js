@@ -3,6 +3,7 @@ import * as GroupService from '../../Services/GroupService.js';
 import {Link} from 'react-router-dom';
 import Header from '../GeneralComponents/Header';
 import './Groups.css';
+import swal from 'sweetalert2';
 
 export default class Group extends Component {
     constructor(props) {
@@ -16,7 +17,34 @@ export default class Group extends Component {
     }
 
     handleDelete = (id, e) => {
-        GroupService.deleteGroup(id);
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.value) {
+                GroupService.deleteGroup(id);
+                swal({
+                    title: "Deleted!",
+                    text: "Instrument has been deleted!",
+                    type: "success"
+                }).then(() => {
+                    this.props.history.push("/groups");
+                });
+
+                // For more information about handling dismissals please visit
+                // https://sweetalert2.github.io/#handling-dismissals
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                swal(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
     };
 
     componentDidMount() {

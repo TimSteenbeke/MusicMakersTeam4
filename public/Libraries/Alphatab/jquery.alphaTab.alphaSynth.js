@@ -456,12 +456,17 @@
         ;
             
         // if playing, animate the cursor to the next beat
-        $('.atHighlight', element).removeClass('atHighlight');
+        $('.b' + beat.Id).attr('id','b' + beat.Id);
+        //$('.atHighlight').removeClass('atHighlight');
+        $('.atHighlight').attr('class','');
+
         if(context.playerState == 1 || stop) {
             duration /= context.player.options.playbackSpeed;
             
             if(!stop) {
-                $('.b' + beat.Id, element).addClass('atHighlight');            
+                //$('#b' + beat.Id).addClass('atHighlight');
+                $('#b' + beat.Id).attr('class','atHighlight');
+
                 var nextBeatX = barBoundings.VisualBounds.X + barBoundings.VisualBounds.W;
                 
                 // get position of next beat on same stavegroup
@@ -575,7 +580,7 @@
         // required css styles 
         element.css({position: 'relative'});
         element.css({'text-align': 'left'});
-        cursorWrapper.css({position: 'absolute', "z-index": 1000, display: 'inline', 'pointer-events': 'none'});
+        cursorWrapper.css({position: 'absolute', "z-index": 1, display: 'inline', 'pointer-events': 'none'});
         selectionWrapper.css({position: 'absolute'});
         barCursor.css({position: 'absolute'});
         beatCursor.css({position: 'absolute'});
@@ -601,7 +606,7 @@
             var renderer = api.renderer(element, context);
             element.data('alphaSynthCursorCache', renderer.BoundsLookup);
             api.playerCursorUpdateTick(element, context, previousTick);
-            cursorWrapper.css({position: 'absolute', "z-index": 1000, 
+            cursorWrapper.css({position: 'absolute', "z-index": 1,
                 width: surface.width(), height: surface.height()});
         });
                

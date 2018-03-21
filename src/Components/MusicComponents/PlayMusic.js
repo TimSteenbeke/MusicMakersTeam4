@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
 import * as MusicService from '../../Services/MusicService.js'
+import Header from '../GeneralComponents/Header';
 import Partituur from "./Partituur";
 import ChordSheet from "./ChordSheet";
 import './PlayMusic';
@@ -36,24 +37,22 @@ export default class PlayMusic extends Component {
 
     render() {
         return (
-            <div className="PlayPartituur">
-                <section className="container">
-                    <div>
-                        <h1 className="header">Play music</h1>
-                        {this.state && this.state.musicSheet &&
-                            <ChordSheet
-                                fileFormat={this.state.partituur.fileFormat}
-                                content={(this.state.musicSheet)}
-                            />
-                        }
-                        {this.state && this.state.musicObj &&
-                            <Partituur
-                                fileFormat={this.state.partituur.fileFormat}
-                                content={this.state.musicObj}
-                            />
-                        }
-                    </div>
-                </section>
+            <div className="Homepage">
+                <Header name="Play Music"/>
+                <div className="PlayPartituur">
+                    {this.state && this.state.musicSheet &&
+                    <ChordSheet
+                        fileFormat={this.state.partituur.fileFormat}
+                        content={(this.state.musicSheet)}
+                    />
+                    }
+                    {this.state && this.state.musicObj &&
+                    <Partituur
+                        fileFormat={this.state.partituur.fileFormat}
+                        content={this.state.musicObj}
+                    />
+                    }
+                </div>
             </div>
         );
     }

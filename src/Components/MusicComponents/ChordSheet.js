@@ -4,18 +4,22 @@ import ChordSheetJS from 'chordsheetjs';
 import GuitarChord from 'react-guitar-chord';
 import $ from 'jquery';
 import './ChordSheet.css';
+import MusicControls from "./MusicControls";
 
 export default class ChordSheet extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataFile:"",
-            chord:'A',
-            chordQuality:'MIN',
-            hideFirst:true,
-            currentChord:0,
-            speed:1000,
-            hidden:true
+            fileName: "",
+            dataFile: "",
+            chord: 'A',
+            chordQuality: 'MIN',
+            hideFirst: true,
+            currentChord: 0,
+            speed: 1000,
+            hidden: true,
+            scrollTop: 0,
+            scrollInterval: {}
         };
         this.nextChord = this.nextChord.bind(this);
     }
@@ -23,34 +27,36 @@ export default class ChordSheet extends Component {
     componentWillMount() {
         this.checkRightFormat();
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.addHover();
     }
 
 
-    addHover(){
+    addHover() {
         let _this = this;
-        $(".chord").hover(function() {
+        $(".chord").hover(function () {
                 let html = $(this).html();
                 let htmlTrim = html.replace(/&nbsp;/g, '');
                 _this.setChord(htmlTrim);
             }
-            ,function () {
-                _this.setState({hideFirst:true})
+            , function () {
+                _this.setState({hideFirst: true})
             });
     }
 
-    checkRightFormat(){
+    checkRightFormat() {
         const fileformat = this.props.fileFormat;
-        const extension = fileformat.substr(fileformat.lastIndexOf('.')+1);
+        const fileName = fileformat.substr(0, fileformat.lastIndexOf('.'));
+        const extension = fileformat.substr(fileformat.lastIndexOf('.') + 1);
         const alphaTabExtensionSupport = ["txt"];
-        if(alphaTabExtensionSupport.indexOf(extension) > -1){
-            this.setState({hidden:false});
+        if (alphaTabExtensionSupport.indexOf(extension) > -1) {
+            this.setState({hidden: false, fileName: fileName});
             this.parseChordSheet();
         }
     }
 
-    parseChordSheet(){
+    parseChordSheet() {
         const chordSheetExample = `
         Am         C/G        F          C
         Let it be, let it be, let it be, let it be
@@ -61,7 +67,7 @@ export default class ChordSheet extends Component {
         this.setState({dataFile: chordSheet});
     }
 
-    parseChordSheetPro(chordSheet){
+    parseChordSheetPro(chordSheet) {
         const chordSheetExample = `
 {title: Let it be}
 {subtitle: ChordSheetJS example version}
@@ -75,37 +81,51 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
     }
 
 
-    setChord(chord){
-        if(chord.charAt(1)=== 'm'){
-            this.setState({chordQuality:'MIN'})
-        }else{
-            this.setState({chordQuality:'MAJ'})
+    setChord(chord) {
+        if (chord.charAt(1) === 'm') {
+            this.setState({chordQuality: 'MIN'})
+        } else {
+            this.setState({chordQuality: 'MAJ'})
         }
-        this.setState({chord:chord.charAt(0)});
-        this.setState({hideFirst:false});
+        this.setState({chord: chord.charAt(0)});
+        this.setState({hideFirst: false});
     }
 
-    play(){
-        let chordList = $(".chord").map(function(){return $(this).html()}).get();
+    play() {
+        let chordList = $(".chord").map(function () {
+            return $(this).html()
+        }).get();
         let _this = this;
-        this.interval = setInterval(function() {_this.nextChord(chordList)}, this.state.speed);
+        this.interval = setInterval(function () {
+            _this.nextChord(chordList);
+        }, this.state.speed);
+       this.state.scrollInterval = setInterval(function () {
+            $('.application').animate({
+                scrollTop:_this.state.scrollTop + 'px'
+            });
+           _this.setState({scrollTop: _this.state.scrollTop+100});
+       }, 4000);
+
     }
 
-    nextChord(chordList){
-        if(this.state.currentChord < chordList.length){
+    nextChord(chordList) {
+        if (this.state.currentChord < chordList.length) {
             this.setChord(chordList[this.state.currentChord]);
-            this.setState({currentChord:this.state.currentChord+1});
+            this.setState({currentChord: this.state.currentChord + 1});
         }
     }
 
-    pauze(){
+    pause() {
         clearInterval((this.interval));
+        clearInterval((this.state.scrollInterval));
     }
 
-    reset(){
-        this.setState({hideFirst:true});
-        this.setState({currentChord:0});
+    stop() {
+        this.setState({hideFirst: true});
+        this.setState({currentChord: 0});
         clearInterval((this.interval));
+        clearInterval((this.state.scrollInterval));
+
     }
 
     render() {
@@ -115,18 +135,38 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
         let disp = formatter.format(song);
 
         return (
+
             <div className="Play" hidden={this.state.hidden}>
-                <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
-                <input type="button" id="pauseBtn" value="Pause" onClick={(e) => this.pauze(e)}/>
-                <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.reset(e)}/>
-                <section className="sheet">
-                    <div id="whiteBox"
-                        dangerouslySetInnerHTML={ {__html: disp} }>
+                <MusicControls
+                    play={(e) => this.play(e)}
+                    pause={(e) => this.pause(e)}
+                    stop={(e) => this.stop(e)}
+                />
+
+                <div className="row">
+                    <div className="col s8">
+                        <div className="row">
+                            <h5 className="headerboi">{this.state.fileName}</h5>
+
+                            <section className="sheet">
+
+                                <div id="chordSheet"
+                                     dangerouslySetInnerHTML={ {__html: disp} }>
+                                </div>
+                            </section>
+                        </div>
                     </div>
-                </section>
-                <section className="guitarChord">
-                <GuitarChord chord={this.state.chord} quality={this.state.chordQuality} hidden={this.state.hideFirst} />
-                </section>
+                    <div className="col s4">
+                        <div className="row rightInfo">
+
+                            <section className="section guitarChord">
+                                <GuitarChord chord={this.state.chord} quality={this.state.chordQuality}
+                                             hidden={this.state.hideFirst}/>
+                            </section>
+                            <div className="divider"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
