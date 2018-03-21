@@ -19,7 +19,6 @@ export default class InstrumentLevels extends Component {
         InstrumentService.getMyInstrumentenLevelsFromBackend().then(levels => {
             this.setState({instrumentlevels: levels});
         });
-        console.log(this.state.instrumentlevels);
     }
 
     componentDidMount() {

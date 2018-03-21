@@ -14,7 +14,6 @@ class AddCourse extends Component {
 
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
             beschrijving: "",
             teacherids: [],
@@ -52,36 +51,28 @@ class AddCourse extends Component {
     }
 
     addCourseTypes = () => {
-        CourseTypeService.getCourseTypesFromBackend().then(console.log("-----CourseTypes------"))
+        CourseTypeService.getCourseTypesFromBackend()
             .then(courseTypes => {
                 this.setState({courseTypes: courseTypes});
-                console.log(courseTypes);
             })
     }
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----students---- \n"))
-            .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
-                console.log(students);
+        UserService.getStudents().then(students => {
+                this.setState({students: students.users});
             });
-        console.log("this state");
-        console.log(this.state.students);
     };
 
     addTeachers = () => {
-        UserService.getTeachers().then(console.log("----teachers---- \n"))
+        UserService.getTeachers()
             .then(teachers => {
-                this.setState({teachers: teachers.users}, console.log(teachers.users));
-                console.log('teachers');
-                console.log(teachers);
+                this.setState({teachers: teachers.users});
             });
 
     };
 
     onChangeDescription = (e) => {
         this.setState({beschrijving: e.target.value});
-        console.log("beschrijving:" + e.target.value)
     };
 
     handleCourseTypeChange = (e, value) => {
@@ -98,7 +89,6 @@ class AddCourse extends Component {
             }
         }
         this.setState({teacherids: value});
-        console.log(this.state.teacherids);
     };
 
     handleStudentChange = (e) => {
@@ -110,7 +100,6 @@ class AddCourse extends Component {
             }
         }
         this.setState({studentids: value});
-        console.log(this.state.studentids);
     };
 
     render() {

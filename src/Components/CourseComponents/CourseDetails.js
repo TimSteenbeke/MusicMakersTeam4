@@ -36,7 +36,6 @@ class CoursesDetails extends Component {
 
         let self = this;
         CourseService.getCourseFromBackend(self.state.courseId)
-            .then(console.log("----Course met id " + self.state.courseId + "---- \n"))
             .then(course => {
                 self.setState({
                     courseId: this.props.match.params.id,
@@ -47,10 +46,6 @@ class CoursesDetails extends Component {
 
 
                 });
-                console.log(course);
-                console.log(self.state.beschrijving);
-                console.log(course.users);
-                console.log(this.state.selectedStudents);
             }).catch((error) => {
             console.log(error);
         });
@@ -74,37 +69,27 @@ class CoursesDetails extends Component {
                 beschrijving: self.state.beschrijving,
             }
         ));
-        console.log("coursebeschrijving: " + self.state.beschrijving);
-        console.log("prijs: " + self.state.prijs);
 
     };
 
 
 
     addCourseTypes = () => {
-        CourseTypeService.getCourseTypesFromBackend().then(console.log("-----CourseTypes------"))
-            .then(courseTypes => {
+        CourseTypeService.getCourseTypesFromBackend().then(courseTypes => {
                 this.setState({courseTypes: courseTypes});
-                console.log(courseTypes);
             })
     }
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----students---- \n"))
-            .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
-                console.log(students);
+        UserService.getStudents().then(students => {
+                this.setState({students: students.users});
             });
-        console.log("this state");
-        console.log(this.state.students);
     };
 
     addTeachers = () => {
-        UserService.getTeachers().then(console.log("----teachers---- \n"))
+        UserService.getTeachers()
             .then(teachers => {
-                this.setState({teachers: teachers.users}, console.log(teachers.users));
-                console.log('teachers');
-                console.log(teachers);
+                this.setState({teachers: teachers.users});
             });
 
     };
@@ -123,7 +108,6 @@ class CoursesDetails extends Component {
             }
         }
         this.setState({selectedTeachers: value});
-        console.log(this.state.selectedTeachers);
     };
 
     handleStudentChange = (e) => {
@@ -135,7 +119,6 @@ class CoursesDetails extends Component {
             }
         }
         this.setState({selectedStudents: value});
-        console.log(this.state.selectedStudents);
     };
 
     handleClick = () => {

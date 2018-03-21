@@ -15,8 +15,6 @@ export function fetchToken(username, password) {
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log("Json Response Fetch:");
-            console.log(responseJson);
             if (responseJson.hasOwnProperty("access_token")) {
                 let JWT = responseJson;
                 let now = Date.now();
@@ -29,7 +27,6 @@ export function fetchToken(username, password) {
         })
         .catch((err) => {
             console.log("geen response");
-            console.log(err);
             return false;
         });
 }
@@ -44,8 +41,6 @@ export function checkToken() {
     if (localStorage.getItem('userToken') != null) {
         let jwt = JSON.parse(localStorage.getItem('userToken'));
         let current_time = Date.now();
-        console.log("curr time: ", current_time);
-        console.log('jwt.expires_in: ', jwt.expires_in);
         if (jwt.expires_in > current_time) {
             return true;
         }

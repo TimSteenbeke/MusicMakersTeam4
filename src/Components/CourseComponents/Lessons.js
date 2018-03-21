@@ -23,9 +23,7 @@ export default class Lessons extends Component {
 
     getLessons() {
         LesService.getLessons().then(lessons => {
-            this.setState({lessons: lessons}, () =>{
-                console.log(this.state.lessons);
-            });
+            this.setState({lessons: lessons});
         });
     }
 

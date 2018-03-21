@@ -52,7 +52,6 @@ export default class Compositions extends Component {
 
     getNewsItem(){
         NewsItemService.getNewsItemsFromBackend().then(newsitems => {
-            console.log(newsitems)
             this.setState({newsitems: newsitems});
         });
     }

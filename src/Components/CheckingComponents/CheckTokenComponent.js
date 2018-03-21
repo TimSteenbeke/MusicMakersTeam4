@@ -11,7 +11,6 @@ export default function(WrapperComponent) {
         checkAuthentication(params) {
             const {history} = params;
             if(!LoginService.checkToken()){
-                console.log("redirected");
                 return false;
             }
             return true;

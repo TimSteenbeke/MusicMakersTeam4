@@ -25,22 +25,12 @@ export default class Header extends Component {
 
     getLoggedIn = () => {
         let self = this;
-        console.log("Logged in check token header =>" + this.checkAuthentication());
         if (this.checkAuthentication()) {
-            console.log("Zit in Logout");
-            self.setState({loginButton: "Log Out"}, () => {
-                console.log("Button? => " + self.state.loginButton);
-            });
+            self.setState({loginButton: "Log Out"});
         } else {
-            console.log("Zit in Login");
-            self.setState({loginButton: "Login"}, () => {
-                console.log("Button? => " + self.state.loginButton);
-            });
+            self.setState({loginButton: "Login"});
         }
-        self.setState({showLogout: this.checkAuthentication()}, () => {
-            console.log("Logged in? showLogout => " + self.state.showLogout);
-        });
-        console.log("Logged in check token header =>" + this.checkAuthentication());
+        self.setState({showLogout: this.checkAuthentication()});
     };
 
     checkLogin = () => {

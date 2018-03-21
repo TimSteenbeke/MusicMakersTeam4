@@ -1,8 +1,5 @@
 import * as fetchService from "./FetchService";
 
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-// const URL = 'http://localhost:8080/api/';
-
 export function getCourseTypesFromBackend() {
     return fetchService.fetchWithHeader("courseTypes", "GET", {}, {});
 }

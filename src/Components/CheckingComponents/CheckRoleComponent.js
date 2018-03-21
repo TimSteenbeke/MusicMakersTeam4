@@ -34,7 +34,6 @@ export default function (WrapperComponent) {
             let roles = [];
             let self=this;
             if (!LoginService.checkToken()) {
-                console.log("redirected");
                 self.setState({login:false});
             }
 

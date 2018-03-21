@@ -28,8 +28,6 @@ export default class InstrumentDetails extends Component {
                 this.setState({soorten: soorten});
             });
 
-        console.log("soorten");
-        console.log(this.state.soorten);
         let self = this;
         InstrumentService.getInstrumentFromBackend(self.state.instrumentId)
             .then(instrument => {

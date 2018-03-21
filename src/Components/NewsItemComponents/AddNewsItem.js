@@ -27,9 +27,8 @@ export default class AddNewsItem extends Component {
     }
 
     addGroups = () => {
-        GroupService.getAllGroupsFromBackend().then(console.log("----Groups---- \n"))
-            .then(groups => {
-                this.setState({groups: groups}, console.log(groups));
+        GroupService.getAllGroupsFromBackend().then(groups => {
+                this.setState({groups: groups});
             });
     };
 
@@ -56,7 +55,6 @@ export default class AddNewsItem extends Component {
     handleChange(field, e){
         let fields = this.state.fields;
         fields[field] = e.target.value;
-        console.log(field + " - " + fields[field]);
         this.setState({fields});
     }
     handleChangeImage = (evt) => {

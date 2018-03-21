@@ -28,24 +28,22 @@ export default class AddGroup extends Component {
     }
 
     addUsers = () => {
-        UserService.getAll().then(console.log("----Users---- \n"))
-            .then(allUsers => {
+        UserService.getAll().then(allUsers => {
                 let users = allUsers.users;
                 users.forEach((user) => {
                     user["fullname"] = user.firstname + ' ' + user.lastname;
                 });
-                this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
+                this.setState({allUsers: allUsers.users});
             });
     };
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----Students---- \n"))
-            .then(students => {
+        UserService.getStudents().then(students => {
                 let users = students.users;
                 users.forEach((students) => {
                     students["fullname"] = students.firstname + ' ' + students.lastname;
                 });
-                this.setState({students: students.users}, console.log(students.users));
+                this.setState({students: students.users});
             });
     };
 
@@ -54,18 +52,14 @@ export default class AddGroup extends Component {
     };
 
     handleBegeleider = (chosenRequest, index) => {
-        console.log(index);
         if (index !== -1) {
             this.setState({supervisor: chosenRequest});
         }
-        console.log(this.state.supervisor);
     };
 
     handleUser = (chosenRequest, index) => {
-        console.log(index);
         if (index !== -1) {
             let value = [];
-            console.log(chosenRequest);
             let users = this.state.userids;
             users.forEach((user) => {
                 value.push(user);
@@ -73,7 +67,6 @@ export default class AddGroup extends Component {
             value.push(chosenRequest.userid);
             const ids = value.filter((val, id, array) => array.indexOf(val) === id);
             this.setState({userids: ids});
-            console.log(ids)
         }
     };
 
@@ -85,11 +78,8 @@ export default class AddGroup extends Component {
 
 
     deleteStudent = (i) => {
-        console.log("userid = " + i);
         this.state.userids.forEach((user) => {
-            console.log("user in loop = " + user);
             if (user === i) {
-                console.log("GOTTEM = " + i);
                 let value = [];
                     let users = this.state.userids;
                     users.forEach((user) => {
@@ -97,7 +87,6 @@ export default class AddGroup extends Component {
                             value.push(user);
                         }
                     });
-                console.log("DEEZ NUTS = " + value);
                 this.setState({userids: value});
             }
         });
@@ -107,8 +96,6 @@ export default class AddGroup extends Component {
     componentDidMount() {
         this.addUsers();
         this.addStudents();
-        console.log(this.state.students);
-        console.log(this.state.allUsers);
     }
 
     handleChangeImage = (evt) => {
@@ -123,7 +110,7 @@ export default class AddGroup extends Component {
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("Uploaded");
+            console.log("successfully Uploaded");
         }, 1000);
     };
 
@@ -135,9 +122,6 @@ export default class AddGroup extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        console.log("Userid: " + this.state.supervisor.userid);
-        console.log("name: " + this.state.name);
-        console.log("id's: " + this.state.userids);
 
         GroupService.postGroup(JSON.stringify(
             {

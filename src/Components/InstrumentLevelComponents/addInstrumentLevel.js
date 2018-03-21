@@ -37,8 +37,6 @@ export default class addInstrumentLevel extends Component {
         });
         this.addStudents();
 
-        console.log(this.state.students);
-
     }
 
     handleClick = () => {
@@ -88,13 +86,11 @@ export default class addInstrumentLevel extends Component {
     changeLevel = event => {
         let value = event.target.value;
         this.setState({level: value});
-        console.log(value);
     };
 
     changeMaxLevel = event => {
         let value = event.target.value;
         this.setState({maxlevel: value});
-        console.log(value);
 
     };
 

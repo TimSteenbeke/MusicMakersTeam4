@@ -144,7 +144,6 @@ export default class ChatComponent extends Component {
         const self = this;
         const ws = new SockJS(serverUrl);
         let messages = [];
-        console.log("init state: ", this.state);
         self.stompClient = Stomp.over(ws);
         self.stompClient.connect({}, () => {
             subscription = self.stompClient.subscribe('/chat/' + self.state.currentChatroom.roomId, (message) => {
@@ -163,7 +162,6 @@ export default class ChatComponent extends Component {
                 }
             });
         });
-        console.log("init is done");
     };
 
     sendMessage = () => {
@@ -190,8 +188,6 @@ export default class ChatComponent extends Component {
     };
 
     render() {
-        console.log("render state");
-        console.log(this.state);
         return (
             <div className="columncontainer">
                 <Header name={"Chat: " + this.state.currentChatroom.roomName}/>
