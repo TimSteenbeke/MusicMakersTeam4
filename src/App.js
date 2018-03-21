@@ -34,6 +34,9 @@ import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 import AddLesson from './Components/CourseComponents/AddLesson.js'
+import Lessons from './Components/CourseComponents/Lessons.js'
+import LessonDetails from './Components/CourseComponents/LessonDetails.js'
+
 export default class App extends Component {
 
 
@@ -70,7 +73,10 @@ export default class App extends Component {
                 <Route name="addCourseTypes" path="/addcoursetype" component={role(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={role(CourseTypes)}/>
                 <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={role(CourseTypeDetails)}/>
-                <Route name="addLesson" path="/addLesson" component={role(AddLesson)}  />
+
+                <Route name="lessons" path="/lessons" component={role(Lessons)}/>
+                <Route name="addLesson" path="/addLesson" component={role(AddLesson)}/>
+                <Route name="lessonDetails" path="/lessonDetails" component={role(LessonDetails)}/>
 
                 <Route name="users" path="/users" component={role(Users)}/>
                 <Route name="addUser" path="/addUser" component={role(AddUser)}/>
@@ -80,11 +86,11 @@ export default class App extends Component {
 
                 <Route name="newsitems" path="/newsitems" component={auth(NewsItems)}/>
                 <Route name="addNewsItem" path="/addNewsItem" component={role(AddNewsItem)}/>
-                    <Route name="updatenNewsItem" path="/updatenewsitem/:id" component={role(UpdateNewsItem)}/>
+                <Route name="updatenNewsItem" path="/updatenewsitem/:id" component={role(UpdateNewsItem)}/>
 
-
-                    <Route path='*' exact={true} component={NotFound}/>
+                <Route path='*' exact={true} component={NotFound}/>
             </Switch>
         );
     }
 }
+

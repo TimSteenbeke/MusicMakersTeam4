@@ -67,13 +67,13 @@ export default class ChatComponent extends Component {
         let self = this;
         console.log(self.state.currentChatroom.roomName);
         let messages = [];
+        subscription.unsubscribe();
         this.state.rooms.forEach((room) => {
             console.log("roooooooom : " + room);
             if (room.roomName === this.state.currentChatroom.roomName){
                 this.setState({currentChatroom: { roomName: name, messages: room.messages}}, () => {
                     console.log("chat =>" + self.state.currentChatroom.roomName);
                     console.log(room.messages);
-                    subscription.unsubscribe();
                     self.initializeWebSocketConnection();
                 });
             }
@@ -90,7 +90,7 @@ export default class ChatComponent extends Component {
         console.log("OH BOI HERE WE GO :" + self.state.currentChatroom.roomName);
         console.log("WEEEEEEEEEE :" + self.state.message.userId);
         self.stompClient.connect({}, () => {
-            subscription= self.stompClient.subscribe('/chat/' + self.state.currentChatroom.roomName, (message) => {
+            subscription = self.stompClient.subscribe('/chat/' + self.state.currentChatroom.roomName, (message) => {
                 console.log("msg");
                 console.log(message);
                 console.log("currentChatRoom");
@@ -155,6 +155,7 @@ export default class ChatComponent extends Component {
                     <div className="rowcontainer messagetyper">
                         <div className="chatbar">
                             <StyledTextField
+                                required={true}
                                 onChange={this.setText}
                                 label="Message"
                                 value={this.state.message.text}
