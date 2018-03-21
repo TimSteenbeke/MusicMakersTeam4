@@ -17,26 +17,26 @@ export default class Users extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Bent u zeker?',
+            text: "u kan dit niet ongedaan maken!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonText: 'Ja, verwijderen!',
+            cancelButtonText: 'Nee, behouden'
         }).then((result) => {
             if (result.value) {
                 UserService.deleteUser(id);
                 swal({
-                    title: "Deleted!",
-                    text: "User has been deleted!",
+                    title: "Verwijderd!",
+                    text: "Gebruiker verwijderd",
                     type: "success"
                 }).then(() => {
                     this.props.history.push("/users");
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Geannuleerd',
+                    'De data is veilig',
                     'error'
                 )
             }
@@ -60,7 +60,7 @@ export default class Users extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Users" />
+                <Header name="Gebruikers" />
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>

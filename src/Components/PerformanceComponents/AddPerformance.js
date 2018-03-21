@@ -17,7 +17,7 @@ export default class AddPerformance extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            myGroups: [],
+            groups: [],
 
             minDate: new Date(),
 
@@ -35,11 +35,14 @@ export default class AddPerformance extends Component {
     }
 
     componentDidMount() {
-        GroupService.getGroupsByUser().then(groups => {
-            this.setState({myGroups: groups});
-        })
+        this.addGroups();
 
     }
+    addGroups = () => {
+        GroupService.getAllGroupsFromBackend().then(groups => {
+            this.setState({groups: groups});
+        });
+    };
 
     addPerformance = () => {
         let group = 0;
@@ -60,9 +63,9 @@ export default class AddPerformance extends Component {
                 startdatetime: this.state.selectedStartDate.toISOString().replace('Z', ''),
                 description: this.state.description
             }
-        )).then(() => {
-            this.props.history.push("/performance");
-        });
+        ));
+
+        this.props.history.push("/performance");
 
 
     };
@@ -130,7 +133,7 @@ export default class AddPerformance extends Component {
                             <option key="" value="" disabled>Kies een groep
                             </option>
                             <option key={999} value={999}>Eigen optreden</option>
-                            {this.state.myGroups.map((group, index) => (
+                            {this.state.groups.map((group, index) => (
                                 <option key={group.groupid}
                                         value={group.groupid}>{group.name}</option>
                             ))}

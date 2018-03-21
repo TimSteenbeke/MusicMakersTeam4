@@ -16,14 +16,14 @@ export default class CourseTypes extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Bent je zeker?',
+            text: "Dit kan niet ongedaan gemaakt worden!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
@@ -31,8 +31,8 @@ export default class CourseTypes extends Component {
         }).then((result) => {
             if (result.value) {
                 swal(
-                    'Deleted!',
-                    'CourseType has been deleted.',
+                    'Verwijderen!',
+                    'Cursus type werd verwijderd.',
                     'success'
                 );
                 CourseTypeService.deleteCourseType(id);
@@ -41,8 +41,8 @@ export default class CourseTypes extends Component {
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Cancelled',
-                    'CourseType was not deleted',
+                    'Geannuleerd',
+                    'Cursus type werd niet verwijderd',
                     'error'
                 )
             }
@@ -63,7 +63,7 @@ export default class CourseTypes extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="CourseTypes"/>
+                <Header name="Cursus types"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
