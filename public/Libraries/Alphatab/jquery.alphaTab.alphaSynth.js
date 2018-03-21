@@ -461,7 +461,8 @@
             duration /= context.player.options.playbackSpeed;
             
             if(!stop) {
-                $('.b' + beat.Id, element).addClass('atHighlight');            
+                $('.b' + beat.Id, element).addClass('atHighlight');
+                $('.b' + beat.Id, element).attr('class','atHighlight');
                 var nextBeatX = barBoundings.VisualBounds.X + barBoundings.VisualBounds.W;
                 
                 // get position of next beat on same stavegroup

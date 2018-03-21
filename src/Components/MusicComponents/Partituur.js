@@ -18,6 +18,11 @@ export default class Partituur extends Component {
 
     }
 
+    componentWillUnmount(){
+        const $ = window.$;
+        $(this.refs.partituur).alphaTab('stop');
+    }
+
     checkRightFormat(){
         const fileformat = this.props.fileFormat;
         const extension = fileformat.substr(fileformat.lastIndexOf('.')+1);
