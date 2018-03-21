@@ -7,6 +7,7 @@ import './ChatComponent.css';
 import {List, ListItem} from 'material-ui/List';
 import * as GroupService from '../Services/GroupService.js';
 import * as UserService from '../Services/UserService';
+import * as ChatService from '../Services/ChatService';
 const serverUrl = 'https://musicmaker-api-team4.herokuapp.com/socket';
 // const serverUrl = 'http://localhost:8080/socket';
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -68,9 +69,10 @@ export default class ChatComponent extends Component {
         console.log(self.state.currentChatroom.roomName);
         let messages = [];
         this.state.rooms.forEach((room) => {
-            console.log("roooooooom : " + room);
+            console.log("room : " + room);
             if (room.roomName === this.state.currentChatroom.roomName){
-                this.setState({currentChatroom: { roomName: name, messages: room.messages}}, () => {
+                messages = ChatService.getChatroomHistory(name);
+                this.setState({currentChatroom: { roomName: name, messages: messages}}, () => {
                     console.log("chat =>" + self.state.currentChatroom.roomName);
                     console.log(room.messages);
                     subscription.unsubscribe();
