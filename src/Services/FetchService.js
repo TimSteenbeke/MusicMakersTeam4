@@ -1,6 +1,5 @@
-const URL = 'https://musicmaker-api-team4.herokuapp.com/';
-// const URL = 'http://localhost:8080/';
-
+const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+//const URL = 'http://localhost:8080/api/';
 
 export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {}) {
     let userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -15,7 +14,7 @@ export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {})
             'Content-Type': 'application/json'
         }
     }
-    return fetch(URL +"api/"+ api,
+    return fetch(URL + api,
         {
             mode: 'cors',
             method: method,
