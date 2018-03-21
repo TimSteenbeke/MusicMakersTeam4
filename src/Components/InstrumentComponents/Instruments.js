@@ -20,6 +20,7 @@ export default class Instruments extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
+            confirmButtonColor: 'red',
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'No, keep it'
         }).then((result) => {
@@ -29,10 +30,7 @@ export default class Instruments extends Component {
                     title: "Deleted!",
                     text: "Instrument has been deleted!",
                     type: "success"
-                }).then(() => {
-                    this.props.history.push("/instrumenten");
                 });
-
                 // For more information about handling dismissals please visit
                 // https://sweetalert2.github.io/#handling-dismissals
             } else if (result.dismiss === swal.DismissReason.cancel) {
@@ -76,7 +74,7 @@ export default class Instruments extends Component {
                             </thead>
                             <tbody>
                             {this.state.Instruments.map((instrument, index) => (
-                                <tr key={index} id={instrument.instrumentId}>
+                                <tr key={index} id={instrument.instrumentid}>
 
                                     <td>{instrument.instrumentname}</td>
 
@@ -84,12 +82,12 @@ export default class Instruments extends Component {
                                     <td>{instrument.details}</td>
                                     <td>
                                         <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                              to={`/instrumentdetails/${instrument.instrumentId}` }>
+                                              to={`/instrumentdetails/${instrument.instrumentid}` }>
                                             <i className="material-icons">edit
                                             </i>
                                         </Link>
                                         <a className="waves-effect white-text deep-orange darken-4 btn"
-                                           onClick={(e) => this.handleDelete(instrument.instrumentId, e)}><i
+                                           onClick={(e) => this.handleDelete(instrument.instrumentid, e)}><i
                                             className="material-icons">delete
                                         </i></a>
                                     </td>
