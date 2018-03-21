@@ -33,6 +33,8 @@ import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 import AddLesson from './Components/CourseComponents/AddLesson.js'
+import MyPlayList from './Components/PlaylistComponents/MyPlaylist';
+
 export default class App extends Component {
 
 
@@ -64,7 +66,11 @@ export default class App extends Component {
                 <Route name="myCourses" path="/mycourses" component={auth(MyCourses)}/>
                 <Route name="myCourseDetails" path="/mycoursedetails/:id" component={auth(MyCourseDetails)}/>
 
-                <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
+                    <Route name="myPlaylist" path="/myplaylist" component={auth(MyPlayList)}/>
+
+
+
+                    <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
 
                 <Route name="addCourseTypes" path="/addcoursetype" component={auth(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={auth(CourseTypes)}/>

@@ -41,27 +41,31 @@ export default class CompositionUpdate extends Component {
     }
 
     handleUpdate = () => {
+        const self = this;
         swal({
             position: 'top-end',
             type: 'success',
             title: 'Composition Updated!',
             showConfirmButton: false,
             timer: 1500
+        }).then(() => {
+            CompositionService.UpdateComposition(self.state.compositionId, JSON.stringify(
+                {
+                    content: self.state.content,
+                    artist: self.state.artist,
+                    language: self.state.language,
+                    genre: self.state.genre,
+                    subject: self.state.subject,
+                    instrumentType: self.state.instrumentType,
+                    link: self.state.link,
+                    fileFormat: self.state.fileFormat,
+                    title: self.state.title
+                }
+            ));
+        }).then(() => {
+            this.props.history.push("/compositions");
         });
-        const self = this;
-        CompositionService.UpdateComposition(self.state.compositionId, JSON.stringify(
-            {
-                content: self.state.content,
-                artist: self.state.artist,
-                language: self.state.language,
-                genre: self.state.genre,
-                subject: self.state.subject,
-                instrumentType: self.state.instrumentType,
-                link: self.state.link,
-                fileFormat: self.state.fileFormat,
-                title: self.state.title
-            }
-        ));
+
     };
 
     setTitle = event => {
