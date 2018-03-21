@@ -68,7 +68,7 @@ export default class Home extends Component{
             else{
                 return (
                     <div>
-                        <Header name="Please login"/>
+                        <Header name="Music Makers"/>
                         <h4 className="center-align">Deze app is voor leden van Music Makers</h4>
                     </div>
                 )
