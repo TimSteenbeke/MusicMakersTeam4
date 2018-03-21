@@ -456,13 +456,17 @@
         ;
             
         // if playing, animate the cursor to the next beat
-        $('.atHighlight', element).removeClass('atHighlight');
+        $('.b' + beat.Id).attr('id','b' + beat.Id);
+        //$('.atHighlight').removeClass('atHighlight');
+        $('.atHighlight').attr('class','');
+
         if(context.playerState == 1 || stop) {
             duration /= context.player.options.playbackSpeed;
             
             if(!stop) {
-                $('.b' + beat.Id, element).addClass('atHighlight');
-                $('.b' + beat.Id, element).attr('class','atHighlight');
+                //$('#b' + beat.Id).addClass('atHighlight');
+                $('#b' + beat.Id).attr('class','atHighlight');
+
                 var nextBeatX = barBoundings.VisualBounds.X + barBoundings.VisualBounds.W;
                 
                 // get position of next beat on same stavegroup
