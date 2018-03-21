@@ -14,7 +14,7 @@ export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {})
             'Content-Type': 'application/json'
         }
     }
-    return fetch(URL +"api/"+ api,
+    return fetch(URL + api,
         {
             mode: 'cors',
             method: method,
