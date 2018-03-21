@@ -34,7 +34,7 @@ export default class CourseTypeDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Instrument Edited',
+            title: 'Cursustype aangepast!',
             showConfirmButton: false,
             timer: 1500
         });
