@@ -4,6 +4,6 @@ export function getChatroomHistory(chatroom) {
     return fetchService.fetchWithHeader("message/chatroom/" + chatroom, "GET", {}, {});
 }
 
-export function getFullHistory(){
+export function getFullHistory() {
     return fetchService.fetchWithHeader("message", "GET", {}, {});
 }
