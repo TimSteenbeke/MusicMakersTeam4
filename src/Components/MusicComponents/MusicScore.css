@@ -39,20 +39,6 @@
 }
 
 
-.controls {
-    background-color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 2;
-}
 
 
-comment{
-    text-align: center;
-    position: fixed;
-}
+
