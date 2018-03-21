@@ -1,26 +1,8 @@
 import * as fetchService from "./FetchService";
 
-/*const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-//const URL = 'http://localhost:8080/api/';*/
 
 export function getPartituurById(partituurId) {
     return fetchService.fetchWithHeader("compositions/" + partituurId, "GET", {}, {});
-    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
-        return fetch(URL + "compositions/" + partituurId, {
-            mode: 'cors',
-            headers: {
-                'Authorization': userToken.token_type + " " +  userToken.access_token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return responseJson;
-            })
-            .catch((err) => {
-                console.log("geen response");
-                console.log(err);
-            });*/
 }
 
 export function getMusicObject(item) {

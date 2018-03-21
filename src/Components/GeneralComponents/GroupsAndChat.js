@@ -35,8 +35,6 @@ export default class GroupsAndChat extends Component {
         GroupService.getGroupsByUser().then(groups => {
             this.setState({groups: groups});
         });
-        console.log("groups");
-        console.log(this.state.groups.newsItems);
 
         this.getMyAgendaItems();
     }
@@ -49,6 +47,7 @@ export default class GroupsAndChat extends Component {
     };
 
     mapAgendaItems = (agendaItems) => {
+
 
         if (this.state.agendaItems.length > 0) {
 

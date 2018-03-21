@@ -18,7 +18,6 @@ export default class UpdateNewsItem extends Component {
     componentDidMount() {
         let self = this;
         NewsItemService.getNewsItemFromBackend(self.state.newsItemId)
-            .then(console.log("----Melding met id " + self.state.newsItemId + "---- \n"))
             .then(newsitem => {
                 self.setState({
                     messageImage: newsitem.messageImage,

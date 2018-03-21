@@ -33,9 +33,7 @@ class AddLesson extends Component {
     }
 
     componentDidMount() {
-        //TODO: ajax call to load all courses for logged in user
       CourseService.getMyCourses().then(courses => {
-          console.log(courses);
           this.setState({myCourses: courses.teachesCourses});
       })
 
@@ -61,12 +59,8 @@ class AddLesson extends Component {
     };
 
     choosedate = (event, date) => {
-        console.log('datum gekozen');
-        console.log(date);
-
         this.setState({chosenDate: date},
             () => {this.updateStartAndEndDate()});
-
     };
 
     chooseBeginHour = (event,date) => {
@@ -75,8 +69,6 @@ class AddLesson extends Component {
 
         let newBeginHour =  addSubtractDate.add(new Date(this.state.chosenDate),hours +1,"hours");
         newBeginHour = addSubtractDate.add(newBeginHour,minutes,"minutes");
-        console.log(newBeginHour);
-
         this.setState({selectedStartDate: newBeginHour});
     };
 
@@ -85,7 +77,6 @@ class AddLesson extends Component {
         let minutes= date.getMinutes();
         let newendhour =  addSubtractDate.add(new Date(this.state.chosenDate),hours +1,"hours");
         newendhour = addSubtractDate.add(newendhour,minutes,"minutes");
-        console.log(newendhour);
         this.setState({selectedEndDate: newendhour});
 
     };
@@ -106,9 +97,6 @@ class AddLesson extends Component {
     }
 
     handleCourseChange = (e,value) => {
-        console.log('course change');
-        console.log(value);
-        console.log(this.state.myCourses);
         this.setState({selectedCourseId: value});
     };
 

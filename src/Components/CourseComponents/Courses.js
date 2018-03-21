@@ -1,6 +1,3 @@
-/**
- * Created by Ben on 27/02/2018.
- */
 import React, {Component} from 'react';
 import * as CourseService from '../../Services/CourseService.js'
 import Header from '../GeneralComponents/Header';
@@ -12,7 +9,6 @@ class Courses extends Component {
 
     constructor(props) {
         super(props);
-        console.log("Constructed");
         this.state = {
             courses: [],
             selectedIndex: 0,

@@ -28,7 +28,7 @@ export default class AddGroup extends Component {
     }
 
     addUsers = () => {
-        UserService.getAll().then(console.log("----Students---- \n"))
+        UserService.getAll().then(console.log("----Users---- \n"))
             .then(allUsers => {
                 let users = allUsers.users;
                 users.forEach((user) => {
@@ -39,7 +39,7 @@ export default class AddGroup extends Component {
     };
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----Users---- \n"))
+        UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
                 let users = students.users;
                 users.forEach((students) => {
@@ -47,7 +47,6 @@ export default class AddGroup extends Component {
                 });
                 this.setState({students: students.users}, console.log(students.users));
             });
-
     };
 
     onChangeName = (e) => {
@@ -199,17 +198,6 @@ export default class AddGroup extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col s12 m12 l12">
-                                        <Row>
-                                            <Input s={12} multiple={true} type='select' label="Studenten"
-                                                   onChange={this.handleStudentChange}
-                                                   icon='child_care' defaultValue='1'>
-                                                <option key="" value="" disabled>Kies de studenten</option>
-                                                {this.state.students.map((student, index) => (
-                                                    <option key={student.userid}
-                                                            value={student.userid}>{student.firstname} {student.lastname}</option>
-                                                ))}
-                                            </Input>
-                                        </Row>
                                     </div>
                                     <div className="col s3 m3 l3">
                                     </div>
@@ -228,7 +216,6 @@ export default class AddGroup extends Component {
                                 <div className="section">
                                     <div className="row">
                                         <div className="col s3 m3 l3">
-                                            <h5 className="truncate">Studenten</h5>
                                         </div>
                                         <div className="col s9 m9 l9">
                                             <Row>

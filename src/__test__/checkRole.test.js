@@ -1,7 +1,7 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import {configure, shallow} from "enzyme";
-import CheckRoleComponent from "../Components/GeneralComponents/CheckRoleComponent";
+import CheckRoleComponent from "../Components/CheckingComponents/CheckRoleComponent";
 import Home from "../Components/Home";
 
 configure({ adapter: new Adapter() });

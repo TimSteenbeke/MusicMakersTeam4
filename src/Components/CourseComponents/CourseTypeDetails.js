@@ -18,10 +18,7 @@ export default class CourseTypeDetails extends Component {
     componentDidMount() {
         let self = this;
         CourseTypeService.getCourseTypeFromBackend(self.state.courseTypeId)
-            .then(console.log("----Coursetype met id " + self.state.courseTypeId + "---- \n"))
             .then(courseType => {
-                console.log("courseType: " + courseType);
-                console.log("---- ---- ---- ----\n");
                 self.setState({
                     courseTypeId: courseType.courseTypeId,
                     description: courseType.description,

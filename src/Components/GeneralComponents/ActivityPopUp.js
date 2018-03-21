@@ -7,8 +7,6 @@ import './ActivityPopUp.css';
 
 export default class ActivityPopUp extends Component {
     constructor(props) {
-        console.log('props');
-        console.log(props);
         super(props);
         this.state = {
             presenceStatus: "Te beslissen",
@@ -24,18 +22,15 @@ export default class ActivityPopUp extends Component {
         if (this.props.type === "Optreden") {
             OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setIcon(statusobject.status);
-                console.log(this.state.presenceStatus);
             })
         } else {
             LesService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setIcon(statusobject.status);
-                console.log(this.state.presenceStatus);
             })
         }
     };
 
     setIcon = (status) => {
-        console.log(status);
         if (status === "absent"){
             this.setState({
                 icon: 'not_interested',

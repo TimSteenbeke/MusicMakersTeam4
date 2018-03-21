@@ -15,7 +15,7 @@ export default class Compositions extends Component {
             selected: [],
             openDetails: false,
             openUpdate: false,
-            search: ""
+            search: "",
         };
     }
 
@@ -61,7 +61,7 @@ export default class Compositions extends Component {
 
         if (value === "" || value === null) {
             CompositionService.getCompositionsFromBackend().then(compositions => {
-                this.setState({compositions: [...this.state.compositions]});
+                this.setState({compositions: compositions});
             });
         } else {
             CompositionService.filterCompositions(value).then(compositions => {
@@ -100,8 +100,13 @@ export default class Compositions extends Component {
         };
     }());
 
+    addToPlaylist = (compositionId) => {
+        CompositionService.addCompositionToMyPlaylist(compositionId);
+    };
+
 
     render() {
+
         return (
             <div className="Homepage">
                 <Header name="Muziekstukken"/>
@@ -148,6 +153,9 @@ export default class Compositions extends Component {
                                             <Link className="waves-effect white-text deep-orange darken-4 btn"
                                                   to={`/play/${composition.compositionId}`}>
                                                 <i className="material-icons">play_arrow</i>
+                                            </Link>
+                                            <Link to={`/myplaylist`} className="waves-effect white-text deep-orange darken-4 btn" onClick={ e => this.addToPlaylist(composition.compositionId)}>
+                                                <i className="material-icons">add</i>
                                             </Link>
                                         </div>
                                     </div>

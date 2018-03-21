@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
@@ -27,21 +26,26 @@ export default class AddComposition extends Component {
             title: 'Composition Added!',
             showConfirmButton: false,
             timer: 1500
-        });
-        this.state.formdata.append("compresource",JSON.stringify(
-            {
-                content: this.state.bestand,
-                title: this.state.fields["title"],
-                artist: this.state.fields["artiest"],
-                language: this.state.fields["taal"],
-                genre: this.state.fields["genre"],
-                subject: this.state.fields["onderwerp"],
-                instrumentType: this.state.fields["type"],
-                link: this.state.fields["link"],
-                fileFormat: this.state.bestandType
-            }));
+        }).then(() => {
+            this.state.formdata.append("compresource",JSON.stringify(
+                {
+                    content: this.state.bestand,
+                    title: this.state.fields["title"],
+                    artist: this.state.fields["artiest"],
+                    language: this.state.fields["taal"],
+                    genre: this.state.fields["genre"],
+                    subject: this.state.fields["onderwerp"],
+                    instrumentType: this.state.fields["type"],
+                    link: this.state.fields["link"],
+                    fileFormat: this.state.bestandType
+                }));
+        }).then(() => {
+            CompositionService.postComposition(this.state.formdata);
 
-        CompositionService.postComposition(this.state.formdata);
+        }).then(() => {
+            this.props.history.push("/compositions");
+        });
+
 
     };
 
@@ -57,13 +61,6 @@ export default class AddComposition extends Component {
         fmdata.append("file",evt.target.files[0]);
         this.state.formdata.append("files", evt.target.files[0]);
     };
-
-
-    compositionSubmit(e){
-        e.preventDefault();
-        this.handleClick();
-        this.props.history.push('/compositions')
-    }
 
     handleChange(field, e){
         let fields = this.state.fields;
@@ -167,11 +164,11 @@ export default class AddComposition extends Component {
                                 </form>
                             </div>
                             <div className="card-action">
-                                <Link to="/compositions" onClick={this.handleClick}
+                                <a  onClick={this.handleClick}
                                       className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
                                     <i
                                         className="material-icons">done</i>
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </div>

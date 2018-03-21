@@ -1,15 +1,22 @@
 import * as fetchService from "./FetchService";
 import axios from 'axios';
 
-const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+export function postComposition(formdata) {
+    const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
 //const URL = 'http://localhost:8080/api/';
-let userToken = JSON.parse(localStorage.getItem('userToken'));
-
-export function postComposition(formdata){
-    axios.post(URL+'compositions/', formdata, {
+    let userToken = JSON.parse(localStorage.getItem('userToken'));
+    axios.post(URL + 'compositions/', formdata, {
         'Authorization': userToken.token_type + " " + userToken.access_token,
         "Content-Type": "multipart/form-data"
     });
+}
+
+export function getMyCompositionsFromBackend() {
+    return fetchService.fetchWithHeader("compositions/mycompositions", "GET", {}, {});
+}
+
+export function addCompositionToMyPlaylist(compositionId) {
+    return fetchService.fetchWithHeader("compositions/addtoplaylist/" + compositionId, "PUT", {}, {});
 }
 
 export function getCompositionsFromBackend() {
@@ -22,6 +29,10 @@ export function filterCompositions(search) {
 
 export function getCompositionFromBackend(compositionId) {
     return fetchService.fetchWithHeader("compositions/" + compositionId, "GET", {}, {naam: "muziekstuk niet gevonden"});
+}
+
+export function postMuziekstuk(data) {
+    fetchService.fetchWithHeader("compositions/", "POST", data, {});
 }
 
 export function deleteComposition(compositionId) {

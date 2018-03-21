@@ -51,7 +51,7 @@ export default class AddInstrument extends Component {
     componentDidMount() {
         InstrumentService.getInstrumentSoortenFromBackend()
             .then(soorten => {
-                this.setState({soorten: soorten}, console.log(soorten));
+                this.setState({soorten: soorten});
             });
     }
 

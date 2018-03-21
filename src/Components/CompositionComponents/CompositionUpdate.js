@@ -26,7 +26,6 @@ export default class CompositionUpdate extends Component {
     componentDidMount() {
         const self = this;
         CompositionService.getCompositionFromBackend(self.state.compositionId)
-            .then(console.log("----Composition with id " + self.state.compositionId + "---- \n"))
             .then(composition => self.setState({
                 title: composition.title,
                 artist: composition.artist,
@@ -37,31 +36,35 @@ export default class CompositionUpdate extends Component {
                 link: composition.link,
                 fileFormat: composition.fileFormat,
                 content: composition.content,
-            }, console.log(composition)))
+            }))
     }
 
     handleUpdate = () => {
+        const self = this;
         swal({
             position: 'top-end',
             type: 'success',
             title: 'Composition Updated!',
             showConfirmButton: false,
             timer: 1500
+        }).then(() => {
+            CompositionService.UpdateComposition(self.state.compositionId, JSON.stringify(
+                {
+                    content: self.state.content,
+                    artist: self.state.artist,
+                    language: self.state.language,
+                    genre: self.state.genre,
+                    subject: self.state.subject,
+                    instrumentType: self.state.instrumentType,
+                    link: self.state.link,
+                    fileFormat: self.state.fileFormat,
+                    title: self.state.title
+                }
+            ));
+        }).then(() => {
+            this.props.history.push("/compositions");
         });
-        const self = this;
-        CompositionService.UpdateComposition(self.state.compositionId, JSON.stringify(
-            {
-                content: self.state.content,
-                artist: self.state.artist,
-                language: self.state.language,
-                genre: self.state.genre,
-                subject: self.state.subject,
-                instrumentType: self.state.instrumentType,
-                link: self.state.link,
-                fileFormat: self.state.fileFormat,
-                title: self.state.title
-            }
-        ));
+
     };
 
     setTitle = event => {

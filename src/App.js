@@ -17,8 +17,8 @@ import AddComposition from "./Components/CompositionComponents/AddComposition";
 import PlayMusic from './Components/MusicComponents/PlayMusic.js';
 import NotFound from "./Components/GeneralComponents/NotFound";
 import CompositionUpdate from "./Components/CompositionComponents/CompositionUpdate";
-import auth from './Components/GeneralComponents/CheckTokenComponent';
-import role from './Components/GeneralComponents/CheckRoleComponent';
+import auth from './Components/CheckingComponents/CheckTokenComponent';
+import role from './Components/CheckingComponents/CheckRoleComponent';
 import AddCourseType from "./Components/CourseComponents/AddCourseType";
 import CourseTypeDetails from "./Components/CourseComponents/CourseTypeDetails";
 import CourseTypes from "./Components/CourseComponents/CourseTypes";
@@ -34,8 +34,12 @@ import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 import AddLesson from './Components/CourseComponents/AddLesson.js'
+import MyPlayList from './Components/PlaylistComponents/MyPlaylist';
+import MyInstrumentLevels from './Components/InstrumentLevelComponents/MyInstrumentLevels';
+import InstrumentLevels from './Components/InstrumentLevelComponents/InstrumentLevels';
 import Lessons from './Components/CourseComponents/Lessons.js'
 import LessonDetails from './Components/CourseComponents/LessonDetails.js'
+import AddInstrumentLevel from './Components/InstrumentLevelComponents/addInstrumentLevel'
 
 export default class App extends Component {
 
@@ -44,13 +48,22 @@ export default class App extends Component {
         return (
             <Switch>
                 <Route name="home" exact path="/" component={Home}/>
+
                 <Route name="addInstrument" path="/addinstrument" component={role(AddInstrument)}/>
                 <Route name="instrument" path="/instrumenten" component={role(Instrumenten)}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={role(InstrumentDetails)}/>
+                <Route name="InstrumentLevels" path="/instrumentlevels" component={role(InstrumentLevels)}/>
+                <Route name="myInstrumentLevels" path="/myinstrumentlevels" component={auth(MyInstrumentLevels)}/>
+                <Route name="addInstrumentLevel" path="/addinstrumentlevel" component={role(AddInstrumentLevel)}/>
 
                 <Route name="courseDetails" path="/coursedetails/:id" component={role(CourseDetails)}/>
                 <Route name="courses" path="/courses" component={role(Courses)}/>
                 <Route name="addCourse" path="/addcourse" component={role(AddCourse)}/>
+                <Route name="addCourseTypes" path="/addcoursetype" component={role(AddCourseType)}/>
+                <Route name="courseTypes" path="/coursetypes" component={role(CourseTypes)}/>
+                <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={role(CourseTypeDetails)}/>
+                <Route name="myCourses" path="/mycourses" component={auth(MyCourses)}/>
+                <Route name="myCourseDetails" path="/mycoursedetails/:id" component={auth(MyCourseDetails)}/>
 
                 <Route name="agenda" path="/agenda" component={auth(Agenda)}/>
 
@@ -61,18 +74,11 @@ export default class App extends Component {
                 <Route name="groups" path="/groups" component={role(Group)}/>
                 <Route name="addGroup" path="/addgroup" component={role(AddGroup)}/>
                 <Route name="groupUpdate" path="/groupupdate/:id" component={role(GroupUpdate)}/>
-
                 <Route name="myGroups" path="/mygroups" component={auth(MyGroup)}/>
                 <Route name="myGroupDetails" path="/mygroupdetails/:id" component={auth(MyGroupDetails)}/>
 
-                <Route name="myCourses" path="/mycourses" component={auth(MyCourses)}/>
-                <Route name="myCourseDetails" path="/mycoursedetails/:id" component={auth(MyCourseDetails)}/>
-
+                <Route name="myPlaylist" path="/myplaylist" component={auth(MyPlayList)}/>
                 <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
-
-                <Route name="addCourseTypes" path="/addcoursetype" component={role(AddCourseType)}/>
-                <Route name="courseTypes" path="/coursetypes" component={role(CourseTypes)}/>
-                <Route name="courseTypeDetails" path="/coursetypedetails/:id" component={role(CourseTypeDetails)}/>
 
                 <Route name="lessons" path="/lessons" component={role(Lessons)}/>
                 <Route name="addLesson" path="/addLesson" component={role(AddLesson)}/>

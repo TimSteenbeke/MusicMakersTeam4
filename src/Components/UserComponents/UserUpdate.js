@@ -29,7 +29,6 @@ export default class UserUpdate extends Component {
         const self = this;
 
         UserService.getUserFromBackend(self.state.userid)
-            .then(console.log("----User met id " + self.state.userid + "---- \n"))
             .then(user => {
                 self.setState({
                     username: user.username,
@@ -57,7 +56,6 @@ export default class UserUpdate extends Component {
             timer: 1500
         });
         let self = this;
-        console.log("wut: " + self.state.userid);
 
         UserService.UpdateUser(self.state.userid, JSON.stringify(
             {
@@ -135,7 +133,6 @@ export default class UserUpdate extends Component {
 
     compositionSubmit(e){
         e.preventDefault();
-        console.log("Form submitted");
         this.handleUpdate();
     }
 

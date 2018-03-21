@@ -22,14 +22,13 @@ export default class Sidebar extends Component {
         this.state = {
             lng: "",
             roles: [],
-            rights: 3
+            rights: "Student"
         };
     }
 
     setLanguage() {
         this.setState({lng: navigator.language});
         localStorage.setItem("i18nextLng", this.state.lng.substring(0, 2));
-        console.log("User language: " + this.state.lng);
     }
 
     componentDidMount() {
@@ -46,9 +45,16 @@ export default class Sidebar extends Component {
         if (localStorage.getItem("userToken") != null) {
             userService.getRolesCurrentUser().then(
                 (value) => {
+                    let roles = value.roles;
+                    roles.forEach(role => {
+                        if ("Admin" === role.rolename) {
+                            self.setState({rights: role.rolename})
+                        } else if ("Teacher" === role.rolename && "Admin" !== self.state.rights) {
+                            self.setState({rights: role.rolename})
+                        }
+                    });
                     self.setState({
                         roles: value.roles,
-                        rights: value.roles[0].roleid
                     });
                 });
         }
@@ -56,8 +62,7 @@ export default class Sidebar extends Component {
 
     render() {
         let adminLinks = null;
-
-        if (this.state.rights < 3) {
+        if ("Admin" === this.state.rights || "Teacher" === this.state.rights) {
             adminLinks = <div>
                 <Link to="/instrumenten">
                     <MenuItem style={styles.menuColor} primaryText={i18n.t('instruments.label')}/>
@@ -66,19 +71,16 @@ export default class Sidebar extends Component {
                     <MenuItem style={styles.menuColor} primaryText={i18n.t('groups.label')}/>
                 </Link>
                 <Link to="/users">
-                    <MenuItem style={styles.menuColor} primaryText="Gebruikers"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('users.label')}/>
                 </Link>
                 <Link to="/courses">
-                    <MenuItem style={styles.menuColor} primaryText="Vakken"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('courses.label')}/>
                 </Link>
                 <Link to="/courseTypes">
-                    <MenuItem style={styles.menuColor} primaryText="Vaktypes"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('coursetypes.label')}/>
                 </Link>
                 <Link to="/lessons">
-                    <MenuItem style={styles.menuColor} primaryText="Lessen"/>
-                </Link>
-                <Link to="/addLesson">
-                    <MenuItem style={styles.menuColor} primaryText="Les toevoegen"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('lessons.label')}/>
                 </Link>
             </div>;
         }
@@ -86,7 +88,9 @@ export default class Sidebar extends Component {
 
         return (
             <div>
-                <img className="circle logo" alt="guitar" src={logo}/>
+                <Link to="/">
+                    <img className="circle logo" alt="guitar" src={logo}/>
+                </Link>
                 <Menu>
                     {LoginService.checkToken() ? <section>
                         <Divider/>
@@ -95,28 +99,39 @@ export default class Sidebar extends Component {
                         </Link>
                         <Divider/>
                         <Link to="/agenda">
-                            <MenuItem style={styles.menuColor} primaryText="Agenda"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('agenda.label')}/>
                         </Link>
                         <Divider/>
                         <Link to="/chat">
-                            <MenuItem style={styles.menuColor} primaryText="Chat"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('chat.label')}/>
                         </Link>
                         <Divider/>
                         {adminLinks}
                         <Link to="/compositions">
-                            <MenuItem style={styles.menuColor} primaryText="Muziekstukken"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('compositions.label')}/>
                         </Link>
                         <Link to="/newsitems">
-                            <MenuItem style={styles.menuColor} primaryText="Meldingen"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('notifications.label')}/>
+                        </Link>
+                        <Link to="/instrumentlevels">
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('instrumentlevels.label')}/>
+                        </Link>
+                        <Link to="/lessons">
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('lessons.label')}/>
                         </Link>
                         <Divider/>
                         <Link to="/mygroups">
-                            <MenuItem style={styles.menuColor} primaryText="Mijn groepen"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('mygroups.label')}/>
                         </Link>
                         <Link to="/mycourses">
-                            <MenuItem style={styles.menuColor} primaryText="Mijn Vakken"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('mycourses.label')}/>
                         </Link>
-                        <Divider/>
+                        <Link to="/myplaylist">
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('myplaylist.label')}/>
+                        </Link>
+                        <Link to="/myinstrumentlevels">
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('myinstrumentlevels.label')}/>
+                        </Link>
                     </section> : <section><Divider/><Link to="/">
                         <MenuItem style={styles.menuColor} primaryText="Home"/>
                     </Link><Divider/></section>}

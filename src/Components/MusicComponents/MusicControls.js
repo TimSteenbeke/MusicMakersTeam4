@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import './MusicControls.css';
 
 export default class MusicControls extends Component {
     constructor(props) {
