@@ -31,8 +31,7 @@ export default function (WrapperComponent) {
             if (this.CheckUserRoles(this.props)) {
                 return <WrapperComponent {...this.props} />
             } else {
-                alert("false checkuser");
-                // return <Home/>
+                return <Home/>
             }
         }
     }
