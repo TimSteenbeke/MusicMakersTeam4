@@ -29,10 +29,17 @@ export default class AddInstrument extends Component {
             showConfirmButton: false,
             timer: 1500
         });
+        console.log(this.state.value);
+        console.log(this.state.typedName);
+        console.log(this.state.typedType);
+        console.log(this.state.typedVersion);
+        console.log(this.state.image);
+
         InstrumentService.postInstrument(JSON.stringify(
             {
+                instrumentid: 0,
                 image: this.state.image,
-                instrumentid: this.state.value,
+                instrumentCategoryid: this.state.value,
                 instrumentname: this.state.typedName,
                 type: this.state.typedType,
                 details: this.state.typedVersion
@@ -62,6 +69,7 @@ export default class AddInstrument extends Component {
 
     handleChange = (event, value) => {
         this.setState({value});
+        console.log(this.state.value);
     };
 
     handleChangeImage = (evt) => {
@@ -118,8 +126,8 @@ export default class AddInstrument extends Component {
                                                     <Row>
                                                         <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
                                                             {this.state.soorten.map((soort, index) => (
-                                                                <option key={soort.instrumentCategoryId}
-                                                                        value={soort.instrumentCategoryId}>{soort.categoryName}</option>
+                                                                <option key={soort.categoryid}
+                                                                        value={soort.categoryid}>{soort.categoryname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>

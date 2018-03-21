@@ -16,8 +16,8 @@ export default class InstrumentDetails extends Component {
             type: "",
             details: "",
             image: "",
-            categoryName: "",
             instrumentCategoryId: 1,
+            instrumentCategoryNaam: "",
             soorten: []
         }
     }
@@ -32,12 +32,14 @@ export default class InstrumentDetails extends Component {
         InstrumentService.getInstrumentFromBackend(self.state.instrumentId)
             .then(instrument => {
                 self.setState({
-                    instrumentName: instrument.instrumentName,
+                    instrumentName: instrument.instrumentname,
                     type: instrument.type,
                     details: instrument.details,
                     image: instrument.image,
-                    categoryName: instrument.instrumentCategory.categoryName,
                     instrumentCategoryId: instrument.instrumentCategory.instrumentCategoryId,
+
+                }, () => {
+                    console.log("CATEGORY => " + this.state.instrumentCategoryId);
                 });
             }).catch((error) => {
             console.log(error);
@@ -55,12 +57,11 @@ export default class InstrumentDetails extends Component {
         let self = this;
         InstrumentService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
             {
-                name: this.state.instrumentName,
+                instrumentname: this.state.instrumentName,
                 type: this.state.type,
                 details: this.state.details,
                 image: this.state.image,
-                categoryName: this.state.categoryName,
-                instrumentcategoryid: this.state.instrumentCategoryId,
+                instrumentCategoryid: this.state.instrumentCategoryId,
             }
         ));
     };
@@ -95,7 +96,8 @@ export default class InstrumentDetails extends Component {
     };
 
     handleChange = (event, value) => {
-        this.setState({value});
+        console.log(value);
+        this.setState({instrumentCategoryId: value});
     };
 
     render() {
@@ -155,10 +157,10 @@ export default class InstrumentDetails extends Component {
                                         <div className="row">
                                         <div className="col s12 m12 l12">
                                             <Row>
-                                                <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music'>
+                                                <Input s={12} onChange={this.handleChange} defaultValue={this.state.instrumentCategoryId} type='select' label="Soort" icon='library_music'>
                                                     {this.state.soorten.map((soort, index) => (
-                                                        <option key={soort.instrumentCategoryId}
-                                                                value={soort.instrumentCategoryId}>{soort.categoryName}</option>
+                                                        <option key={soort.categoryid}
+                                                                value={soort.categoryid}>{soort.categoryname}</option>
                                                     ))}
                                                 </Input>
                                             </Row>
