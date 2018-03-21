@@ -55,12 +55,17 @@ export default class Group extends Component {
     };
 
     componentDidMount() {
+        console.log("MOUNTED");
         this.getCourses();
     }
 
     getCourses = () => {
+        console.log("GET COURSES");
         GroupService.getAllGroupsFromBackend().then(groups => {
             this.setState({groups: groups});
+        }, () => {
+            console.log("COURSES SHOULD BE GOT");
+            console.log(this.state.groups);
         });
     };
 

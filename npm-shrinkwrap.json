@@ -10286,7 +10286,7 @@
     },
     "prop-types": {
       "version": "https://registry.npmjs.org/prop-types/-/prop-types-15.6.0.tgz",
-      "integrity": "sha1-zq8IMCL8RrSjX2nhPvda7Q1jmFY=",
+      "integrity": "sha512-H16NHdiZ8szYSKNkCpmKmS8BCogxyABjJ1AqQknIY2iTpy1xC04egoBAzjKm+WU2pbuNxFonw921dnxR0QYAdw==",
       "requires": {
         "fbjs": "0.8.16",
         "loose-envify": "1.3.1",
@@ -10498,7 +10498,7 @@
     },
     "react-agenda": {
       "version": "https://registry.npmjs.org/react-agenda/-/react-agenda-0.0.5.tgz",
-      "integrity": "sha1-iiNTXnT3hTRBu58NCITCMC9bQEM=",
+      "integrity": "sha512-MYC3L9VGNxZyGQz2VQY3eOF3eVHr0e4VOL1K43E9gZVux9Ez5/n3fVy9aUxTwS+ry/kxICrbtwzGARSUKpSfLA==",
       "requires": {
         "classnames": "2.2.5",
         "drag-drop-touch-polyfill": "1.0.0",

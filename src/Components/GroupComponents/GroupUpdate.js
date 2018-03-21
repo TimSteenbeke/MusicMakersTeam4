@@ -10,6 +10,11 @@ import './GroupUpdate.css';
 import AutoComplete from 'material-ui/AutoComplete';
 
 export default class GroupUpdate extends Component {
+    dataSourceConfig = {
+        text: 'fullname',
+        value: 'userid',
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -123,23 +128,25 @@ export default class GroupUpdate extends Component {
         this.getGroup();
     }
 
-    getGroup =() => {
+    getGroup = () => {
         const self = this;
-        GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup =>
-
-            self.setState({
-            name: loadedGroup.name,
-            supervisor: loadedGroup.supervisor,
-            users: loadedGroup.users,
-            groupimage: loadedGroup.groupimage
-        }, () => {
+        GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => {
+            console.log("GELADEN GROEP YAAAAS => ");
             console.log(loadedGroup);
-            console.log(console.log(this.state.name));
-            console.log(console.log(this.state.groupid));
-            console.log(console.log(this.state.supervisor.id));
-            console.log(console.log(this.state.userids));
-            this.setUserIds();
-        }))
+            self.setState({
+                name: loadedGroup.name,
+                supervisor: loadedGroup.supervisor,
+                users: loadedGroup.users,
+                groupimage: loadedGroup.groupimage
+            }, () => {
+                console.log(loadedGroup);
+                console.log(console.log(this.state.name));
+                console.log(console.log(this.state.groupid));
+                console.log(console.log(this.state.supervisor.id));
+                console.log(console.log(this.state.userids));
+                this.setUserIds();
+            })
+        })
     };
 
     setUserIds = () =>{

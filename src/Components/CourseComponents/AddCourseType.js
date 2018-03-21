@@ -54,8 +54,6 @@ export default class AddCourseType extends Component {
             <div className="Homepage">
                 <Header name="Cursus type toevoegen"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
                                 <div className="card-content">
                                     <form className="addcoursetype" action="/" method="POST" onSubmit={(e) => {
@@ -65,7 +63,7 @@ export default class AddCourseType extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>beschrijving</h5>
+                                                    <h5 className="truncate">beschrijving</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <StyledTextField onChange={this.onChangeDescription} placeholder="Geef een beschrijving in..." label="beschrijving"/>
@@ -76,14 +74,13 @@ export default class AddCourseType extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5>price</h5>
+                                                    <h5 className="truncate">price</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <StyledTextField onChange={this.onChangePrice} placeholder="Geef een prijs in..." label="prijs"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
                                     </form>
                                 </div>
                                 <div className="card-action">
@@ -94,9 +91,7 @@ export default class AddCourseType extends Component {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col s0 m2 l2"/>
-                    </div>
+
                 </section>
             </div>
         );

@@ -16,7 +16,7 @@ export default class CourseTypes extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Bent je zeker?',
+            title: 'Ben je zeker?',
             text: "Dit kan niet ongedaan gemaakt worden!",
             type: 'warning',
             showCancelButton: true,
@@ -31,18 +31,19 @@ export default class CourseTypes extends Component {
         }).then((result) => {
             if (result.value) {
                 swal(
-                    'Verwijderen!',
-                    'Cursus type werd verwijderd.',
+                    'Verwijderd!',
+                    'cursustype is verwijderd.',
                     'success'
-                );
-                CourseTypeService.deleteCourseType(id);
+                ).then(() => {
+                    CourseTypeService.deleteCourseType(id);
+                });
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Geannuleerd',
-                    'Cursus type werd niet verwijderd',
+                    'Gestopt',
+                    'cursustype is niet verwijderd.',
                     'error'
                 )
             }
@@ -63,7 +64,7 @@ export default class CourseTypes extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Cursus types"/>
+                <Header name="Cursustypes"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
