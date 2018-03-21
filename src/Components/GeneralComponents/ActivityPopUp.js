@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as LesService from '../../Services/LesService.js';
-import * as OptredenService from '../../Services/OptredenService.js';
+import * as PerformanceService from '../../Services/PerformanceService';
 import swal from 'sweetalert2';
 import './ActivityPopUp.css';
 
@@ -20,7 +20,7 @@ export default class ActivityPopUp extends Component {
 
     getStatus = () => {
         if (this.props.type === "Optreden") {
-            OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
+            PerformanceService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setIcon(statusobject.status);
             })
         } else {
@@ -51,7 +51,7 @@ export default class ActivityPopUp extends Component {
     present = () => {
         let id = this.props.id;
         if (this.props.type === "Optreden") {
-            OptredenService.registerPresent(id);
+            PerformanceService.registerUserPresent(id);
 
         } else {
             LesService.registerPresent(id);
@@ -61,7 +61,7 @@ export default class ActivityPopUp extends Component {
     absent = () => {
         let id = this.props.id;
         if (this.props.type === "Optreden") {
-            OptredenService.registerAbsent(id);
+            PerformanceService.registerUserAbsent(id);
         } else {
             LesService.registerAbsent(id);
         }

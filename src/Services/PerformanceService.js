@@ -5,18 +5,18 @@ export function postPerformance(data) {
 }
 
 export function getPerformance(performanceId) {
-    fetchService.fetchWithHeader("performance/" + performanceId, "GET", {}, {});
+    return fetchService.fetchWithHeader("performance/" + performanceId, "GET", {}, {});
 }
 
 export function getAllPerformances() {
-    fetchService.fetchWithHeader("performance", "GET",{}, {});
+    return fetchService.fetchWithHeader("performance/", "GET",{}, {});
 }
 
 export function deletePerformance(performanceId) {
     fetchService.fetchWithHeader("performance/"+performanceId, "DELETE", {}, {});
 }
 
-export function updatePerformance(performanceId) {
+export function updatePerformance(performanceId,data) {
     fetchService.fetchWithHeader("performance/performance/" + performanceId, "PUT", data, {});
 }
 
@@ -29,7 +29,7 @@ export function registerUserAbsent(performanceid) {
 }
 
 export function getAttendanceStatus(performanceid) {
-    fetchService.fetchWithHeader("performance/attendancestatus/"+ performanceid, "GET", {}, {});
+    return fetchService.fetchWithHeader("performance/attendancestatus/"+ performanceid, "GET", {}, {});
 }
 
 
