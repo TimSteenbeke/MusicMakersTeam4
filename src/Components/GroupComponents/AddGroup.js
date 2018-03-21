@@ -91,12 +91,12 @@ export default class AddGroup extends Component {
             if (user === i) {
                 console.log("GOTTEM = " + i);
                 let value = [];
-                    let users = this.state.userids;
-                    users.forEach((user) => {
-                        if (user != i){
-                            value.push(user);
-                        }
-                    });
+                let users = this.state.userids;
+                users.forEach((user) => {
+                    if (user != i) {
+                        value.push(user);
+                    }
+                });
                 console.log("DEEZ NUTS = " + value);
                 this.setState({userids: value});
             }
@@ -179,9 +179,8 @@ export default class AddGroup extends Component {
                             </div>
                             <div className="row">
                                 <div className="col s3 m3 l3">
-                                    <h5 className="truncate">Groepsnaam</h5>
                                 </div>
-                                <div className="col s9 m9 l9">
+                                <div className="col s12 m12 l12">
                                     <StyledTextField onChange={this.onChangeName}
                                                      label="Naam"/>
                                 </div>
@@ -190,9 +189,8 @@ export default class AddGroup extends Component {
                             <div className="section">
                                 <div className="row">
                                     <div className="col s3 m3 l3">
-                                        <h5 className="truncate">Begeleider</h5>
                                     </div>
-                                    <div className="col s9 m9 l9">
+                                    <div className="col s12 m12 l12">
                                         <Row>
                                             <AutoComplete
                                                 floatingLabelText="Begeleiders"
@@ -222,9 +220,8 @@ export default class AddGroup extends Component {
                                 <div className="section">
                                     <div className="row">
                                         <div className="col s3 m3 l3">
-                                            <h5 className="truncate">Studenten</h5>
                                         </div>
-                                        <div className="col s9 m9 l9">
+                                        <div className="col s12 m12 l12">
                                             <Row>
                                                 <AutoComplete
                                                     floatingLabelText="Studenten"
