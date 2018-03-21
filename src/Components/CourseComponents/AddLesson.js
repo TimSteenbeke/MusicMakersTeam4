@@ -5,6 +5,8 @@ import TimePicker from 'material-ui/TimePicker';
 import * as LesService from "../../Services/LesService";
 import * as CourseService from '../../Services/CourseService'
 import swal from "sweetalert2";
+import Header from '../GeneralComponents/Header';
+import './AddLesson.css';
 
 
 const addSubtractDate = require("add-subtract-date");
@@ -33,6 +35,7 @@ class AddLesson extends Component {
     componentDidMount() {
         //TODO: ajax call to load all courses for logged in user
       CourseService.getMyCourses().then(courses => {
+          console.log(courses);
           this.setState({myCourses: courses.teachesCourses});
       })
 
@@ -67,10 +70,10 @@ class AddLesson extends Component {
     };
 
     chooseBeginHour = (event,date) => {
-        var hours = date.getHours();
-        var minutes= date.getMinutes();
+        let hours = date.getHours();
+        let minutes= date.getMinutes();
 
-        var newBeginHour =  addSubtractDate.add(new Date(this.state.chosenDate),hours +1,"hours");
+        let newBeginHour =  addSubtractDate.add(new Date(this.state.chosenDate),hours +1,"hours");
         newBeginHour = addSubtractDate.add(newBeginHour,minutes,"minutes");
         console.log(newBeginHour);
 
@@ -78,9 +81,9 @@ class AddLesson extends Component {
     };
 
     chooseEndHour = (event,date) => {
-        var hours = date.getHours();
-        var minutes= date.getMinutes();
-        var newendhour =  addSubtractDate.add(new Date(this.state.chosenDate),hours +1,"hours");
+        let hours = date.getHours();
+        let minutes= date.getMinutes();
+        let newendhour =  addSubtractDate.add(new Date(this.state.chosenDate),hours +1,"hours");
         newendhour = addSubtractDate.add(newendhour,minutes,"minutes");
         console.log(newendhour);
         this.setState({selectedEndDate: newendhour});
@@ -112,13 +115,13 @@ class AddLesson extends Component {
 
     render() {
         return (
-            <div>Add lesson component
-
-                <div className="col s9 m9 l9">
+            <div className="Homepage">
+                <Header name="Voeg les toe"/>
+                <div className="paddingnator">
                     <Row>
                         <Input s={12} multiple={false} type='select'
                                onChange={this.handleCourseChange}
-                               label="Leerkrachten" icon='face' defaultValue='1'>
+                               label="Leerkrachten" defaultValue='1'>
                             <option key="" value="" disabled>Kies het vak
                             </option>
                             {this.state.myCourses.map((course, index) => (
@@ -128,21 +131,33 @@ class AddLesson extends Component {
                         </Input>
                     </Row>
                 </div>
-
-
-                <DatePicker hintText="Lesdatum"  container="inline"   minDate={this.state.minDate}   disableYearSelection={this.state.disableYearSelection}
+                <div className="divider"></div>
+                <div className="row paddingnator">
+                    <div className="col s8">
+                <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}} hintText="Lesdatum"  container="inline"   minDate={this.state.minDate}   disableYearSelection={this.state.disableYearSelection}
                             onChange={this.choosedate}/>
                 <TimePicker
+                    textFieldStyle={{width: '100%'}}
                     format="24hr"
                     hintText="Beginuur"
                     onChange={this.chooseBeginHour}
                 />
                 <TimePicker
+                    textFieldStyle={{width: '100%'}}
                     format="24hr"
                     hintText="Einduur"
                     onChange={this.chooseEndHour}
                 />
-                <button onClick={this.addLesson}>Voeg les toe</button>
+                    </div>
+                    <div className="col s4">
+                        <div className="">
+                            <a className="addLessonBtn waves-effect deep-orange darken-4 waves-light btn"
+                               onClick={this.addLesson}>Voeg les toe</a>
+                        </div>
+                    </div>
+                </div>
+                <div className="divider"></div>
+
             </div>
         );
     }

@@ -77,6 +77,9 @@ export default class Sidebar extends Component {
                         <Link to="/newsitems">
                             <MenuItem style={styles.menuColor} primaryText="Meldingen"/>
                         </Link>
+                        <Link to="/lessons">
+                            <MenuItem style={styles.menuColor} primaryText="Lessen"/>
+                        </Link>
                         <Divider/>
                         <Link to="/mygroups">
                             <MenuItem style={styles.menuColor} primaryText="Mijn groepen"/>
