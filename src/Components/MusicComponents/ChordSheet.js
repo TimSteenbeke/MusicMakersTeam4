@@ -4,6 +4,7 @@ import ChordSheetJS from 'chordsheetjs';
 import GuitarChord from 'react-guitar-chord';
 import $ from 'jquery';
 import './ChordSheet.css';
+import MusicControls from "./MusicControls";
 
 export default class ChordSheet extends Component {
     constructor(props) {
@@ -98,11 +99,11 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
         }
     }
 
-    pauze(){
+    pause(){
         clearInterval((this.interval));
     }
 
-    reset(){
+    stop(){
         this.setState({hideFirst:true});
         this.setState({currentChord:0});
         clearInterval((this.interval));
@@ -116,9 +117,11 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
 
         return (
             <div className="Play" hidden={this.state.hidden}>
-                <input type="button" id="play" value="Play" onClick={(e) => this.play(e)}/>
-                <input type="button" id="pauseBtn" value="Pause" onClick={(e) => this.pauze(e)}/>
-                <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.reset(e)}/>
+                <MusicControls
+                    play={(e) => this.play(e)}
+                    pause={(e) => this.pause(e)}
+                    stop={(e) => this.stop(e)}
+                />
                 <section className="sheet">
                     <div id="chordSheet"
                         dangerouslySetInnerHTML={ {__html: disp} }>

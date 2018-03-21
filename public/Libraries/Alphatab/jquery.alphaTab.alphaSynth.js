@@ -580,7 +580,7 @@
         // required css styles 
         element.css({position: 'relative'});
         element.css({'text-align': 'left'});
-        cursorWrapper.css({position: 'absolute', "z-index": 1000, display: 'inline', 'pointer-events': 'none'});
+        cursorWrapper.css({position: 'absolute', "z-index": 1, display: 'inline', 'pointer-events': 'none'});
         selectionWrapper.css({position: 'absolute'});
         barCursor.css({position: 'absolute'});
         beatCursor.css({position: 'absolute'});
@@ -606,7 +606,7 @@
             var renderer = api.renderer(element, context);
             element.data('alphaSynthCursorCache', renderer.BoundsLookup);
             api.playerCursorUpdateTick(element, context, previousTick);
-            cursorWrapper.css({position: 'absolute', "z-index": 1000, 
+            cursorWrapper.css({position: 'absolute', "z-index": 1,
                 width: surface.width(), height: surface.height()});
         });
                
