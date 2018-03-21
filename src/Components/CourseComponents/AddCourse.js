@@ -1,6 +1,3 @@
-/**
- * Created by Ben on 27/02/2018.
- */
 import React, {Component} from 'react';
 import * as CourseService from '../../Services/CourseService.js'
 import Header from '../GeneralComponents/Header';

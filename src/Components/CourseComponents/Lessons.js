@@ -1,6 +1,3 @@
-/**
- * Created by jariv on 20/03/2018.
- */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import * as LesService from '../../Services/LesService'
