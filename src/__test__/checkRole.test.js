@@ -2,6 +2,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import {configure, shallow} from "enzyme";
 import CheckRoleComponent from "../Components/GeneralComponents/CheckRoleComponent";
+import Home from "../Components/Home";
 
 configure({ adapter: new Adapter() });
 
@@ -12,8 +13,8 @@ describe('CheckRoleTest', () => {
     });
 
     it('expects svg to redirect', () => {
+        const home = shallow(<Home/>);
         const checkRole = shallow(<CheckRoleComponent/>);
-        const svg = checkRole.find('svg');
-        expect(svg).toBeDefined();
+        expect(home);
     });
 });

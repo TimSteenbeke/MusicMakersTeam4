@@ -1,34 +1,58 @@
 import * as userService from "../../Services/UserService";
 import React, {Component} from "react";
 import Home from '../Home.js';
+import * as LoginService from "../../Services/LoginService";
 
 export default function (WrapperComponent) {
     class CheckRoleComponent extends Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                redirect: false,
+                login:true
+            }
+        }
 
-        CheckUserRoles(params) {
-            const {history} = params;
+        componentWillMount() {
             let roles = [];
-            let redirect = false;
+            let self=this;
             if (localStorage.getItem("userToken") != null) {
                 userService.getRolesCurrentUser().then(
                     (value) => {
                         roles = value.roles;
-                        alert("roles:" + roles[0]);
-/*                        if(roles[0].roleid <3){
-                            return true;
-                        }*/
                         roles.forEach(role => {
-                            if (role.rolename == "Teacher" || role.rolename == "Admin") {
-                                redirect= true;
+                            if (role.rolename === "Teacher" || role.rolename === "Admin") {
+                               self.setState({redirect:true})
+                            }
+                        });
+                    });
+            };
+            this.CheckUserRoles();
+        }
+
+        CheckUserRoles() {
+            let roles = [];
+            let self=this;
+            if (!LoginService.checkToken()) {
+                console.log("redirected");
+                self.setState({login:false});
+            }
+
+            if (localStorage.getItem("userToken") != null) {
+                userService.getRolesCurrentUser().then(
+                    (value) => {
+                        roles = value.roles;
+                        roles.forEach(role => {
+                            if (role.rolename === "Teacher" || role.rolename === "Admin") {
+                                self.setState({redirect:true})
                             }
                         });
                     });
             }
-            return redirect;
         }
 
         render() {
-            if (this.CheckUserRoles(this.props)) {
+            if (this.state.login && this.state.redirect) {
                 return <WrapperComponent {...this.props} />
             } else {
                 return <Home/>
