@@ -129,7 +129,7 @@ export default class AddGroup extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Groep toegevoegd',
+            title: 'Groep toegevoegd!',
             showConfirmButton: false,
             timer: 1500
         });

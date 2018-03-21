@@ -21,7 +21,7 @@ export default class NotFound extends Component {
     test = () => {
         swal({
             title: '404 Error!',
-            text: 'U will be redirected to the homepage.',
+            text: 'We sturen je terug naar de homepagina.',
             timer: 2000,
             onOpen: () => {
                 swal.showLoading()
