@@ -128,10 +128,10 @@ export default class GroupUpdate extends Component {
         this.getGroup();
     }
 
-    getGroup =() => {
+    getGroup = () => {
         const self = this;
         GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => {
-            console.log("GELADEN GROEP YAAAAS => ")
+            console.log("GELADEN GROEP YAAAAS => ");
             console.log(loadedGroup);
             self.setState({
                 name: loadedGroup.name,

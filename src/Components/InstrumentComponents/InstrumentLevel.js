@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import * as InstrumentService from '../../Services/InstrumentService.js';
 import Header from '../GeneralComponents/Header';
 import './InstrumentLevel.css';
