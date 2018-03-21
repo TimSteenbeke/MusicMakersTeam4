@@ -120,7 +120,7 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
                 <input type="button" id="pauseBtn" value="Pause" onClick={(e) => this.pauze(e)}/>
                 <input type="button" id="stopBtn" value="Reset" onClick={(e) => this.reset(e)}/>
                 <section className="sheet">
-                    <div id="whiteBox"
+                    <div id="chordSheet"
                         dangerouslySetInnerHTML={ {__html: disp} }>
                     </div>
                 </section>

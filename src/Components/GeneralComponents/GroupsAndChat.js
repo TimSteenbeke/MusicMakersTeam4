@@ -47,7 +47,7 @@ export default class GroupsAndChat extends Component {
     };
 
     mapAgendaItems = (agendaItems) => {
-        if (agendaItems !== undefined) {
+        if (agendaItems == undefined) {
             let AgendaItems= [];
 
             //Over lessons loopen en info in AgendaItem steken
