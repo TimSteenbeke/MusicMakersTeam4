@@ -5,21 +5,16 @@ import {Link} from 'react-router-dom';
 import swal from 'sweetalert2'
 
 
-class Courses extends Component {
-
+export default class Courses extends Component {
     constructor(props) {
         super(props);
         this.state = {
             courses: [],
             selectedIndex: 0,
-        }
-
-        ;
+        };
     }
-
     componentDidMount() {
         this.getCourses();
-
     }
 
     getCourses() {
@@ -30,14 +25,14 @@ class Courses extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Bent je zeker?',
+            text: "Dit kan niet ongedaan gemaakt worden!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
@@ -45,8 +40,8 @@ class Courses extends Component {
         }).then((result) => {
             if (result.value) {
                 swal(
-                    'Deleted!',
-                    'Course has been deleted.',
+                    'Verwijderen!',
+                    'Cursus werd verwijderd.',
                     'success'
                 );
                 CourseService.deleteCourse(id);
@@ -55,8 +50,8 @@ class Courses extends Component {
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Cancelled',
-                    'Course was not deleted',
+                    'Gestopt',
+                    'Cursus werd niet verwijderd',
                     'error'
                 )
             }
@@ -70,13 +65,13 @@ class Courses extends Component {
         return (
 
             <div className="Homepage">
-                <Header name="Courses"/>
+                <Header name="Cursussen"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Course</th>
+                            <th>Cursus</th>
                             <th>Prijs</th>
                             <th>Acties</th>
                         </tr>
@@ -113,5 +108,3 @@ class Courses extends Component {
         );
     }
 }
-
-export default Courses;

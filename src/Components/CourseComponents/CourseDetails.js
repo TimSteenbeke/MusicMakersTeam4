@@ -7,7 +7,7 @@ import swal from 'sweetalert2'
 import * as CourseTypeService from "../../Services/CourseTypeService";
 import * as UserService from "../../Services/UserService";
 
-class CoursesDetails extends Component {
+export default class CoursesDetails extends Component {
 
     constructor(props) {
         super(props);
@@ -52,14 +52,14 @@ class CoursesDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Course Edited',
+            title: 'Cursus geupdate',
             showConfirmButton: false,
             timer: 1500
         });
         let self = this;
         CourseService.updateCourse(self.state.courseId, JSON.stringify(
             {
-                beschrijving: self.state.beschrijving,
+                description: self.state.description,
             }
         ));
 
@@ -118,7 +118,7 @@ class CoursesDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Course Updated',
+            title: 'Cursus geupdate',
             showConfirmButton: false,
             timer: 1500
         });
@@ -126,8 +126,8 @@ class CoursesDetails extends Component {
         CourseService.updateCourse(this.state.courseId, JSON.stringify(
             {
                 courseTypeId: this.state.selectedCourseType,
-                teacherids: this.state.selectedTeachers,
-                studentids: this.state.selectedStudents
+                teacherIds: this.state.selectedTeachers,
+                studentIds: this.state.selectedStudents
             }
         ));
     };
@@ -138,7 +138,7 @@ class CoursesDetails extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Update Course"/>
+                <Header name="Cursus updaten"/>
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s0 m2 l2"/>
@@ -232,5 +232,3 @@ class CoursesDetails extends Component {
         );
     }
 }
-
-export default CoursesDetails;

@@ -21,7 +21,7 @@ export default class AddCourseType extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'CourseType Added!',
+            title: 'Cursus type toegevoegd!',
             showConfirmButton: false,
             timer: 1500
         });
@@ -52,7 +52,8 @@ export default class AddCourseType extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Voeg cursustype toe"/>
+
+                <Header name="Cursus type toevoegen"/>
                 <section className="containerCss">
                             <div className="card hoverable">
                                 <div className="card-content">

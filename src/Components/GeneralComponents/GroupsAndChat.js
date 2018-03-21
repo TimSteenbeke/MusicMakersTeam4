@@ -72,7 +72,7 @@ export default class GroupsAndChat extends Component {
             for (let x= 0; x < agendaItems.performances.length; x++) {
                 let optreden = {
                     id: agendaItems.performances[x].performanceId,
-                    name: agendaItems.performances[x].beschrijving,
+                    name: agendaItems.performances[x].description,
                     startDateTime: new Date(agendaItems.performances[x].startDateTime),
                     endDateTime: new Date(agendaItems.performances[x].endDateTime),
                     type: 'Optreden',

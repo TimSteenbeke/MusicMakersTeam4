@@ -12,7 +12,7 @@ import './AddLesson.css';
 const addSubtractDate = require("add-subtract-date");
 
 
-class AddLesson extends Component {
+export default class AddLesson extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -104,13 +104,13 @@ class AddLesson extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Voeg les toe"/>
+                <Header name="Les toevoegen"/>
                 <div className="paddingnator">
                     <Row>
                         <Input s={12} multiple={false} type='select'
                                onChange={this.handleCourseChange}
                                label="Leerkrachten" defaultValue='1'>
-                            <option key="" value="" disabled>Kies het vak
+                            <option key="" value="" disabled>Kies de cursus
                             </option>
                             {this.state.myCourses.map((course, index) => (
                                 <option key={course.courseId}
@@ -149,8 +149,4 @@ class AddLesson extends Component {
             </div>
         );
     }
-
-
 }
-
-export default AddLesson;

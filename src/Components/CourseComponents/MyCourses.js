@@ -26,7 +26,7 @@ export default class MyCourses extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Mijn vakken"/>
+                <Header name="Mijn cursussen"/>
                 <section className="containerCss">
                     <table className="black-text bordered responsive-table centered">
                         <colgroup>
@@ -36,7 +36,7 @@ export default class MyCourses extends Component {
                         </colgroup>
                         <thead>
                         <tr>
-                            <th className="center">Vak</th>
+                            <th className="center">Cursus</th>
                             <th className="center">Details</th>
                         </tr>
                         </thead>
