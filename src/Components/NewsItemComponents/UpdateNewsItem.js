@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import * as NewsItemService from '../../Services/NewsItemService';
 import Header from '../GeneralComponents/Header';
-import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 
@@ -79,9 +78,7 @@ export default class UpdateNewsItem extends Component {
         return ( <div className="Homepage">
                 <Header name="Melding aanpassen"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                    <div className="col s12 m8 offset-m2 l8 offset-m2">
                             <div className="card hoverable z-depth-3">
                                 <div className="card-image">
                                     <img
@@ -134,8 +131,6 @@ export default class UpdateNewsItem extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col s0 m2 l2"/>
-                    </div>
                 </section>
             </div>
         );

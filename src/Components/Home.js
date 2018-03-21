@@ -24,7 +24,6 @@ export default class Home extends Component{
         }
     }
 
-
     render(){
             if (LoginService.checkToken()){
             return (
@@ -35,13 +34,26 @@ export default class Home extends Component{
                             <div className="col s12 m10 offset-m1 l10 offset-l1">
                                 <div className="card hoverable z-depth-3">
                                     <div className="card-image waves-effect waves-block waves-light">
-                                        <img className="activator" alt="guitar" src={guitar}/>
+                                        {item.messageImage !== null ?
+                                            <img className="activator responsive-img" alt="guitar"  src={"data:image;base64," + item.messageImage}/> :
+                                            <img className="activator" alt="guitar" src={guitar}/>
+                                        }
                                     </div>
                                     <div className="card-content darken-2">
-                                        <span className="card-title activator black-text text-darken-4"><p>{item.title}<br/>
+                                        <div className="row valign-wrapper">
+                                            <div className="col s8">
+                                                <span className="card-title activator black-text text-darken-4"><p>{item.title}<br/>
                                             <small>{ MomentJs(item.date).utc().format('YYYY-MM-DD')} - {item.editor}</small>
-                                        </p></span>
+                                        </p></span>                                            </div>
+                                            <div className="col s4">
+                                                <span className="black-text">
+                                                    <a><i className="activator material-icons right">open_in_new</i></a>
+                                                </span>
+                                            </div>
+                                        </div>
+
                                     </div>
+
                                     <div className="card-reveal darken-2 lighten-4 black-text">
                                     <span className="card-title black-text text-darken-4">{item.title}<i
                                         className="material-icons right">close</i></span>

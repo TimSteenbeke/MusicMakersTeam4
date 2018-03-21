@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import * as NewsItemService from '../../Services/NewsItemService';
 import Header from '../GeneralComponents/Header';
-import StyledTextField from '../GeneralComponents/StyledTextField';
-import {Link} from 'react-router-dom';
 import {Row, Input} from 'react-materialize';
 import swal from 'sweetalert2';
 import * as GroupService from "../../Services/GroupService";
+import StyledTextField from "../GeneralComponents/StyledTextField";
 
 export default class AddNewsItem extends Component {
     constructor(props) {
@@ -14,7 +13,7 @@ export default class AddNewsItem extends Component {
             value: 1,
             soorten: [],
             groups: [],
-            groupid: 1,
+            groupids: [],
             open: false,
             title: "",
             message: "",
@@ -47,10 +46,11 @@ export default class AddNewsItem extends Component {
                 title: this.state.fields["title"],
                 message: this.state.fields["message"],
                 messageImage: this.state.image,
-                groupid: this.state.groupid
+                groupids: this.state.groupids
             }
         ));
 
+        this.props.history.push('/newsitems')
     };
 
     handleChange(field, e){
@@ -75,15 +75,17 @@ export default class AddNewsItem extends Component {
         }, 1000);
     };
 
+
+
     handleGroupChange = (e) => {
         let options = e.target.options;
-        let value = 1;
+        let value = [];
         for (let i = 0, l = options.length; i < l; i++) {
             if (options[i].selected) {
-                value = options[i].value;
+                value.push(options[i].value);
             }
         }
-        this.setState({groupid: value});
+        this.setState({groupids: value});
     };
 
     render() {
@@ -91,9 +93,7 @@ export default class AddNewsItem extends Component {
             <div className="Meldingen">
                 <Header name="Melding toevoegen"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-m2">
                             <div className="card hoverable">
                                 <div className="card-image">
                                     <img
@@ -115,45 +115,34 @@ export default class AddNewsItem extends Component {
                                     </form>
                                 </div>
                                 <div className="card-content">
-                                    <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
+                                    <form className="addNewsItem" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Titel *</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <input ref="title" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel"/>
+                                                <div className="col s12 m12 l12">
+                                                    <input ref="title" required="true" onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Bericht *</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
-                                                    <textarea ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht"/>
+                                                <div className="col s12 m12 l12">
+                                                    <input ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht *"/>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5>Groep</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
+                                                <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input s={12} multiple={false} type='select'
-                                                               onChange={this.handleGroupChange}
-                                                               label="Groep" icon='face'>
-                                                            <option key="" value="" disabled>Selecteer een groep
-                                                            </option>
+                                                        <Input s={12} multiple={true} type='select' label="Groepen" onChange={this.handleGroupChange}
+                                                               icon='child_care' defaultValue='1'>
+                                                            <option key="" value="" disabled>Selecteer groepen</option>
                                                             {this.state.groups.map((group, index) => (
                                                                 <option key={group.groupid}
                                                                         value={group.groupid}>{group.name}</option>
@@ -163,7 +152,7 @@ export default class AddNewsItem extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
+                                        <div className="divider"/>
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
@@ -175,16 +164,14 @@ export default class AddNewsItem extends Component {
 
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/" onClick={this.handleClick}
+                                    <input type="submit" onClick={this.handleClick}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
                                         <i
                                             className="material-icons">done</i>
-                                    </Link>
+                                    </input>
                                 </div>
                             </div>
                         </div>
-                        <div className="col s0 m2 l2"/>
-                    </div>
                 </section>
             </div>
         );

@@ -25,33 +25,26 @@ export default class Compositions extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
-            confirmButtonClass: 'btn red',
-            cancelButtonClass: 'btn green marginator',
-            buttonsStyling: false,
-            reverseButtons: true
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
         }).then((result) => {
             if (result.value) {
-                swal(
-                    'Deleted!',
-                    'Composition has been deleted.',
-                    'success'
-                );
                 CompositionService.deleteComposition(id);
-            } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
-            ) {
+                swal({
+                    title: "Deleted!",
+                    text: "Composition has been deleted!",
+                    type: "success"
+                }).then(() => {
+                    this.props.history.push("/compositions");
+                });
+            } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Cancelled',
-                    'Composition was not deleted',
+                    'Your imaginary file is safe :)',
                     'error'
                 )
             }
-        });
+        })
     };
 
     componentDidMount() {
@@ -59,37 +52,6 @@ export default class Compositions extends Component {
             this.setState({compositions: compositions});
         });
     }
-
-    /*componentWillUpdate(){
-        console.log("upddatte: "+ this.state.search);
-
-        if (this.state.search === "" || this.state.search === null) {
-            CompositionService.getCompositionsFromBackend().then(compositions => {
-                this.setState({compositions: compositions});
-            });
-        } else {
-            CompositionService.filterCompositions(this.state.search).then(compositions => {
-                this.setState({compositions: compositions});
-            });
-        }
-    }*/
-
-    filterCompositions = (e) => {
-        const self = this;
-        this.setState({compositions: []});
-
-        if (self.state.search === "") {
-            CompositionService.getCompositionsFromBackend().then(compositions => {
-                this.setState({compositions: compositions});
-            });
-        } else {
-            CompositionService.filterCompositions(self.state.search, e.target.id).then(compositions => {
-                this.setState({compositions: compositions});
-            });
-        }
-
-
-    };
 
     setSearch = event => {
         this.setState({compositions: []});
@@ -99,7 +61,7 @@ export default class Compositions extends Component {
 
         if (value === "" || value === null) {
             CompositionService.getCompositionsFromBackend().then(compositions => {
-                this.setState({compositions: compositions});
+                this.setState({compositions: [...this.state.compositions]});
             });
         } else {
             CompositionService.filterCompositions(value).then(compositions => {
@@ -167,9 +129,9 @@ export default class Compositions extends Component {
                         </thead>
                         <tbody>
                         {this.state.compositions.map((composition, index) => (
-                            <tr key={index} id={composition.muziekstukId}>
-                                <td>{composition.muziekstukId}</td>
-                                <td>{composition.titel}</td>
+                            <tr key={index} id={composition.compositionId}>
+                                <td>{composition.compositionId}</td>
+                                <td>{composition.title}</td>
                                 <td>{composition.artist}</td>
                                 <td>{composition.genre}</td>
                                 <td>{composition.subject}</td>
@@ -184,7 +146,7 @@ export default class Compositions extends Component {
                                             </a></div>
                                         <div className="col s6 m6 l6">
                                             <Link className="waves-effect white-text deep-orange darken-4 btn"
-                                                  to={`/play/${composition.muziekstukId}`}>
+                                                  to={`/play/${composition.compositionId}`}>
                                                 <i className="material-icons">play_arrow</i>
                                             </Link>
                                         </div>
@@ -192,12 +154,12 @@ export default class Compositions extends Component {
                                     <div className="row">
                                         <div className="col s6 m6 l6">
                                             <Link className="waves-effect white-text deep-orange darken-4 btn"
-                                                  to={`/compositions/${composition.muziekstukId}`}>
+                                                  to={`/compositions/${composition.compositionId}`}>
                                                 <i className="material-icons">edit</i>
                                             </Link></div>
                                         <div className="col s6 m6 l6">
                                             <a className="waves-effect white-text deep-orange darken-4 btn"
-                                               onClick={(e) => this.handleDelete(composition.muziekstukId, e)}>
+                                               onClick={(e) => this.handleDelete(composition.compositionId, e)}>
                                                 <i className="material-icons">delete
                                                 </i>
                                             </a>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import * as UserService from "../../Services/UserService";
 import swal from 'sweetalert2'
 import Header from "../GeneralComponents/Header";
-import {Row} from "react-materialize";
+import {Row,Input} from "react-materialize";
 import Link from "react-router-dom/es/Link";
 import AutoComplete from 'material-ui/AutoComplete';
 import StyledTextField from "../GeneralComponents/StyledTextField";
@@ -91,12 +91,12 @@ export default class AddGroup extends Component {
             if (user === i) {
                 console.log("GOTTEM = " + i);
                 let value = [];
-                let users = this.state.userids;
-                users.forEach((user) => {
-                    if (user != i) {
-                        value.push(user);
-                    }
-                });
+                    let users = this.state.userids;
+                    users.forEach((user) => {
+                        if (user != i){
+                            value.push(user);
+                        }
+                    });
                 console.log("DEEZ NUTS = " + value);
                 this.setState({userids: value});
             }

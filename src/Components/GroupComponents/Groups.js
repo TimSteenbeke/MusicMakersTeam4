@@ -22,33 +22,29 @@ export default class Group extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
-            confirmButtonClass: 'btn red',
-            cancelButtonClass: 'btn green marginator',
-            buttonsStyling: false,
-            reverseButtons: true
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
         }).then((result) => {
             if (result.value) {
-                swal(
-                    'Deleted!',
-                    'Instrument has been deleted.',
-                    'success'
-                );
                 GroupService.deleteGroup(id);
-            } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
-            ) {
+                swal({
+                    title: "Deleted!",
+                    text: "Instrument has been deleted!",
+                    type: "success"
+                }).then(() => {
+                    this.props.history.push("/groups");
+                });
+
+                // For more information about handling dismissals please visit
+                // https://sweetalert2.github.io/#handling-dismissals
+            } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Cancelled',
-                    'Instrument was not deleted',
+                    'Your imaginary file is safe :)',
                     'error'
                 )
             }
-        });
+        })
     };
 
     componentDidMount() {

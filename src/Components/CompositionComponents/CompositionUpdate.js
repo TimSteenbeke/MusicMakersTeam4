@@ -10,8 +10,8 @@ export default class CompositionUpdate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            MuziekstukId: this.props.match.params.id,
-            titel: "",
+            compositionId: this.props.match.params.id,
+            title: "",
             artist: "",
             language: "",
             genre: "",
@@ -25,10 +25,10 @@ export default class CompositionUpdate extends Component {
 
     componentDidMount() {
         const self = this;
-        CompositionService.getCompositionFromBackend(self.state.MuziekstukId)
-            .then(console.log("----Composition with id " + self.state.MuziekstukId + "---- \n"))
+        CompositionService.getCompositionFromBackend(self.state.compositionId)
+            .then(console.log("----Composition with id " + self.state.compositionId + "---- \n"))
             .then(composition => self.setState({
-                titel: composition.titel,
+                title: composition.title,
                 artist: composition.artist,
                 language: composition.language,
                 genre: composition.genre,
@@ -49,7 +49,7 @@ export default class CompositionUpdate extends Component {
             timer: 1500
         });
         const self = this;
-        CompositionService.UpdateComposition(self.state.MuziekstukId, JSON.stringify(
+        CompositionService.UpdateComposition(self.state.compositionId, JSON.stringify(
             {
                 content: self.state.content,
                 artist: self.state.artist,
@@ -59,14 +59,14 @@ export default class CompositionUpdate extends Component {
                 instrumentType: self.state.instrumentType,
                 link: self.state.link,
                 fileFormat: self.state.fileFormat,
-                titel: self.state.titel
+                title: self.state.title
             }
         ));
     };
 
     setTitle = event => {
         let value = event.target.value;
-        return this.setState({titel: value})
+        return this.setState({title: value})
     };
 
     setArtist = event => {
@@ -101,20 +101,16 @@ export default class CompositionUpdate extends Component {
 
     render() {
         return (<div className="Homepage">
-                <Header name={this.state.titel}/>
-
+                <Header name="Muziekstuk bewerken"/>
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
-                                <div className="card-image">
-                                    <span className="card-title white-text">{this.state.titel}</span>
-                                </div>
                                 <div className="card-content">
                                     <div className="row">
                                         <div className="col s12 m12 l12">
                                             <label>Titel</label>
-                                            <input type="text" value={this.state.titel} label="Titel"
+                                            <input type="text" value={this.state.title} label="Titel"
                                                    onChange={this.setTitle} placeholder="Geef een titel in.."/>
                                         </div>
                                     </div>

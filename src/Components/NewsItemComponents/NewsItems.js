@@ -24,34 +24,26 @@ export default class Compositions extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
-            confirmButtonClass: 'btn red',
-            cancelButtonClass: 'btn green marginator',
-            buttonsStyling: false,
-            reverseButtons: true
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
         }).then((result) => {
             if (result.value) {
-                swal(
-                    'Deleted!',
-                    'Melding is verwijderd.',
-                    'success'
-                );
-                //DELETEMETHOD
                 NewsItemService.deleteNewsItem(id);
-            } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
-            ) {
+                swal({
+                    title: "Deleted!",
+                    text: "Melding has been deleted!",
+                    type: "success"
+                }).then(() => {
+                    this.props.history.push("/newsitems");
+                });
+            } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Cancelled',
-                    'Composition was not deleted',
+                    'Your imaginary file is safe :)',
                     'error'
                 )
             }
-        });
+        })
     };
 
     componentDidMount() {

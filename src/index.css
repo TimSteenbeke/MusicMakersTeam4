@@ -33,6 +33,7 @@ html, body
     padding-top: 4%;
     padding-left: 20px;
     padding-right: 20px;
+    z-index: 2;
 }
 
 .introscreen{
@@ -52,6 +53,7 @@ html, body
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
+    z-index: 2;
 }
 
 .application{
