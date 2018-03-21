@@ -123,6 +123,7 @@ Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
     stop() {
         this.setState({hideFirst: true});
         this.setState({currentChord: 0});
+        this.setState({scrollTop: 0});
         clearInterval((this.interval));
         clearInterval((this.state.scrollInterval));
 
