@@ -8,6 +8,7 @@ export default function (WrapperComponent) {
         CheckUserRoles(params) {
             const {history} = params;
             let roles = [];
+            let redirect = false;
             if (localStorage.getItem("userToken") != null) {
                 userService.getRolesCurrentUser().then(
                     (value) => {
@@ -17,21 +18,21 @@ export default function (WrapperComponent) {
                             return true;
                         }*/
                         roles.forEach(role => {
-                            if(role.roleid<3){
-                            // if (role.roleid === 1 || role.roleid === 2) {
-                                return true;
+                            if (role.rolename == "Teacher" || role.rolename == "Admin") {
+                                redirect= true;
                             }
                         });
                     });
             }
-            return false;
+            return redirect;
         }
 
         render() {
             if (this.CheckUserRoles(this.props)) {
                 return <WrapperComponent {...this.props} />
             } else {
-                return <Home/>
+                alert("false checkuser");
+                // return <Home/>
             }
         }
     }
