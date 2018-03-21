@@ -51,7 +51,6 @@ export default class CourseTypes extends Component {
 
     getCourseTypes() {
         CourseTypeService.getCourseTypesFromBackend().then(courseTypes => {
-            console.log(courseTypes);
             this.setState({courseTypes: courseTypes});
         });
     }

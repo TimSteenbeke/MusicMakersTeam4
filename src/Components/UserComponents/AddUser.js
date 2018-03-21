@@ -67,14 +67,13 @@ export default class AddUser extends Component {
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("Uploaded");
+            console.log("successfully Uploaded");
         }, 1000);
     };
 
     handleChange(field, e){
         let fields = this.state.fields;
         fields[field] = e.target.value;
-        console.log(field + " - " + fields[field]);
         this.setState({fields});
     }
 

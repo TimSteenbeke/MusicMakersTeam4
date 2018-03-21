@@ -23,17 +23,15 @@ export default class GroupUpdate extends Component {
     }
 
     addUsers = () => {
-        UserService.getAll().then(console.log("----Users---- \n"))
-            .then(allUsers => {
-                this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
-            });
+        UserService.getAll().then(allUsers => {
+            this.setState({allUsers: allUsers.users});
+        });
     };
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----Students---- \n"))
-            .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
-            });
+        UserService.getStudents().then(students => {
+            this.setState({students: students.users});
+        });
 
     };
 
@@ -87,16 +85,13 @@ export default class GroupUpdate extends Component {
         this.addStudents();
 
         const self = this;
-        GroupService.getGroupFromBackend(self.state.groupid)
-            .then(console.log("----Groep met id " + self.state.groupid + "---- \n"))
-            .then(loadedGroup => self.setState({
-                groupid: loadedGroup.groupid,
-                name: loadedGroup.name,
-                supervisorId: loadedGroup.supervisorid,
-                studentIds: loadedGroup.userids,
-                groupimage: loadedGroup.groupimage
-            }, console.log("loadGroup: " + loadedGroup),
-            console.log("supervisorId" + this.state.supervisorId)))
+        GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => self.setState({
+            groupid: loadedGroup.groupid,
+            name: loadedGroup.name,
+            supervisorId: loadedGroup.supervisorid,
+            studentIds: loadedGroup.userids,
+            groupimage: loadedGroup.groupimage
+        }))
     }
 
     handleUpdate = () => {

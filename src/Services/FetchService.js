@@ -14,7 +14,7 @@ export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {})
             'Content-Type': 'application/json'
         }
     }
-    return fetch(URL + api,
+    return fetch(URL +"api/"+ api,
         {
             mode: 'cors',
             method: method,
@@ -24,12 +24,10 @@ export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {})
         .then((response) =>
             response.json())
         .then((responseJson) => {
-            console.log(responseJson);
             return responseJson;
         })
         .catch((err) => {
             console.log("geen response");
-            console.log(err);
             return error;
         });
 }

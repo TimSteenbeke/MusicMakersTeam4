@@ -1,6 +1,3 @@
-/**
- * Created by Ben on 21/03/2018.
- */
 import React, {Component} from 'react';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
@@ -11,12 +8,6 @@ import * as InstrumentLevelService from '../../Services/InstrumentLevelService'
 import * as InstrumentService from '../../Services/InstrumentService'
 import StyledTextField from '../GeneralComponents/StyledTextField';
 
-/*
- private int userid;
- private int maxlevel;
- private int level;
- private int instrumentid;
- */
 
 export default class addInstrumentLevel extends Component {
     constructor(props) {
@@ -36,8 +27,6 @@ export default class addInstrumentLevel extends Component {
             this.setState({instruments: Instruments});
         });
         this.addStudents();
-
-        console.log(this.state.students);
 
     }
 
@@ -88,13 +77,11 @@ export default class addInstrumentLevel extends Component {
     changeLevel = event => {
         let value = event.target.value;
         this.setState({level: value});
-        console.log(value);
     };
 
     changeMaxLevel = event => {
         let value = event.target.value;
         this.setState({maxlevel: value});
-        console.log(value);
 
     };
 

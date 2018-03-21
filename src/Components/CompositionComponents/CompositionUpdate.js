@@ -26,7 +26,6 @@ export default class CompositionUpdate extends Component {
     componentDidMount() {
         const self = this;
         CompositionService.getCompositionFromBackend(self.state.compositionId)
-            .then(console.log("----Composition with id " + self.state.compositionId + "---- \n"))
             .then(composition => self.setState({
                 title: composition.title,
                 artist: composition.artist,
@@ -37,7 +36,7 @@ export default class CompositionUpdate extends Component {
                 link: composition.link,
                 fileFormat: composition.fileFormat,
                 content: composition.content,
-            }, console.log(composition)))
+            }))
     }
 
     handleUpdate = () => {

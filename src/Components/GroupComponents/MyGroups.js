@@ -17,7 +17,6 @@ export default class MyGroups extends Component {
 
     componentDidMount() {
         GroupService.getGroupsByUser().then(groups => {
-            console.log(groups);
             this.setState({groups: groups});
         });
     }

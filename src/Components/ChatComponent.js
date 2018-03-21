@@ -7,6 +7,9 @@ import './ChatComponent.css';
 import {List, ListItem} from 'material-ui/List';
 import * as GroupService from '../Services/GroupService.js';
 import * as UserService from '../Services/UserService';
+import * as ChatService from '../Services/ChatService';
+import {Divider} from "material-ui";
+
 const serverUrl = 'https://musicmaker-api-team4.herokuapp.com/socket';
 // const serverUrl = 'http://localhost:8080/socket';
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -17,69 +20,118 @@ export default class ChatComponent extends Component {
         super(props);
         this.state = {
             title: "WebSockets chat",
-            text: "",
             currentChatroom: {
-                roomName: "Groep 1",
+                roomName: "Global",
+                roomId: "global",
                 messages: []
             },
-            rooms: [],
+            groupRooms: [],
+            userRooms: [],
             message: {
                 userName: "",
                 userId: 1,
                 text: ""
             },
-            user: {},
+            user: {
+                id: 0,
+                userName: ""
+            },
         };
         this.stompClient = null;
-        console.log("user " + this.state.name);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let self = this;
         UserService.getUserByUsernameFromBackend().then(user => {
             self.setState({user: user}, () => {
                 self.setState({message: {userId: user.id}});
                 self.setState({message: {userName: user.firstname + ' ' + user.lastname}});
-            });
-            console.log("Users \n \n => " + this.state.user.firstname);
-            console.log("Users Message \n \n => " + this.state.message.userId);
-            GroupService.getGroupsByUser().then(groups => {
-                let value = [];
-                groups.forEach((group) => {
-                    let chat = {
-                        roomName: group.name,
-                        messages: [],
-                    };
-                    value.push(chat);
-                });
-                console.log("VALUE : " + value);
-                let startRoom = "";
-                if (groups.length === 0){
-                    startRoom = "Globale Chat"
-                }else{
-                    startRoom = groups[0].name
-                }
-                    self.setState({rooms: value, currentChatroom: {roomName: startRoom, messages: []} });
-                }
-            ).then(()=> {
-                self.initializeWebSocketConnection();
-            });
-        });
+                self.getUserRooms(user.id);
+                self.getGroupRooms();
 
-
+            });
+        }).then(() => {
+            self.initializeWebSocketConnection();
+        })
     }
 
-    ChangeRoom = (name) => {
+    getGroupRooms = () => {
+        let groupRooms = [];
         let self = this;
-        console.log(self.state.currentChatroom.roomName);
-        let messages = [];
+        GroupService.getGroupsByUser().then(groups => {
+            groups.forEach((group) => {
+                let groupRoom = {
+                    roomName: group.name,
+                    roomId: group.name,
+                    messages: [],
+                };
+                groupRooms.push(groupRoom);
+            });
+        }).then(() => {
+                self.setState({
+                    groupRooms: groupRooms
+                });
+            }
+        )
+    };
+
+    getUserRooms = (curuser) => {
+        let userRooms = [];
+        let self = this;
+        UserService.getAll().then(object => {
+            let users = object.users;
+            users.forEach((user) => {
+                    if (user.userid != curuser) {
+                        let roomName = user.firstname + " " + user.lastname;
+                        let roomId = "";
+                        if (user.userid < curuser) {
+                            roomId = user.userid + "V" + curuser;
+                        } else {
+                            roomId = curuser + "V" + user.userid;
+                        }
+                        let userRoom = {
+                            roomName: roomName,
+                            roomId: roomId,
+                            messages: [],
+                        };
+                        userRooms.push(userRoom);
+                    }
+                }
+            )
+        }).then(() => {
+                self.setState({
+                    userRooms: userRooms
+                });
+            }
+        )
+    };
+
+
+    changeRoom = (changeRoom) => {
+        let self = this;
         subscription.unsubscribe();
-        this.state.rooms.forEach((room) => {
-            console.log("roooooooom : " + room);
-            if (room.roomName === this.state.currentChatroom.roomName){
-                this.setState({currentChatroom: { roomName: name, messages: room.messages}}, () => {
-                    console.log("chat =>" + self.state.currentChatroom.roomName);
-                    console.log(room.messages);
+        let allRooms = [{
+            roomName: "Global",
+            roomId: "global",
+            messages: [],
+        }];
+        this.state.groupRooms.forEach((room) => {
+                allRooms.push(room);
+            }
+        );
+        this.state.userRooms.forEach((room) => {
+                allRooms.push(room);
+            }
+        );
+        allRooms.forEach((room) => {
+            if (room.roomId == changeRoom) {
+                this.setState({
+                    currentChatroom: {
+                        roomName: room.roomName,
+                        roomId: room.roomId,
+                        messages: []
+                    }
+                }, () => {
                     self.initializeWebSocketConnection();
                 });
             }
@@ -87,39 +139,52 @@ export default class ChatComponent extends Component {
 
     };
 
+
     initializeWebSocketConnection = () => {
         const self = this;
         const ws = new SockJS(serverUrl);
+        let messages = [];
         self.stompClient = Stomp.over(ws);
-        console.log("initializeWebSocketConnection");
-        console.log(ws);
-        console.log("OH BOI HERE WE GO :" + self.state.currentChatroom.roomName);
-        console.log("WEEEEEEEEEE :" + self.state.message.userId);
         self.stompClient.connect({}, () => {
-            subscription = self.stompClient.subscribe('/chat/' + self.state.currentChatroom.roomName, (message) => {
-                console.log("msg");
-                console.log(message);
-                console.log("currentChatRoom");
-                console.log(this.state.currentChatroom.roomName);
-                console.log(this.state.currentChatroom.messages);
+            subscription = self.stompClient.subscribe('/chat/' + self.state.currentChatroom.roomId, (message) => {
                 if (message.body) {
-                    self.setState({currentChatroom: {messages: [...self.state.currentChatroom.messages, JSON.parse(message.body)], roomName: self.state.currentChatroom.roomName}});
-                    console.log("BOWDY => " + JSON.parse(message.body).userId);
+                    ChatService.getChatroomHistory(self.state.currentChatroom.roomId).then((value) => {
+                        messages = value.messages;
+                        self.setState({
+                            currentChatroom: {
+                                messages: messages,
+                                roomName: self.state.currentChatroom.roomName,
+                                roomId: self.state.currentChatroom.roomId
+                            }
+                        });
+                    });
+
                 }
             });
         });
-        console.log("init is done");
     };
 
     sendMessage = () => {
-        console.log("DIS SHIT EMPTY: " + this.state.message.userId);
-        this.stompClient.send('/chat/' + this.state.currentChatroom.roomName, {}, JSON.stringify(this.state.message));
-        console.log("send to " + this.state.currentChatroom.roomName);
+        let message = this.state.message;
+        let data = {
+            "chatroom": this.state.currentChatroom.roomId,
+            "username": message.userName,
+            "userId": message.userId,
+            "message": message.text
+        };
+        ChatService.postChatroomMessage(JSON.stringify(data));
+        this.stompClient.send('/chat/' + this.state.currentChatroom.roomId, {}, JSON.stringify(message));
         this.setState({message: {text: ''}});
     };
 
     setText = (e) => {
-        this.setState({message: {text: e.target.value, userId: this.state.user.id, userName: this.state.user.firstname + ' ' + this.state.user.lastname}});
+        this.setState({
+            message: {
+                text: e.target.value,
+                userId: this.state.user.id,
+                userName: this.state.user.firstname + ' ' + this.state.user.lastname
+            }
+        });
     };
 
     render() {
@@ -129,30 +194,41 @@ export default class ChatComponent extends Component {
                 <div className="rowcontainer chat">
                     <div className="groupschat">
                         <List>
-                            { this.state.rooms && this.state.rooms.length > 0 ?
-                                this.state.rooms.map((group, index) => (
-                                    <ListItem key={index} primaryText={group.roomName}
-                                              onClick={() => this.ChangeRoom(group.roomName)}/>))
-                                : <ListItem key={1} primaryText="Geen groepen!"/>
+                            <ListItem key={1} primaryText="Global"
+                                      onClick={() => this.changeRoom("global")}/>
+                            <Divider/>
+                            {this.state.groupRooms && this.state.groupRooms.length > 0 ?
+                                this.state.groupRooms.map((group, index) => (
+                                    <ListItem key={index + 1} primaryText={group.roomName}
+                                              onClick={() => this.changeRoom(group.roomId)}/>))
+                                : <ListItem key={2} primaryText="Geen groepen!"/>
+                            }
+                        </List>
+                        <Divider/>
+                        <List>
+                            {this.state.userRooms && this.state.userRooms.length > 0 ?
+                                this.state.userRooms.map((user, index) => (
+                                    <ListItem key={index} primaryText={user.roomName}
+                                              onClick={() => this.changeRoom(user.roomId)}/>))
+                                : <ListItem key={1} primaryText="Geen users gevonden."/>
                             }
                         </List>
                     </div>
                     <div className="texting paddingnator">
-                        {
-                            this.state.currentChatroom.messages.map((msg, key) => {
-                                    console.log("MESSAGE: " + msg.text);
-                                    console.log("IDDDDDD: " + msg.userId);
-                                    if (msg.userId === this.state.user.id) {
-                                        return (
-                                            <div key={key} className="speech-bubbleYou chatMarginYou" id={key}>{msg.userName}: {msg.text}</div>
-                                        )
-                                    } else {
-                                        return (
-                                            <div key={key} className="speech-bubble chatmargin" id={key}>{msg.userName}: {msg.text}</div>
-                                        )
-                                    }
+                        {this.state.currentChatroom.messages.map((msg, key) => {
+                                if (msg.userId === this.state.user.id) {
+                                    return (
+                                        <div key={key} className="speech-bubbleYou chatMarginYou"
+                                             id={key}>{msg.username} : {msg.message}</div>
+                                    )
+                                } else {
+                                    return (
+                                        <div key={key} className="speech-bubble chatmargin"
+                                             id={key}>{msg.username} : {msg.message}</div>
+                                    )
                                 }
-                            )
+                            }
+                        )
                         }
                     </div>
                 </div>

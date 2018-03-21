@@ -21,7 +21,6 @@ export default class MyCourseDetails extends Component {
     componentDidMount() {
         let self = this;
         CourseService.getCourseFromBackend(self.state.courseId)
-            .then(console.log("----Course met id " + self.state.courseId + "---- \n"))
             .then(course => {
                 self.setState({
                     courseId: this.props.match.params.id,
@@ -29,10 +28,6 @@ export default class MyCourseDetails extends Component {
                     students: course.students,
                     teachers: course.teachers
                 });
-                console.log("beschrijving: "+self.state.beschrijving);
-                console.log("users: " + course.users);
-                console.log("course: " +course);
-                console.log("---- ---- ---- ----\n");
             }).catch((error) => {
             console.log(error);
         });
@@ -42,7 +37,6 @@ export default class MyCourseDetails extends Component {
     retrieveLessons(courseId) {
         CourseService.getLessonsFromCourse(courseId)
             .then(lessons => {
-                console.log(lessons.lessonResources);
                 this.setState({lessons: lessons.lessonResources});
             })
     }
