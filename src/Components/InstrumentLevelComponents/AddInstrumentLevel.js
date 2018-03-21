@@ -26,6 +26,7 @@ export default class addInstrumentLevel extends Component {
         InstrumentService.getInstrumentenFromBackend().then(Instruments => {
             this.setState({instruments: Instruments});
         });
+        console.log(this.state.instruments);
         this.addStudents();
 
     }
@@ -48,6 +49,8 @@ export default class addInstrumentLevel extends Component {
 
             }
         ));
+
+        this.prop.history.push("/instrumentlevels");
     };
 
 
@@ -95,28 +98,24 @@ export default class addInstrumentLevel extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Add Course"/>
+                <Header name="Instrumentlevel toewijzen"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
                                 <div className="card-content">
+                                    <h4 className="center">Instrumentlevel toewijzen</h4>
                                     <form className="addCourse" action="/" method="POST" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5 className="truncate">Studenten</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
+                                                <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input s={12} multiple={false} type='select'
+                                                        <Input required s={12} multiple={false} type='select'
                                                                onChange={this.handleStudentChange}
-                                                               label="Studenten" icon='face' defaultValue='1'>
-                                                            <option key="" value="" disabled>Kies student
+                                                               label="Student" icon='person' defaultValue='1'>
+                                                            <option key="" value="" disabled>Selecteer een student...
                                                             </option>
                                                             {this.state.students.map((student, index) => (
                                                                 <option key={student.userid}
@@ -127,19 +126,14 @@ export default class addInstrumentLevel extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="divider"></div>
                                         <div className="section">
                                             <div className="row">
-                                                <div className="col s3 m3 l3">
-                                                    <h5 className="truncate">Leerkrachten</h5>
-                                                </div>
-                                                <div className="col s9 m9 l9">
+                                                <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input s={12} multiple={false} type='select'
+                                                        <Input required s={12} multiple={false} type='select'
                                                                onChange={this.handleInstrumentChange}
-                                                               label="Instrumenten" icon='face' defaultValue='1'>
-                                                            <option key="" value="" disabled>Kies het instrument
-                                                            </option>
+                                                               label="Instrumenten" icon='person' defaultValue='1'>
+                                                            <option key="" value="" disabled>Selecteer een instrument...</option>
                                                             {this.state.instruments.map((instrument, index) => (
                                                                 <option key={instrument.instrumentid}
                                                                         value={instrument.instrumentid}>{instrument.instrumentname}</option>
@@ -149,24 +143,25 @@ export default class addInstrumentLevel extends Component {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div className="divider"></div>
+                                        <div className="section">
+                                                <div className="col s12 m12 l12">
+                                                    <StyledTextField  type="number" min="0" max="10" onChange={this.changeLevel} label="Instrumentscore (0-10)" placeholder="Geef een score tussen 0 en 10..." required/>
+                                                </div>
+                                            </div>
+                                        <div className="section">
+                                            <div className="col s12 m12 l12">
+                                                <StyledTextField type="number" min="0" max="10" onChange={this.changeMaxLevel} label="Maxlevel (0-10)" placeholder="Geef een score tussen 0 en 10..." required/>
+                                            </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="col s12 m12 l12 center">
+                                                <input type="submit" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle" value="Opslaan"/>
+                                                <Link to="/instrumentlevels" type="button" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle">Terug</Link>
+                                            </div>
+                                        </div>
                                     </form>
-                                <StyledTextField onChange={this.changeLevel} label="Instrumentscore (0-10)" required={true}/>
-                                </div>
-
-                                <StyledTextField onChange={this.changeMaxLevel} label="Maxlevel (0-10)" required={true}/>
-
-                                <div className="card-action">
-                                    <Link to="/courses" onClick={this.handleClick}
-                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
-                                        <i
-                                            className="material-icons">done</i>
-                                    </Link>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col s0 m2 l2"/>
                     </div>
                 </section>
             </div>

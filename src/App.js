@@ -39,7 +39,7 @@ import MyInstrumentLevels from './Components/InstrumentLevelComponents/MyInstrum
 import InstrumentLevels from './Components/InstrumentLevelComponents/InstrumentLevels';
 import Lessons from './Components/CourseComponents/Lessons.js'
 import LessonDetails from './Components/CourseComponents/LessonDetails.js'
-import AddInstrumentLevel from './Components/InstrumentLevelComponents/addInstrumentLevel'
+import AddInstrumentLevel from './Components/InstrumentLevelComponents/AddInstrumentLevel'
 import AddPerformance from "./Components/PerformanceComponents/AddPerformance";
 import PerformanceDetails from "./Components/PerformanceComponents/PerformanceDetails";
 import Performance from "./Components/PerformanceComponents/Performance";
