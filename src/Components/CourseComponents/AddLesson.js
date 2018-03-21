@@ -149,8 +149,4 @@ export default class AddLesson extends Component {
             </div>
         );
     }
-
-
 }
-
-export default AddLesson;
