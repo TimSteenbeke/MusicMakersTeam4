@@ -35,7 +35,6 @@ export default class Group extends Component {
                         <tr>
                             <th>Naam</th>
                             <th>Begeleider</th>
-                            <th>Leden</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,16 +44,7 @@ export default class Group extends Component {
                                 </td>*/}
                                 <td>{group.name}</td>
 
-                                {/*<td>{group.supervisor.firstname}</td>*/}
-                                {/*       <td><Dropdown trigger={<RaisedButton onClick={this.setUsers(group)}>Klik!</RaisedButton>
-                                }>
-                                    {this.state.users.map((user, index2) => (
-                                        <tr key={index2} id={user.userId}>
-                                            <NavItem>{user.username}</NavItem>
-                                        </tr>
-                                    ))}
-                                </Dropdown>
-                                </td>*/}
+                                <td>{group.supervisor.firstname}</td>
                                 <td>
                                     <Link className="waves-effect white-text red darken-4 btn marginator"
                                           to={`/groupupdate/${group.groupid}`}>

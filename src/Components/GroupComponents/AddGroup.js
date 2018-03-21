@@ -28,7 +28,7 @@ export default class AddGroup extends Component {
     }
 
     addUsers = () => {
-        UserService.getAll().then(console.log("----Students---- \n"))
+        UserService.getAll().then(console.log("----Users---- \n"))
             .then(allUsers => {
                 let users = allUsers.users;
                 users.forEach((user) => {
@@ -39,7 +39,7 @@ export default class AddGroup extends Component {
     };
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----Users---- \n"))
+        UserService.getStudents().then(console.log("----Students---- \n"))
             .then(students => {
                 let users = students.users;
                 users.forEach((students) => {
@@ -47,7 +47,6 @@ export default class AddGroup extends Component {
                 });
                 this.setState({students: students.users}, console.log(students.users));
             });
-
     };
 
     onChangeName = (e) => {

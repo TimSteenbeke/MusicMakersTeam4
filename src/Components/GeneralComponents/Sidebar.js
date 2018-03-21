@@ -66,19 +66,19 @@ export default class Sidebar extends Component {
                     <MenuItem style={styles.menuColor} primaryText={i18n.t('groups.label')}/>
                 </Link>
                 <Link to="/users">
-                    <MenuItem style={styles.menuColor} primaryText="Gebruikers"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('users.label')}/>
                 </Link>
                 <Link to="/courses">
-                    <MenuItem style={styles.menuColor} primaryText="Vakken"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('courses.label')}/>
                 </Link>
                 <Link to="/courseTypes">
-                    <MenuItem style={styles.menuColor} primaryText="Vaktypes"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('coursetypes.label')}/>
                 </Link>
                 <Link to="/lessons">
-                    <MenuItem style={styles.menuColor} primaryText="Lessen"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('lessons.label')}/>
                 </Link>
                 <Link to="/addLesson">
-                    <MenuItem style={styles.menuColor} primaryText="Les toevoegen"/>
+                    <MenuItem style={styles.menuColor} primaryText={i18n.t('addlessons.label')}/>
                 </Link>
             </div>;
         }
@@ -104,17 +104,17 @@ export default class Sidebar extends Component {
                         <Divider/>
                         {adminLinks}
                         <Link to="/compositions">
-                            <MenuItem style={styles.menuColor} primaryText="Muziekstukken"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('compositions.label')}/>
                         </Link>
                         <Link to="/newsitems">
-                            <MenuItem style={styles.menuColor} primaryText="Meldingen"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('notifications.label')}/>
                         </Link>
                         <Divider/>
                         <Link to="/mygroups">
-                            <MenuItem style={styles.menuColor} primaryText="Mijn groepen"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('mygroups.label')}/>
                         </Link>
                         <Link to="/mycourses">
-                            <MenuItem style={styles.menuColor} primaryText="Mijn Vakken"/>
+                            <MenuItem style={styles.menuColor} primaryText={i18n.t('mycourses.label')}/>
                         </Link>
                         <Divider/>
                     </section> : <section><Divider/><Link to="/">
