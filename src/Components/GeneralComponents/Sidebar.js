@@ -79,6 +79,9 @@ export default class Sidebar extends Component {
                         </Link>
                         <Link to="/instrumentlevels">
                             <MenuItem style={styles.menuColor} primaryText="Instrumentenlevels"/>
+
+                        <Link to="/lessons">
+                            <MenuItem style={styles.menuColor} primaryText="Lessen"/>
                         </Link>
                         <Divider/>
                         <Link to="/mygroups">

@@ -18,6 +18,7 @@ export default class GroupsAndChat extends Component {
             lastname: "",
             groups: [],
             items: [],
+            agendaItems: []
         };
     }
 
@@ -42,7 +43,8 @@ export default class GroupsAndChat extends Component {
 
     getMyAgendaItems = () => {
         AgendaService.getMyAgenda().then(agendaItems => {
-            this.mapAgendaItems(agendaItems)
+           this.setState({agendaItems: agendaItems}
+           ,() => {this.mapAgendaItems(this.state.agendaItems)})
         });
     };
 
