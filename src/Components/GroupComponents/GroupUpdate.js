@@ -23,7 +23,6 @@ export default class GroupUpdate extends Component {
             students: [],
             supervisor: {},
             userids: [],
-            users: [],
             name: "",
             groupimage: "../image/image.jpg"
         }
@@ -131,34 +130,18 @@ export default class GroupUpdate extends Component {
     getGroup = () => {
         const self = this;
         GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => {
-            console.log("GELADEN GROEP YAAAAS => ");
-            console.log(loadedGroup);
             self.setState({
                 name: loadedGroup.name,
                 supervisor: loadedGroup.supervisor,
-                users: loadedGroup.users,
+                userids: loadedGroup.userids,
                 groupimage: loadedGroup.groupimage
             }, () => {
-                console.log(loadedGroup);
                 console.log(console.log(this.state.name));
                 console.log(console.log(this.state.groupid));
-                console.log(console.log(this.state.supervisor.id));
+                console.log(console.log(this.state.supervisor.firstname));
                 console.log(console.log(this.state.userids));
-                this.setUserIds();
             })
         })
-    };
-
-    setUserIds = () =>{
-        let value = [];
-        this.state.users.forEach((user) => {
-            value.push(user.userid);
-        });
-        this.setState({
-            userids: value
-        }, () => {
-            console.log(this.state.userids);
-        });
     };
 
     handleUpdate = () => {
@@ -240,7 +223,7 @@ export default class GroupUpdate extends Component {
                                     <div className="col s9 m9 l9">
                                         <ul className="collection">
                                             <li className="collection-item">
-                                                <div>{this.state.supervisor.fullname}<a onClick={this.deleteSupervisor}
+                                                <div>{this.state.supervisor.firstname}<a onClick={this.deleteSupervisor}
                                                                                         className="secondary-content"><i
                                                     className="material-icons">clear</i></a></div>
                                             </li>

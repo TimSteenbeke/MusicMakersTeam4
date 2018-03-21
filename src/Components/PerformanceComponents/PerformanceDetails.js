@@ -111,7 +111,7 @@ export default class PerformanceDetails extends Component {
         let selectedEndDate = this.state.selectedEndDate.toDateString();
         return (
             <div className="Homepage">
-                <Header name="Optreden Detais"/>
+                <Header name="Optreden Details"/>
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s0 m2 l2"/>
