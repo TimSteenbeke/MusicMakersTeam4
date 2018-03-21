@@ -5,34 +5,41 @@ import StyledTextField from '../GeneralComponents/StyledTextField';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
 import './InstrumentDetails.css';
+import {Row, Input} from 'react-materialize';
 
 export default class InstrumentDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             instrumentId: this.props.match.params.id,
-            afbeelding: "",
-            instrumentsoortid: 1,
-            soortnaam: "",
-            naam: "",
+            instrumentName: "",
             type: "",
-            uitvoering: "",
+            details: "",
+            image: "",
+            categoryName: "",
+            instrumentCategoryId: 1,
+            soorten: []
         }
     }
 
     componentDidMount() {
+        InstrumentService.getInstrumentSoortenFromBackend()
+            .then(soorten => {
+                this.setState({soorten: soorten});
+            });
+
+        console.log("soorten");
+        console.log(this.state.soorten);
         let self = this;
         InstrumentService.getInstrumentFromBackend(self.state.instrumentId)
-            .then(console.log("----Instrument met id " + self.state.instrumentId + "---- \n"))
             .then(instrument => {
                 self.setState({
-                    afbeelding: instrument.afbeelding,
-                    instrumentsoortid: instrument.soort.instrumentSoortId,
-                    soortnaam: instrument.soort.soortNaam,
-                    naam: instrument.naam,
+                    instrumentName: instrument.instrumentName,
                     type: instrument.type,
-                    uitvoering: instrument.uitvoering
-
+                    details: instrument.details,
+                    image: instrument.image,
+                    categoryName: instrument.instrumentCategory.categoryName,
+                    instrumentCategoryId: instrument.instrumentCategory.instrumentCategoryId,
                 });
             }).catch((error) => {
             console.log(error);
@@ -50,29 +57,33 @@ export default class InstrumentDetails extends Component {
         let self = this;
         InstrumentService.UpdateInstrument(self.state.instrumentId, JSON.stringify(
             {
-                afbeelding: self.state.afbeelding,
-                instrumentsoortid: self.state.instrumentsoortid,
-                naam: self.state.naam,
-                type: self.state.type,
-                uitvoering: self.state.uitvoering
+                name: this.state.instrumentName,
+                type: this.state.type,
+                details: this.state.details,
+                image: this.state.image,
+                categoryName: this.state.categoryName,
+                instrumentcategoryid: this.state.instrumentCategoryId,
             }
         ));
     };
 
     handleChangeImage = (evt) => {
-        console.log("Uploading");
         let self = this;
         let reader = new FileReader();
         let file = evt.target.files[0];
         reader.onload = function (upload) {
             self.setState({
-                afbeelding: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
+                image: upload.target.result.replace(/^data:image\/[a-z]+;base64,/, "")
             });
         };
         reader.readAsDataURL(file);
         setTimeout(function () {
-            console.log("successfully Uploaded");
         }, 1000);
+    };
+
+    setName = event => {
+        let value = event.target.value;
+        return this.setState({instrumentName: value})
     };
 
     setType = event => {
@@ -80,22 +91,30 @@ export default class InstrumentDetails extends Component {
         return this.setState({type: value})
     };
 
+    setDetails = event => {
+        let value = event.target.value;
+        return this.setState({details: value})
+    };
+
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
+
     render() {
-        return ( <div className="Homepage">
-                <Header name={this.state.naam}/>
+        return (
+            <div className="Homepage">
+                <Header name="Instrument bewerken"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable z-depth-3">
                                 <div className="card-image">
                                     <img
-                                        src={"data:image;base64," + this.state.afbeelding} alt="Instrument"
+                                        src={"data:image;base64," + this.state.image} alt="Instrument"
                                         height="300px"/>
-                                    <span className="card-title white-text">{this.state.naam}</span>
                                     <form action="#">
                                         <div className="file-field input-field">
                                             <div
+
                                                 className="btn-floating halfway-fab waves-effect waves-light deep-orange darken-4 pulse">
                                                 <i className="material-icons">attach_file</i>
                                                 <input name="file"
@@ -108,29 +127,46 @@ export default class InstrumentDetails extends Component {
                                     </form>
                                 </div>
                                 <div className="card-content">
+                                    <div className="divider"></div>
                                     <div className="section">
                                         <div className="row">
-                                        <div className="col s3 m3 l3">
-                                            <h5>{this.state.type}</h5>
-                                        </div>
-                                        <div className="col s9 m9 l9">
-                                            <input className="center" type="text" value={this.state.type} label="Type"  onChange={this.setType} placeholder="Geef een type in.."/>
-                                        </div>
+                                            <div className="col s12 m12 l12">
+                                                <StyledTextField value={this.state.instrumentName} defaultValue={this.state.instrumentName} onChange={this.setName} label="Naam" placeholder="Geef naam in..."/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="divider"></div>
                                     <div className="section">
                                         <div className="row">
+                                            <div className="col s12 m12 l12">
+                                                <StyledTextField value={this.state.type} defaultValue={this.state.type} onChange={this.setType} label="type" placeholder="Geef type in..."/>
 
-                                        <div className="col s3 m3 l3">
-                                            <h5>{this.state.soortnaam}</h5>
+                                            </div>
                                         </div>
-                                        <div className="col s9 m9 l9">
-                                        <StyledTextField disabled={true} hint="Geef nieuwe soortnaam in..." label="Soortnaam"/>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s12 m12 l12">
+                                                <StyledTextField value={this.state.details} defaultValue={this.state.details} onChange={this.setDetails} label="Uitvoering" placeholder="Geef uitvoering in..."/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
+                                        <div className="col s12 m12 l12">
+                                            <Row>
+                                                <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music'>
+                                                    {this.state.soorten.map((soort, index) => (
+                                                        <option key={soort.instrumentCategoryId}
+                                                                value={soort.instrumentCategoryId}>{soort.categoryName}</option>
+                                                    ))}
+                                                </Input>
+                                            </Row>
                                         </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="card-action">
                                     <Link to="/instrumenten" onClick={this.handleUpdate}
@@ -140,8 +176,6 @@ export default class InstrumentDetails extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col s0 m2 l2"/>
-                    </div>
                 </section>
             </div>
         );

@@ -54,7 +54,13 @@ export default class ChatComponent extends Component {
                     value.push(chat);
                 });
                 console.log("VALUE : " + value);
-                    self.setState({rooms: value, currentChatroom: {roomName: groups[0].name, messages: []} });
+                let startRoom = "";
+                if (groups.length === 0){
+                    startRoom = "Globale Chat"
+                }else{
+                    startRoom = groups[0].name
+                }
+                    self.setState({rooms: value, currentChatroom: {roomName: startRoom, messages: []} });
                 }
             ).then(()=> {
                 self.initializeWebSocketConnection();

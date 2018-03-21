@@ -4,7 +4,7 @@ import * as LoginService from '../../Services/LoginService';
 import * as GroupService from '../../Services/GroupService.js';
 import * as AgendaService from '../../Services/AgendaService.js';
 import swal from 'sweetalert2';
-import {Button, CardPanel} from 'react-materialize';
+import { CardPanel} from 'react-materialize';
 import "./GroupsAndChat.css";
 import {Link} from 'react-router-dom';
 
@@ -49,7 +49,9 @@ export default class GroupsAndChat extends Component {
     };
 
     mapAgendaItems = (agendaItems) => {
+
         if (this.state.agendaItems.length > 0) {
+
             let AgendaItems= [];
 
             //Over lessons loopen en info in AgendaItem steken
