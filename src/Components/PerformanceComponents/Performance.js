@@ -1,27 +1,31 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import * as LesService from '../../Services/LesService';
 import * as PerformanceService from '../../Services/PerformanceService';
 import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
-import './AddLesson.css';
+import './AddPerformance.css';
 
 export default class Performance extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            lessons: [],
+            performances: [],
         };
     }
 
     componentDidMount() {
-        this.getLessons();
+        this.getPerformances();
     }
 
-    getLessons() {
-        LesService.getLessons().then(lessons => {
-            this.setState({lessons: lessons});
+    getPerformances() {
+        PerformanceService.getAllPerformances().then(performances => {
+            let perfs = performances;
+            perfs.forEach(perf=>{
+                if(perf.group == null){
+                    perf.group= {name:"Eigen optreeden"}
+                }
+            });
+            this.setState({performances: perfs});
         });
     }
 
@@ -43,17 +47,17 @@ export default class Performance extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'Instrument has been deleted.',
+                    'Performance has been deleted.',
                     'success'
                 );
-                LesService.deleteLesson(id);
+                PerformanceService.deletePerformance(id);
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Cancelled',
-                    'Instrument was not deleted',
+                    'Preformance was not deleted',
                     'error'
                 )
             }
@@ -61,15 +65,14 @@ export default class Performance extends Component {
     };
 
     render() {
-
         return (
-
             <div className="Homepage">
-                <Header name="Lessen"/>
+                <Header name="Optreden"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
+                            <th>Groep</th>
                             <th>Beschrijving</th>
                             <th>Begindatum</th>
                             <th>Einddatum</th>
@@ -77,19 +80,20 @@ export default class Performance extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.lessons.map((les, index) => (
-                            <tr key={index} id={les.id}>
-                                <td>{les.course.description}</td>
-                                <td>{les.startdatetime}</td>
-                                <td>{les.enddatetime}</td>
+                        {this.state.performances.map((performance, index) => (
+                            <tr key={index} id={performance.id}>
+                                <td>{performance.group.name}</td>
+                                <td>{performance.description}</td>
+                                <td>{performance.startdatetime}</td>
+                                <td>{performance.enddatetime}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/instrumentdetails/${les.id}` }>
+                                          to={`/performanceDetails/${performance.id}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
                                     <a className="waves-effect white-text deep-orange darken-4 btn"
-                                       onClick={(e) => this.handleDelete(les.id, e)}><i
+                                       onClick={(e) => this.handleDelete(performance.id, e)}><i
                                         className="material-icons">delete
                                     </i></a>
                                 </td>
@@ -98,7 +102,7 @@ export default class Performance extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addLesson" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addPerformance" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>
