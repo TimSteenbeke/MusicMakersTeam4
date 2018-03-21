@@ -35,8 +35,8 @@ export default class Login extends Component {
                 this.setState({errorMessage: "Gebruikersnaam of passwoord incorrect"}, () => {
                     if (!this.state.isLoggedIn) {
                         swal({
-                            type: 'Fout',
-                            title: 'Oops...',
+                            type: 'error',
+                            title: 'Oeps...',
                             text: 'Gebruikersnaam of paswoord incorrect!',
                             timer: 2000,
                             showConfirmButton: false,
@@ -73,14 +73,14 @@ export default class Login extends Component {
 
         let steps = [
             {
-                title: 'gebruikersnaam',
-                html: 'Geef je gebruikersnaam in',
+                title: 'Gebruikersnaam',
+                html: 'Geef je gebruikersnaam in:',
                 input: 'text',
                 confirmButtonText: 'Next',
             },
             {
                 title: 'Paswoord',
-                text: 'Geef je paswoord in',
+                text: 'Geef je paswoord in:',
                 input: 'password',
                 confirmButtonText: 'Next',
             },
