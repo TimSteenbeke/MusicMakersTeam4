@@ -60,7 +60,9 @@ export default class AddPerformance extends Component {
                 startdatetime: this.state.selectedStartDate.toISOString().replace('Z', ''),
                 description: this.state.description
             }
-        ));
+        )).then(() => {
+            this.props.history.push("/performance");
+        });
 
 
     };
