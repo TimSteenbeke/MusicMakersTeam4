@@ -35,6 +35,7 @@ import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 import AddLesson from './Components/CourseComponents/AddLesson.js'
 import Lessons from './Components/CourseComponents/Lessons.js'
 import LessonDetails from './Components/CourseComponents/LessonDetails.js'
+import AddInstrumentLevel from './Components/InstrumentLevelComponents/addInstrumentLevel'
 
 export default class App extends Component {
 
@@ -87,6 +88,8 @@ export default class App extends Component {
                 <Route name="newsitems" path="/newsitems" component={auth(NewsItems)}/>
                 <Route name="addNewsItem" path="/addNewsItem" component={auth(AddNewsItem)}/>
                     <Route name="updatenNewsItem" path="/updatenewsitem/:id" component={auth(UpdateNewsItem)}/>
+
+                <Route name="addInstrumentLevel" path="/addinstrumentlevel" component={auth(AddInstrumentLevel)} />
 
 
                     <Route path='*' exact={true} component={NotFound}/>
