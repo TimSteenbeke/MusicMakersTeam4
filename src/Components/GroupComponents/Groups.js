@@ -62,6 +62,7 @@ export default class Group extends Component {
     getCourses = () => {
         console.log("GET COURSES");
         GroupService.getAllGroupsFromBackend().then(groups => {
+            console.log(groups);
             this.setState({groups: groups});
         }, () => {
             console.log("COURSES SHOULD BE GOT");

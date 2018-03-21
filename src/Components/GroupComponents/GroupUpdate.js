@@ -130,6 +130,7 @@ export default class GroupUpdate extends Component {
     getGroup = () => {
         const self = this;
         GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => {
+            console.log(loadedGroup);
             self.setState({
                 name: loadedGroup.name,
                 supervisor: loadedGroup.supervisor,
