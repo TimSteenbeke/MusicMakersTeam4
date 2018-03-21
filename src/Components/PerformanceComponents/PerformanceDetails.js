@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
 const addSubtractDate = require("add-subtract-date");
 
 
-class LessonDetails extends Component {
+export default class PerformanceDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -181,4 +181,3 @@ class LessonDetails extends Component {
 
 }
 
-export default LessonDetails;
