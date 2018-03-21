@@ -20,7 +20,8 @@ export default class AddComposition extends Component {
         };
     }
 
-    handleClick = () => {
+    handleSubmit(e) {
+        e.preventDefault();
         swal({
             position: 'top-end',
             type: 'success',
@@ -77,14 +78,11 @@ export default class AddComposition extends Component {
                     <div className="col s12 m8 offset-m2 l8 offset-m2">
                         <div className="card hoverable">
                             <div className="card-content">
-                                <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
-                                    e.preventDefault();
-                                    this.handleClick();
-                                } }>
+                                <form onSubmit={ this.handleSubmit }>
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="titel"  required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
+                                                <StyledTextField  ref="titel" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +90,7 @@ export default class AddComposition extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="artiest"  required onChange={this.handleChange.bind(this, "artiest")} placeholder="Geef een artiest in..." label="Artiest *"/>
+                                                <StyledTextField ref="artiest" required onChange={this.handleChange.bind(this, "artiest")} placeholder="Geef een artiest in..." label="Artiest *"/>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +122,7 @@ export default class AddComposition extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="type" required="true" onChange={this.handleChange.bind(this, "type")} placeholder="Geef een type in..." label="Type *"/>
+                                                <StyledTextField ref="type" required onChange={this.handleChange.bind(this, "type")} placeholder="Geef een type in..." label="Type *"/>
                                             </div>
                                         </div>
                                     </div>
@@ -162,6 +160,7 @@ export default class AddComposition extends Component {
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="submit"value="submit"/>
                                 </form>
                             </div>
                             <div className="card-action">
