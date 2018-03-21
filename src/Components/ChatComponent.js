@@ -86,6 +86,7 @@ export default class ChatComponent extends Component {
     initializeWebSocketConnection = () => {
         const self = this;
         const ws = new SockJS(serverUrl);
+        let messages = [];
         self.stompClient = Stomp.over(ws);
         console.log("initializeWebSocketConnection");
         console.log(ws);
@@ -99,7 +100,8 @@ export default class ChatComponent extends Component {
                 console.log(this.state.currentChatroom.roomName);
                 console.log(this.state.currentChatroom.messages);
                 if (message.body) {
-                    self.setState({currentChatroom: {messages: [...self.state.currentChatroom.messages, JSON.parse(message.body)], roomName: self.state.currentChatroom.roomName}});
+                    messages = ChatService.getChatroomHistory(self.state.currentChatroom.roomName);
+                    self.setState({currentChatroom: {messages: messages, roomName: self.state.currentChatroom.roomName}});
                     console.log("BOWDY => " + JSON.parse(message.body).userId);
                 }
             });
