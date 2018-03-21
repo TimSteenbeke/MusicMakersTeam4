@@ -18,8 +18,11 @@ export default class Partituur extends Component {
     }
 
     componentWillUnmount(){
-        const $ = window.$;
-        $(this.refs.partituur).alphaTab('stop');
+        if (!this.state.hidden){
+            const $ = window.$;
+            $(this.refs.partituur).alphaTab('stop');
+        }
+
     }
 
     checkRightFormat(){

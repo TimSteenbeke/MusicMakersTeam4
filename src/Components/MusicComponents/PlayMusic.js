@@ -37,20 +37,22 @@ export default class PlayMusic extends Component {
 
     render() {
         return (
-            <div className="PlayPartituur">
+            <div className="Homepage">
                 <Header name="Play Music"/>
-                        {this.state && this.state.musicSheet &&
-                            <ChordSheet
-                                fileFormat={this.state.partituur.fileFormat}
-                                content={(this.state.musicSheet)}
-                            />
-                        }
-                        {this.state && this.state.musicObj &&
-                            <Partituur
-                                fileFormat={this.state.partituur.fileFormat}
-                                content={this.state.musicObj}
-                            />
-                        }
+                <div className="PlayPartituur">
+                    {this.state && this.state.musicSheet &&
+                    <ChordSheet
+                        fileFormat={this.state.partituur.fileFormat}
+                        content={(this.state.musicSheet)}
+                    />
+                    }
+                    {this.state && this.state.musicObj &&
+                    <Partituur
+                        fileFormat={this.state.partituur.fileFormat}
+                        content={this.state.musicObj}
+                    />
+                    }
+                </div>
             </div>
         );
     }

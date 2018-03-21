@@ -1,40 +1,32 @@
 import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 export default class MusicControls extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
-
     }
-    play(){
-        this.props.play();
-    }
-
-    stop(){
-        this.props.stop();
-
-    }
-
-    pause(){
-        this.props.pause();
-    }
-
 
     render() {
         return (
-                <div id="controls" className="waves-effect deep-orange darken-4 waves-light">
-                    <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.play(e)}>
-                        <i className="material-icons">play_arrow</i>
-                    </a>
-                    <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.pause(e)}>
-                        <i className="material-icons">pause</i>
-                    </a>
-                    <a className="waves-effect deep-orange darken-4 waves-light btn"  onClick={(e) => this.stop(e)}>
-                        <i className="material-icons">replay</i>
-                    </a>
+                <div>
+                    <div className="controls navbar">
+                        <nav className="nav">
+                            <div className="nav-wrapper orange deep-orange darken-4">
+                                <ul id="nav-mobile" className="left hide-on-small-and-down">
+                                    <li>  <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.props.play(e)}>
+                                        <i className="material-icons">play_arrow</i>
+                                    </a></li>
+                                    <li>   <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.props.pause(e)}>
+                                        <i className="material-icons">pause</i>
+                                    </a></li>
+                                    <li>  <a className="waves-effect deep-orange darken-4 waves-light btn"  onClick={(e) => this.props.stop(e)}>
+                                        <i className="material-icons">replay</i>
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
         );
     }

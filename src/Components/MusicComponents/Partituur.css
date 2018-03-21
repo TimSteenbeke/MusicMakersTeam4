@@ -1,0 +1,58 @@
+.barCursor {
+    opacity: 0.15;
+    background: #9cf0ff;
+}
+
+.beatCursor {
+    opacity: 0.75;
+    background: #3041ff;
+}
+
+.selectionWrapper div {
+    opacity: 0.1;
+    background: #4040FF;
+}
+
+.atHighlight * {
+    fill: #ff0b00;
+}
+
+.alphaTabSurface {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: #FFF;
+    border-radius: 3px;
+}
+
+#alphaTab {
+    width: 95%;
+    display: block;
+    margin: auto;
+}
+
+#wrapper {
+    position: absolute;
+    top: 100px;
+    background: #b7e6ff;
+    height: 600px;
+    width: 80%;
+    overflow: auto;
+}
+
+
+.controls {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+
+comment{
+    text-align: center;
+    position: fixed;
+}

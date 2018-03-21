@@ -11,10 +11,12 @@
     "chordsheetjs": "^2.1.0",
     "detect-browser-language": "0.0.1",
     "empty-module": "0.0.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "i18next": "^10.6.0",
     "i18next-browser-languagedetector": "^2.1.0",
     "jquery": "^3.3.1",
-    "loadjs": "^3.5.2",
+    "loadjs": "^3.5.3",
     "lru-cache": "^4.1.2",
     "material-ui": "^0.20.0",
     "material-ui-superselectfield": "^1.8.11",
@@ -48,5 +50,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "jest": "^22.4.2"
   }
 }

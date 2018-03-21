@@ -31,7 +31,6 @@ export function getUserByUsernameFromBackend() {
 }
 
 
-
 export function getUserFromBackend(userId) {
     return fetchService.fetchWithHeader("users/" + userId, "GET", {}, {naam: "User niet gevonden"});
     /*let userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -168,4 +167,8 @@ export function deleteUser(userId) {
                 'Authorization': userToken.token_type + " " +  userToken.access_token
             }
         });*/
+}
+
+export function getRolesCurrentUser() {
+    return fetchService.fetchWithHeader("users/userroles", "GET", {}, {});
 }
