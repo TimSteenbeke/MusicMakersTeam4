@@ -7,3 +7,7 @@ export function getChatroomHistory(chatroom) {
 export function getFullHistory() {
     return fetchService.fetchWithHeader("message", "GET", {}, {});
 }
+
+export function postChatroomMessage(data){
+    return fetchService.fetchWithHeader("message/", "POST", data, {});
+}
