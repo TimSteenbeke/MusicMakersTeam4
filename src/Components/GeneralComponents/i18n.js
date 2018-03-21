@@ -14,6 +14,8 @@ i18next
             en: {
                 translation: {
                     home: { label: 'Home', },
+                    agenda: { label: 'Agenda'},
+                    chat: { label: 'Chat' },
                     instruments: { label: 'Instruments', },
                     groups: { label: 'Groups', },
                     users: { label: 'Users'},
@@ -24,12 +26,17 @@ i18next
                     compositions: { label: 'Compositions'},
                     notifications: { label: 'Notifications'},
                     mygroups: { label: 'My groups'},
-                    mycourses: { label: 'My courses'}
+                    mycourses: { label: 'My courses'},
+                    myplaylist: { label: 'My playlist'},
+                    myinstrumentlevels: { label: 'My instrumentlevels'},
+                    instrumentlevels: {label: 'Instrumentlevels'}
                 },
             },
             nl: {
                 translation: {
                     home: { label: 'Startpagina', },
+                    agenda: { label: 'Agenda'},
+                    chat: { label: 'Chat' },
                     instruments: { label: 'Instrumenten', },
                     groups: { label: 'Groepen', },
                     users: { label: 'Gebruikers'},
@@ -40,7 +47,10 @@ i18next
                     compositions: { label: 'Muziekstukken'},
                     notifications: { label: 'Meldingen'},
                     mygroups: { label: 'Mijn groepen'},
-                    mycourses: { label: 'Mijn vakken'}
+                    mycourses: { label: 'Mijn vakken'},
+                    myplaylist: { label: 'Mijn afspeellijst'},
+                    myinstrumentlevels: { label: 'Mijn instrumentniveaus'},
+                    instrumentlevels: {label: 'Instrumentniveaus'}
                 },
             },
         },
