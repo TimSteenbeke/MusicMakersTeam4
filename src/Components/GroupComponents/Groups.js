@@ -22,36 +22,47 @@ export default class Group extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
         }).then((result) => {
             if (result.value) {
                 GroupService.deleteGroup(id);
-                swal({
-                    title: "Deleted!",
-                    text: "Instrument has been deleted!",
-                    type: "success"
-                }).then(() => {
-                    this.props.history.push("/groups");
+                swal(
+                    'Verwijderd!',
+                    'Groep is verwijderd.',
+                    'success'
+                ).then(() => {
+                    this.getCourses();
                 });
 
-                // For more information about handling dismissals please visit
-                // https://sweetalert2.github.io/#handling-dismissals
-            } else if (result.dismiss === swal.DismissReason.cancel) {
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
                 swal(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Verwijderd!',
+                    'Groep is niet verwijderd.',
                     'error'
                 )
             }
-        })
+        });
     };
 
     componentDidMount() {
+        this.getCourses();
+    }
+
+    getCourses = () => {
         GroupService.getAllGroupsFromBackend().then(groups => {
             this.setState({groups: groups});
         });
-    }
+    };
 
     render() {
         return (
@@ -74,12 +85,12 @@ export default class Group extends Component {
 
                                 <td>{group.supervisor.firstname}</td>
                                 <td>
-                                    <Link className="waves-effect white-text red darken-4 btn marginator"
+                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
                                           to={`/groupupdate/${group.groupid}`}>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
-                                    <a className="waves-effect white-text red darken-4 btn"
+                                    <a className="waves-effect white-text deep-orange darken-4 btn"
                                        onClick={(e) => this.handleDelete(group.groupid, e)}><i
                                         className="material-icons">delete
                                     </i></a>

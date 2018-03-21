@@ -31,7 +31,7 @@ export default class Home extends Component{
                     <Header name="Home"/>
                     <div className="row">
                         {this.state.newsitems.map((item, index) => (
-                            <div className="col s12 m10 offset-m1 l10 offset-l1">
+                            <div key={index} className="col s12 m10 offset-m1 l10 offset-l1">
                                 <div className="card hoverable z-depth-3">
                                     <div className="card-image waves-effect waves-block waves-light">
                                         {item.messageImage !== null ?

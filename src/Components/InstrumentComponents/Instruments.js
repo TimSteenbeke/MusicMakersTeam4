@@ -9,7 +9,7 @@ export default class Instruments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Instruments: [],
+            instruments: [],
             selectedIndex: 0,
         };
     }
@@ -20,27 +20,36 @@ export default class Instruments extends Component {
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: 'red',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
         }).then((result) => {
             if (result.value) {
                 InstrumentService.deleteInstrument(id);
-                swal({
-                    title: "Deleted!",
-                    text: "Instrument has been deleted!",
-                    type: "success"
+                swal(
+                    'Deleted!',
+                    'Instrument has been deleted.',
+                    'success'
+                ).then(() => {
+                    this.getInstrumenten();
                 });
-                // For more information about handling dismissals please visit
-                // https://sweetalert2.github.io/#handling-dismissals
-            } else if (result.dismiss === swal.DismissReason.cancel) {
+
+            } else if (
+                // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+            ) {
                 swal(
                     'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Instrument was not deleted',
                     'error'
                 )
             }
-        })
+        });
     };
 
     componentWillReceiveProps() {
@@ -49,7 +58,7 @@ export default class Instruments extends Component {
 
     getInstrumenten() {
         InstrumentService.getInstrumentenFromBackend().then(Instruments => {
-            this.setState({Instruments: Instruments});
+            this.setState({instruments: Instruments});
         });
     }
 
@@ -73,7 +82,7 @@ export default class Instruments extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.Instruments.map((instrument, index) => (
+                            {this.state.instruments.map((instrument, index) => (
                                 <tr key={index} id={instrument.instrumentid}>
 
                                     <td>{instrument.instrumentname}</td>
@@ -96,7 +105,7 @@ export default class Instruments extends Component {
                             </tbody>
                         </table>
                         <div className="fixed-action-btn">
-                            <Link to="/addinstrumentlevel" className="btn-floating btn-large deep-orange darken-4">
+                            <Link to="/addinstrument" className="btn-floating btn-large deep-orange darken-4">
                                 <i className="large material-icons">add</i>
                             </Link>
                         </div>
