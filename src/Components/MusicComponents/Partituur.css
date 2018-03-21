@@ -39,11 +39,19 @@
 }
 
 #controls{
-    text-align: center;
-    position: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    width: 100%;
+    background: #3041ff;
     bottom: 0;
     height: 50px;
     z-index:1;
 }
 
-
+comment{
+    text-align: center;
+    position: fixed;
+}

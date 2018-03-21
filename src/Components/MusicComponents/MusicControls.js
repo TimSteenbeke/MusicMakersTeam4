@@ -25,14 +25,14 @@ export default class MusicControls extends Component {
 
     render() {
         return (
-                <div id="controls" className="waves-effect deep-orange darken-4 waves-light">
-                    <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.play(e)}>
+                <div id="controls" className="deep-orange darken-4">
+                    <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.props.play(e)}>
                         <i className="material-icons">play_arrow</i>
                     </a>
-                    <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.pause(e)}>
+                    <a className="waves-effect deep-orange darken-4 waves-light btn" onClick={(e) => this.props.pause(e)}>
                         <i className="material-icons">pause</i>
                     </a>
-                    <a className="waves-effect deep-orange darken-4 waves-light btn"  onClick={(e) => this.stop(e)}>
+                    <a className="waves-effect deep-orange darken-4 waves-light btn"  onClick={(e) => this.props.stop(e)}>
                         <i className="material-icons">replay</i>
                     </a>
                 </div>
