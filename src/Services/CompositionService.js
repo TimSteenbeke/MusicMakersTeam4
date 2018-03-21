@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 export function postComposition(formdata){
-    fetchService.fetchForm("compositions/", "GET",formdata,{});
+    fetchService.fetchForm("compositions/", "POST",formdata,{});
     /*let userToken = JSON.parse(localStorage.getItem('userToken'));
     axios.post('https://musicmaker-api-team4.herokuapp.com/api/compositions/', formdata, {
         'Authorization': userToken.token_type + " " + userToken.access_token,

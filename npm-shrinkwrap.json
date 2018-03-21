@@ -11943,6 +11943,7 @@
         "anymatch": "2.0.0",
         "exec-sh": "0.2.1",
         "fb-watchman": "2.0.0",
+        "fsevents": "1.1.2",
         "micromatch": "3.1.9",
         "minimist": "1.2.0",
         "walker": "1.0.7",
