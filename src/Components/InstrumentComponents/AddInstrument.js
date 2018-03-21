@@ -119,7 +119,7 @@ export default class AddInstrument extends Component {
                                                         <Input s={12} onChange={this.handleChange} type='select' label="Soort" icon='library_music' defaultValue='1'>
                                                             {this.state.soorten.map((soort, index) => (
                                                                 <option key={soort.instrumentCategoryId}
-                                                                        value={soort.instrumentCategoryId}>{soort.categoryName}</option>
+                                                                        value={soort.instrumentCategoryId}>{soort.categoryname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
