@@ -17,26 +17,31 @@ export default class Users extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Ben je zeker?',
-            text: "Je kan dit niet ongedaan maken!",
-            type: 'success',
+
+            title: 'Bent u zeker?',
+            text: "u kan dit niet ongedaan maken!",
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Verwijderen!',
-            cancelButtonText: 'Behouden'
+            confirmButtonText: 'Ja, verwijderen!',
+            cancelButtonText: 'Nee, behouden'
+
         }).then((result) => {
             if (result.value) {
                 UserService.deleteUser(id);
                 swal({
                     title: "Verwijderd!",
-                    text: "Gebruiker is verwijderd!",
+
+                    text: "Gebruiker verwijderd",
                     type: "success"
                 }).then(() => {
                     this.props.history.push("/users");
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Geannuleerd',
-                    'Gebruiker is behouden',
+
+                    'Gestopt',
+                    'De data is veilig',
+
                     'error'
                 )
             }

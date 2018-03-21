@@ -20,9 +20,11 @@ export default class Performance extends Component {
     getPerformances() {
         PerformanceService.getAllPerformances().then(performances => {
             let perfs = performances;
-            perfs.forEach(perf=>{
-                if(perf.group == null){
-                    perf.group= {name:"Eigen optreeden"}
+            perfs.forEach(perf => {
+                perf.startdatetime = new Date(perf.startdatetime);
+                perf.enddatetime = new Date(perf.enddatetime);
+                if (perf.group == null) {
+                    perf.group = {name: "Eigen optreden"}
                 }
             });
             this.setState({performances: perfs});
@@ -31,8 +33,8 @@ export default class Performance extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Bent u zeker?',
+            text: "U kan dit niet ongedaan maken!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -45,19 +47,20 @@ export default class Performance extends Component {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-                swal(
-                    'Deleted!',
-                    'Performance has been deleted.',
-                    'success'
-                );
                 PerformanceService.deletePerformance(id);
+                swal(
+                    'Verwijderd!',
+                    'Performance werd verwijderd.',
+                    'success'
+                ).then(() => {
+                    this.props.history.push("/performance");
+                });
             } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
+                result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Cancelled',
-                    'Preformance was not deleted',
+                    'Gestopt',
+                    'Preformance werd niet verwijderd',
                     'error'
                 )
             }
@@ -84,11 +87,11 @@ export default class Performance extends Component {
                             <tr key={index} id={performance.id}>
                                 <td>{performance.group.name}</td>
                                 <td>{performance.description}</td>
-                                <td>{performance.startdatetime}</td>
-                                <td>{performance.enddatetime}</td>
+                                <td>{performance.startdatetime.toUTCString()}</td>
+                                <td>{performance.enddatetime.toUTCString()}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/performanceDetails/${performance.id}` }>
+                                          to={`/performanceDetails/${performance.id}`}>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>

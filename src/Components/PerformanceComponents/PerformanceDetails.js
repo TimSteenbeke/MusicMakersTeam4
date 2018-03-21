@@ -33,8 +33,8 @@ export default class PerformanceDetails extends Component {
         PerformanceService.getPerformance(self.state.performanceId)
             .then(performance => {
                 self.setState({
-                    selectedStartDate: performance.startdatetime,
-                    selectedEndDate: performance.enddatetime,
+                    selectedStartDate: new Date(performance.startdatetime),
+                    selectedEndDate: new Date(performance.enddatetime),
                     group: performance.group,
 
                 });
@@ -48,7 +48,7 @@ export default class PerformanceDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'optreden toegevoegd',
+            title: 'optreden aangepast',
             showConfirmButton: false,
             timer: 1500
         });
@@ -107,9 +107,9 @@ export default class PerformanceDetails extends Component {
 
 
     render() {
-        let chosenDate = this.state.chosenDate;
-        let selectedStartDate = this.state.selectedStartDate;
-        let selectedEndDate = this.state.selectedEndDate;
+        let chosenDate = this.state.chosenDate.toDateString();
+        let selectedStartDate = this.state.selectedStartDate.toDateString();
+        let selectedEndDate = this.state.selectedEndDate.toDateString();
         return (
             <div className="Homepage">
                 <Header name="Optreden Detais"/>
@@ -122,7 +122,7 @@ export default class PerformanceDetails extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s3 m3 l3">
-                                                <h5>{chosenDate.toDateString()}</h5>
+                                                <h5>{chosenDate}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}}
@@ -137,7 +137,7 @@ export default class PerformanceDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5>{selectedStartDate.toDateString()}</h5>
+                                                <h5>{selectedStartDate}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker
@@ -153,7 +153,7 @@ export default class PerformanceDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5>{selectedEndDate.toDateString()}</h5>
+                                                <h5>{selectedEndDate}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker

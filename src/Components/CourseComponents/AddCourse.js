@@ -7,14 +7,14 @@ import swal from 'sweetalert2'
 import * as UserService from '../../Services/UserService'
 import * as CourseTypeService from '../../Services/CourseTypeService.js'
 
-class AddCourse extends Component {
+export default class AddCourse extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            beschrijving: "",
-            teacherids: [],
-            studentids: [],
+            description: "",
+            teacherIds: [],
+            studentIds: [],
             courseTypeId: 0,
             teachers: [],
             students: [],
@@ -27,7 +27,7 @@ class AddCourse extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Course Added',
+            title: 'Cursus toegevoegd',
             showConfirmButton: false,
             timer: 1500
         });
@@ -35,8 +35,8 @@ class AddCourse extends Component {
         CourseService.postCourse(JSON.stringify(
             {
                 courseTypeId: this.state.courseTypeId,
-                teacherids: this.state.teacherids,
-                studentids: this.state.studentids
+                teacherIds: this.state.teacherIds,
+                studentIds: this.state.studentIds
             }
         ));
     };
@@ -69,7 +69,7 @@ class AddCourse extends Component {
     };
 
     onChangeDescription = (e) => {
-        this.setState({beschrijving: e.target.value});
+        this.setState({description: e.target.value});
     };
 
     handleCourseTypeChange = (e, value) => {
@@ -85,7 +85,7 @@ class AddCourse extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({teacherids: value});
+        this.setState({teacherIds: value});
     };
 
     handleStudentChange = (e) => {
@@ -96,13 +96,13 @@ class AddCourse extends Component {
                 value.push(options[i].value);
             }
         }
-        this.setState({studentids: value});
+        this.setState({studentIds: value});
     };
 
     render() {
         return (
             <div className="Homepage">
-                <Header name="Add Course"/>
+                <Header name="Cursus toevoegen"/>
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s0 m2 l2"/>
@@ -116,13 +116,13 @@ class AddCourse extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5 className="truncate">Beschrijving</h5>
+                                                    <h5 className="truncate">Type</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
                                                         <Input s={12} multiple={false} type='select'
                                                                onChange={this.handleCourseTypeChange}
-                                                               label="Leerkrachten" icon='face' defaultValue='1'>
+                                                               label="Type" icon='face' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies lesType
                                                             </option>
                                                             {this.state.courseTypes.map((courseType, index) => (
@@ -196,6 +196,4 @@ class AddCourse extends Component {
         );
     }
 }
-
-export default AddCourse;
 

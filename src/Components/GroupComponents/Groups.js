@@ -18,8 +18,8 @@ export default class Group extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -55,12 +55,17 @@ export default class Group extends Component {
     };
 
     componentDidMount() {
+        console.log("MOUNTED");
         this.getCourses();
     }
 
     getCourses = () => {
+        console.log("GET COURSES");
         GroupService.getAllGroupsFromBackend().then(groups => {
             this.setState({groups: groups});
+        }, () => {
+            console.log("COURSES SHOULD BE GOT");
+            console.log(this.state.groups);
         });
     };
 
