@@ -77,6 +77,9 @@ export default class Sidebar extends Component {
                         <Link to="/newsitems">
                             <MenuItem style={styles.menuColor} primaryText="Meldingen"/>
                         </Link>
+                        <Link to="/instrumentlevels">
+                            <MenuItem style={styles.menuColor} primaryText="Instrumentenlevels"/>
+                        </Link>
                         <Divider/>
                         <Link to="/mygroups">
                             <MenuItem style={styles.menuColor} primaryText="Mijn groepen"/>
@@ -86,6 +89,9 @@ export default class Sidebar extends Component {
                         </Link>
                         <Link to="/myplaylist">
                             <MenuItem style={styles.menuColor} primaryText="Mijn afspeellijst"/>
+                        </Link>
+                        <Link to="/myinstrumentlevels">
+                            <MenuItem style={styles.menuColor} primaryText="Mijn Instrumentlevels"/>
                         </Link>
                         <Link to="/addLesson">
                             <MenuItem style={styles.menuColor} primaryText="Les toevoegen"/>

@@ -5,16 +5,6 @@ import * as fetchService from "./FetchService";
 
 export function postUser(data) {
     fetchService.fetchWithHeader("users", "POST", data, {});
-    /*    let userToken = JSON.parse(localStorage.getItem('userToken'));
-        fetch(URL + "users/", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken.token_type + " " +  userToken.access_token
-            },
-            body: data
-        })*/
 }
 
 export function getUserByUsernameFromBackend() {

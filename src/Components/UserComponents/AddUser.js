@@ -4,6 +4,8 @@ import swal from 'sweetalert2';
 import * as UserService from '../../Services/UserService';
 import './AddUser.css';
 import StyledTextField from "../GeneralComponents/StyledTextField";
+import {Row,Input} from 'react-materialize';
+
 
 export default class AddUser extends Component {
     constructor(props) {
@@ -14,7 +16,15 @@ export default class AddUser extends Component {
             fields: {},
             errors: {},
             image: "..image/image.jpg",
+            roles: [],
+            roleids: []
         };
+    }
+
+    componentDidMount(){
+        UserService.getUserRoles().then(roles => {
+            this.setState({roles: roles})
+        })
     }
 
     handleClick = () => {
@@ -37,6 +47,7 @@ export default class AddUser extends Component {
                 postalcode: this.state.fields["postcode"],
                 city: this.state.fields["woonplaats"],
                 country: this.state.fields["land"],
+                roleids: this.state.roleids
             }
         ));
 
@@ -66,6 +77,19 @@ export default class AddUser extends Component {
         console.log(field + " - " + fields[field]);
         this.setState({fields});
     }
+
+
+    handleRoleChange = (e) => {
+        let options = e.target.options;
+        let value = [];
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        this.setState({roleids: value});
+    };
+
 
     render() {
         return (
@@ -128,6 +152,25 @@ export default class AddUser extends Component {
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="wachtwoord" required onChange={this.handleChange.bind(this, "wachtwoord")} placeholder="Geef een wachtwoord in..." label="Wachtwoord *"/>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="row">
+                                            <div className="col s12 m12 l12">
+                                                <Row>
+                                                    <Input s={12} multiple={true} type='select'
+                                                           onChange={this.handleRoleChange}
+                                                           label="Rol" icon='face' defaultValue='1'>
+                                                        <option key="" value="" disabled>Selecteer een rol...
+                                                        </option>
+                                                        {this.state.roles.map((role, index) => (
+                                                            <option key={role.roleId}
+                                                                    value={role.roleId}>{role.roleName}</option>
+                                                        ))}
+                                                    </Input>
+                                                </Row>
+                                           </div>
                                         </div>
                                     </div>
                                     <div className="divider"></div>

@@ -34,6 +34,8 @@ import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 import AddLesson from './Components/CourseComponents/AddLesson.js'
 import MyPlayList from './Components/PlaylistComponents/MyPlaylist';
+import MyInstrumentLevels from './Components/InstrumentLevelComponents/MyInstrumentLevels';
+import InstrumentLevels from './Components/InstrumentLevelComponents/InstrumentLevels';
 
 export default class App extends Component {
 
@@ -67,6 +69,11 @@ export default class App extends Component {
                 <Route name="myCourseDetails" path="/mycoursedetails/:id" component={auth(MyCourseDetails)}/>
 
                     <Route name="myPlaylist" path="/myplaylist" component={auth(MyPlayList)}/>
+
+                <Route name="InstrumentLevels" path="/instrumentlevels" component={auth(InstrumentLevels)}/>
+
+
+                <Route name="myInstrumentLevels" path="/myinstrumentlevels" component={auth(MyInstrumentLevels)}/>
 
 
 
