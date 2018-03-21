@@ -12,15 +12,16 @@ export default function (WrapperComponent) {
                 userService.getRolesCurrentUser().then(
                     (value) => {
                         roles = value.roles;
-                        if(roles[0].roleid <3){
+                        alert("roles:" + roles[0]);
+/*                        if(roles[0].roleid <3){
                             return true;
-                        }
-/*                        roles.forEach(role => {
+                        }*/
+                        roles.forEach(role => {
                             if(role.roleid<3){
                             // if (role.roleid === 1 || role.roleid === 2) {
                                 return true;
                             }
-                        });*/
+                        });
                     });
             }
             return false;
