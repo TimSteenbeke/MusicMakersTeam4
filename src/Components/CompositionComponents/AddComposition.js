@@ -19,14 +19,15 @@ export default class AddComposition extends Component {
         };
     }
 
-    handleClick = () => {
+    handleSubmit = () => {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Composition Added!',
+            title: 'Muziekstuk toegevoegd!!',
             showConfirmButton: false,
             timer: 1500
-        }).then(() => {
+        });
+
             this.state.formdata.append("compresource",JSON.stringify(
                 {
                     content: this.state.bestand,
@@ -39,14 +40,9 @@ export default class AddComposition extends Component {
                     link: this.state.fields["link"],
                     fileFormat: this.state.bestandType
                 }));
-        }).then(() => {
+
             CompositionService.postComposition(this.state.formdata);
-
-        }).then(() => {
             this.props.history.push("/compositions");
-        });
-
-
     };
 
     handleChangeImage = (evt) => {
@@ -72,73 +68,50 @@ export default class AddComposition extends Component {
         return (
             <div className="Homepage">
                 <Header name="Muziekstuk toevoegen"/>
-                <section className="containerCss">
+                <section>
                     <div className="col s12 m8 offset-m2 l8 offset-m2">
                         <div className="card hoverable">
                             <div className="card-content">
-                                <form className="addInstrument" action="/" method="POST" onSubmit={(e) => {
-                                    e.preventDefault();
-                                    this.handleClick();
-                                } }>
+                                <h4 className="center">Muziekstuk toevoegen</h4>
+                                <form action="/" method="POST" onSubmit={(e) => {e.preventDefault(); this.handleSubmit();}}>
                                     <div className="section">
-                                        <div className="row">
-                                            <div className="col s12 m12 l12">
-                                                <StyledTextField ref="titel"  required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
-                                            </div>
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField  ref="titel" required onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
-                                            <div className="col s12 m12 l12">
-                                                <StyledTextField ref="artiest"  required onChange={this.handleChange.bind(this, "artiest")} placeholder="Geef een artiest in..." label="Artiest *"/>
-                                            </div>
+                                        <div className="col s12 m12 l12">
+                                            <StyledTextField ref="artiest" required onChange={this.handleChange.bind(this, "artiest")} placeholder="Geef een artiest in..." label="Artiest *"/>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="taal"  required onChange={this.handleChange.bind(this, "taal")} placeholder="Geef een taal in..." label="Taal *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="genre" required onChange={this.handleChange.bind(this, "genre")} placeholder="Geef een genre in..." label="Genre *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="onderwerp"  required onChange={this.handleChange.bind(this, "onderwerp")} placeholder="Geef een onderwerp in..." label="Onderwerp *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="type" required="true" onChange={this.handleChange.bind(this, "type")} placeholder="Geef een type in..." label="Type *"/>
+                                                <StyledTextField ref="type" required onChange={this.handleChange.bind(this, "type")} placeholder="Geef een type in..." label="Type *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="link"  onChange={this.handleChange.bind(this, "link")} placeholder="Geef een link in..." label="Link"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
+                                        <div className="section">
                                             <div className="col s12 m12 l12">
+                                                <label>Bestand</label>
                                                 <div className="file-field input-field">
                                                     <div className="btn-floating waves-effect waves-light deep-orange darken-4 pulse">
                                                         <i className="material-icons">attach_file</i>
@@ -151,30 +124,24 @@ export default class AddComposition extends Component {
                                                 </div>
                                                 <label>{this.state.bestandType}</label>
                                             </div>
+                                    </div>
+                                    <div className="section">
+                                        <div className="col s12 m12 l12">
+                                            <small style={{color: 'red'}}>Velden met een * zijn verplicht</small>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
-                                            <div className="col s12 m12 l12">
-                                                <small style={{color: 'red'}}>Velden met een * zijn verplicht</small>
-                                            </div>
+                                        <div className="col s12 m12 l12 center">
+                                            <input type="submit" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle" value="Toevoegen"/>
+                                            <Link to="/compositions" type="button" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle">Terug</Link>
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                            <div className="card-action">
-                                <a  onClick={this.handleClick}
-                                      className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
-                                    <i
-                                        className="material-icons">done</i>
-                                </a>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
-
         );
     }
 }

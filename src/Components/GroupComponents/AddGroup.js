@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import * as UserService from "../../Services/UserService";
 import swal from 'sweetalert2'
 import Header from "../GeneralComponents/Header";
-import {Row,Input} from "react-materialize";
+import {Row, Input} from "react-materialize";
 import Link from "react-router-dom/es/Link";
 import AutoComplete from 'material-ui/AutoComplete';
 import StyledTextField from "../GeneralComponents/StyledTextField";
@@ -89,15 +89,13 @@ export default class AddGroup extends Component {
         this.state.userids.forEach((user) => {
             console.log("user in loop = " + user);
             if (user === i) {
-                console.log("GOTTEM = " + i);
                 let value = [];
-                    let users = this.state.userids;
-                    users.forEach((user) => {
-                        if (user !== i){
-                            value.push(user);
-                        }
-                    });
-                console.log("DEEZ NUTS = " + value);
+                let users = this.state.userids;
+                users.forEach((user) => {
+                    if (user !== i) {
+                        value.push(user);
+                    }
+                });
                 this.setState({userids: value});
             }
         });
@@ -131,7 +129,7 @@ export default class AddGroup extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Groep toegevoegd',
+            title: 'Groep toegevoegd!',
             showConfirmButton: false,
             timer: 1500
         });
@@ -145,7 +143,6 @@ export default class AddGroup extends Component {
                 supervisorid: this.state.supervisor.userid,
                 userids: this.state.userids,
                 groupimage: this.state.image
-
             }
         ));
     };
@@ -178,13 +175,17 @@ export default class AddGroup extends Component {
                             </div>
                             <div className="row">
                                 <div className="col s12 m12 l12">
-                                    <StyledTextField placeholder="Geef een groepsnaam in..."  label="Groepsnaam" onChange={this.onChangeName}/>
+                                    <StyledTextField placeholder="Geef een groepsnaam in..." label="Groepsnaam"
+                                                     onChange={this.onChangeName}/>
                                 </div>
                             </div>
                             <div className="divider"/>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s12 m12 l12">
+                                    <div className="col s3 m3 l3">
+                                        <h5 className="truncate">Begeleiders</h5>
+                                    </div>
+                                    <div className="col s9 m9 l9">
                                         <Row>
                                             <AutoComplete
                                                 floatingLabelText="Begeleiders"
@@ -211,11 +212,13 @@ export default class AddGroup extends Component {
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
                                 <div className="divider"/>
 
                                 <div className="section">
                                     <div className="row">
                                         <div className="col s3 m3 l3">
+                                            <h5 className="truncate">Studenten</h5>
                                         </div>
                                         <div className="col s9 m9 l9">
                                             <Row>
@@ -256,7 +259,6 @@ export default class AddGroup extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </section>
             </div>

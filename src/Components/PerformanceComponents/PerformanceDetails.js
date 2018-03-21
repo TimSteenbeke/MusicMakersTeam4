@@ -1,27 +1,26 @@
 import React, {Component} from "react";
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-import * as LesService from "../../Services/LesService";
+import * as PerformanceService from '../../Services/PerformanceService';
 import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
-import './AddLesson.css';
+import './AddPerformance.css';
 import {Link} from 'react-router-dom';
 
 
 const addSubtractDate = require("add-subtract-date");
 
 
-class LessonDetails extends Component {
+export default class PerformanceDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lessonid: this.props.match.params.id,
-            myCourses: [],
+            performanceId: this.props.match.params.id,
             minDate: new Date(),
             chosenDate: new Date(),
             startDate: new Date(),
             endDate: new Date(),
-            course: {},
+            group: {},
             selectedStartDate: new Date(),
             selectedEndDate: new Date()
 
@@ -30,12 +29,12 @@ class LessonDetails extends Component {
 
     componentDidMount() {
         let self = this;
-        LesService.getLesson(self.state.lessonid)
-            .then(lesson => {
+        PerformanceService.getPerformance(self.state.performanceId)
+            .then(performance => {
                 self.setState({
-                    selectedStartDate: lesson.startdatetime,
-                    selectedEndDate: lesson.enddatetime,
-                    course: lesson.course,
+                    selectedStartDate: new Date(performance.startdatetime),
+                    selectedEndDate: new Date(performance.enddatetime),
+                    group: performance.group,
 
                 });
             }).catch((error) => {
@@ -44,18 +43,18 @@ class LessonDetails extends Component {
 
     }
 
-    updateLesson = () => {
+    updatePerformance = () => {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Les toegevoegd',
+            title: 'optreden aangepast',
             showConfirmButton: false,
             timer: 1500
         });
 
-        LesService.updateLesson(this.props.lessonid, JSON.stringify(
+        PerformanceService.updatePerformance(this.props.performanceId, JSON.stringify(
             {
-                courseid: this.state.selectedCourseId,
+                groupId: this.state.selectedGroupId,
                 enddatetime: this.state.selectedEndDate.toISOString().replace('Z', ''),
                 startdatetime: this.state.selectedStartDate.toISOString().replace('Z', '')
             }
@@ -107,9 +106,12 @@ class LessonDetails extends Component {
 
 
     render() {
+        let chosenDate = this.state.chosenDate.toDateString();
+        let selectedStartDate = this.state.selectedStartDate.toDateString();
+        let selectedEndDate = this.state.selectedEndDate.toDateString();
         return (
             <div className="Homepage">
-                <Header name="Les Details"/>
+                <Header name="Optreden Detais"/>
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s0 m2 l2"/>
@@ -119,11 +121,11 @@ class LessonDetails extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.chosenDate.toDateString()}</h5>
+                                                <h5>{chosenDate}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}}
-                                                            hintText="Lesdatum" container="inline"
+                                                            hintText="Optredendatum" container="inline"
                                                             minDate={this.state.minDate}
                                                             disableYearSelection={this.state.disableYearSelection}
                                                             onChange={this.choosedate}/></div>
@@ -134,7 +136,7 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.selectedStartDate.toDateString()}</h5>
+                                                <h5>{selectedStartDate}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker
@@ -150,7 +152,7 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.selectedEndDate.toDateString()}</h5>
+                                                <h5>{selectedEndDate}</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker
@@ -164,7 +166,7 @@ class LessonDetails extends Component {
 
                                 </div>
                                 <div className="card-action">
-                                    <Link to="/lessons" onClick={this.updateLesson}
+                                    <Link to="/performance" onClick={this.updatePerformance}
                                           className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
                                         className="material-icons">done</i>
                                     </Link>
@@ -181,4 +183,3 @@ class LessonDetails extends Component {
 
 }
 
-export default LessonDetails;

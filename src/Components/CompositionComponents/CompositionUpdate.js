@@ -44,7 +44,7 @@ export default class CompositionUpdate extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Composition Updated!',
+            title: 'Muziekstuk opgeslagen!',
             showConfirmButton: false,
             timer: 1500
         }).then(() => {
@@ -103,91 +103,76 @@ export default class CompositionUpdate extends Component {
     };
 
     render() {
-        return (<div className="Homepage">
+        return (
+            <div className="Homepage">
                 <Header name="Muziekstuk bewerken"/>
-                <section className="containerCss">
-                    <div className="row">
+                <section>
                         <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable">
                                 <div className="card-content">
-                                    <div className="row">
+                                    <h4 className="center">Muziekstuk bewerken</h4>
+                                    <form action="/" method="PUT" onSubmit={(e) => {e.preventDefault(); this.handleUpdate();}}>
+                                    <div className="section">
                                         <div className="col s12 m12 l12">
-                                            <label>Titel</label>
-                                            <input type="text" value={this.state.title} label="Titel"
-                                                   onChange={this.setTitle} placeholder="Geef een titel in.."/>
+                                            <label>Titel *</label>
+                                            <input required type="text" value={this.state.title} label="Titel" onChange={this.setTitle} placeholder="Geef een titel in.."/>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <label>Artiest</label>
-                                                <input type="text" value={this.state.artist} onChange={this.setArtist}
-                                                       placeholder="Geef een artiest in.."/>
+                                                <label>Artiest *</label>
+                                                <input required type="text" value={this.state.artist} onChange={this.setArtist} placeholder="Geef een artiest in.."/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
-                                    <div className="section">
-                                        <div className="row">
+                                        <div className="section">
                                             <div className="col s12 m12 l12">
-                                                <label>Taal</label>
-                                                <input type="text" value={this.state.language}
+                                                <label>Taal *</label>
+                                                <input required type="text" value={this.state.language}
                                                        onChange={this.setLanguage} placeholder="Geef een taal in.."/>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <label>Genre</label>
-                                                <input type="text" value={this.state.genre} onChange={this.setGenre}
+                                                <label>Genre *</label>
+                                                <input required type="text" value={this.state.genre} onChange={this.setGenre}
                                                        placeholder="Geef een genre in.."/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <label>Onderwerp</label>
-                                                <input type="text" value={this.state.subject} onChange={this.setSubject}
+                                                <label>Onderwerp *</label>
+                                                <input required type="text" value={this.state.subject} onChange={this.setSubject}
                                                        placeholder="Geef een onderwerp in.."/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <label>Instrumenttype</label>
-                                                <input type="text" value={this.state.instrumentType}
+                                                <label>Instrumenttype *</label>
+                                                <input required type="text" value={this.state.instrumentType}
                                                        onChange={this.setType} placeholder="Geef een type in.."/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <label>Link</label>
                                                 <input type="text" value={this.state.link} onChange={this.setLink}
                                                        placeholder="Geef een link in.."/>
                                             </div>
-                                        </div>
                                     </div>
+                                        <div className="section">
+                                            <div className="col s12 m12 l12">
+                                                <small style={{color: 'red'}}>Velden met een * zijn verplicht</small>
+                                            </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="col s12 m12 l12 center">
+                                                <input type="submit" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle" value="Bewerken"/>
+                                                <Link to="/compositions" type="button" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle">Terug</Link>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div className="card-action">
-                                    <Link to="/compositions" onClick={this.handleUpdate}
-                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
-                                        className="material-icons">done</i>
-                                    </Link>
-                                </div>
-
                             </div>
-                        </div>
-                        <div className="col s0 m2 l2"/>
                     </div>
                 </section>
             </div>

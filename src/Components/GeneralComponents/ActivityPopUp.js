@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as LesService from '../../Services/LesService.js';
-import * as OptredenService from '../../Services/OptredenService.js';
+import * as PerformanceService from '../../Services/PerformanceService';
 import swal from 'sweetalert2';
 import './ActivityPopUp.css';
 
@@ -20,7 +20,7 @@ export default class ActivityPopUp extends Component {
 
     getStatus = () => {
         if (this.props.type === "Optreden") {
-            OptredenService.getAttendanceStatus(this.props.id).then(statusobject => {
+            PerformanceService.getAttendanceStatus(this.props.id).then(statusobject => {
                 this.setIcon(statusobject.status);
             })
         } else {
@@ -34,12 +34,12 @@ export default class ActivityPopUp extends Component {
         if (status === "absent"){
             this.setState({
                 icon: 'not_interested',
-                presenceStatus: "absent",
+                presenceStatus: "afwezig",
             });
         }else if(status === "present"){
             this.setState({
                 icon: 'check',
-                presenceStatus: "present",
+                presenceStatus: "aanwezig",
             });
         }else{
             this.setState({
@@ -51,7 +51,7 @@ export default class ActivityPopUp extends Component {
     present = () => {
         let id = this.props.id;
         if (this.props.type === "Optreden") {
-            OptredenService.registerPresent(id);
+            PerformanceService.registerUserPresent(id);
 
         } else {
             LesService.registerPresent(id);
@@ -61,7 +61,7 @@ export default class ActivityPopUp extends Component {
     absent = () => {
         let id = this.props.id;
         if (this.props.type === "Optreden") {
-            OptredenService.registerAbsent(id);
+            PerformanceService.registerUserAbsent(id);
         } else {
             LesService.registerAbsent(id);
         }
@@ -85,7 +85,7 @@ export default class ActivityPopUp extends Component {
             if (result.value) {
                 swal(
                     'Aanwezig!',
-                    'Je bent present op deze les.',
+                    'Je bent aanwezig op deze les.',
                     'success'
                 );
                 this.present();
@@ -96,7 +96,7 @@ export default class ActivityPopUp extends Component {
             ) {
                 swal(
                     'Afwezig',
-                    'Je bent absent op deze les',
+                    'Je bent afwezig op deze les',
                     'error'
                 );
                 this.absent();

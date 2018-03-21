@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import * as InstrumentService from '../../Services/InstrumentService.js';
+import * as InstrumentLevelService from '../../Services/InstrumentLevelService';
+import * as InstrumentService from '../../Services/InstrumentService';
+
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
@@ -19,44 +21,57 @@ export default class InstrumentLevels extends Component {
 
     getInstrumentLevels() {
         InstrumentService.getInstrumentenLevelsFromBackend().then(levels => {
+            console.log(levels);
             this.setState({instrumentlevels: levels});
         });
-    }
 
-    componentDidMount() {
-        this.getInstrumentLevels();
     }
 
     handleDelete = (id, e) => {
+        console.log(id);
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet ongedaan maken!",
+            type: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonText: 'Verwijderen!',
+            cancelButtonText: 'Behouden'
         }).then((result) => {
             if (result.value) {
-                InstrumentService.deleteInstrument(id);
+                InstrumentLevelService.deleteInstrumentLevel(id);
                 swal({
-                    title: "Deleted!",
-                    text: "Instrumentlevel has been deleted!",
+                    title: "Verwijderd!",
+                    text: "Instrument niveau is verwijderd!",
                     type: "success"
                 }).then(() => {
                     this.props.history.push("/instrumentlevels");
                 });
-
-                // For more information about handling dismissals please visit
-                // https://sweetalert2.github.io/#handling-dismissals
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Gestopt',
+                    'Item is behouden',
                     'error'
                 )
             }
         })
     };
+
+    upLevel = (id, e) => {
+        InstrumentLevelService.increaseLevel(id).then(() =>
+            this.getInstrumentLevels()
+        );
+    };
+
+    lowerLevel = (id, e) => {
+        InstrumentLevelService.decreaseLevel(id).then(() =>
+            this.getInstrumentLevels()
+        );
+
+    };
+
+    componentDidMount() {
+        this.getInstrumentLevels();
+    }
 
     render() {
         return (
@@ -75,12 +90,19 @@ export default class InstrumentLevels extends Component {
                         </thead>
                         <tbody>
                         {this.state.instrumentlevels.map((level, index) => (
-                            <tr key={index} id={level.instrumentLevelId}>
+                            <tr key={index} id={level.instrumentlevelid}>
                                 <td>{level.user.firstname}</td>
                                 <td>{level.instrument.instrumentName}</td>
-                                <td>{level.level}</td>
+                                <td><button onClick={(e) => this.upLevel(level.instrumentlevelid, e)} className="btn-floating deep-orange darken-4">+</button> {level.level} <button onClick={(e) => this.lowerLevel(level.instrumentlevelid, e)} className="btn-floating deep-orange darken-4">-</button></td>
                                 <td>{level.maxLevel}</td>
                                 <td>
+                                        <div className="col s6 m6 l6">
+                                            <a className="waves-effect white-text deep-orange darken-4 btn"
+                                               onClick={(e) => this.handleDelete(level.instrumentlevelid, e)}>
+                                                <i className="material-icons">delete
+                                                </i>
+                                            </a>
+                                        </div>
                                 </td>
                             </tr>
                         ))}

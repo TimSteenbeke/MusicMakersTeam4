@@ -7,32 +7,48 @@ import * as UserService from "../../Services/UserService";
 import {Input, Row} from "react-materialize";
 import StyledTextField from "../GeneralComponents/StyledTextField";
 import './GroupUpdate.css';
+import AutoComplete from 'material-ui/AutoComplete';
 
 export default class GroupUpdate extends Component {
+    dataSourceConfig = {
+        text: 'fullname',
+        value: 'userid',
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             groupid: this.props.match.params.id,
             allUsers: [],
             students: [],
+            supervisor: {},
+            userids: [],
+            users: [],
             name: "",
-            supervisorId: 1,
-            studentIds: [],
             groupimage: "../image/image.jpg"
         }
     }
 
     addUsers = () => {
-        UserService.getAll().then(allUsers => {
-            this.setState({allUsers: allUsers.users});
-        });
+        UserService.getAll().then(console.log("----Users---- \n"))
+            .then(allUsers => {
+                let users = allUsers.users;
+                users.forEach((user) => {
+                    user["fullname"] = user.firstname + ' ' + user.lastname;
+                });
+                this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
+            });
     };
 
     addStudents = () => {
-        UserService.getStudents().then(students => {
-            this.setState({students: students.users});
-        });
-
+        UserService.getStudents().then(console.log("----Students---- \n"))
+            .then(students => {
+                let users = students.users;
+                users.forEach((students) => {
+                    students["fullname"] = students.firstname + ' ' + students.lastname;
+                });
+                this.setState({students: students.users}, console.log(students.users));
+            });
     };
 
     handleNameChange = event => {
@@ -41,26 +57,52 @@ export default class GroupUpdate extends Component {
     };
 
 
-    handleUserChange = (e) => {
-        let options = e.target.options;
-        let value = 1;
-        for (let i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                value = options[i].value;
-            }
+    handleBegeleider = (chosenRequest, index) => {
+        console.log(index);
+        if (index !== -1) {
+            this.setState({supervisor: chosenRequest});
         }
-        this.setState({supervisorId: value});
+        console.log(this.state.supervisor);
     };
 
-    handleStudentChange = (e) => {
-        let options = e.target.options;
-        let value = [];
-        for (let i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
+    handleUser = (chosenRequest, index) => {
+        console.log(index);
+        if (index !== -1) {
+            let value = [];
+            console.log(chosenRequest);
+            let users = this.state.userids;
+            users.forEach((user) => {
+                value.push(user);
+            });
+            value.push(chosenRequest.userid);
+            const ids = value.filter((val, id, array) => array.indexOf(val) === id);
+            this.setState({userids: ids});
+            console.log(ids)
         }
-        this.setState({studentIds: value});
+    };
+
+    deleteSupervisor = () => {
+        this.setState({
+            supervisor: {}
+        })
+    };
+
+
+    deleteStudent = (i) => {
+        console.log("userid = " + i);
+        this.state.userids.forEach((user) => {
+            console.log("user in loop = " + user);
+            if (user === i) {
+                let value = [];
+                let users = this.state.userids;
+                users.forEach((user) => {
+                    if (user !== i) {
+                        value.push(user);
+                    }
+                });
+                this.setState({userids: value});
+            }
+        });
     };
 
     handleChangeImage = (evt) => {
@@ -83,16 +125,41 @@ export default class GroupUpdate extends Component {
     componentDidMount() {
         this.addUsers();
         this.addStudents();
-
-        const self = this;
-        GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => self.setState({
-            groupid: loadedGroup.groupid,
-            name: loadedGroup.name,
-            supervisorId: loadedGroup.supervisorid,
-            studentIds: loadedGroup.userids,
-            groupimage: loadedGroup.groupimage
-        }))
+        this.getGroup();
     }
+
+    getGroup = () => {
+        const self = this;
+        GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => {
+            console.log("GELADEN GROEP YAAAAS => ");
+            console.log(loadedGroup);
+            self.setState({
+                name: loadedGroup.name,
+                supervisor: loadedGroup.supervisor,
+                users: loadedGroup.users,
+                groupimage: loadedGroup.groupimage
+            }, () => {
+                console.log(loadedGroup);
+                console.log(console.log(this.state.name));
+                console.log(console.log(this.state.groupid));
+                console.log(console.log(this.state.supervisor.id));
+                console.log(console.log(this.state.userids));
+                this.setUserIds();
+            })
+        })
+    };
+
+    setUserIds = () =>{
+        let value = [];
+        this.state.users.forEach((user) => {
+            value.push(user.userid);
+        });
+        this.setState({
+            userids: value
+        }, () => {
+            console.log(this.state.userids);
+        });
+    };
 
     handleUpdate = () => {
         swal({
@@ -106,8 +173,8 @@ export default class GroupUpdate extends Component {
         GroupService.updateGroup(self.state.groupid, JSON.stringify(
             {
                 name: self.state.name,
-                supervisorid: self.state.supervisorId,
-                userids: self.state.studentIds,
+                supervisorid: self.state.supervisor.userid,
+                userids: self.state.userids,
                 groupimage: self.state.groupimage
             }
         ));
@@ -124,7 +191,6 @@ export default class GroupUpdate extends Component {
                                 <img
                                     src={"data:image;base64," + this.state.groupimage} alt="Groep"
                                     height="300px"/>
-                                <span className="card-title white-text"></span>
                                 <form action="#">
                                     <div className="file-field input-field">
                                         <div
@@ -151,38 +217,68 @@ export default class GroupUpdate extends Component {
                             <div className="divider"></div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s12 m12 l12">
+                                    <div className="col s3 m3 l3">
+                                        <h5 className="truncate">Begeleiders</h5>
+                                    </div>
+                                    <div className="col s9 m9 l9">
                                         <Row>
-                                            <Input s={12} multiple={false} type='select'
-                                                   onChange={this.handleUserChange}
-                                                   label="Begeleider" icon='face' value={this.state.supervisorId}
-                                                   defaultValue={this.state.supervisorId}>
-                                                <option key="" value="" disabled>Kies de begeleider
-                                                </option>
-                                                {this.state.allUsers.map((user, index) => (
-                                                    <option key={user.userid}
-                                                            value={user.userid}>{user.firstname} {user.lastname}</option>
-                                                ))}
-                                            </Input>
+                                            <AutoComplete
+                                                floatingLabelText="Begeleiders"
+                                                dataSource={this.state.allUsers}
+                                                dataSourceConfig={this.dataSourceConfig}
+                                                fullWidth={true}
+                                                onNewRequest={this.handleBegeleider}
+                                            />
                                         </Row>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col s12 m12 l12">
+                                    </div>
+                                    <div className="col s3 m3 l3">
+                                    </div>
+                                    <div className="col s9 m9 l9">
+                                        <ul className="collection">
+                                            <li className="collection-item">
+                                                <div>{this.state.supervisor.fullname}<a onClick={this.deleteSupervisor}
+                                                                                        className="secondary-content"><i
+                                                    className="material-icons">clear</i></a></div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                             <div className="section">
                                 <div className="row">
-                                    <div className="col s12 m12 l12">
+                                    <div className="col s3 m3 l3">
+                                        <h5 className="truncate">Studenten</h5>
+                                    </div>
+                                    <div className="col s9 m9 l9">
                                         <Row>
-                                            <Input s={12} multiple={true} type='select' label="Studenten"
-                                                   onChange={this.handleStudentChange}
-                                                   icon='child_care' value={this.state.studentIds}
-                                                   defaultValue={this.state.studentIds}>
-                                                <option key="" value="" disabled>Kies de studenten</option>
-                                                {this.state.students.map((student, index) => (
-                                                    <option key={student.userid}
-                                                            value={student.userid}>{student.firstname} {student.lastname}</option>
-                                                ))}
-                                            </Input>
+                                            <AutoComplete
+                                                floatingLabelText="Studenten"
+                                                dataSource={this.state.students}
+                                                dataSourceConfig={this.dataSourceConfig}
+                                                fullWidth={true}
+                                                onNewRequest={this.handleUser}
+                                            />
                                         </Row>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col s3 m3 l3">
+                                    </div>
+                                    <div className="col s9 m9 l9">
+                                        <ul className="collection">
+                                            {this.state.userids.map((id, index) => (
+                                                <li key={index} className="collection-item">
+                                                    <div>{this.state.students.find(student => student.userid === id).fullname}<a
+                                                        onClick={() => this.deleteStudent(id)}
+                                                        className="secondary-content"><i
+                                                        className="material-icons">clear</i></a></div>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
                                 <div className="divider"></div>

@@ -1,101 +1,111 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import * as PerformanceService from '../../Services/PerformanceService';
+import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
-import swal from 'sweetalert2';
-import * as CourseTypeService from "../../Services/CourseTypeService";
-import './CourseTypes.css';
+import './AddPerformance.css';
 
-export default class CourseTypes extends Component {
+export default class Performance extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            courseTypes: [""],
-            selectedIndex: 0,
+            performances: [],
         };
+    }
+
+    componentDidMount() {
+        this.getPerformances();
+    }
+
+    getPerformances() {
+        PerformanceService.getAllPerformances().then(performances => {
+            let perfs = performances;
+            perfs.forEach(perf => {
+                perf.startdatetime = new Date(perf.startdatetime);
+                perf.enddatetime = new Date(perf.enddatetime);
+                if (perf.group == null) {
+                    perf.group = {name: "Eigen optreden"}
+                }
+            });
+            this.setState({performances: perfs});
+        });
     }
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Ben je zeker?',
-            text: "Dit kan niet ongedaan gemaakt worden!",
+            title: 'Bent u zeker?',
+            text: "U kan dit niet ongedaan maken!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Verwijder!',
-            cancelButtonText: 'Annuleer!',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
+                PerformanceService.deletePerformance(id);
                 swal(
                     'Verwijderd!',
-                    'cursustype is verwijderd.',
+                    'Performance werd verwijderd.',
                     'success'
                 ).then(() => {
-                    CourseTypeService.deleteCourseType(id);
+                    this.props.history.push("/performance");
                 });
             } else if (
-                // Read more about handling dismissals
-            result.dismiss === swal.DismissReason.cancel
+                result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Gestopt',
-                    'cursustype is niet verwijderd.',
+                    'Preformance werd niet verwijderd',
                     'error'
                 )
             }
         });
     };
 
-    getCourseTypes() {
-        CourseTypeService.getCourseTypesFromBackend().then(courseTypes => {
-            this.setState({courseTypes: courseTypes});
-        });
-    }
-
-    componentDidMount() {
-        this.getCourseTypes();
-    }
-
-
     render() {
         return (
             <div className="Homepage">
-                <Header name="Cursustypes"/>
+                <Header name="Optreden"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
+                            <th>Groep</th>
                             <th>Beschrijving</th>
-                            <th>Prijs</th>
+                            <th>Begindatum</th>
+                            <th>Einddatum</th>
+                            <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.courseTypes.map((courseType, index) => (
-                            <tr key={index} id={courseType.courseTypeId}>
-                                <td>{courseType.description}</td>
-                                <td>{courseType.price}</td>
+                        {this.state.performances.map((performance, index) => (
+                            <tr key={index} id={performance.id}>
+                                <td>{performance.group.name}</td>
+                                <td>{performance.description}</td>
+                                <td>{performance.startdatetime.toUTCString()}</td>
+                                <td>{performance.enddatetime.toUTCString()}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/coursetypedetails/${courseType.courseTypeId}`}>
+                                          to={`/performanceDetails/${performance.id}`}>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>
                                     <a className="waves-effect white-text deep-orange darken-4 btn"
-                                       onClick={(e) => this.handleDelete(courseType.courseTypeId, e)}><i
+                                       onClick={(e) => this.handleDelete(performance.id, e)}><i
                                         className="material-icons">delete
                                     </i></a>
-
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addcoursetype" className="btn-floating btn-large deep-orange darken-4">
+                        <Link to="/addPerformance" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>

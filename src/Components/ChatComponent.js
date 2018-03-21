@@ -158,10 +158,20 @@ export default class ChatComponent extends Component {
                             }
                         });
                     });
-
                 }
             });
         });
+        ChatService.getChatroomHistory(self.state.currentChatroom.roomId).then((value) => {
+            messages = value.messages;
+            self.setState({
+                currentChatroom: {
+                    messages: messages,
+                    roomName: self.state.currentChatroom.roomName,
+                    roomId: self.state.currentChatroom.roomId
+                }
+            });
+        });
+
     };
 
     sendMessage = () => {

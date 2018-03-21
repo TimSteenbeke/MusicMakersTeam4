@@ -3,6 +3,7 @@ import * as NewsItemService from '../../Services/NewsItemService';
 import Header from '../GeneralComponents/Header';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert2';
+import StyledTextField from '../GeneralComponents/StyledTextField';
 
 export default class UpdateNewsItem extends Component {
     constructor(props) {
@@ -75,10 +76,13 @@ export default class UpdateNewsItem extends Component {
 
     render() {
         return ( <div className="Homepage">
-                <Header name="Melding aanpassen"/>
+                <Header name="Melding bewerken"/>
                 <section className="containerCss">
                     <div className="col s12 m8 offset-m2 l8 offset-m2">
                             <div className="card hoverable z-depth-3">
+                                <h4 className="center">Melding bewerken</h4>
+                                <form action="/" method="PUT" onSubmit={(e) => {e.preventDefault(); this.handleUpdate();}}>
+
                                 <div className="card-image">
                                     <img
                                         src={"data:image;base64," + this.state.messageImage} alt="Instrument"
@@ -99,35 +103,33 @@ export default class UpdateNewsItem extends Component {
                                 </div>
                                 <div className="card-content">
                                     <div className="section">
-                                        <div className="row">
-                                            <div className="col s3 m3 l3">
-                                                <h5>Titel</h5>
+                                            <div className="col s12 m12 l12">
+                                                <StyledTextField required type="text" value={this.state.title} label="Titel *"  onChange={this.setTitle} placeholder="Geef een titel in.."/>
                                             </div>
-                                            <div className="col s9 m9 l9">
-                                                <input className="center" type="text" value={this.state.title} label="Titel"  onChange={this.setTitle} placeholder="Geef een titel in.."/>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
 
-                                            <div className="col s3 m3 l3">
-                                                <h5>Bericht</h5>
+                                            <div className="col s12 m12 l12">
+                                                <StyledTextField required type="text" value={this.state.message} label="Bericht *"  onChange={this.setMessage} placeholder="Geef een bericht in.."/>
                                             </div>
-                                            <div className="col s9 m9 l9">
-                                                <textarea className="center" type="text" value={this.state.message} label="Bericht"  onChange={this.setMessage} placeholder="Geef een bericht in.."/>
-                                            </div>
+                                    </div>
+                                    <div className="section">
+                                        <div className="col s12 m12 l12">
+                                            <small style={{color: 'red'}}>Velden met een * zijn verplicht</small>
+                                        </div>
+                                    </div>
+                                    <div className="section">
+                                        <div className="col s12 m12 l12 center">
+                                            <input type="submit" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle" value="Bewerken"/>
+                                            <Link to="/newsitems" type="button" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle">Terug</Link>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div className="card-action">
-                                    <Link to="/newsitems" onClick={this.handleUpdate}
-                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse"><i
-                                        className="material-icons">done</i>
-                                    </Link>
-                                </div>
+
+
+                                </form>
                             </div>
                         </div>
                 </section>

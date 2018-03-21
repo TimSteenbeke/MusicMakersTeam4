@@ -26,14 +26,14 @@ export default class Lessons extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Bent je zeker?',
+            text: "Dit kan niet ongedaan gemaakt worden!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
@@ -42,7 +42,7 @@ export default class Lessons extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'Instrument has been deleted.',
+                    'Lesson has been deleted.',
                     'success'
                 );
                 LesService.deleteLesson(id);
@@ -52,7 +52,7 @@ export default class Lessons extends Component {
             ) {
                 swal(
                     'Cancelled',
-                    'Instrument was not deleted',
+                    'Lesson was not deleted',
                     'error'
                 )
             }
@@ -83,7 +83,7 @@ export default class Lessons extends Component {
                                 <td>{les.enddatetime}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/instrumentdetails/${les.id}` }>
+                                          to={`/lessonDetails/${les.id}` }>
                                         <i className="material-icons">edit
                                         </i>
                                     </Link>

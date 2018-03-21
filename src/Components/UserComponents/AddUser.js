@@ -31,7 +31,7 @@ export default class AddUser extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'User Added!',
+            title: 'Gebruiker toegevoegd!',
             showConfirmButton: false,
             timer: 1500
         });
