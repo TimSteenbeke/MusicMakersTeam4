@@ -191,7 +191,6 @@ export default class GroupUpdate extends Component {
                                 <img
                                     src={"data:image;base64," + this.state.groupimage} alt="Groep"
                                     height="300px"/>
-                                <span className="card-title white-text"></span>
                                 <form action="#">
                                     <div className="file-field input-field">
                                         <div

@@ -34,12 +34,12 @@ export default class ActivityPopUp extends Component {
         if (status === "absent"){
             this.setState({
                 icon: 'not_interested',
-                presenceStatus: "absent",
+                presenceStatus: "afwezig",
             });
         }else if(status === "present"){
             this.setState({
                 icon: 'check',
-                presenceStatus: "present",
+                presenceStatus: "aanwezig",
             });
         }else{
             this.setState({
@@ -85,7 +85,7 @@ export default class ActivityPopUp extends Component {
             if (result.value) {
                 swal(
                     'Aanwezig!',
-                    'Je bent present op deze les.',
+                    'Je bent aanwezig op deze les.',
                     'success'
                 );
                 this.present();
@@ -96,7 +96,7 @@ export default class ActivityPopUp extends Component {
             ) {
                 swal(
                     'Afwezig',
-                    'Je bent absent op deze les',
+                    'Je bent afwezig op deze les',
                     'error'
                 );
                 this.absent();

@@ -52,6 +52,7 @@ export default class AddCourseType extends Component {
     render() {
         return (
             <div className="Homepage">
+
                 <Header name="Cursus type toevoegen"/>
                 <section className="containerCss">
                             <div className="card hoverable">
