@@ -32,33 +32,3 @@ export function fetchWithHeader(api = "", method = 'GET', body = {}, error = {})
             return error;
         });
 }
-
-export function fetchForm(api = "", method = 'GET', body = {}, error = {}) {
-    let userToken = JSON.parse(localStorage.getItem('userToken'));
-    let headers = {
-        'Authorization': userToken.token_type + " " + userToken.access_token,
-        "Content-Type": "multipart/form-data"
-    };
-    if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
-        headers = {
-            'Accept': 'application/json',
-            'Authorization': userToken.token_type + " " + userToken.access_token,
-            "Content-Type": "multipart/form-data"
-        }
-    }
-    return fetch(URL +"api/"+ api,body,
-        {
-            mode: 'cors',
-            method: method,
-            headers: headers
-        })
-        .then((response) =>
-            response.json())
-        .then((responseJson) => {
-            return responseJson;
-        })
-        .catch((err) => {
-            console.log("geen response");
-            return error;
-        });
-}
