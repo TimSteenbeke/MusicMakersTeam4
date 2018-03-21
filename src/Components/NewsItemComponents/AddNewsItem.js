@@ -4,7 +4,8 @@ import Header from '../GeneralComponents/Header';
 import {Row, Input} from 'react-materialize';
 import swal from 'sweetalert2';
 import * as GroupService from "../../Services/GroupService";
-import StyledTextField from "../GeneralComponents/StyledTextField";
+import {Link} from 'react-router-dom';
+import StyledTextField from '../GeneralComponents/StyledTextField';
 
 export default class AddNewsItem extends Component {
     constructor(props) {
@@ -58,7 +59,6 @@ export default class AddNewsItem extends Component {
         this.setState({fields});
     }
     handleChangeImage = (evt) => {
-        console.log("Uploading");
         let self = this;
         let reader = new FileReader();
         let file = evt.target.files[0];
@@ -68,12 +68,7 @@ export default class AddNewsItem extends Component {
             });
         };
         reader.readAsDataURL(file);
-        setTimeout(function () {
-            console.log("successfully Uploaded");
-        }, 1000);
     };
-
-
 
     handleGroupChange = (e) => {
         let options = e.target.options;
@@ -93,6 +88,7 @@ export default class AddNewsItem extends Component {
                 <section className="containerCss">
                         <div className="col s12 m8 offset-m2 l8 offset-m2">
                             <div className="card hoverable">
+                                <h4 className="center">Melding toevoegen</h4>
                                 <div className="card-image">
                                     <img
                                         src={"data:image;base64," + this.state.image} alt="Instrument"
@@ -117,56 +113,42 @@ export default class AddNewsItem extends Component {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
-                                        <div className="divider"/>
                                         <div className="section">
-                                            <div className="row">
                                                 <div className="col s12 m12 l12">
-                                                    <input ref="title" required="true" onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
+                                                    <StyledTextField ref="title" required="true" onChange={this.handleChange.bind(this, "title")} placeholder="Geef een titel in..." label="Titel *"/>
                                                 </div>
-                                            </div>
                                         </div>
-                                        <div className="divider"/>
                                         <div className="section">
-                                            <div className="row">
                                                 <div className="col s12 m12 l12">
-                                                    <input ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht *"/>
+                                                    <StyledTextField ref="message" required onChange={this.handleChange.bind(this, "message")} placeholder="Geef een bericht in..." label="Bericht *"/>
                                                 </div>
-                                            </div>
                                         </div>
-                                        <div className="divider"/>
                                         <div className="section">
-                                            <div className="row">
                                                 <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input s={12} multiple={true} type='select' label="Groepen" onChange={this.handleGroupChange}
-                                                               icon='child_care' defaultValue='1'>
-                                                            <option key="" value="" disabled>Selecteer groepen</option>
+                                                        <Input required s={12} multiple={true} type='select' label="Groepen" onChange={this.handleGroupChange}
+                                                               icon='group' defaultValue='1'>
+                                                            <option key="" value="" disabled>Selecteer 1 of meerdere groepen...</option>
                                                             {this.state.groups.map((group, index) => (
                                                                 <option key={group.groupid}
                                                                         value={group.groupid}>{group.name}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
-                                                </div>
                                             </div>
                                         </div>
-                                        <div className="divider"/>
                                         <div className="section">
-                                            <div className="row">
                                                 <div className="col s12 m12 l12">
-                                                    <span>Velden met een * zijn verplicht!</span>
+                                                    <small style={{color: 'red'}}>Velden met een * zijn verplicht</small>
                                                 </div>
+                                        </div>
+                                        <div className="section">
+                                            <div className="col s12 m12 l12 center">
+                                                <input type="submit" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle" value="Toevoegen"/>
+                                                <Link to="/newsitems" type="button" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle">Terug</Link>
                                             </div>
                                         </div>
                                     </form>
-
-                                </div>
-                                <div className="card-action">
-                                    <input type="submit" onClick={this.handleClick}
-                                          className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
-                                        <i
-                                            className="material-icons">done</i>
-                                    </input>
                                 </div>
                             </div>
                         </div>
