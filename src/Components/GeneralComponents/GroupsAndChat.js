@@ -50,6 +50,7 @@ export default class GroupsAndChat extends Component {
 
     mapAgendaItems = (agendaItems) => {
 
+
         if (this.state.agendaItems.length > 0) {
 
             let AgendaItems= [];

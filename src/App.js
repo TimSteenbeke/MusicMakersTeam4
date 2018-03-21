@@ -34,8 +34,12 @@ import NewsItems from "./Components/NewsItemComponents/NewsItems";
 import AddNewsItem from "./Components/NewsItemComponents/AddNewsItem";
 import UpdateNewsItem from "./Components/NewsItemComponents/UpdateNewsItem";
 import AddLesson from './Components/CourseComponents/AddLesson.js'
+import MyPlayList from './Components/PlaylistComponents/MyPlaylist';
+import MyInstrumentLevels from './Components/InstrumentLevelComponents/MyInstrumentLevels';
+import InstrumentLevels from './Components/InstrumentLevelComponents/InstrumentLevels';
 import Lessons from './Components/CourseComponents/Lessons.js'
 import LessonDetails from './Components/CourseComponents/LessonDetails.js'
+import AddInstrumentLevel from './Components/InstrumentLevelComponents/addInstrumentLevel'
 
 export default class App extends Component {
 
@@ -68,7 +72,16 @@ export default class App extends Component {
                 <Route name="myCourses" path="/mycourses" component={auth(MyCourses)}/>
                 <Route name="myCourseDetails" path="/mycoursedetails/:id" component={auth(MyCourseDetails)}/>
 
-                <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
+                    <Route name="myPlaylist" path="/myplaylist" component={auth(MyPlayList)}/>
+
+                <Route name="InstrumentLevels" path="/instrumentlevels" component={auth(InstrumentLevels)}/>
+
+
+                <Route name="myInstrumentLevels" path="/myinstrumentlevels" component={auth(MyInstrumentLevels)}/>
+
+
+
+                    <Route name="play" path="/play/:id" component={auth(PlayMusic)}/>
 
                 <Route name="addCourseTypes" path="/addcoursetype" component={role(AddCourseType)}/>
                 <Route name="courseTypes" path="/coursetypes" component={role(CourseTypes)}/>
@@ -85,6 +98,10 @@ export default class App extends Component {
                 <Route name="chat" path="/chat" component={auth(ChatComponent)}/>
 
                 <Route name="newsitems" path="/newsitems" component={auth(NewsItems)}/>
+
+
+                <Route name="addInstrumentLevel" path="/addinstrumentlevel" component={auth(AddInstrumentLevel)} />
+
                 <Route name="addNewsItem" path="/addNewsItem" component={role(AddNewsItem)}/>
                 <Route name="updatenNewsItem" path="/updatenewsitem/:id" component={role(UpdateNewsItem)}/>
 

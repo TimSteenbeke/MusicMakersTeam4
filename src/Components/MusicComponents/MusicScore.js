@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
-import './Partituur.css';
+import './MusicScore.css';
 import MusicControls from "./MusicControls";
 
-export default class Partituur extends Component {
+export default class MusicScore extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +21,7 @@ export default class Partituur extends Component {
     componentWillUnmount(){
         if (!this.state.hidden){
             const $ = window.$;
-            $(this.refs.partituur).alphaTab('stop');
+            $(this.refs.musicScore).alphaTab('stop');
         }
 
     }
@@ -40,7 +40,7 @@ export default class Partituur extends Component {
         const $ = window.$;
 
         // Load alphaTab
-        $(this.refs.partituur).alphaTab({
+        $(this.refs.musicScore).alphaTab({
             file: this.props.content,
             engine: 'svg',
             width: -1
@@ -48,28 +48,28 @@ export default class Partituur extends Component {
 
         // Initialize Player and Setup Player
 
-        var as = $(this.refs.partituur).alphaTab('playerInit');
-        $(this.refs.partituur).alphaTab("playerOptions", {scrollElement: '.application'});
+        var as = $(this.refs.musicScore).alphaTab('playerInit');
+        $(this.refs.musicScore).alphaTab("playerOptions", {scrollElement: '.application'});
         as.LoadSoundFont('/Libraries/Alphatab/alphaSynth/default.sf2');
 
-        $(this.refs.partituur).alphaTab('playerCursor');
+        $(this.refs.musicScore).alphaTab('playerCursor');
 
     }
 
 
     play(){
         const $ = window.$;
-        $(this.refs.partituur).alphaTab('play');
+        $(this.refs.musicScore).alphaTab('play');
     }
 
     stop(){
         const $ = window.$;
-        $(this.refs.partituur).alphaTab('stop');
+        $(this.refs.musicScore).alphaTab('stop');
     }
 
     pause(){
         const $ = window.$;
-        $(this.refs.partituur).alphaTab('pause');
+        $(this.refs.musicScore).alphaTab('pause');
     }
 
 
@@ -82,7 +82,7 @@ export default class Partituur extends Component {
                 pause={(e) => this.pause(e)}
                 stop={(e) => this.stop(e)}
                 />
-                <div id="AlphaTab" ref="partituur" data-tracks="0"/>
+                <div id="AlphaTab" ref="musicScore" data-tracks="0"/>
             </div>
         );
     }
