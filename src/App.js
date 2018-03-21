@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Home from './Components/Home';
 import AddInstrument from './Components/InstrumentComponents/AddInstrument.js';
-import Instrumenten from './Components/InstrumentComponents/Instruments.js';
+import Instruments from './Components/InstrumentComponents/Instruments.js';
 import InstrumentDetails from './Components/InstrumentComponents/InstrumentDetails.js';
 import CourseDetails from './Components/CourseComponents/CourseDetails.js';
 import AddCourse from './Components/CourseComponents/AddCourse.js'
@@ -39,7 +39,10 @@ import MyInstrumentLevels from './Components/InstrumentLevelComponents/MyInstrum
 import InstrumentLevels from './Components/InstrumentLevelComponents/InstrumentLevels';
 import Lessons from './Components/CourseComponents/Lessons.js'
 import LessonDetails from './Components/CourseComponents/LessonDetails.js'
-import AddInstrumentLevel from './Components/InstrumentLevelComponents/addInstrumentLevel'
+import AddInstrumentLevel from './Components/InstrumentLevelComponents/AddInstrumentLevel'
+import AddPerformance from "./Components/PerformanceComponents/AddPerformance";
+import PerformanceDetails from "./Components/PerformanceComponents/PerformanceDetails";
+import Performance from "./Components/PerformanceComponents/Performance";
 
 export default class App extends Component {
 
@@ -50,7 +53,7 @@ export default class App extends Component {
                 <Route name="home" exact path="/" component={Home}/>
 
                 <Route name="addInstrument" path="/addinstrument" component={role(AddInstrument)}/>
-                <Route name="instrument" path="/instrumenten" component={role(Instrumenten)}/>
+                <Route name="instrument" path="/instrumenten" component={role(Instruments)}/>
                 <Route name="instrumentDetails" path="/instrumentdetails/:id" component={role(InstrumentDetails)}/>
                 <Route name="InstrumentLevels" path="/instrumentlevels" component={role(InstrumentLevels)}/>
                 <Route name="myInstrumentLevels" path="/myinstrumentlevels" component={auth(MyInstrumentLevels)}/>
@@ -82,7 +85,11 @@ export default class App extends Component {
 
                 <Route name="lessons" path="/lessons" component={role(Lessons)}/>
                 <Route name="addLesson" path="/addLesson" component={role(AddLesson)}/>
-                <Route name="lessonDetails" path="/lessonDetails" component={role(LessonDetails)}/>
+                <Route name="lessonDetails" path="/lessonDetails/:id" component={role(LessonDetails)}/>
+
+                <Route name="performance" path="/performance" component={auth(Performance)}/>
+                <Route name="addperformance" path="/addperformance" component={auth(AddPerformance)}/>
+                <Route name="performancedetails" path="/performancedetails/:id" component={auth(PerformanceDetails)}/>
 
                 <Route name="users" path="/users" component={role(Users)}/>
                 <Route name="addUser" path="/addUser" component={role(AddUser)}/>

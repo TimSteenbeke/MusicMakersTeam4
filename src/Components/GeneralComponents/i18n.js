@@ -29,7 +29,8 @@ i18next
                     mycourses: { label: 'My courses'},
                     myplaylist: { label: 'My playlist'},
                     myinstrumentlevels: { label: 'My instrumentlevels'},
-                    instrumentlevels: {label: 'Instrumentlevels'}
+                    instrumentlevels: {label: 'Instrumentlevels'},
+                    performances: {label: 'Performances'}
                 },
             },
             nl: {
@@ -37,7 +38,7 @@ i18next
                     home: { label: 'Startpagina', },
                     agenda: { label: 'Agenda'},
                     chat: { label: 'Chat' },
-                    instruments: { label: 'Instrumenten', },
+                    instruments: { label: 'Instruments', },
                     groups: { label: 'Groepen', },
                     users: { label: 'Gebruikers'},
                     courses: { label: 'Vakken'},
@@ -50,7 +51,8 @@ i18next
                     mycourses: { label: 'Mijn vakken'},
                     myplaylist: { label: 'Mijn afspeellijst'},
                     myinstrumentlevels: { label: 'Mijn instrumentniveaus'},
-                    instrumentlevels: {label: 'Instrumentniveaus'}
+                    instrumentlevels: {label: 'Instrumentniveaus'},
+                    performances: {label: 'Optredens'}
                 },
             },
         },

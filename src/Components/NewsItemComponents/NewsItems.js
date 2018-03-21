@@ -20,26 +20,26 @@ export default class Compositions extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet ongedaan maken!",
+            type: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonText: 'Verwijderen!',
+            cancelButtonText: 'Behouden'
         }).then((result) => {
             if (result.value) {
                 NewsItemService.deleteNewsItem(id);
                 swal({
-                    title: "Deleted!",
-                    text: "Melding has been deleted!",
+                    title: "Verwijderd!",
+                    text: "Melding is verwijderd!",
                     type: "success"
                 }).then(() => {
                     this.props.history.push("/newsitems");
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Geannuleerd',
+                    'Item is behouden',
                     'error'
                 )
             }
@@ -67,8 +67,7 @@ export default class Compositions extends Component {
                             <th>Datum</th>
                             <th>Geplaats door</th>
                             <th>Melding</th>
-                            <th>Groep</th>
-                            <th></th>
+                            <th>Opties</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -77,7 +76,6 @@ export default class Compositions extends Component {
                                 <td>{ MomentJs(item.date).utc().format('YYYY-MM-DD')}</td>
                                 <td>{item.editor}</td>
                                 <td>{item.title}</td>
-                                <td></td>
                                 <td>
                                     <div className="row">
                                         <div className="col s6 m6 l6">

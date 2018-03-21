@@ -21,26 +21,26 @@ export default class Compositions extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet ongedaan maken!",
+            type: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonText: 'Verwijderen!',
+            cancelButtonText: 'Behouden'
         }).then((result) => {
             if (result.value) {
                 CompositionService.deleteComposition(id);
                 swal({
-                    title: "Deleted!",
-                    text: "Composition has been deleted!",
+                    title: "Verwijderd!",
+                    text: "Muziekstuk is verwijderd!",
                     type: "success"
                 }).then(() => {
                     this.props.history.push("/compositions");
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Geannuleerd',
+                    'Item is behouden',
                     'error'
                 )
             }
