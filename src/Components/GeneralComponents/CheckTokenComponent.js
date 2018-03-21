@@ -16,11 +16,13 @@ export default function(WrapperComponent) {
             }
             return true;
         }
+
+
         render() {
             if(this.checkAuthentication(this.props)){
-                return <WrapperComponent {...this.props} />
+                    return <WrapperComponent {...this.props} />
             }else{
-                return <Home/>
+                return <Home/>;
             }
         }
     }
