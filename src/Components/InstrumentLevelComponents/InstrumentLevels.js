@@ -77,23 +77,18 @@ export default class InstrumentLevels extends Component {
                         <tbody>
                         {this.state.instrumentlevels.map((level, index) => (
                             <tr key={index} id={level.instrumentLevelId}>
-                                <td>{level.user.username}</td>
-                                <td>{level.instrument.instrumentname}</td>
+                                <td>{level.user.firstname}</td>
+                                <td>{level.instrument.instrumentName}</td>
                                 <td>{level.level}</td>
                                 <td>{level.maxLevel}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/instrumentlevelupdate/${level.instrumentLevelId}` }>
-                                        <i className="material-icons">edit
-                                        </i>
-                                    </Link>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link  to="/instrumentlevels" className="btn-floating btn-large deep-orange darken-4">
+                        <Link  to="/addinstrumentlevel" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>

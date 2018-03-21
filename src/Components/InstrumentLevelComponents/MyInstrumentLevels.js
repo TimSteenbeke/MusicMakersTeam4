@@ -42,7 +42,7 @@ export default class InstrumentLevels extends Component {
                         <tbody>
                         {this.state.instrumentlevels.map((level, index) => (
                             <tr key={index} id={level.instrumentLevelId}>
-                                <td>{level.instrument.instrumentname}</td>
+                                <td>{level.instrument.instrumentName}</td>
                                 <td>{level.level}</td>
                                 <td>{level.maxLevel}</td>
                             </tr>

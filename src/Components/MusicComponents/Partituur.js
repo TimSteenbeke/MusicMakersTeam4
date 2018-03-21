@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../../CSS/GlobalStylesheet.css';
-import './Partituur.css';
 import MusicControls from "./MusicControls";
 
 export default class Partituur extends Component {

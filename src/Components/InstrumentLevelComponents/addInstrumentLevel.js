@@ -24,10 +24,10 @@ export default class addInstrumentLevel extends Component {
         this.state = {
             instruments: [],
             students: [],
-
-            selectedInstrumentid:0,
-            selectedStudentid:0,
-            selectedLevel:0
+            userid: "",
+            instrumentid: "",
+            level: 0,
+            maxlevel: 0
         };
     }
 
@@ -37,6 +37,7 @@ export default class addInstrumentLevel extends Component {
         });
         this.addStudents();
 
+        console.log(this.state.students);
 
     }
 
@@ -51,35 +52,57 @@ export default class addInstrumentLevel extends Component {
 
         InstrumentLevelService.postInstrumentLevel(JSON.stringify(
             {
-                userid: this.state.selectedStudentid,
-                maxlevel: 10,
-                level: this.state.selectedLevel,
-                instrumentid: this.state.selectedInstrumentid,
-
+                userid: this.state.userid,
+                maxlevel: this.state.maxlevel,
+                level: this.state.level,
+                instrumentid: this.state.instrumentid,
 
             }
         ));
     };
 
 
-    handleStudentChange(event,value) {
+    handleStudentChange = (e) => {
+        let options = e.target.options;
+        let value = 1;
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value = options[i].value;
+            }
+        }
+
+        this.setState({userid: value});
+    };
+
+    handleInstrumentChange = (e) => {
+        let options = e.target.options;
+        let value = 1;
+        for (let i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                value = options[i].value;
+            }
+        }
+        this.setState({instrumentid: value});
+    };
+
+    changeLevel = event => {
+        let value = event.target.value;
+        this.setState({level: value});
+        console.log(value);
+    };
+
+    changeMaxLevel = event => {
+        let value = event.target.value;
+        this.setState({maxlevel: value});
         console.log(value);
 
-    }
-
-    handleInstrumentChange(value) {
-        console.log(value);
-
-    }
+    };
 
     addStudents = () => {
-        UserService.getStudents().then(console.log("----students---- \n"))
-            .then(students => {
-                this.setState({students: students.users}, console.log(students.users));
-                console.log(students);
-            });
-        console.log("this state");
-        console.log(this.state.students);
+        UserService.getStudents().then(students =>
+        {
+            this.setState({students: students.users});
+        });
     };
 
     render() {
@@ -109,8 +132,8 @@ export default class addInstrumentLevel extends Component {
                                                             <option key="" value="" disabled>Kies student
                                                             </option>
                                                             {this.state.students.map((student, index) => (
-                                                                <option key={student.id}
-                                                                        value={student.id}>{student.firstname}</option>
+                                                                <option key={student.userid}
+                                                                        value={student.userid}>{student.firstname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
@@ -125,14 +148,14 @@ export default class addInstrumentLevel extends Component {
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
-                                                        <Input s={12} multiple={true} type='select'
+                                                        <Input s={12} multiple={false} type='select'
                                                                onChange={this.handleInstrumentChange}
                                                                label="Instrumenten" icon='face' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies het instrument
                                                             </option>
                                                             {this.state.instruments.map((instrument, index) => (
-                                                                <option key={instrument.id}
-                                                                        value={instrument.userid}>{instrument.firstname} {instrument.lastname}</option>
+                                                                <option key={instrument.instrumentid}
+                                                                        value={instrument.instrumentid}>{instrument.instrumentname}</option>
                                                             ))}
                                                         </Input>
                                                     </Row>
@@ -142,8 +165,10 @@ export default class addInstrumentLevel extends Component {
 
                                         <div className="divider"></div>
                                     </form>
-                                <StyledTextField label="Instrumentscore (0-10)" required={true}/>
+                                <StyledTextField onChange={this.changeLevel} label="Instrumentscore (0-10)" required={true}/>
                                 </div>
+
+                                <StyledTextField onChange={this.changeMaxLevel} label="Maxlevel (0-10)" required={true}/>
 
                                 <div className="card-action">
                                     <Link to="/courses" onClick={this.handleClick}
