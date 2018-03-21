@@ -52,7 +52,7 @@ export default class AddCourseType extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Add CourseType"/>
+                <Header name="Voeg cursustype toe"/>
                 <section className="containerCss">
                             <div className="card hoverable">
                                 <div className="card-content">
