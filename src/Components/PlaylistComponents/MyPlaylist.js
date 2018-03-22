@@ -55,7 +55,7 @@ export default class MyPlaylist extends Component {
             this.setState({compositions: compositions});
         });
         this.setState({loading: false})
-    }
+    };
 
 
     setSearch = event => {
@@ -105,7 +105,10 @@ export default class MyPlaylist extends Component {
         };
     }());
 
-
+    showFileFormat = (file) => {
+        swal(file)
+    };
+    
     render() {
         const { loading } = this.state;
 
@@ -128,26 +131,22 @@ export default class MyPlaylist extends Component {
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Titel</th>
                             <th>Artiest</th>
                             <th>Genre</th>
                             <th>Onderwerp</th>
                             <th>Instrumenttype</th>
-                            <th>Bestand</th>
                             <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.compositions.map((composition, index) => (
                             <tr key={index} id={composition.compositionId}>
-                                <td>{composition.compositionId}</td>
                                 <td>{composition.title}</td>
                                 <td>{composition.artist}</td>
                                 <td>{composition.genre}</td>
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
-                                <td>{composition.fileFormat !== null ? composition.fileFormat : "No file"}</td>
                                 <td>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
@@ -167,6 +166,13 @@ export default class MyPlaylist extends Component {
                                             <a title="Verwijderen uit afspeellijst" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={(e) => this.handleDelete(composition.compositionId, e)}>
                                                 <i className="material-icons">delete
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <div className="col s6 m6 l6">
+                                            <a title="Information" className="waves-effect white-text deep-orange darken-4 btn"
+                                               onClick={(e) => this.showFileFormat(composition.fileFormat !== null ? composition.fileFormat : "No file", e)}>
+                                                <i className="material-icons">settings
                                                 </i>
                                             </a>
                                         </div>

@@ -90,7 +90,7 @@ export default class Instruments extends Component {
                                     <td>{instrument.type}</td>
                                     <td>{instrument.details}</td>
                                     <td>
-                                        <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
+                                        <Link className="waves-effect white-text deep-orange darken-4 minimargin btn"
                                               to={`/instrumentdetails/${instrument.instrumentid}` }>
                                             <i className="material-icons">edit
                                             </i>
