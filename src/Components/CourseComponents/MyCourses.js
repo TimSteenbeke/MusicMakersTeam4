@@ -18,7 +18,8 @@ export default class MyCourses extends Component {
     }
 
     getCourses() {
-        CourseService.getCoursesFromBackend().then(courses => {
+        CourseService.getMyCourses().then(value => {
+            let courses = value.followCourses;
             this.setState({courses: courses});
         });
     }

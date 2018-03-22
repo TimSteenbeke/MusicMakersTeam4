@@ -44,7 +44,7 @@ export default class MyCourseDetails extends Component {
     render() {
         return (
             <div className="Homepage">
-                <Header name="Cursus detais"/>
+                <Header name="Cursus details"/>
                 <section className="containerCss">
                     <div className="row">
                         <div className="col s12 m12 l12 center">

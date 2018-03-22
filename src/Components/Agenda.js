@@ -6,6 +6,7 @@ import Header from './GeneralComponents/Header';
 import {Row, Input} from 'react-materialize';
 import * as UserService from '../Services/UserService.js';
 import './Agenda';
+import * as userService from "../Services/UserService";
 
 require('moment/locale/nl.js');
 
@@ -39,7 +40,8 @@ export default class Agenda extends Component {
             startDate: new Date(),
             agendaItems: [],
             agendaOwner: "",
-            selectableUsers: []
+            selectableUsers: [],
+            rights: "Student"
         };
     }
 
@@ -55,6 +57,7 @@ export default class Agenda extends Component {
         this.getUserRoles();
         this.getUsers();
         this.getMyAgendaItems();
+        this.CheckUserRoles();
     }
 
 
@@ -69,7 +72,6 @@ export default class Agenda extends Component {
     };
 
     getMyAgendaItems = () => {
-        //HARDCODED ID (TEMPORARY)
         AgendaService.getMyAgenda().then(agendaItems => {
             this.mapAgendaItems(agendaItems)
         });
@@ -124,30 +126,54 @@ export default class Agenda extends Component {
         });
     };
 
+    CheckUserRoles() {
+        let self = this;
+        if (localStorage.getItem("userToken") != null) {
+            userService.getRolesCurrentUser().then(
+                (value) => {
+                    let roles = value.roles;
+                    if (roles != null) {
+                        roles.forEach(role => {
+                            if ("Admin" === role.rolename) {
+                                self.setState({rights: role.rolename})
+                            } else if ("Teacher" === role.rolename && "Admin" !== self.state.rights) {
+                                self.setState({rights: role.rolename})
+                            }
+                        });
+                    }
+                });
+        }
+    }
+
     render() {
-        //Load extra components based on state
+        let dropdown = null;
+        if ("Student" !== this.state.rights) {
+            dropdown = <div>
+                <div className="col s3 m3 l3">
+                    <h5 className="truncate">Studenten</h5>
+                </div>
+                <div className="col s9 m9 l9">
+                    <Row>
+                        <Input s={12} multiple={false} type='select' label="Gebruikers"
+                               onChange={this.setSelectedUser}
+                               icon='child_care' defaultValue='1'>
+                            <option key="" value="" disabled>Kies de studenten</option>
+                            {this.state.selectableUsers.map((user, index) => (
+                                <option key={user.userid}
+                                        value={user.userid}>{user.firstname} {user.lastname}</option>
+                            ))}
+                        </Input>
+                    </Row>
+                </div>
+            </div>
+        }
         return (
             <div>
                 <Header name="Agenda"/>
                 <section className="containerCss">
                     <div className="section">
                         <div className="row">
-                            <div className="col s3 m3 l3">
-                                <h5 className="truncate">Studenten</h5>
-                            </div>
-                            <div className="col s9 m9 l9">
-                                <Row>
-                                    <Input s={12} multiple={false} type='select' label="Gebruikers"
-                                           onChange={this.setSelectedUser}
-                                           icon='child_care' defaultValue='1'>
-                                        <option key="" value="" disabled>Kies de studenten</option>
-                                        {this.state.selectableUsers.map((user, index) => (
-                                            <option key={user.userid}
-                                                    value={user.userid}>{user.firstname} {user.lastname}</option>
-                                        ))}
-                                    </Input>
-                                </Row>
-                            </div>
+                            {dropdown}
                         </div>
                     </div>
                     <ReactAgenda

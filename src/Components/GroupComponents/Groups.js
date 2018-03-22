@@ -62,6 +62,7 @@ export default class Group extends Component {
     getCourses = () => {
         console.log("GET COURSES");
         GroupService.getAllGroupsFromBackend().then(groups => {
+            console.log(groups);
             this.setState({groups: groups});
         }, () => {
             console.log("COURSES SHOULD BE GOT");
@@ -88,7 +89,12 @@ export default class Group extends Component {
                                 </td>*/}
                                 <td>{group.name}</td>
 
-                                <td>{group.supervisor.firstname}</td>
+                                {group.supervisor === null ?
+                                    <td>Geen supervisor ingesteld!</td>
+                                 :
+                                    <td>{group.supervisor.firstname}</td>
+                                }
+
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
                                           to={`/groupupdate/${group.groupid}`}>

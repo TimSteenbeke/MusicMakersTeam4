@@ -26,9 +26,10 @@ export default class Header extends Component {
     getLoggedIn = () => {
         let self = this;
         if (this.checkAuthentication()) {
-            self.setState({loginButton: "Log Out"});
+            self.setState({loginButton: "Uitloggen"});
         } else {
-            self.setState({loginButton: "Login"});
+
+            self.setState({loginButton: "Aanmelden"});
         }
         self.setState({showLogout: this.checkAuthentication()});
     };
