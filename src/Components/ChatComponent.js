@@ -12,7 +12,6 @@ import {Divider} from "material-ui";
 
 const serverUrl = 'https://musicmaker-api-team4.herokuapp.com/socket';
 // const serverUrl = 'http://localhost:8080/socket';
-const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 let subscription = {};
 
 export default class ChatComponent extends Component {
@@ -81,7 +80,7 @@ export default class ChatComponent extends Component {
         UserService.getAll().then(object => {
             let users = object.users;
             users.forEach((user) => {
-                    if (user.userid != curuser) {
+                    if (user.userid !== curuser) {
                         let roomName = user.firstname + " " + user.lastname;
                         let roomId = "";
                         if (user.userid < curuser) {
@@ -124,7 +123,7 @@ export default class ChatComponent extends Component {
             }
         );
         allRooms.forEach((room) => {
-            if (room.roomId == changeRoom) {
+            if (room.roomId === changeRoom) {
                 this.setState({
                     currentChatroom: {
                         roomName: room.roomName,

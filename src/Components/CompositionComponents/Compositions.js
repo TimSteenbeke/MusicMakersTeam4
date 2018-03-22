@@ -22,11 +22,17 @@ export default class Compositions extends Component {
     handleDelete = (id, e) => {
         swal({
             title: 'Ben je zeker?',
-            text: "Je kan dit niet ongedaan maken!",
-            type: 'success',
+            text: "Je kan dit niet terugdraaien!",
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Verwijderen!',
-            cancelButtonText: 'Behouden!'
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
         }).then((result) => {
             if (result.value) {
                 CompositionService.deleteComposition(id);
@@ -35,12 +41,12 @@ export default class Compositions extends Component {
                     text: "Muziekstuk is verwijderd!",
                     type: "success"
                 }).then(() => {
-                    this.props.history.push("/compositions");
+                    this.getCompositions();
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Gestopt',
-                    'Item is behouden',
+                    'Muziekstuk is behouden',
                     'error'
                 )
             }
@@ -48,10 +54,14 @@ export default class Compositions extends Component {
     };
 
     componentDidMount() {
+        this.getCompositions();
+    }
+
+    getCompositions = () => {
         CompositionService.getCompositionsFromBackend().then(compositions => {
             this.setState({compositions: compositions});
         });
-    }
+    };
 
     setSearch = event => {
         this.setState({compositions: []});

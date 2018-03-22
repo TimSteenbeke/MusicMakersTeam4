@@ -82,7 +82,7 @@ export default class Agenda extends Component {
         if (agendaItems != undefined) {
             let AgendaItems = [];
             //Eigenaar toewijzen (Agenda van: ....)
-            this.setState({agendaOwner: agendaItems.agendaEigenaar})
+            this.setState({agendaOwner: agendaItems.agendaEigenaar});
 
             //Over lessons loopen en info in AgendaItem steken
             //type en basic info

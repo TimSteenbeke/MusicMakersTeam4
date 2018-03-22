@@ -20,14 +20,16 @@ export default class Lessons extends Component {
 
     getLessons() {
         LesService.getLessons().then(lessons => {
-            this.setState({lessons: lessons});
+            this.setState({lessons: lessons}, () => {
+                console.log(lessons)
+            });
         });
     }
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Bent je zeker?',
-            text: "Dit kan niet ongedaan gemaakt worden!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -42,17 +44,19 @@ export default class Lessons extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'Lesson has been deleted.',
+                    'Les is verwijderd.',
                     'success'
-                );
-                LesService.deleteLesson(id);
+                ).then(() => {
+                    LesService.deleteLesson(id);
+                });
+
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Cancelled',
-                    'Lesson was not deleted',
+                    'Les is niet verwijderd',
                     'error'
                 )
             }
@@ -78,7 +82,11 @@ export default class Lessons extends Component {
                         <tbody>
                         {this.state.lessons.map((les, index) => (
                             <tr key={index} id={les.id}>
-                                <td>{les.course.description}</td>
+                                {les.course !== null ?
+                                    <td>{les.course.courseType.description}</td>
+                                    :
+                                    <td>Geen les beschikbaar</td>
+                                }
                                 <td>{les.startdatetime}</td>
                                 <td>{les.enddatetime}</td>
                                 <td>

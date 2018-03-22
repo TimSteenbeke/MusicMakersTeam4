@@ -52,7 +52,7 @@ export default class CoursesDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Cursus geupdate',
+            title: 'Cursus geupdated',
             showConfirmButton: false,
             timer: 1500
         });

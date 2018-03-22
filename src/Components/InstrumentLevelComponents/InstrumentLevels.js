@@ -32,11 +32,17 @@ export default class InstrumentLevels extends Component {
         console.log(id);
         swal({
             title: 'Ben je zeker?',
-            text: "Je kan dit niet ongedaan maken!",
-            type: 'success',
+            text: "Je kan dit niet terugdraaien!",
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Verwijderen!',
-            cancelButtonText: 'Behouden'
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
         }).then((result) => {
             if (result.value) {
                 InstrumentLevelService.deleteInstrumentLevel(id);
@@ -45,7 +51,7 @@ export default class InstrumentLevels extends Component {
                     text: "Instrument niveau is verwijderd!",
                     type: "success"
                 }).then(() => {
-                    this.props.history.push("/instrumentlevels");
+                    this.getInstrumentLevels();
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(

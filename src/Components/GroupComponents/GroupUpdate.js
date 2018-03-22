@@ -4,7 +4,7 @@ import swal from 'sweetalert2'
 import Link from "react-router-dom/es/Link";
 import Header from "../GeneralComponents/Header";
 import * as UserService from "../../Services/UserService";
-import {Input, Row} from "react-materialize";
+import {Row} from "react-materialize";
 import StyledTextField from "../GeneralComponents/StyledTextField";
 import './GroupUpdate.css';
 import AutoComplete from 'material-ui/AutoComplete';

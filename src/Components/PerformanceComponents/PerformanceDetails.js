@@ -6,7 +6,6 @@ import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
 import './AddPerformance.css';
 import {Link} from 'react-router-dom';
-import * as momentjs from 'moment';
 
 
 const addSubtractDate = require("add-subtract-date");

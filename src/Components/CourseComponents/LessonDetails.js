@@ -6,7 +6,6 @@ import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
 import './AddLesson.css';
 import {Link} from 'react-router-dom';
-import Moment from 'react-moment';
 
 const addSubtractDate = require("add-subtract-date");
 
@@ -23,8 +22,9 @@ class LessonDetails extends Component {
             endDate: new Date(),
             course: {},
             selectedStartDate: new Date(),
-            selectedEndDate: new Date()
-
+            selectedEndDate: new Date(),
+            currentStartDate: new Date(),
+            currentEndDate: new Date()
         }
     }
 
@@ -32,10 +32,12 @@ class LessonDetails extends Component {
         let self = this;
         LesService.getLesson(self.state.lessonid)
             .then(lesson => {
+                console.log(lesson);
+                console.log(self.state.lessonid);
                 self.setState({
-                    selectedStartDate: lesson.startdatetime,
-                    selectedEndDate: lesson.enddatetime,
                     course: lesson.course,
+                    currentStartDate: lesson.startdatetime,
+                    currentEndDate: lesson.enddatetime
 
                 });
             }).catch((error) => {
@@ -48,14 +50,15 @@ class LessonDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Les toegevoegd',
+            title: 'Les aangepast!',
             showConfirmButton: false,
             timer: 1500
         });
+        console.log(this.state.lessonid);
+        LesService.updateLesson(this.state.lessonid, JSON.stringify(
 
-        LesService.updateLesson(this.props.lessonid, JSON.stringify(
             {
-                courseid: this.state.selectedCourseId,
+                courseid: this.state.course.courseId,
                 enddatetime: this.state.selectedEndDate.toISOString().replace('Z', ''),
                 startdatetime: this.state.selectedStartDate.toISOString().replace('Z', '')
             }
@@ -117,7 +120,7 @@ class LessonDetails extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.chosenDate.toDateString()}</h5>
+                                                <h5 className="truncate">Datum</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}}
@@ -132,9 +135,11 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5><Moment>{this.state.selectedStartDate}</Moment></h5>
+                                                <h5 className="truncate">Begindatum</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
+                                                <p>Huidige startdatum: {this.state.currentStartDate.toString()}</p>
+                                                <div className="divider"></div>
                                                 <TimePicker
                                                     textFieldStyle={{width: '100%'}}
                                                     format="24hr"
@@ -143,14 +148,16 @@ class LessonDetails extends Component {
                                                 /></div>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
+
                                     <div className="section">
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5><Moment>{this.state.selectedEndDate}</Moment></h5>
+                                                <h5 className="truncate">Einddatum</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
+                                                <p>Huidige einddatum: {this.state.currentEndDate.toString()}</p>
+                                                <div className="divider"></div>
                                                 <TimePicker
                                                     textFieldStyle={{width: '100%'}}
                                                     format="24hr"

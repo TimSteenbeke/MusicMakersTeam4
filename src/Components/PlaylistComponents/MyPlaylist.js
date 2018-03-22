@@ -34,7 +34,7 @@ export default class MyPlaylist extends Component {
                     text: "Muziekstuk is van je playlist verwijderd!",
                     type: "success"
                 }).then(() => {
-                    this.props.history.push("/myplaylist");
+                    this.getPlaylists();
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
@@ -47,6 +47,10 @@ export default class MyPlaylist extends Component {
     };
 
     componentDidMount() {
+        this.getPlaylists();
+    }
+
+    getPlaylists = () => {
         CompositionService.getMyCompositionsFromBackend().then(compositions => {
             this.setState({compositions: compositions});
         });

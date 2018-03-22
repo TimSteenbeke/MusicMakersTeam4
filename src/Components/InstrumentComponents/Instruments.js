@@ -16,14 +16,14 @@ export default class Instruments extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
@@ -32,8 +32,8 @@ export default class Instruments extends Component {
             if (result.value) {
                 InstrumentService.deleteInstrument(id);
                 swal(
-                    'Deleted!',
-                    'Instrument has been deleted.',
+                    'Verwijderd!',
+                    'Instrument is verwijderd.',
                     'success'
                 ).then(() => {
                     this.getInstrumenten();
@@ -44,8 +44,8 @@ export default class Instruments extends Component {
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Cancelled',
-                    'Instrument was not deleted',
+                    'Geannuleerd',
+                    'Instrument is niet verwijderd',
                     'error'
                 )
             }
