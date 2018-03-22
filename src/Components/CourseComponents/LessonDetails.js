@@ -23,8 +23,7 @@ class LessonDetails extends Component {
             endDate: new Date(),
             course: {},
             selectedStartDate: new Date(),
-            selectedEndDate: new Date()
-
+            selectedEndDate: new Date(),
         }
     }
 
@@ -32,6 +31,7 @@ class LessonDetails extends Component {
         let self = this;
         LesService.getLesson(self.state.lessonid)
             .then(lesson => {
+                console.log(lesson);
                 self.setState({
                     selectedStartDate: lesson.startdatetime,
                     selectedEndDate: lesson.enddatetime,
@@ -48,7 +48,7 @@ class LessonDetails extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Les toegevoegd',
+            title: 'Les aangepast!',
             showConfirmButton: false,
             timer: 1500
         });
@@ -117,7 +117,7 @@ class LessonDetails extends Component {
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.chosenDate.toDateString()}</h5>
+                                                <h5>Datum</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}}
@@ -132,7 +132,7 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5><Moment>{this.state.selectedStartDate}</Moment></h5>
+                                                <h5>Begindatum</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker
@@ -148,7 +148,7 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5><Moment>{this.state.selectedEndDate}</Moment></h5>
+                                                <h5>Einddatum</h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker

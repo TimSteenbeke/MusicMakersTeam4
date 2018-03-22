@@ -20,7 +20,9 @@ export default class Lessons extends Component {
 
     getLessons() {
         LesService.getLessons().then(lessons => {
-            this.setState({lessons: lessons});
+            this.setState({lessons: lessons}, () => {
+                console.log(lessons)
+            });
         });
     }
 
@@ -44,8 +46,10 @@ export default class Lessons extends Component {
                     'Deleted!',
                     'Lesson has been deleted.',
                     'success'
-                );
-                LesService.deleteLesson(id);
+                ).then(() => {
+                    LesService.deleteLesson(id);
+                });
+
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -78,7 +82,11 @@ export default class Lessons extends Component {
                         <tbody>
                         {this.state.lessons.map((les, index) => (
                             <tr key={index} id={les.id}>
-                                <td>{les.course.description}</td>
+                                {les.course !== null ?
+                                    <td>{les.course.courseType.description}</td>
+                                    :
+                                    <td>Geen les beschikbaar</td>
+                                }
                                 <td>{les.startdatetime}</td>
                                 <td>{les.enddatetime}</td>
                                 <td>
