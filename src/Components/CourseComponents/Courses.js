@@ -39,12 +39,15 @@ export default class Courses extends Component {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
+                CourseService.deleteCourse(id);
                 swal(
                     'Verwijderen!',
                     'Cursus werd verwijderd.',
                     'success'
-                );
-                CourseService.deleteCourse(id);
+                ).then(() => {
+                    this.props.history.push("/courses");
+                });
+
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
@@ -65,14 +68,13 @@ export default class Courses extends Component {
         return (
 
             <div className="Homepage">
-                <Header name="Cursussen"/>
+                <Header name="Vakken"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
                             <th>Id</th>
                             <th>Cursus</th>
-                            <th>Prijs</th>
                             <th>Acties</th>
                         </tr>
                         </thead>
@@ -81,7 +83,6 @@ export default class Courses extends Component {
                             <tr key={course.courseId} id={course.courseId}>
                                 <td>{course.courseId}</td>
                                 <td>{course.courseType.description}</td>
-                                <td>{course.courseType.price}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
                                           to={`/coursedetails/${course.courseId}` }>
