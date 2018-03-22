@@ -19,9 +19,10 @@ let colors = {
 let now = new Date();
 
 let AgendaItem = function (props) {
+    console.log(props);
     return <div className="agendaItem">
         <h6 className="white-text">{props.item.name}</h6>
-        <p className="white-text">leerkracht: {props.leerkrachten}</p>
+        <p className="white-text">Type: {props.item.type}</p>
         <ActivityPopUp id={props.item.id} type={props.item.type}/>
     </div>
 };
