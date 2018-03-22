@@ -3,9 +3,6 @@ import '../../CSS/GlobalStylesheet.css';
 import './MusicControls.css';
 
 export default class MusicControls extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

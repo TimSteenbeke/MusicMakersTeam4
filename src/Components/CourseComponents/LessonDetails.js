@@ -6,7 +6,6 @@ import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
 import './AddLesson.css';
 import {Link} from 'react-router-dom';
-import Moment from 'react-moment';
 
 const addSubtractDate = require("add-subtract-date");
 

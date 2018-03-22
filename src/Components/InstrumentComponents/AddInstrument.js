@@ -25,7 +25,7 @@ export default class AddInstrument extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Instrument Added!',
+            title: 'Instrument Toegevoegd!',
             showConfirmButton: false,
             timer: 1500
         });

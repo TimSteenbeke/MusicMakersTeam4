@@ -52,8 +52,6 @@ export default class AddUser extends Component {
                 roleids: this.state.roleids
             }
         ));
-
-        this.props.history.push('/users');
     };
 
     handleChangeImage = (evt) => {

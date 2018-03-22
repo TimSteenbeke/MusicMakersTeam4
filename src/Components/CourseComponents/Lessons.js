@@ -44,7 +44,7 @@ export default class Lessons extends Component {
             if (result.value) {
                 swal(
                     'Deleted!',
-                    'Lesson has been deleted.',
+                    'Les is verwijderd.',
                     'success'
                 ).then(() => {
                     LesService.deleteLesson(id);
@@ -56,7 +56,7 @@ export default class Lessons extends Component {
             ) {
                 swal(
                     'Cancelled',
-                    'Lesson was not deleted',
+                    'Les is niet verwijderd',
                     'error'
                 )
             }

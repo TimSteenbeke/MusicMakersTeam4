@@ -82,8 +82,6 @@ export default class UserUpdate extends Component {
                     roleids: self.state.selectedroles
                 }
             ));
-            }).then(() => {
-            this.props.history.push('/users')
         });
 
 

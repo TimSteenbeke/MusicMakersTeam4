@@ -46,7 +46,7 @@ export default class Compositions extends Component {
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
                     'Gestopt',
-                    'Item is behouden',
+                    'Muziekstuk is behouden',
                     'error'
                 )
             }

@@ -32,8 +32,8 @@ export default class Instruments extends Component {
             if (result.value) {
                 InstrumentService.deleteInstrument(id);
                 swal(
-                    'Deleted!',
-                    'Instrument has been deleted.',
+                    'Verwijderd!',
+                    'Instrument is verwijderd.',
                     'success'
                 ).then(() => {
                     this.getInstrumenten();
@@ -44,8 +44,8 @@ export default class Instruments extends Component {
             result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
-                    'Cancelled',
-                    'Instrument was not deleted',
+                    'Geannuleerd',
+                    'Instrument is niet verwijderd',
                     'error'
                 )
             }

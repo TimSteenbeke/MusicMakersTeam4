@@ -9,7 +9,6 @@ export default function(WrapperComponent) {
     class CheckTokenComponent extends Component {
 
         checkAuthentication(params) {
-            const {history} = params;
             if(!LoginService.checkToken()){
                 return false;
             }
