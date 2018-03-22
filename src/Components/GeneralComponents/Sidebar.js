@@ -88,6 +88,7 @@ export default class Sidebar extends Component {
                 <Link to="/lessons">
                     <MenuItem style={styles.menuColor} primaryText={i18n.t('lessons.label')}/>
                 </Link>
+                <Divider/>
             </div>;
         }
         if("Student" === this.state.rights || "Teacher" === this.state.rights){
@@ -104,6 +105,7 @@ export default class Sidebar extends Component {
                 <Link to="/myinstrumentlevels">
                     <MenuItem style={styles.menuColor} primaryText={i18n.t('myinstrumentlevels.label')}/>
                 </Link>
+                <Divider/>
             </div>
         }
 
@@ -136,9 +138,6 @@ export default class Sidebar extends Component {
                         </Link>
                         <Link to="/performance">
                             <MenuItem style={styles.menuColor} primaryText={i18n.t('performances.label')}/>
-                        </Link>
-                        <Link to="/lessons">
-                            <MenuItem style={styles.menuColor} primaryText={i18n.t('lessons.label')}/>
                         </Link>
                         <Divider/>
                         {studentLinks}
