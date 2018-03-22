@@ -10,7 +10,7 @@ export function getCourseFromBackend(courseNr) {
 }
 
 export function postCourse(data) {
-    fetchService.fetchWithHeader("courses/", "POST", data, {});
+    fetchService.fetchWithHeader("courses", "POST", data, {});
 }
 
 export function deleteCourse(courseId) {

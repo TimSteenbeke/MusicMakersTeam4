@@ -35,8 +35,8 @@ export default class AddCourse extends Component {
         CourseService.postCourse(JSON.stringify(
             {
                 courseTypeId: this.state.courseTypeId,
-                teacherIds: this.state.teacherIds,
-                studentIds: this.state.studentIds
+                teacherids: this.state.teacherIds,
+                studentids: this.state.studentIds
             }
         ));
     };
@@ -52,7 +52,7 @@ export default class AddCourse extends Component {
             .then(courseTypes => {
                 this.setState({courseTypes: courseTypes});
             })
-    }
+    };
 
     addStudents = () => {
         UserService.getStudents().then(students => {
@@ -73,7 +73,6 @@ export default class AddCourse extends Component {
     };
 
     handleCourseTypeChange = (e, value) => {
-
         this.setState({courseTypeId: value});
     };
 

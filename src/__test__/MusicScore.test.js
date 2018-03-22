@@ -15,7 +15,7 @@ describe('MusicScore', () => {
     it('expects svg to be rendered', () => {
         const musicScord = shallow(<Partituur
             fileFormat="Canon.gp5"
-            content="/BackendJsonSimulated/Cano.gp5"
+            content="/BackendJsonSimulated/Canon.gp5"
         />);
         const svg = musicScord.find('svg');
         expect(svg).toBeDefined();

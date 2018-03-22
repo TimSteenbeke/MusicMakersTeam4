@@ -65,7 +65,7 @@ export default class Courses extends Component {
         return (
 
             <div className="Homepage">
-                <Header name="Cursussen"/>
+                <Header name="Vakken"/>
                 <section className="containerCss">
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
