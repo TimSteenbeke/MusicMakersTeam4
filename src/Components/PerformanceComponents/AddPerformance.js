@@ -67,8 +67,9 @@ export default class AddPerformance extends Component {
                 description: this.state.description
             }
         ));
+            this.props.history.push("/performance");
 
-        this.props.history.push("/performance");
+
 
 
     };

@@ -49,8 +49,10 @@ export default class AddNewsItem extends Component {
                 groupids: this.state.groupids
             }
         ));
+            this.props.history.push('/newsitems')
 
-        this.props.history.push('/newsitems')
+
+
     };
 
     handleChange(field, e){

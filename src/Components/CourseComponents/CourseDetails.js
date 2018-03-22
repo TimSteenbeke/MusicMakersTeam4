@@ -71,7 +71,7 @@ export default class CoursesDetails extends Component {
         CourseTypeService.getCourseTypesFromBackend().then(courseTypes => {
                 this.setState({courseTypes: courseTypes});
             })
-    }
+    };
 
     addStudents = () => {
         UserService.getStudents().then(students => {
@@ -130,6 +130,8 @@ export default class CoursesDetails extends Component {
                 studentIds: this.state.selectedStudents
             }
         ));
+            this.props.history.push('/courses');
+
     };
 
 

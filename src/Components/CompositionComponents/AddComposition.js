@@ -41,8 +41,10 @@ export default class AddComposition extends Component {
                     fileFormat: this.state.bestandType
                 }));
 
-            CompositionService.postComposition(this.state.formdata);
-            this.props.history.push("/compositions");
+            CompositionService.postComposition(this.state.formdata).then(() => {
+                this.props.history.push("/compositions");
+            });
+
     };
 
     handleChangeImage = (evt) => {

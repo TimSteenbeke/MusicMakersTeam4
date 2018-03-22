@@ -46,8 +46,9 @@ export default class UpdateNewsItem extends Component {
                 message: self.state.message,
             }
         ));
+            this.props.history.push("/newsitems");
 
-        this.props.history.push("/newsitems");
+
     };
 
     handleChangeImage = (evt) => {

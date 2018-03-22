@@ -39,6 +39,8 @@ export default class AddCourse extends Component {
                 studentids: this.state.studentIds
             }
         ));
+            this.props.history.push('/courses');
+
     };
 
     componentDidMount() {
