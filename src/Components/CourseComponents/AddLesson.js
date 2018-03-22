@@ -124,8 +124,8 @@ export default class AddLesson extends Component {
                 </div>
                 <div className="divider"></div>
                 <div className="row paddingnator">
-                    <div className="col s8">
-                <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}} hintText="Lesdatum"  container="inline"   minDate={this.state.minDate}   disableYearSelection={this.state.disableYearSelection}
+                    <div className="col s12 m12 l12">
+                <DatePicker textFieldStyle={{width: '100%', hintStyle: '#000000'}} hintText="Lesdatum" label="Lesdatum"  container="inline"   minDate={this.state.minDate}   disableYearSelection={this.state.disableYearSelection}
                             onChange={this.choosedate}/>
                 <TimePicker
                     textFieldStyle={{width: '100%'}}
@@ -140,7 +140,7 @@ export default class AddLesson extends Component {
                     onChange={this.chooseEndHour}
                 />
                     </div>
-                    <div className="col s4">
+                    <div className="col s12 m12 l12 center">
                         <div className="">
                             <a className="addLessonBtn waves-effect deep-orange darken-4 waves-light btn"
                                onClick={this.addLesson}>Voeg les toe</a>

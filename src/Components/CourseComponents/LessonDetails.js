@@ -6,7 +6,7 @@ import swal from "sweetalert2";
 import Header from '../GeneralComponents/Header';
 import './AddLesson.css';
 import {Link} from 'react-router-dom';
-
+import Moment from 'react-moment';
 
 const addSubtractDate = require("add-subtract-date");
 
@@ -111,9 +111,7 @@ class LessonDetails extends Component {
             <div className="Homepage">
                 <Header name="Les Details"/>
                 <section className="containerCss">
-                    <div className="row">
-                        <div className="col s0 m2 l2"/>
-                        <div className="col s12 m8 l8">
+                        <div className="col s12 m8 offset-m2 l8 offset-l2">
                             <div className="card hoverable z-depth-3">
                                 <div className="card-content">
                                     <div className="section">
@@ -134,7 +132,7 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.selectedStartDate.toDateString()}</h5>
+                                                <h5><Moment>{this.state.selectedStartDate}</Moment></h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker
@@ -150,7 +148,7 @@ class LessonDetails extends Component {
                                         <div className="row">
 
                                             <div className="col s3 m3 l3">
-                                                <h5>{this.state.selectedEndDate.toDateString()}</h5>
+                                                <h5><Moment>{this.state.selectedEndDate}</Moment></h5>
                                             </div>
                                             <div className="col s9 m9 l9">
                                                 <TimePicker
@@ -170,8 +168,6 @@ class LessonDetails extends Component {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col s0 m2 l2"/>
                     </div>
                 </section>
             </div>
