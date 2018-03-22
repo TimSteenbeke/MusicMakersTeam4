@@ -28,8 +28,8 @@ export default class Lessons extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Bent je zeker?',
-            text: "Dit kan niet ongedaan gemaakt worden!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

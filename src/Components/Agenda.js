@@ -124,6 +124,10 @@ export default class Agenda extends Component {
         this.setState({'requesteduser': user});
         AgendaService.getOtherAgenda(this.state.requesteduser).then(agendaitems => {
             this.mapAgendaItems(agendaitems);
+        }).then(() => {
+            this.getMyAgendaItems();
+        }, () => {
+            console.log(this.state.agendaItems);
         });
     };
 

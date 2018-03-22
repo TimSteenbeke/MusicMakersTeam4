@@ -21,11 +21,17 @@ export default class Compositions extends Component {
     handleDelete = (id, e) => {
         swal({
             title: 'Ben je zeker?',
-            text: "Je kan dit niet ongedaan maken!",
-            type: 'success',
+            text: "Je kan dit niet terugdraaien!",
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Verwijderen!',
-            cancelButtonText: 'Behouden'
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
         }).then((result) => {
             if (result.value) {
                 NewsItemService.deleteNewsItem(id);
@@ -34,7 +40,7 @@ export default class Compositions extends Component {
                     text: "Melding is verwijderd!",
                     type: "success"
                 }).then(() => {
-                    this.props.history.push("/newsitems");
+                    this.getNewsItem();
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(

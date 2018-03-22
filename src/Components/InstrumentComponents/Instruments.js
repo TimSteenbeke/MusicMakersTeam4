@@ -16,14 +16,14 @@ export default class Instruments extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete!',
-            cancelButtonText: 'Cancel!',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,

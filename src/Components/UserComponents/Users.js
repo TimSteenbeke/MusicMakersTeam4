@@ -18,12 +18,18 @@ export default class Users extends Component {
     handleDelete = (id, e) => {
         swal({
 
-            title: 'Bent u zeker?',
-            text: "u kan dit niet ongedaan maken!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Ja, verwijderen!',
-            cancelButtonText: 'Nee, behouden'
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Verwijder!',
+            cancelButtonText: 'Annuleer!',
+            confirmButtonClass: 'btn red',
+            cancelButtonClass: 'btn green marginator',
+            buttonsStyling: false,
+            reverseButtons: true
 
         }).then((result) => {
             if (result.value) {
@@ -34,7 +40,7 @@ export default class Users extends Component {
                     text: "Gebruiker verwijderd",
                     type: "success"
                 }).then(() => {
-                    this.props.history.push("/users");
+                    this.getUsers();
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(

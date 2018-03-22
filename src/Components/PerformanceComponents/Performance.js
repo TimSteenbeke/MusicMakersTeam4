@@ -33,8 +33,8 @@ export default class Performance extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Bent u zeker?',
-            text: "U kan dit niet ongedaan maken!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -53,14 +53,14 @@ export default class Performance extends Component {
                     'Performance werd verwijderd.',
                     'success'
                 ).then(() => {
-                    this.props.history.push("/performance");
+                    this.getPerformances();
                 });
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Gestopt',
-                    'Preformance werd niet verwijderd',
+                    'Performance werd niet verwijderd',
                     'error'
                 )
             }

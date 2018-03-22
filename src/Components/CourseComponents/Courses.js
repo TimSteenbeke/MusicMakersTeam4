@@ -25,8 +25,8 @@ export default class Courses extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Bent je zeker?',
-            text: "Dit kan niet ongedaan gemaakt worden!",
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet terugdraaien!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -45,7 +45,7 @@ export default class Courses extends Component {
                     'Cursus werd verwijderd.',
                     'success'
                 ).then(() => {
-                    this.props.history.push("/courses");
+                    this.getCourses();
                 });
 
             } else if (
