@@ -111,8 +111,6 @@ export default class Compositions extends Component {
     }());
 
     addToPlaylist = (compositionId) => {
-
-
         swal({
             position: 'top-end',
             type: 'success',
@@ -121,7 +119,10 @@ export default class Compositions extends Component {
             timer: 1500
         });
         CompositionService.addCompositionToMyPlaylist(compositionId);
+    };
 
+    showFileFormat = (file) => {
+        swal(file)
     };
 
 
@@ -142,57 +143,66 @@ export default class Compositions extends Component {
                     <table className="highlight striped black-text bordered responsive-table centered">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Titel</th>
                             <th>Artiest</th>
                             <th>Genre</th>
                             <th>Onderwerp</th>
                             <th>Instrumenttype</th>
                             <th>Bestand</th>
-                            <th>Acties</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         {this.state.compositions.map((composition, index) => (
                             <tr key={index} id={composition.compositionId}>
-                                <td>{composition.compositionId}</td>
                                 <td>{composition.title}</td>
                                 <td>{composition.artist}</td>
                                 <td>{composition.genre}</td>
                                 <td>{composition.subject}</td>
                                 <td>{composition.instrumentType}</td>
-                                <td>{composition.fileFormat !== null ? composition.fileFormat : "No file"}</td>
                                 <td>
+                                    <div className="section">
                                     <div className="row">
-                                        <div className="col s6 m6 l6">
+                                        <div className="col s3 m3 l3">
                                             <a title="Bestand downloaden" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={e => this.assignItem(composition.content, index)}>
                                                 <i className="material-icons">file_download</i>
                                             </a></div>
-                                        <div className="col s6 m6 l6">
+                                        <div className="col s4 m4 l4">
                                             <Link title="Afspelen" className="waves-effect white-text deep-orange darken-4 btn"
                                                   to={`/play/${composition.compositionId}`}>
                                                 <i className="material-icons">play_arrow</i>
                                             </Link>
+                                        </div>
+                                            <div className="col s3 m3 l3">
                                             <Link title="Aan afspeellijst toevoegen" to={`/myplaylist`} className="waves-effect white-text deep-orange darken-4 btn" onClick={ e => this.addToPlaylist(composition.compositionId)}>
                                                 <i className="material-icons">format_list_bulleted</i>
                                             </Link>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div className="section">
                                     <div className="row">
-                                        <div className="col s6 m6 l6">
+                                        <div className="col s3 m3 l3">
                                             <Link title="Bewerken" className="waves-effect white-text deep-orange darken-4 btn"
                                                   to={`/compositions/${composition.compositionId}`}>
                                                 <i className="material-icons">edit</i>
                                             </Link></div>
-                                        <div className="col s6 m6 l6">
+                                        <div className="col s4 m4 l4">
                                             <a title="Verwijderen" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={(e) => this.handleDelete(composition.compositionId, e)}>
                                                 <i className="material-icons">delete
                                                 </i>
                                             </a>
                                         </div>
+                                        <div className="col s3 m3 l3">
+                                            <a title="Information" className="waves-effect white-text deep-orange darken-4 btn"
+                                               onClick={(e) => this.showFileFormat(composition.fileFormat !== null ? composition.fileFormat : "No file", e)}>
+                                                <i className="material-icons">settings
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
                                     </div>
                                 </td>
                             </tr>

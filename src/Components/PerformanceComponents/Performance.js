@@ -33,14 +33,14 @@ export default class Performance extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Ben je zeker?',
-            text: "Je kan dit niet terugdraaien!",
+            title: 'Bent u zeker?',
+            text: "U kan dit niet ongedaan maken!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Verwijder!',
-            cancelButtonText: 'Annuleer!',
+            confirmButtonText: 'Delete!',
+            cancelButtonText: 'Cancel!',
             confirmButtonClass: 'btn red',
             cancelButtonClass: 'btn green marginator',
             buttonsStyling: false,
@@ -53,14 +53,14 @@ export default class Performance extends Component {
                     'Performance werd verwijderd.',
                     'success'
                 ).then(() => {
-                    this.getPerformances();
+                    this.props.history.push("/performance");
                 });
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
                 swal(
                     'Gestopt',
-                    'Performance werd niet verwijderd',
+                    'Preformance werd niet verwijderd',
                     'error'
                 )
             }
@@ -90,15 +90,22 @@ export default class Performance extends Component {
                                 <td>{performance.startdatetime.toUTCString()}</td>
                                 <td>{performance.enddatetime.toUTCString()}</td>
                                 <td>
-                                    <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
-                                          to={`/performanceDetails/${performance.id}`}>
-                                        <i className="material-icons">edit
-                                        </i>
-                                    </Link>
-                                    <a className="waves-effect white-text deep-orange darken-4 btn"
-                                       onClick={(e) => this.handleDelete(performance.id, e)}><i
-                                        className="material-icons">delete
-                                    </i></a>
+                                    <div className="row">
+                                        <div className="col s6">
+                                            <Link
+                                                className="waves-effect white-text deep-orange darken-4 btn"
+                                                to={`/performanceDetails/${performance.id}`}>
+                                                <i className="material-icons">edit
+                                                </i>
+                                            </Link>
+                                        </div>
+                                        <div className="col s6">
+                                            <a className="waves-effect white-text deep-orange darken-4 btn"
+                                               onClick={(e) => this.handleDelete(performance.id, e)}><i
+                                                className="material-icons">delete
+                                            </i></a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
