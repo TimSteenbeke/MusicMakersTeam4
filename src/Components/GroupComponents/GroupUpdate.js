@@ -21,7 +21,7 @@ export default class GroupUpdate extends Component {
             groupid: this.props.match.params.id,
             allUsers: [],
             students: [],
-            supervisor: {},
+            supervisorid: 0,
             userids: [],
             name: "",
             groupimage: "../image/image.jpg"
@@ -35,7 +35,10 @@ export default class GroupUpdate extends Component {
                 users.forEach((user) => {
                     user["fullname"] = user.firstname + ' ' + user.lastname;
                 });
-                this.setState({allUsers: allUsers.users}, console.log(allUsers.users));
+                this.setState({allUsers: allUsers.users}, () =>{
+                    console.log(allUsers);
+                    this.addStudents();
+                });
             });
     };
 
@@ -46,7 +49,10 @@ export default class GroupUpdate extends Component {
                 users.forEach((students) => {
                     students["fullname"] = students.firstname + ' ' + students.lastname;
                 });
-                this.setState({students: students.users}, console.log(students.users));
+                this.setState({students: students.users}, () => {
+                    console.log(students);
+                    this.getGroup();
+                });
             });
     };
 
@@ -59,9 +65,9 @@ export default class GroupUpdate extends Component {
     handleBegeleider = (chosenRequest, index) => {
         console.log(index);
         if (index !== -1) {
-            this.setState({supervisor: chosenRequest});
+            this.setState({supervisorid: chosenRequest.userid});
         }
-        console.log(this.state.supervisor);
+        console.log(this.state.supervisorid);
     };
 
     handleUser = (chosenRequest, index) => {
@@ -123,29 +129,35 @@ export default class GroupUpdate extends Component {
 
     componentDidMount() {
         this.addUsers();
-        this.addStudents();
-        this.getGroup();
     }
 
     getGroup = () => {
         const self = this;
         GroupService.getGroupFromBackend(self.state.groupid).then(loadedGroup => {
             console.log(loadedGroup);
+            if (loadedGroup.supervisor !== null) {
+                self.setState({
+                    supervisorid: loadedGroup.supervisor.id
+                });
+                console.log(this.state.supervisorid)
+            }
             self.setState({
                 name: loadedGroup.name,
-                supervisor: loadedGroup.supervisor,
                 userids: loadedGroup.userids,
-                groupimage: loadedGroup.groupimage
+                groupimage: loadedGroup.groupimage,
+
             }, () => {
-                console.log(console.log(this.state.name));
                 console.log(console.log(this.state.groupid));
-                console.log(console.log(this.state.supervisor.firstname));
+                console.log(console.log(this.state.supervisorid));
                 console.log(console.log(this.state.userids));
             })
+
         })
+
     };
 
     handleUpdate = () => {
+        let self = this;
         swal({
             position: 'top-end',
             type: 'success',
@@ -153,11 +165,16 @@ export default class GroupUpdate extends Component {
             showConfirmButton: false,
             timer: 1500
         });
-        let self = this;
+
+        console.log("NAME =>" + console.log(self.state.name));
+        console.log(console.log(self.state.groupid));
+        console.log(console.log(self.state.supervisorid));
+        console.log(console.log(self.state.userids));
+
         GroupService.updateGroup(self.state.groupid, JSON.stringify(
             {
                 name: self.state.name,
-                supervisorid: self.state.supervisor.userid,
+                supervisorid: self.state.supervisorid,
                 userids: self.state.userids,
                 groupimage: self.state.groupimage
             }
@@ -217,16 +234,21 @@ export default class GroupUpdate extends Component {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col s12 m12 l12">
-                                    </div>
                                     <div className="col s3 m3 l3">
                                     </div>
                                     <div className="col s9 m9 l9">
                                         <ul className="collection">
                                             <li className="collection-item">
-                                                <div>{this.state.supervisor.firstname}<a onClick={this.deleteSupervisor}
-                                                                                        className="secondary-content"><i
-                                                    className="material-icons">clear</i></a></div>
+                                                {this.state.supervisorid !== 0 ?
+                                                    <div>{this.state.allUsers.find(user => user.userid === this.state.supervisorid).fullname}<a
+                                                        onClick={this.deleteSupervisor}
+                                                        className="secondary-content"><i
+                                                        className="material-icons">clear</i></a></div>
+                                                    :
+                                                    <div>Geen begeleider gevonden<a
+                                                        className="secondary-content"><i
+                                                        className="material-icons">clear</i></a></div>
+                                                }
                                             </li>
                                         </ul>
                                     </div>
