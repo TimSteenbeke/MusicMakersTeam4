@@ -39,12 +39,15 @@ export default class Courses extends Component {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
+                CourseService.deleteCourse(id);
                 swal(
                     'Verwijderen!',
                     'Cursus werd verwijderd.',
                     'success'
-                );
-                CourseService.deleteCourse(id);
+                ).then(() => {
+                    this.props.history.push("/courses");
+                });
+
             } else if (
                 // Read more about handling dismissals
             result.dismiss === swal.DismissReason.cancel
