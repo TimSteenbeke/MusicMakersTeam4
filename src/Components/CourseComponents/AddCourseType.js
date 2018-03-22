@@ -31,6 +31,8 @@ export default class AddCourseType extends Component {
                 description: this.state.typedDescription
             }
         ));
+            this.props.history.push('/coursetype');
+
     };
 
     componentDidMount() {

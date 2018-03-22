@@ -49,8 +49,10 @@ export default class addInstrumentLevel extends Component {
 
             }
         ));
+            this.props.history.push("/instrumentlevels");
 
-        this.props.history.push("/instrumentlevels");
+
+
     };
 
 

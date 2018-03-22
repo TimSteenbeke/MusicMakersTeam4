@@ -55,8 +55,10 @@ export default class AddLesson extends Component {
                 startdatetime: this.state.selectedStartDate.toISOString().replace('Z', '')
             }
         ));
+            this.props.history.push("/lessons");
 
-        this.props.history.push("/lessons");
+
+
 
     };
 
