@@ -17,17 +17,20 @@ export default class Users extends Component {
 
     handleDelete = (id, e) => {
         swal({
+
             title: 'Bent u zeker?',
             text: "u kan dit niet ongedaan maken!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ja, verwijderen!',
             cancelButtonText: 'Nee, behouden'
+
         }).then((result) => {
             if (result.value) {
                 UserService.deleteUser(id);
                 swal({
                     title: "Verwijderd!",
+
                     text: "Gebruiker verwijderd",
                     type: "success"
                 }).then(() => {
@@ -35,8 +38,10 @@ export default class Users extends Component {
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
+
                     'Gestopt',
                     'De data is veilig',
+
                     'error'
                 )
             }

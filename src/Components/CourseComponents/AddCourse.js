@@ -35,8 +35,8 @@ export default class AddCourse extends Component {
         CourseService.postCourse(JSON.stringify(
             {
                 courseTypeId: this.state.courseTypeId,
-                teacherIds: this.state.teacherIds,
-                studentIds: this.state.studentIds
+                teacherids: this.state.teacherIds,
+                studentids: this.state.studentIds
             }
         ));
     };
@@ -52,7 +52,7 @@ export default class AddCourse extends Component {
             .then(courseTypes => {
                 this.setState({courseTypes: courseTypes});
             })
-    }
+    };
 
     addStudents = () => {
         UserService.getStudents().then(students => {
@@ -73,7 +73,6 @@ export default class AddCourse extends Component {
     };
 
     handleCourseTypeChange = (e, value) => {
-
         this.setState({courseTypeId: value});
     };
 
@@ -116,13 +115,13 @@ export default class AddCourse extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5 className="truncate">Beschrijving</h5>
+                                                    <h5 className="truncate">Type</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <Row>
                                                         <Input s={12} multiple={false} type='select'
                                                                onChange={this.handleCourseTypeChange}
-                                                               label="Leerkrachten" icon='face' defaultValue='1'>
+                                                               label="Type" icon='face' defaultValue='1'>
                                                             <option key="" value="" disabled>Kies lesType
                                                             </option>
                                                             {this.state.courseTypes.map((courseType, index) => (

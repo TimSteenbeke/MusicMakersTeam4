@@ -56,10 +56,23 @@ export default class InstrumentLevels extends Component {
         })
     };
 
+    showUpdate = () =>{
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Niveau aangepast!',
+            showConfirmButton: false,
+            timer: 500
+        });
+    };
+
     upLevel = (id, e) => {
         InstrumentLevelService.increaseLevel(id).then(() =>
             this.getInstrumentLevels()
         );
+
+        this.showUpdate();
+
     };
 
     lowerLevel = (id, e) => {
@@ -67,6 +80,7 @@ export default class InstrumentLevels extends Component {
             this.getInstrumentLevels()
         );
 
+        this.showUpdate();
     };
 
     componentDidMount() {

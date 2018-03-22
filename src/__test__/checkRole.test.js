@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 
 describe('CheckRoleTest', () => {
 
-    it('knows that 2 and 2 make 4', () => {
+    it('knows that 2 and 2 make 4 if the test suit works', () => {
         expect(2 + 2).toBe(4);
     });
 

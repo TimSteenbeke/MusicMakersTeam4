@@ -39,8 +39,11 @@ export default class AddPerformance extends Component {
 
     }
     addGroups = () => {
-        GroupService.getAllGroupsFromBackend().then(groups => {
-            this.setState({groups: groups});
+        let self = this;
+        GroupService.getAllGroupsFromBackend().then((value) => {
+            let groups = value;
+            console.log(groups);
+            self.setState({groups: groups});
         });
     };
 

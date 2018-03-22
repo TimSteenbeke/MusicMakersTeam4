@@ -109,7 +109,7 @@ export default class AddLesson extends Component {
                     <Row>
                         <Input s={12} multiple={false} type='select'
                                onChange={this.handleCourseChange}
-                               label="Leerkrachten" defaultValue='1'>
+                               label="Vakken" defaultValue='1'>
                             <option key="" value="" disabled>Kies de cursus
                             </option>
                             {this.state.myCourses.map((course, index) => (

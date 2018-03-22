@@ -133,6 +133,7 @@ export default class Compositions extends Component {
                         </tr>
                         </thead>
                         <tbody>
+
                         {this.state.compositions.map((composition, index) => (
                             <tr key={index} id={composition.compositionId}>
                                 <td>{composition.compositionId}</td>

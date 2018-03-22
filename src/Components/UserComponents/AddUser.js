@@ -5,7 +5,7 @@ import * as UserService from '../../Services/UserService';
 import './AddUser.css';
 import StyledTextField from "../GeneralComponents/StyledTextField";
 import {Row,Input} from 'react-materialize';
-
+import {Link} from 'react-router-dom';
 
 export default class AddUser extends Component {
     constructor(props) {
@@ -31,7 +31,9 @@ export default class AddUser extends Component {
         swal({
             position: 'top-end',
             type: 'success',
-            title: 'Gebruiker toegevoegd!',
+
+            title: 'Gebruiker toegevoegd!!',
+
             showConfirmButton: false,
             timer: 1500
         });
@@ -97,10 +99,11 @@ export default class AddUser extends Component {
                 <section className="containerCss">
                     <div className="col s12 m8 offset-m2 l8 offset-m2">
                         <div className="card hoverable">
-                            <div className="card-image">
+                            <h4 className="center">Gebruiker toevoegen</h4>
+                            <div className="card-image" >
                                 <img
                                     src={"data:image;base64," + this.state.image} alt="Instrument"
-                                    height="300px"/>
+                                    height="300" width="50" className="circle"/>
                                 <form action="#">
                                     <div className="file-field input-field">
                                         <div
@@ -121,47 +124,33 @@ export default class AddUser extends Component {
                                     e.preventDefault();
                                     this.handleClick();
                                 } }>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="gebruikersnaam"  required onChange={this.handleChange.bind(this, "gebruikersnaam")} placeholder="Geef een gebruikersnaam in..." label="Gebruikersnaam *"/>
+                                                <StyledTextField type="email" ref="gebruikersnaam"  required onChange={this.handleChange.bind(this, "gebruikersnaam")} placeholder="Geef een email in..." label="Email *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="voornaam"  required onChange={this.handleChange.bind(this, "voornaam")} placeholder="Geef een voornaam in..." label="Voornaam *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <StyledTextField ref="achternaam" required onChange={this.handleChange.bind(this, "achternaam")} placeholder="Geef een achternaam in..." label="Achternaam *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="wachtwoord" required onChange={this.handleChange.bind(this, "wachtwoord")} placeholder="Geef een wachtwoord in..." label="Wachtwoord *"/>
+                                                <StyledTextField type="password" ref="wachtwoord" required onChange={this.handleChange.bind(this, "wachtwoord")} placeholder="Geef een wachtwoord in..." label="Wachtwoord *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
                                                 <Row>
-                                                    <Input s={12} multiple={true} type='select'
+                                                    <Input required s={12} multiple={true} type='select'
                                                            onChange={this.handleRoleChange}
-                                                           label="Rol" icon='face' defaultValue='1'>
-                                                        <option key="" value="" disabled>Selecteer een rol...
+                                                           label="Rol" icon='person_outline' defaultValue='1'>
+                                                        <option key="" value="" disabled>Selecteer 1 of meerdere rollen...
                                                         </option>
                                                         {this.state.roles.map((role, index) => (
                                                             <option key={role.roleId}
@@ -169,53 +158,45 @@ export default class AddUser extends Component {
                                                         ))}
                                                     </Input>
                                                 </Row>
-                                           </div>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
                                         <div className="row">
                                             <div className="col s12 m6 l6">
-                                                <StyledTextField ref="straat"  required onChange={this.handleChange.bind(this, "straat")} placeholder="Geef een straat in..." label="straat *"/>
+                                                <StyledTextField ref="straat"  required onChange={this.handleChange.bind(this, "straat")} placeholder="Geef een straat in..." label="Straat *"/>
                                             </div>
                                             <div className="col s12 m6 l6">
-                                                <StyledTextField ref="nummer"  required onChange={this.handleChange.bind(this, "nummer")} placeholder="Geef een nummer in..." label="nummer *"/>
+                                                <StyledTextField  ref="nummer"  required onChange={this.handleChange.bind(this, "nummer")} placeholder="Geef een nummer in..." label="Huisnummer *"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="postcode" required onChange={this.handleChange.bind(this, "postcode")} placeholder="Geef een postcode in..." label="postcode *"/>
+                                                <StyledTextField type="number" ref="postcode" required onChange={this.handleChange.bind(this, "postcode")} placeholder="Geef een postcode in..." label="Postcode *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="woonplaats"  required onChange={this.handleChange.bind(this, "woonplaats")} placeholder="Geef een woonplaats in..." label="woonplaats *"/>
+                                                <StyledTextField ref="woonplaats"  required onChange={this.handleChange.bind(this, "woonplaats")} placeholder="Geef een woonplaats in..." label="Woonplaats *"/>
                                             </div>
-                                        </div>
                                     </div>
-                                    <div className="divider"></div>
                                     <div className="section">
-                                        <div className="row">
                                             <div className="col s12 m12 l12">
-                                                <StyledTextField ref="land" required onChange={this.handleChange.bind(this, "land")} placeholder="Geef een land in..." label="land *"/>
+                                                <StyledTextField ref="land" required onChange={this.handleChange.bind(this, "land")} placeholder="Geef een land in..." label="Land *"/>
                                             </div>
+                                    </div>
+                                    <div className="section">
+                                        <div className="col s12 m12 l12 center">
+                                            <small style={{color: 'red'}}>Velden met een * zijn verplicht</small>
                                         </div>
                                     </div>
-                                    <div className="divider"></div>
+                                    <div className="section">
+                                        <div className="col s12 m12 l12 center">
+                                            <input type="submit" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle" value="Toevoegen"/>
+                                            <Link to="/users" type="button" className="btn waves-effect waves-light deep-orange darken-4 pulse buttonstyle">Terug</Link>
+                                        </div>
+                                    </div>
                                 </form>
-                            </div>
-                            <div className="card-action">
-                                <button onClick={this.handleClick}
-                                      className="btn-floating btn-small waves-effect waves-light deep-orange darken-4 pulse">
-                                    <i
-                                        className="material-icons">done</i>
-                                </button>
                             </div>
                         </div>
                     </div>

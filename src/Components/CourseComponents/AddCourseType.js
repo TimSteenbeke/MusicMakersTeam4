@@ -75,7 +75,7 @@ export default class AddCourseType extends Component {
                                         <div className="section">
                                             <div className="row">
                                                 <div className="col s3 m3 l3">
-                                                    <h5 className="truncate">price</h5>
+                                                    <h5 className="truncate">prijs</h5>
                                                 </div>
                                                 <div className="col s9 m9 l9">
                                                     <StyledTextField onChange={this.onChangePrice} placeholder="Geef een prijs in..." label="prijs"/>
