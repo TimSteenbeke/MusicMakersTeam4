@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
 export function postComposition(formdata) {
-    const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
-    //const URL = 'http://localhost:8080/api/';
+    //const URL = 'https://musicmaker-api-team4.herokuapp.com/api/';
+    const URL = 'http://localhost:8080/api/';
 
 
     let userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -21,6 +21,10 @@ export function getMyCompositionsFromBackend() {
 
 export function addCompositionToMyPlaylist(compositionId) {
     return fetchService.fetchWithHeader("compositions/addtoplaylist/" + compositionId, "PUT", {}, {});
+}
+
+export function deleteItemFromMyPlaylist(compositionId){
+    return fetchService.fetchWithHeader("compositions/removefromplaylist/" + compositionId, "PUT", {}, {});
 }
 
 export function getCompositionsFromBackend() {

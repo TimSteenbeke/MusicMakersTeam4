@@ -56,6 +56,8 @@ export default class AddLesson extends Component {
             }
         ));
 
+        this.props.history.push("/lessons");
+
     };
 
     choosedate = (event, date) => {
@@ -98,6 +100,7 @@ export default class AddLesson extends Component {
 
     handleCourseChange = (e,value) => {
         this.setState({selectedCourseId: value});
+        console.log(this.state.selectedCourseId);
     };
 
 
@@ -109,7 +112,7 @@ export default class AddLesson extends Component {
                     <Row>
                         <Input s={12} multiple={false} type='select'
                                onChange={this.handleCourseChange}
-                               label="Vakken" defaultValue='1'>
+                               label="Vakken" defaultValue=''>
                             <option key="" value="" disabled>Kies de cursus
                             </option>
                             {this.state.myCourses.map((course, index) => (

@@ -20,26 +20,26 @@ export default class MyPlaylist extends Component {
 
     handleDelete = (id, e) => {
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
+            title: 'Ben je zeker?',
+            text: "Je kan dit niet ongedaan maken!",
+            type: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it'
+            confirmButtonText: 'Verwijderen!',
+            cancelButtonText: 'Behouden'
         }).then((result) => {
             if (result.value) {
-                CompositionService.deleteComposition(id);
+                CompositionService.deleteItemFromMyPlaylist(id);
                 swal({
-                    title: "Deleted!",
-                    text: "Composition has been deleted!",
+                    title: "Verwijderd!",
+                    text: "Muziekstuk is van je playlist verwijderd!",
                     type: "success"
                 }).then(() => {
-                    this.props.history.push("/compositions");
+                    this.props.history.push("/myplaylist");
                 });
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Gestopt',
+                    'Item is behouden',
                     'error'
                 )
             }
@@ -147,12 +147,12 @@ export default class MyPlaylist extends Component {
                                 <td>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
-                                            <a className="waves-effect white-text deep-orange darken-4 btn"
+                                            <a title="Bestand downloaden" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={e => this.assignItem(composition.content, index)}>
                                                 <i className="material-icons">file_download</i>
                                             </a></div>
                                         <div className="col s6 m6 l6">
-                                            <Link className="waves-effect white-text deep-orange darken-4 btn"
+                                            <Link title="Afspelen" className="waves-effect white-text deep-orange darken-4 btn"
                                                   to={`/play/${composition.compositionId}`}>
                                                 <i className="material-icons">play_arrow</i>
                                             </Link>
@@ -160,7 +160,7 @@ export default class MyPlaylist extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
-                                            <a className="waves-effect white-text deep-orange darken-4 btn"
+                                            <a title="Verwijderen uit afspeellijst" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={(e) => this.handleDelete(composition.compositionId, e)}>
                                                 <i className="material-icons">delete
                                                 </i>
@@ -172,12 +172,6 @@ export default class MyPlaylist extends Component {
                         ))}
                         </tbody>
                     </table>
-                    <div className="fixed-action-btn">
-                        <Link to="/addcomposition" className="btn-floating btn-large deep-orange darken-4">
-                            <i className="large material-icons">add</i>
-                        </Link>
-                    </div>
-
                 </section>
             </div>
         );

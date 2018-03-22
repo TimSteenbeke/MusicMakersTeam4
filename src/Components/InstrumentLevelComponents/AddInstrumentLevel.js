@@ -104,7 +104,7 @@ export default class addInstrumentLevel extends Component {
                             <div className="card hoverable">
                                 <div className="card-content">
                                     <h4 className="center">Instrumentlevel toewijzen</h4>
-                                    <form className="addCourse" action="/" method="POST" onSubmit={(e) => {
+                                    <form className="addinstrumentlevel" name="addinstrumentlevel" action="/" method="POST" onSubmit={(e) => {
                                         e.preventDefault();
                                         this.handleClick();
                                     } }>
@@ -112,9 +112,9 @@ export default class addInstrumentLevel extends Component {
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input required s={12} multiple={false} type='select'
+                                                        <Input name="students" required s={12} multiple={false} type='select'
                                                                onChange={this.handleStudentChange}
-                                                               label="Student" icon='person' defaultValue='1'>
+                                                               label="Student" icon='person' defaultValue=''>
                                                             <option key="" value="" disabled>Selecteer een student...
                                                             </option>
                                                             {this.state.students.map((student, index) => (
@@ -130,9 +130,9 @@ export default class addInstrumentLevel extends Component {
                                             <div className="row">
                                                 <div className="col s12 m12 l12">
                                                     <Row>
-                                                        <Input required s={12} multiple={false} type='select'
+                                                        <Input name="instrumenten" s={12} multiple={false} type='select'
                                                                onChange={this.handleInstrumentChange}
-                                                               label="Instrumenten" icon='person' defaultValue='1'>
+                                                               label="Instrumenten" icon='person' defaultValue=''>
                                                             <option key="" value="" disabled>Selecteer een instrument...</option>
                                                             {this.state.instruments.map((instrument, index) => (
                                                                 <option key={instrument.instrumentid}

@@ -24,6 +24,7 @@ export default class InstrumentLevels extends Component {
             console.log(levels);
             this.setState({instrumentlevels: levels});
         });
+        console.log(this.state.instrumentlevels);
 
     }
 

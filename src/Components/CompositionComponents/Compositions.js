@@ -101,7 +101,17 @@ export default class Compositions extends Component {
     }());
 
     addToPlaylist = (compositionId) => {
+
+
+        swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Muziekstuk aan je playlist toegevoegd!',
+            showConfirmButton: false,
+            timer: 1500
+        });
         CompositionService.addCompositionToMyPlaylist(compositionId);
+
     };
 
 
@@ -146,28 +156,28 @@ export default class Compositions extends Component {
                                 <td>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
-                                            <a className="waves-effect white-text deep-orange darken-4 btn"
+                                            <a title="Bestand downloaden" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={e => this.assignItem(composition.content, index)}>
                                                 <i className="material-icons">file_download</i>
                                             </a></div>
                                         <div className="col s6 m6 l6">
-                                            <Link className="waves-effect white-text deep-orange darken-4 btn"
+                                            <Link title="Afspelen" className="waves-effect white-text deep-orange darken-4 btn"
                                                   to={`/play/${composition.compositionId}`}>
                                                 <i className="material-icons">play_arrow</i>
                                             </Link>
-                                            <Link to={`/myplaylist`} className="waves-effect white-text deep-orange darken-4 btn" onClick={ e => this.addToPlaylist(composition.compositionId)}>
-                                                <i className="material-icons">add</i>
+                                            <Link title="Aan afspeellijst toevoegen" to={`/myplaylist`} className="waves-effect white-text deep-orange darken-4 btn" onClick={ e => this.addToPlaylist(composition.compositionId)}>
+                                                <i className="material-icons">format_list_bulleted</i>
                                             </Link>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col s6 m6 l6">
-                                            <Link className="waves-effect white-text deep-orange darken-4 btn"
+                                            <Link title="Bewerken" className="waves-effect white-text deep-orange darken-4 btn"
                                                   to={`/compositions/${composition.compositionId}`}>
                                                 <i className="material-icons">edit</i>
                                             </Link></div>
                                         <div className="col s6 m6 l6">
-                                            <a className="waves-effect white-text deep-orange darken-4 btn"
+                                            <a title="Verwijderen" className="waves-effect white-text deep-orange darken-4 btn"
                                                onClick={(e) => this.handleDelete(composition.compositionId, e)}>
                                                 <i className="material-icons">delete
                                                 </i>
@@ -180,7 +190,7 @@ export default class Compositions extends Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="/addcomposition" className="btn-floating btn-large deep-orange darken-4">
+                        <Link title="Muziekstuk toevoegen" to="/addcomposition" className="btn-floating btn-large deep-orange darken-4">
                             <i className="large material-icons">add</i>
                         </Link>
                     </div>
