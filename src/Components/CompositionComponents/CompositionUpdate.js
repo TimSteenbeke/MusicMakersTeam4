@@ -61,9 +61,10 @@ export default class CompositionUpdate extends Component {
                     title: self.state.title
                 }
             ));
-        }).then(() => {
-            this.props.history.push('/compositions');
         });
+
+        this.props.history.push('/compositions');
+
     };
 
     setTitle = event => {
