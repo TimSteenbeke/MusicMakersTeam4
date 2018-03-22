@@ -75,7 +75,6 @@ export default class Courses extends Component {
                         <tr>
                             <th>Id</th>
                             <th>Cursus</th>
-                            <th>Prijs</th>
                             <th>Acties</th>
                         </tr>
                         </thead>
@@ -84,7 +83,6 @@ export default class Courses extends Component {
                             <tr key={course.courseId} id={course.courseId}>
                                 <td>{course.courseId}</td>
                                 <td>{course.courseType.description}</td>
-                                <td>{course.courseType.price}</td>
                                 <td>
                                     <Link className="waves-effect white-text deep-orange darken-4 btn marginator"
                                           to={`/coursedetails/${course.courseId}` }>

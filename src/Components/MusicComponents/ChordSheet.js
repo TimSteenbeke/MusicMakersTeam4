@@ -57,26 +57,7 @@ export default class ChordSheet extends Component {
     }
 
     parseChordSheet() {
-        const chordSheetExample = `
-        Am         C/G        F          C
-        Let it be, let it be, let it be, let it be
-        C                G              F  C/E Dm C
-        Whisper words of wisdom, let it be`.substring(1);
-
         const chordSheet = this.props.content;
-        this.setState({dataFile: chordSheet});
-    }
-
-    parseChordSheetPro(chordSheet) {
-        const chordSheetExample = `
-{title: Let it be}
-{subtitle: ChordSheetJS example version}
-{Chorus}
- 
-Let it [Am]be, let it [C/G]be, let it [F]be, let it [C]be
-[C]Whisper words of [G]wisdom, let it [F]be [C/E] [Dm] [C]`.substring(1);
-
-        const parser = new ChordSheetJS.ChordProParser();
         this.setState({dataFile: chordSheet});
     }
 
