@@ -10,7 +10,6 @@ export function getCourseFromBackend(courseNr) {
 }
 
 export function postCourse(data) {
-    console.log("data: ",data);
     fetchService.fetchWithHeader("courses", "POST", data, {});
 }
 
