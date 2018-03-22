@@ -26,7 +26,7 @@ export default class Compositions extends Component {
             type: 'success',
             showCancelButton: true,
             confirmButtonText: 'Verwijderen!',
-            cancelButtonText: 'Behouden'
+            cancelButtonText: 'Behouden!'
         }).then((result) => {
             if (result.value) {
                 CompositionService.deleteComposition(id);
