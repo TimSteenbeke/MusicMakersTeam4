@@ -35,6 +35,8 @@ export default class AddLesson extends Component {
     componentDidMount() {
       CourseService.getMyCourses().then(courses => {
           this.setState({myCourses: courses.teachesCourses});
+          console.log('courses:');
+          console.log(courses);
       })
 
     }

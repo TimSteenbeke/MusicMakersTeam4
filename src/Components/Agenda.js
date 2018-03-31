@@ -80,6 +80,8 @@ export default class Agenda extends Component {
 
     mapAgendaItems = (agendaItems) => {
         if (agendaItems != undefined) {
+            console.log('agendaitems');
+            console.log(agendaItems);
             let AgendaItems = [];
             //Eigenaar toewijzen (Agenda van: ....)
             this.setState({agendaOwner: agendaItems.agendaEigenaar});
@@ -90,7 +92,7 @@ export default class Agenda extends Component {
                 let les = {
                     _id: guid(),
                     id: agendaItems.lessons[i].lessonId,
-                    name: agendaItems.lessons[i].course.description,
+                    name: agendaItems.lessons[i].course.courseType.description,
                     startDateTime: new Date(agendaItems.lessons[i].startDateTime),
                     endDateTime: new Date(agendaItems.lessons[i].endDateTime),
                     type: 'Les',
